@@ -1,5 +1,5 @@
 # --- CRITICAL FIX FOR STREAMLIT CLOUD ---
-# This must be at the very top of the file
+# This must be at the very top of the file to fix the "sqlite3 too old" error
 __import__('pysqlite3')
 import sys
 sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')

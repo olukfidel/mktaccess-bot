@@ -2,12 +2,12 @@ import os
 import requests
 from bs4 import BeautifulSoup
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-# UPDATED IMPORT: Use the specific text splitters package
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-# UPDATED IMPORT: Use langchain_core for documents
 from langchain_core.documents import Document
-from langchain.chains import RetrievalQA
+from langchain_core.prompts import ChatPromptTemplate
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key):
@@ -29,7 +29,6 @@ class NSEKnowledgeBase:
         self.embeddings = OpenAIEmbeddings()
         
         # 3. Initialize Vector Store
-        # We use a persistent directory so we don't lose data on restart
         self.db_directory = "./nse_db"
         self.vector_db = Chroma(
             persist_directory=self.db_directory, 
@@ -105,15 +104,28 @@ class NSEKnowledgeBase:
         return f"Success! Indexed {len(docs)} chunks of data.", logs
 
     def _init_chain(self):
-        """Initializes the Q&A chain"""
+        """Initializes the Q&A chain using the modern LangChain syntax"""
         retriever = self.vector_db.as_retriever(search_kwargs={"k": 4})
         
-        self.qa_chain = RetrievalQA.from_chain_type(
-            llm=self.llm,
-            chain_type="stuff",
-            retriever=retriever,
-            return_source_documents=True
+        # Define the system prompt logic
+        system_prompt = (
+            "You are a helpful assistant for the Nairobi Securities Exchange (NSE). "
+            "Use the following pieces of retrieved context to answer the user's question. "
+            "If the answer is not in the context, politely say you don't have that information "
+            "based on the current NSE data available to you. "
+            "\n\n"
+            "Context:\n"
+            "{context}"
         )
+
+        prompt = ChatPromptTemplate.from_messages([
+            ("system", system_prompt),
+            ("human", "{input}"),
+        ])
+
+        # Create the chain
+        question_answer_chain = create_stuff_documents_chain(self.llm, prompt)
+        self.qa_chain = create_retrieval_chain(retriever, question_answer_chain)
 
     def answer_question(self, query):
         """
@@ -123,11 +135,13 @@ class NSEKnowledgeBase:
             self._init_chain()
             
         try:
-            result = self.qa_chain.invoke({"query": query})
-            answer = result["result"]
+            # The new chain expects 'input' instead of 'query'
+            result = self.qa_chain.invoke({"input": query})
             
-            # Extract unique sources
-            sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result["source_documents"]]))
+            answer = result["answer"]
+            
+            # Extract sources from the 'context' key
+            sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result.get("context", [])]))
             
             return answer, sources
         except Exception as e:
