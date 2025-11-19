@@ -10,7 +10,7 @@ from nse_engine import NSEKnowledgeBase
 st.set_page_config(page_title="NSE Smart Chatbot", page_icon="📈")
 st.title("📈 NSE Context-Aware Chatbot")
 
-# --- MODIFIED AUTHENTICATION LOGIC ---
+# --- AUTHENTICATION ---
 if "OPENAI_API_KEY" in st.secrets:
     openai_api_key = st.secrets["OPENAI_API_KEY"]
 else:
@@ -19,7 +19,6 @@ else:
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.", icon="🗝️")
     st.stop()
-# -------------------------------------
 
 @st.cache_resource
 def get_nse_engine(api_key):
@@ -31,33 +30,35 @@ except Exception as e:
     st.error(f"Initialization Error: {e}")
     st.stop()
 
-# --- AUTO SCRAPE ON STARTUP LOGIC ---
-# This checks if we have run the scrape in this session yet.
-if "auto_scraped" not in st.session_state:
-    with st.spinner("🚀 Performing initial NSE market data scrape... (This runs once on startup)"):
+# --- OPTIMIZED STARTUP LOGIC ---
+# We check if we have scraped in this session OR if the DB already has data.
+if "startup_check_done" not in st.session_state:
+    with st.spinner("Checking knowledge base..."):
         try:
-            status_msg, logs = nse_bot.build_knowledge_base()
-            st.session_state["auto_scraped"] = True
-            st.success("Startup Data Refresh Complete! " + status_msg)
+            # Optimization: Only scrape if the database is empty
+            if not nse_bot.has_data():
+                st.write("🚀 Database empty. Performing initial scrape...")
+                status_msg, logs = nse_bot.build_knowledge_base()
+                st.success(status_msg)
+            else:
+                # Data exists, no need to scrape!
+                st.toast("✅ Loaded data from cache (Fast Start)", icon="⚡")
             
-            # Optional: Log details to console or expander if you debugging
-            # with st.expander("Startup Logs"):
-            #    for log in logs: st.write(log)
+            st.session_state["startup_check_done"] = True
             
         except Exception as e:
-            st.error(f"Automatic scraping failed: {e}")
-# ------------------------------------
+            st.error(f"Startup failed: {e}")
+# -------------------------------
 
 with st.sidebar:
     st.header("🧠 Knowledge Base")
-    st.write("Data is refreshed automatically on startup.")
     
-    # Kept as a manual override in case data changes while the user is using the app
+    # Manual override to force a refresh
     if st.button("⚠️ Force Re-Scrape"):
-        with st.spinner("Forcing fresh scrape..."):
+        with st.spinner("Scraping 20+ pages in parallel..."):
             status_msg, logs = nse_bot.build_knowledge_base()
             st.success(status_msg)
-            with st.expander("Logs"):
+            with st.expander("View Scraping Logs"):
                 for log in logs:
                     st.text(log)
 
