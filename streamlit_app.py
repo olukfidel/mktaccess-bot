@@ -1,3 +1,10 @@
+# --- CRITICAL FIX FOR STREAMLIT CLOUD ---
+# This must be at the very top of the file
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# ----------------------------------------
+
 import streamlit as st
 from nse_engine import NSEKnowledgeBase
 import os
@@ -77,7 +84,6 @@ if prompt := st.chat_input("Ask about NSE market stats, listed companies, etc.")
                             st.write(f"- {source}")
                             
                 # Add assistant response to history
-                # We combine text and sources for the history log, or just keep text
                 full_response = response_text
                 if sources:
                     full_response += "\n\n*Sources: " + ", ".join(sources) + "*"

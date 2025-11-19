@@ -3,7 +3,10 @@ openai
 langchain
 langchain-openai
 langchain-community
+langchain-core
+langchain-text-splitters
 chromadb
 beautifulsoup4
 requests
 tiktoken
+pysqlite3-binary

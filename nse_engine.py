@@ -2,9 +2,11 @@ import os
 import requests
 from bs4 import BeautifulSoup
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain.text_splitter import RecursiveCharacterTextSplitter
+# UPDATED IMPORT: Use the specific text splitters package
+from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain.docstore.document import Document
+# UPDATED IMPORT: Use langchain_core for documents
+from langchain_core.documents import Document
 from langchain.chains import RetrievalQA
 
 class NSEKnowledgeBase:
@@ -20,13 +22,13 @@ class NSEKnowledgeBase:
         # 1. Initialize OpenAI LLM
         self.llm = ChatOpenAI(
             model_name="gpt-3.5-turbo", 
-            temperature=0.0  # Zero temperature for strict factual answers
+            temperature=0.0
         )
         
         # 2. Initialize OpenAI Embeddings
         self.embeddings = OpenAIEmbeddings()
         
-        # 3. Initialize Vector Store (The specific memory)
+        # 3. Initialize Vector Store
         # We use a persistent directory so we don't lose data on restart
         self.db_directory = "./nse_db"
         self.vector_db = Chroma(
