@@ -4,6 +4,10 @@ from bs4 import BeautifulSoup
 import chromadb
 from openai import OpenAI
 import uuid
+import urllib3
+
+# Suppress SSL warnings so the logs stay clean
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key):
@@ -15,11 +19,10 @@ class NSEKnowledgeBase:
         self.client = OpenAI(api_key=openai_api_key)
         
         # Initialize ChromaDB (The memory)
-        # We use a persistent folder so data is saved
         self.db_path = "./nse_db_pure"
         self.chroma_client = chromadb.PersistentClient(path=self.db_path)
         
-        # Create or get a collection (like a table) for NSE data
+        # Create or get a collection for NSE data
         self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
 
     def get_embedding(self, text):
@@ -37,33 +40,48 @@ class NSEKnowledgeBase:
             end = start + chunk_size
             chunk = text[start:end]
             chunks.append(chunk)
-            # Move forward by chunk_size minus overlap
             start += chunk_size - overlap
         return chunks
 
     def scrape_nse_website(self, urls):
-        """Scrapes text from URLs"""
-        headers = {'User-Agent': 'Mozilla/5.0'}
+        """Scrapes text with stealth headers to bypass blocking"""
+        # Real browser headers (Stealth Mode)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Connection': 'keep-alive',
+            'Upgrade-Insecure-Requests': '1',
+        }
         logs = []
         scraped_data = []
 
         for url in urls:
             try:
-                response = requests.get(url, headers=headers, timeout=10)
+                # verify=False bypasses SSL errors common with scrapers
+                response = requests.get(url, headers=headers, timeout=15, verify=False)
+                
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.content, 'html.parser')
+                    
                     # Clean script/style tags
                     for item in soup(["script", "style", "nav", "footer"]):
                         item.decompose()
                     
                     text = soup.get_text(separator="\n")
-                    # Basic cleanup
-                    clean_text = "\n".join([line.strip() for line in text.splitlines() if line.strip()])
                     
-                    scraped_data.append({"url": url, "text": clean_text})
-                    logs.append(f"✅ Scraped: {url}")
+                    # Basic cleanup
+                    lines = [line.strip() for line in text.splitlines() if line.strip()]
+                    clean_text = "\n".join(lines)
+                    
+                    # Only save if we actually got content
+                    if len(clean_text) > 100:
+                        scraped_data.append({"url": url, "text": clean_text})
+                        logs.append(f"✅ Scraped: {url} ({len(clean_text)} chars)")
+                    else:
+                        logs.append(f"⚠️ Page empty or too short: {url}")
                 else:
-                    logs.append(f"❌ Failed {url}: {response.status_code}")
+                    logs.append(f"❌ Failed {url}: Status {response.status_code}")
             except Exception as e:
                 logs.append(f"❌ Error {url}: {str(e)}")
         
@@ -73,57 +91,57 @@ class NSEKnowledgeBase:
         """Scrapes and saves data to ChromaDB"""
         if not urls:
             urls = [
-                "https://www.nse.co.ke/"
-"https://www.nse.co.ke/home/"
-"https://www.nse.co.ke/about-nse/"
-"https://www.nse.co.ke/about-nse/history/"
-"https://www.nse.co.ke/about-nse/vision-mission/"
-"https://www.nse.co.ke/about-nse/board-of-directors/"
-"https://www.nse.co.ke/about-nse/management-team/"
-"https://www.nse.co.ke/listed-companies/"
-"https://www.nse.co.ke/listed-companies/list/"
-"https://www.nse.co.ke/share-price/"
-"https://www.nse.co.ke/market-statistics/"
-"https://www.nse.co.ke/market-statistics/daily-market-report/"
-"https://www.nse.co.ke/market-statistics/weekly-market-report/"
-"https://www.nse.co.ke/market-statistics/monthly-market-report/"
-"https://www.nse.co.ke/data/"
-"https://www.nse.co.ke/data/historical-data/"
-"https://www.nse.co.ke/data/bond-data/"
-"https://www.nse.co.ke/products/"
-"https://www.nse.co.ke/products/equities/"
-"https://www.nse.co.ke/products/derivatives/"
-"https://www.nse.co.ke/products/reits/"
-"https://www.nse.co.ke/products/etfs/"
-"https://www.nse.co.ke/products/bonds/"
-"https://www.nse.co.ke/usp/"
-"https://www.nse.co.ke/ibuka/"
-"https://www.nse.co.ke/clearing-settlement/"
-"https://www.nse.co.ke/news/"
-"https://www.nse.co.ke/news/announcements/"
-"https://www.nse.co.ke/circulars/"
-"https://www.nse.co.ke/media-center/"
-"https://www.nse.co.ke/investor-education/"
-"https://www.nse.co.ke/investor-relations/"
-"https://www.nse.co.ke/careers/"
-"https://www.nse.co.ke/contact-us/"
-"https://www.nse.co.ke/faqs/"
-"https://www.nse.co.ke/sustainability/"
-"https://www.nse.co.ke/tenders/"
-"https://www.nse.co.ke/procurement/"
-"https://www.nse.co.ke/regulations/"
-"https://www.nse.co.ke/trading-participants/"
-"https://www.nse.co.ke/trading-participants/stockbrokers/"
-"https://www.nse.co.ke/trading-participants/authorized-securities-dealers/"
-"https://www.nse.co.ke/login/"
-"https://www.nse.co.ke/online-trading-platform/"
-"https://www.nse.co.ke/market-data-vendor/"
-"https://live.nse.co.ke/"
-"https://www.nse.co.ke/indices/"
-"https://www.nse.co.ke/indices/nse-asi/"
-"https://www.nse.co.ke/indices/nse-20/"
-"https://www.nse.co.ke/indices/nse-25/"
-"https://www.nse.co.ke/indices/nse-bond-index/"
+                "https://www.nse.co.ke/",
+                "https://www.nse.co.ke/home/",
+                "https://www.nse.co.ke/about-nse/",
+                "https://www.nse.co.ke/about-nse/history/",
+                "https://www.nse.co.ke/about-nse/vision-mission/",
+                "https://www.nse.co.ke/about-nse/board-of-directors/",
+                "https://www.nse.co.ke/about-nse/management-team/",
+                "https://www.nse.co.ke/listed-companies/",
+                "https://www.nse.co.ke/listed-companies/list/",
+                "https://www.nse.co.ke/share-price/",
+                "https://www.nse.co.ke/market-statistics/",
+                "https://www.nse.co.ke/market-statistics/daily-market-report/",
+                "https://www.nse.co.ke/market-statistics/weekly-market-report/",
+                "https://www.nse.co.ke/market-statistics/monthly-market-report/",
+                "https://www.nse.co.ke/data/",
+                "https://www.nse.co.ke/data/historical-data/",
+                "https://www.nse.co.ke/data/bond-data/",
+                "https://www.nse.co.ke/products/",
+                "https://www.nse.co.ke/products/equities/",
+                "https://www.nse.co.ke/products/derivatives/",
+                "https://www.nse.co.ke/products/reits/",
+                "https://www.nse.co.ke/products/etfs/",
+                "https://www.nse.co.ke/products/bonds/",
+                "https://www.nse.co.ke/usp/",
+                "https://www.nse.co.ke/ibuka/",
+                "https://www.nse.co.ke/clearing-settlement/",
+                "https://www.nse.co.ke/news/",
+                "https://www.nse.co.ke/news/announcements/",
+                "https://www.nse.co.ke/circulars/",
+                "https://www.nse.co.ke/media-center/",
+                "https://www.nse.co.ke/investor-education/",
+                "https://www.nse.co.ke/investor-relations/",
+                "https://www.nse.co.ke/careers/",
+                "https://www.nse.co.ke/contact-us/",
+                "https://www.nse.co.ke/faqs/",
+                "https://www.nse.co.ke/sustainability/",
+                "https://www.nse.co.ke/tenders/",
+                "https://www.nse.co.ke/procurement/",
+                "https://www.nse.co.ke/regulations/",
+                "https://www.nse.co.ke/trading-participants/",
+                "https://www.nse.co.ke/trading-participants/stockbrokers/",
+                "https://www.nse.co.ke/trading-participants/authorized-securities-dealers/",
+                "https://www.nse.co.ke/login/",
+                "https://www.nse.co.ke/online-trading-platform/",
+                "https://www.nse.co.ke/market-data-vendor/",
+                "https://live.nse.co.ke/",
+                "https://www.nse.co.ke/indices/",
+                "https://www.nse.co.ke/indices/nse-asi/",
+                "https://www.nse.co.ke/indices/nse-20/",
+                "https://www.nse.co.ke/indices/nse-25/",
+                "https://www.nse.co.ke/indices/nse-bond-index/"
             ]
 
         # 1. Scrape
@@ -140,8 +158,6 @@ class NSEKnowledgeBase:
             metadatas = [{"source": item['url']} for _ in chunks]
             
             # Generate embeddings for this batch
-            # Note: In a production app we'd batch this API call, 
-            # but looping is fine for small updates.
             embeddings = [self.get_embedding(chunk) for chunk in chunks]
             
             self.collection.add(
@@ -167,7 +183,9 @@ class NSEKnowledgeBase:
             )
             
             # 3. Extract context
-            # Chroma returns lists of lists
+            if not results['documents'] or not results['documents'][0]:
+                return "I couldn't find any relevant information in my knowledge base.", []
+
             retrieved_texts = results['documents'][0]
             sources = list(set([m['source'] for m in results['metadatas'][0]]))
             
