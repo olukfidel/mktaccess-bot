@@ -11,10 +11,8 @@ st.set_page_config(page_title="NSE Smart Chatbot", page_icon="📈")
 st.title("📈 NSE Context-Aware Chatbot")
 
 # --- MODIFIED AUTHENTICATION LOGIC ---
-# 1. Try to get key from Streamlit Secrets (Best for Cloud)
 if "OPENAI_API_KEY" in st.secrets:
     openai_api_key = st.secrets["OPENAI_API_KEY"]
-# 2. If not in secrets, ask the user (Best for Local Testing)
 else:
     openai_api_key = st.text_input("OpenAI API Key", type="password")
 
@@ -33,12 +31,30 @@ except Exception as e:
     st.error(f"Initialization Error: {e}")
     st.stop()
 
+# --- AUTO SCRAPE ON STARTUP LOGIC ---
+# This checks if we have run the scrape in this session yet.
+if "auto_scraped" not in st.session_state:
+    with st.spinner("🚀 Performing initial NSE market data scrape... (This runs once on startup)"):
+        try:
+            status_msg, logs = nse_bot.build_knowledge_base()
+            st.session_state["auto_scraped"] = True
+            st.success("Startup Data Refresh Complete! " + status_msg)
+            
+            # Optional: Log details to console or expander if you debugging
+            # with st.expander("Startup Logs"):
+            #    for log in logs: st.write(log)
+            
+        except Exception as e:
+            st.error(f"Automatic scraping failed: {e}")
+# ------------------------------------
+
 with st.sidebar:
     st.header("🧠 Knowledge Base")
-    # Only show the Update button if we are running locally or if you specifically want users to update it
-    # You can hide this from normal users if you want by checking for a specific password
-    if st.button("🔄 Update NSE Data"):
-        with st.spinner("Scraping..."):
+    st.write("Data is refreshed automatically on startup.")
+    
+    # Kept as a manual override in case data changes while the user is using the app
+    if st.button("⚠️ Force Re-Scrape"):
+        with st.spinner("Forcing fresh scrape..."):
             status_msg, logs = nse_bot.build_knowledge_base()
             st.success(status_msg)
             with st.expander("Logs"):
@@ -64,9 +80,6 @@ if prompt := st.chat_input("Ask about NSE..."):
             
             full_response = answer
             if sources:
-                # formatted_sources = "\n\n**Sources:** " + ", ".join(sources)
-                # st.markdown(formatted_sources)
-                # full_response += formatted_sources
                 with st.expander("📚 Sources"):
                     for source in sources:
                         st.write(f"- {source}")
