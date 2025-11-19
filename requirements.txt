@@ -1,8 +1,10 @@
 streamlit
 openai
-langchain
+langchain>=0.1.10
 langchain-openai
 langchain-community
+langchain-core
+langchain-text-splitters
 chromadb
 beautifulsoup4
 requests
