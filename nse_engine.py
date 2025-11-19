@@ -7,7 +7,7 @@ from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 
-# We strictly use the modern chain syntax now
+# Modern chain syntax for LangChain 0.2+
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 
@@ -18,8 +18,15 @@ class NSEKnowledgeBase:
             
         os.environ["OPENAI_API_KEY"] = openai_api_key
         
-        self.llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.0)
-        self.embeddings = OpenAIEmbeddings()
+        # Initialize LLM with specific model parameters
+        # We explicitly pass the key to avoid environment variable race conditions
+        self.llm = ChatOpenAI(
+            model_name="gpt-3.5-turbo", 
+            temperature=0.0,
+            api_key=openai_api_key
+        )
+        
+        self.embeddings = OpenAIEmbeddings(api_key=openai_api_key)
         
         self.db_directory = "./nse_db"
         self.vector_db = Chroma(
@@ -96,6 +103,7 @@ class NSEKnowledgeBase:
             self._init_chain()
             
         try:
+            # Modern chain uses 'input'
             result = self.qa_chain.invoke({"input": query})
             answer = result["answer"]
             sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result.get("context", [])]))
