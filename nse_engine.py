@@ -23,11 +23,25 @@ class NSEKnowledgeBase:
         self.client = OpenAI(api_key=openai_api_key)
         
         self.db_path = "./nse_db_pure"
+        # Initialize ChromaDB
         self.chroma_client = chromadb.PersistentClient(path=self.db_path)
-        self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
+        
+        # Robust initialization: Try to get, if fails, just pass (will be handled in build)
+        try:
+            self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
+        except Exception:
+            self.collection = None
 
     def has_data(self):
-        return self.collection.count() > 0
+        """Checks if the database has data. Fail-safe against corruption."""
+        try:
+            if self.collection is None:
+                return False
+            return self.collection.count() > 0
+        except Exception:
+            # If database is corrupted or collection missing, return False
+            # This forces the app to re-scrape and fix itself.
+            return False
 
     def get_last_update_time(self):
         try:
@@ -63,7 +77,6 @@ class NSEKnowledgeBase:
         return chunks
 
     def _extract_text_from_pdf(self, pdf_content):
-        """Helper to extract text from PDF binary data"""
         try:
             pdf_file = io.BytesIO(pdf_content)
             reader = PdfReader(pdf_file)
@@ -75,17 +88,15 @@ class NSEKnowledgeBase:
             return ""
 
     def _scrape_single_url(self, url):
-        """Scrapes HTML OR PDF based on content type"""
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
             'Upgrade-Insecure-Requests': '1',
         }
-        found_pdfs = [] # List to store PDF links found on this page
+        found_pdfs = []
         
         try:
             response = requests.get(url, headers=headers, timeout=15, verify=False)
             
-            # 1. Handle PDF Files directly
             if url.lower().endswith(".pdf") or 'application/pdf' in response.headers.get('Content-Type', ''):
                 pdf_text = self._extract_text_from_pdf(response.content)
                 if len(pdf_text) > 100:
@@ -94,18 +105,14 @@ class NSEKnowledgeBase:
                 else:
                     return None, f"⚠️ Empty PDF: {url}", []
 
-            # 2. Handle HTML Files
             elif response.status_code == 200:
                 soup = BeautifulSoup(response.content, 'html.parser')
-                
-                # A. Hunt for PDF links on this page
                 for link in soup.find_all('a', href=True):
                     href = link['href']
                     if href.lower().endswith('.pdf'):
                         full_pdf_url = urljoin(url, href)
                         found_pdfs.append(full_pdf_url)
 
-                # B. Clean and Extract HTML Text
                 for item in soup(["script", "style", "nav", "footer"]):
                     item.decompose()
                 text = soup.get_text(separator="\n")
@@ -127,7 +134,6 @@ class NSEKnowledgeBase:
         logs = []
         discovered_pdfs = set()
 
-        # Phase 1: Scrape Main URLs + Find PDF Links
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             future_to_url = {executor.submit(self._scrape_single_url, url): url for url in urls}
             for future in concurrent.futures.as_completed(future_to_url):
@@ -135,16 +141,12 @@ class NSEKnowledgeBase:
                 logs.append(log_msg)
                 if data:
                     scraped_data.append(data)
-                # Collect PDF links found on the page
                 for pdf in pdfs_found:
                     discovered_pdfs.add(pdf)
 
-        # Phase 2: Scrape the Discovered PDFs
-        # Limit to 15 PDFs to prevent overload during demo
         pdf_list = list(discovered_pdfs)[:15] 
         if pdf_list:
             logs.append(f"🔍 Found {len(discovered_pdfs)} PDFs. Scraping top 15...")
-            
             with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
                 future_to_url = {executor.submit(self._scrape_single_url, url): url for url in pdf_list}
                 for future in concurrent.futures.as_completed(future_to_url):
@@ -156,11 +158,14 @@ class NSEKnowledgeBase:
         return scraped_data, logs
 
     def build_knowledge_base(self, urls=None):
+        # Hard Reset: Ensure we start with a clean slate
         try:
             self.chroma_client.delete_collection("nse_data")
-            self.collection = self.chroma_client.create_collection(name="nse_data")
         except:
             pass
+        
+        # Re-create collection
+        self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
 
         if not urls:
             urls = [
@@ -234,6 +239,10 @@ class NSEKnowledgeBase:
 
     def answer_question(self, query):
         try:
+            # Safety check before querying
+            if self.collection is None:
+                 return "Knowledge base is initializing. Please try again in a few seconds.", []
+                 
             search_queries = self.generate_context_queries(query)
             query_embeddings = self.get_embeddings_batch(search_queries)
             
