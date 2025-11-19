@@ -1,107 +1,149 @@
 import os
 import requests
 from bs4 import BeautifulSoup
-# We use the modern OpenAI client to prevent 'proxies' errors
-from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import Chroma
-from langchain.docstore.document import Document
-
-# We use RetrievalQA because it is available in ALL versions of LangChain
-from langchain.chains import RetrievalQA
+import chromadb
+from openai import OpenAI
+import uuid
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key):
         if not openai_api_key:
             raise ValueError("OpenAI API Key is required")
-            
-        os.environ["OPENAI_API_KEY"] = openai_api_key
         
-        # 1. Initialize LLM
-        self.llm = ChatOpenAI(
-            model_name="gpt-3.5-turbo", 
-            temperature=0.0,
-            api_key=openai_api_key
-        )
+        self.api_key = openai_api_key
+        # Initialize OpenAI Client directly
+        self.client = OpenAI(api_key=openai_api_key)
         
-        # 2. Initialize Embeddings
-        self.embeddings = OpenAIEmbeddings(api_key=openai_api_key)
+        # Initialize ChromaDB (The memory)
+        # We use a persistent folder so data is saved
+        self.db_path = "./nse_db_pure"
+        self.chroma_client = chromadb.PersistentClient(path=self.db_path)
         
-        # 3. Initialize Vector Store
-        self.db_directory = "./nse_db"
-        self.vector_db = Chroma(
-            persist_directory=self.db_directory, 
-            embedding_function=self.embeddings
-        )
+        # Create or get a collection (like a table) for NSE data
+        self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
+
+    def get_embedding(self, text):
+        """Generates an embedding using OpenAI directly"""
+        text = text.replace("\n", " ")
+        return self.client.embeddings.create(input=[text], model="text-embedding-3-small").data[0].embedding
+
+    def simple_text_splitter(self, text, chunk_size=1000, overlap=200):
+        """A simple pure-python text splitter"""
+        chunks = []
+        start = 0
+        text_len = len(text)
         
-        self.qa_chain = None
+        while start < text_len:
+            end = start + chunk_size
+            chunk = text[start:end]
+            chunks.append(chunk)
+            # Move forward by chunk_size minus overlap
+            start += chunk_size - overlap
+        return chunks
 
     def scrape_nse_website(self, urls):
-        documents = []
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-        status_logs = []
+        """Scrapes text from URLs"""
+        headers = {'User-Agent': 'Mozilla/5.0'}
+        logs = []
+        scraped_data = []
 
         for url in urls:
             try:
                 response = requests.get(url, headers=headers, timeout=10)
                 if response.status_code == 200:
                     soup = BeautifulSoup(response.content, 'html.parser')
-                    for script in soup(["script", "style", "nav", "footer"]):
-                        script.decompose()
-                    text = soup.get_text()
-                    lines = (line.strip() for line in text.splitlines())
-                    chunks = (phrase.strip() for line in lines for phrase in line.split("  "))
-                    clean_text = '\n'.join(chunk for chunk in chunks if chunk)
-                    documents.append(Document(page_content=clean_text, metadata={"source": url}))
-                    status_logs.append(f"✅ Scraped: {url}")
+                    # Clean script/style tags
+                    for item in soup(["script", "style", "nav", "footer"]):
+                        item.decompose()
+                    
+                    text = soup.get_text(separator="\n")
+                    # Basic cleanup
+                    clean_text = "\n".join([line.strip() for line in text.splitlines() if line.strip()])
+                    
+                    scraped_data.append({"url": url, "text": clean_text})
+                    logs.append(f"✅ Scraped: {url}")
                 else:
-                    status_logs.append(f"❌ Failed {url}: Status {response.status_code}")
+                    logs.append(f"❌ Failed {url}: {response.status_code}")
             except Exception as e:
-                status_logs.append(f"❌ Error {url}: {str(e)}")
-        return documents, status_logs
+                logs.append(f"❌ Error {url}: {str(e)}")
+        
+        return scraped_data, logs
 
     def build_knowledge_base(self, urls=None):
+        """Scrapes and saves data to ChromaDB"""
         if not urls:
             urls = [
                 "https://www.nse.co.ke/",
                 "https://www.nse.co.ke/market-statistics/",
                 "https://www.nse.co.ke/listed-companies/",
-                "https://www.nse.co.ke/market-reports/"
             ]
 
-        raw_docs, logs = self.scrape_nse_website(urls)
-        if not raw_docs:
-            return "No data found.", logs
+        # 1. Scrape
+        data, logs = self.scrape_nse_website(urls)
+        if not data:
+            return "No data found to scrape.", logs
 
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-        docs = text_splitter.split_documents(raw_docs)
-        self.vector_db.add_documents(docs)
-        return f"Success! Indexed {len(docs)} chunks of data.", logs
+        # 2. Chunk and Embed
+        count = 0
+        for item in data:
+            chunks = self.simple_text_splitter(item['text'])
+            
+            ids = [str(uuid.uuid4()) for _ in chunks]
+            metadatas = [{"source": item['url']} for _ in chunks]
+            
+            # Generate embeddings for this batch
+            # Note: In a production app we'd batch this API call, 
+            # but looping is fine for small updates.
+            embeddings = [self.get_embedding(chunk) for chunk in chunks]
+            
+            self.collection.add(
+                documents=chunks,
+                embeddings=embeddings,
+                metadatas=metadatas,
+                ids=ids
+            )
+            count += len(chunks)
 
-    def _init_chain(self):
-        # Use the standard RetrievalQA chain which is robust across versions
-        retriever = self.vector_db.as_retriever(search_kwargs={"k": 4})
-        
-        self.qa_chain = RetrievalQA.from_chain_type(
-            llm=self.llm,
-            chain_type="stuff",
-            retriever=retriever,
-            return_source_documents=True
-        )
+        return f"Success! Indexed {count} new text chunks.", logs
 
     def answer_question(self, query):
-        if not self.qa_chain:
-            self._init_chain()
-            
+        """Retrieves data and asks GPT-3.5"""
         try:
-            # Legacy invocation works on both new and old versions for RetrievalQA
-            result = self.qa_chain.invoke({"query": query})
+            # 1. Embed user query
+            query_embedding = self.get_embedding(query)
             
-            answer = result["result"]
-            sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result.get("source_documents", [])]))
+            # 2. Query Database
+            results = self.collection.query(
+                query_embeddings=[query_embedding],
+                n_results=4
+            )
             
+            # 3. Extract context
+            # Chroma returns lists of lists
+            retrieved_texts = results['documents'][0]
+            sources = list(set([m['source'] for m in results['metadatas'][0]]))
+            
+            context_block = "\n---\n".join(retrieved_texts)
+
+            # 4. Ask OpenAI
+            system_prompt = (
+                "You are an expert on the Nairobi Securities Exchange (NSE). "
+                "Answer the question ONLY using the Context provided below. "
+                "If the answer isn't in the context, say 'I don't have that information'."
+                "\n\nContext:\n" + context_block
+            )
+
+            response = self.client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": query}
+                ],
+                temperature=0
+            )
+            
+            answer = response.choices[0].message.content
             return answer, sources
+
         except Exception as e:
-            return f"Error processing request: {str(e)}", []
+            return f"Error: {str(e)}", []
