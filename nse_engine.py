@@ -7,14 +7,9 @@ from langchain_community.vectorstores import Chroma
 from langchain_core.documents import Document
 from langchain_core.prompts import ChatPromptTemplate
 
-# Try importing the modern chain, if it fails, we will use a legacy method in the class
-try:
-    from langchain.chains import create_retrieval_chain
-    from langchain.chains.combine_documents import create_stuff_documents_chain
-    MODERN_CHAIN = True
-except ImportError:
-    from langchain.chains import RetrievalQA
-    MODERN_CHAIN = False
+# We strictly use the modern chain syntax now
+from langchain.chains import create_retrieval_chain
+from langchain.chains.combine_documents import create_stuff_documents_chain
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key):
@@ -79,45 +74,31 @@ class NSEKnowledgeBase:
         return f"Success! Indexed {len(docs)} chunks of data.", logs
 
     def _init_chain(self):
+        # Initialize using modern create_retrieval_chain
         retriever = self.vector_db.as_retriever(search_kwargs={"k": 4})
         
-        if MODERN_CHAIN:
-            # Modern LangChain (v0.1+)
-            system_prompt = (
-                "You are a helpful assistant for the Nairobi Securities Exchange (NSE). "
-                "Use the following pieces of retrieved context to answer the user's question. "
-                "If the answer is not in the context, politely say you don't have that information. "
-                "\n\nContext:\n{context}"
-            )
-            prompt = ChatPromptTemplate.from_messages([
-                ("system", system_prompt),
-                ("human", "{input}"),
-            ])
-            question_answer_chain = create_stuff_documents_chain(self.llm, prompt)
-            self.qa_chain = create_retrieval_chain(retriever, question_answer_chain)
-        else:
-            # Legacy LangChain (Fallback)
-            self.qa_chain = RetrievalQA.from_chain_type(
-                llm=self.llm,
-                chain_type="stuff",
-                retriever=retriever,
-                return_source_documents=True
-            )
+        system_prompt = (
+            "You are a helpful assistant for the Nairobi Securities Exchange (NSE). "
+            "Use the following pieces of retrieved context to answer the user's question. "
+            "If the answer is not in the context, politely say you don't have that information. "
+            "\n\nContext:\n{context}"
+        )
+        prompt = ChatPromptTemplate.from_messages([
+            ("system", system_prompt),
+            ("human", "{input}"),
+        ])
+        
+        question_answer_chain = create_stuff_documents_chain(self.llm, prompt)
+        self.qa_chain = create_retrieval_chain(retriever, question_answer_chain)
 
     def answer_question(self, query):
         if not self.qa_chain:
             self._init_chain()
             
         try:
-            if MODERN_CHAIN:
-                result = self.qa_chain.invoke({"input": query})
-                answer = result["answer"]
-                sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result.get("context", [])]))
-            else:
-                # Legacy invocation
-                result = self.qa_chain.invoke({"query": query})
-                answer = result["result"]
-                sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result.get("source_documents", [])]))
+            result = self.qa_chain.invoke({"input": query})
+            answer = result["answer"]
+            sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result.get("context", [])]))
             
             return answer, sources
         except Exception as e:
