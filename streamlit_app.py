@@ -10,11 +10,18 @@ from nse_engine import NSEKnowledgeBase
 st.set_page_config(page_title="NSE Smart Chatbot", page_icon="📈")
 st.title("📈 NSE Context-Aware Chatbot")
 
-openai_api_key = st.text_input("OpenAI API Key", type="password")
+# --- MODIFIED AUTHENTICATION LOGIC ---
+# 1. Try to get key from Streamlit Secrets (Best for Cloud)
+if "OPENAI_API_KEY" in st.secrets:
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
+# 2. If not in secrets, ask the user (Best for Local Testing)
+else:
+    openai_api_key = st.text_input("OpenAI API Key", type="password")
 
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.", icon="🗝️")
     st.stop()
+# -------------------------------------
 
 @st.cache_resource
 def get_nse_engine(api_key):
@@ -28,6 +35,8 @@ except Exception as e:
 
 with st.sidebar:
     st.header("🧠 Knowledge Base")
+    # Only show the Update button if we are running locally or if you specifically want users to update it
+    # You can hide this from normal users if you want by checking for a specific password
     if st.button("🔄 Update NSE Data"):
         with st.spinner("Scraping..."):
             status_msg, logs = nse_bot.build_knowledge_base()
@@ -52,8 +61,14 @@ if prompt := st.chat_input("Ask about NSE..."):
         with st.spinner("Thinking..."):
             answer, sources = nse_bot.answer_question(prompt)
             st.markdown(answer)
-            if sources:
-                st.markdown(f"\n\n**Sources:** {', '.join(sources)}")
             
-            full_response = f"{answer}\n\n**Sources:** {', '.join(sources)}" if sources else answer
+            full_response = answer
+            if sources:
+                # formatted_sources = "\n\n**Sources:** " + ", ".join(sources)
+                # st.markdown(formatted_sources)
+                # full_response += formatted_sources
+                with st.expander("📚 Sources"):
+                    for source in sources:
+                        st.write(f"- {source}")
+            
             st.session_state.messages.append({"role": "assistant", "content": full_response})
