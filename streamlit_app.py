@@ -6,6 +6,8 @@ sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 import streamlit as st
 from nse_engine import NSEKnowledgeBase
+import threading
+import time
 
 st.set_page_config(page_title="NSE Smart Chatbot", page_icon="📈")
 st.title("📈 NSE Context-Aware Chatbot")
@@ -30,37 +32,47 @@ except Exception as e:
     st.error(f"Initialization Error: {e}")
     st.stop()
 
-# --- OPTIMIZED STARTUP LOGIC ---
-# We check if we have scraped in this session OR if the DB already has data.
-if "startup_check_done" not in st.session_state:
-    with st.spinner("Checking knowledge base..."):
-        try:
-            # Optimization: Only scrape if the database is empty
-            if not nse_bot.has_data():
-                st.write("🚀 Database empty. Performing initial scrape...")
-                status_msg, logs = nse_bot.build_knowledge_base()
-                st.success(status_msg)
-            else:
-                # Data exists, no need to scrape!
-                st.toast("✅ Loaded data from cache (Fast Start)", icon="⚡")
-            
-            st.session_state["startup_check_done"] = True
-            
-        except Exception as e:
-            st.error(f"Startup failed: {e}")
-# -------------------------------
+# --- SILENT BACKGROUND AUTO-UPDATE LOGIC ---
+if "update_thread_started" not in st.session_state:
+    st.session_state["update_thread_started"] = False
 
+# Check last update time
+last_update_ts = nse_bot.get_last_update_time()
+current_ts = time.time()
+hours_since_update = (current_ts - last_update_ts) / 3600
+
+# Condition: If no data exists OR data is older than 6 hours
+if not nse_bot.has_data() or hours_since_update > 6:
+    if not st.session_state["update_thread_started"]:
+        
+        def run_background_scrape():
+            # This runs in a separate thread
+            print("🔄 Starting background NSE scrape...")
+            nse_bot.build_knowledge_base()
+            print("✅ Background scrape finished.")
+        
+        # Start the thread
+        t = threading.Thread(target=run_background_scrape)
+        t.start()
+        
+        st.session_state["update_thread_started"] = True
+        
+        # Notify user non-intrusively
+        if not nse_bot.has_data():
+            st.info("⚙️ Initial setup: Creating knowledge base... (Chat may be slow for 15 seconds)")
+        else:
+            st.toast("Refreshing market data in the background...", icon="🔄")
+# -------------------------------------------
+
+# Sidebar is now purely informational (No Button)
 with st.sidebar:
     st.header("🧠 Knowledge Base")
+    if last_update_ts > 0:
+        st.write(f"Last Updated: {time.ctime(last_update_ts)}")
+    else:
+        st.write("Status: Initializing...")
     
-    # Manual override to force a refresh
-    if st.button("⚠️ Force Re-Scrape"):
-        with st.spinner("Scraping 20+ pages in parallel..."):
-            status_msg, logs = nse_bot.build_knowledge_base()
-            st.success(status_msg)
-            with st.expander("View Scraping Logs"):
-                for log in logs:
-                    st.text(log)
+    st.info("Data updates automatically every 6 hours.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
