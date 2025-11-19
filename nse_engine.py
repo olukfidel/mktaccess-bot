@@ -101,15 +101,57 @@ class NSEKnowledgeBase:
 
         if not urls:
             urls = [
-                "https://www.nse.co.ke/",
-                "https://www.nse.co.ke/market-statistics/",
-                "https://www.nse.co.ke/market-statistics/daily-market-report/",
-                "https://www.nse.co.ke/listed-companies/",
-                "https://www.nse.co.ke/listed-company-announcements/",
-                "https://www.nse.co.ke/derivatives/",
-                "https://www.nse.co.ke/real-estate-investment-trusts/",
-                "https://www.nse.co.ke/exchange-traded-funds/",
-                "https://www.nse.co.ke/faqs/"
+                "https://www.nse.co.ke/"
+"https://www.nse.co.ke/home/"
+"https://www.nse.co.ke/about-nse/"
+"https://www.nse.co.ke/about-nse/history/"
+"https://www.nse.co.ke/about-nse/vision-mission/"
+"https://www.nse.co.ke/about-nse/board-of-directors/"
+"https://www.nse.co.ke/about-nse/management-team/"
+"https://www.nse.co.ke/listed-companies/"
+"https://www.nse.co.ke/listed-companies/list/"
+"https://www.nse.co.ke/share-price/"
+"https://www.nse.co.ke/market-statistics/"
+"https://www.nse.co.ke/market-statistics/daily-market-report/"
+"https://www.nse.co.ke/market-statistics/weekly-market-report/"
+"https://www.nse.co.ke/market-statistics/monthly-market-report/"
+"https://www.nse.co.ke/data/"
+"https://www.nse.co.ke/data/historical-data/"
+"https://www.nse.co.ke/data/bond-data/"
+"https://www.nse.co.ke/products/"
+"https://www.nse.co.ke/products/equities/"
+"https://www.nse.co.ke/products/derivatives/"
+"https://www.nse.co.ke/products/reits/"
+"https://www.nse.co.ke/products/etfs/"
+"https://www.nse.co.ke/products/bonds/"
+"https://www.nse.co.ke/usp/"
+"https://www.nse.co.ke/ibuka/"
+"https://www.nse.co.ke/clearing-settlement/"
+"https://www.nse.co.ke/news/"
+"https://www.nse.co.ke/news/announcements/"
+"https://www.nse.co.ke/circulars/"
+"https://www.nse.co.ke/media-center/"
+"https://www.nse.co.ke/investor-education/"
+"https://www.nse.co.ke/investor-relations/"
+"https://www.nse.co.ke/careers/"
+"https://www.nse.co.ke/contact-us/"
+"https://www.nse.co.ke/faqs/"
+"https://www.nse.co.ke/sustainability/"
+"https://www.nse.co.ke/tenders/"
+"https://www.nse.co.ke/procurement/"
+"https://www.nse.co.ke/regulations/"
+"https://www.nse.co.ke/trading-participants/"
+"https://www.nse.co.ke/trading-participants/stockbrokers/"
+"https://www.nse.co.ke/trading-participants/authorized-securities-dealers/"
+"https://www.nse.co.ke/login/"
+"https://www.nse.co.ke/online-trading-platform/"
+"https://www.nse.co.ke/market-data-vendor/"
+"https://live.nse.co.ke/"
+"https://www.nse.co.ke/indices/"
+"https://www.nse.co.ke/indices/nse-asi/"
+"https://www.nse.co.ke/indices/nse-20/"
+"https://www.nse.co.ke/indices/nse-25/"
+"https://www.nse.co.ke/indices/nse-bond-index/"
             ]
 
         # 1. Scrape
