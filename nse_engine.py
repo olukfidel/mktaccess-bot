@@ -1,15 +1,14 @@
 import os
 import requests
 from bs4 import BeautifulSoup
+# We use the modern OpenAI client to prevent 'proxies' errors
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain_core.documents import Document
-from langchain_core.prompts import ChatPromptTemplate
+from langchain.docstore.document import Document
 
-# Modern chain syntax for LangChain 0.2+
-from langchain.chains import create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
+# We use RetrievalQA because it is available in ALL versions of LangChain
+from langchain.chains import RetrievalQA
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key):
@@ -18,16 +17,17 @@ class NSEKnowledgeBase:
             
         os.environ["OPENAI_API_KEY"] = openai_api_key
         
-        # Initialize LLM with specific model parameters
-        # We explicitly pass the key to avoid environment variable race conditions
+        # 1. Initialize LLM
         self.llm = ChatOpenAI(
             model_name="gpt-3.5-turbo", 
             temperature=0.0,
             api_key=openai_api_key
         )
         
+        # 2. Initialize Embeddings
         self.embeddings = OpenAIEmbeddings(api_key=openai_api_key)
         
+        # 3. Initialize Vector Store
         self.db_directory = "./nse_db"
         self.vector_db = Chroma(
             persist_directory=self.db_directory, 
@@ -81,32 +81,26 @@ class NSEKnowledgeBase:
         return f"Success! Indexed {len(docs)} chunks of data.", logs
 
     def _init_chain(self):
-        # Initialize using modern create_retrieval_chain
+        # Use the standard RetrievalQA chain which is robust across versions
         retriever = self.vector_db.as_retriever(search_kwargs={"k": 4})
         
-        system_prompt = (
-            "You are a helpful assistant for the Nairobi Securities Exchange (NSE). "
-            "Use the following pieces of retrieved context to answer the user's question. "
-            "If the answer is not in the context, politely say you don't have that information. "
-            "\n\nContext:\n{context}"
+        self.qa_chain = RetrievalQA.from_chain_type(
+            llm=self.llm,
+            chain_type="stuff",
+            retriever=retriever,
+            return_source_documents=True
         )
-        prompt = ChatPromptTemplate.from_messages([
-            ("system", system_prompt),
-            ("human", "{input}"),
-        ])
-        
-        question_answer_chain = create_stuff_documents_chain(self.llm, prompt)
-        self.qa_chain = create_retrieval_chain(retriever, question_answer_chain)
 
     def answer_question(self, query):
         if not self.qa_chain:
             self._init_chain()
             
         try:
-            # Modern chain uses 'input'
-            result = self.qa_chain.invoke({"input": query})
-            answer = result["answer"]
-            sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result.get("context", [])]))
+            # Legacy invocation works on both new and old versions for RetrievalQA
+            result = self.qa_chain.invoke({"query": query})
+            
+            answer = result["result"]
+            sources = list(set([doc.metadata.get('source', 'Unknown') for doc in result.get("source_documents", [])]))
             
             return answer, sources
         except Exception as e:
