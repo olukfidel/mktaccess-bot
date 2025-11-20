@@ -228,7 +228,9 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/wp-content/uploads/Nairobi-Securities-Exchange-Plc-Appointment-of-Non-Executive-Director.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Press-Release-Nairobi-Securities-Exchange-Plc-Launches-Banking-Sector-Index.pdf",
             "https://www.nse.co.ke/wp-content/uploads/NSE-Market-Data-Pricelist.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/broker-back-office-prequalified-vendors.pdf"
+            "https://www.nse.co.ke/wp-content/uploads/broker-back-office-prequalified-vendors.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/NSE-2025-2029-Strategy.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/BBO-standards.pdf"
         ]
         
         count = 0
@@ -318,6 +320,11 @@ class NSEKnowledgeBase:
         elif "listed-companies" in url: tag = "[COMPANY_DATA]"
         elif "investor-calendar" in url: tag = "[CALENDAR]"
         elif "derivatives" in url: tag = "[DERIVATIVES]"
+        elif "csr" in url: tag = "[CSR]"
+        elif "e-digest" in url: tag = "[DIGEST]"
+        elif "press-releases" in url: tag = "[PRESS_RELEASE]"
+        elif "publications" in url: tag = "[PUBLICATION]"
+        elif "strategy" in url: tag = "[STRATEGY]"
 
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
@@ -499,7 +506,17 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/derivatives/",
             "https://www.nse.co.ke/nse-investor-calendar/",
             "https://www.nse.co.ke/policy-guidance-notes/",
-            "https://www.nse.co.ke/circulars/"
+            "https://www.nse.co.ke/circulars/",
+            
+            # More Latest Batch
+            "https://www.nse.co.ke/how-to-become-a-trading-participant/",
+            "https://www.nse.co.ke/e-digest/",
+            "https://www.nse.co.ke/list-of-trading-participants/",
+            "https://www.nse.co.ke/nse-events/",
+            "https://www.nse.co.ke/csr/",
+            "https://www.nse.co.ke/press-releases/",
+            "https://www.nse.co.ke/publications/",
+            "https://www.nse.co.ke/trading-participant-financials/"
         ]
         
         # External/Social links (might be skipped by crawler logic, but included as requested)
@@ -635,7 +652,7 @@ class NSEKnowledgeBase:
             today = datetime.date.today().strftime("%Y-%m-%d")
             system_prompt = f"""You are the NSE Digital Assistant (similar to Zuri), an expert on the Nairobi Securities Exchange. Your responses must be factual, based solely on the provided CONTEXT. Do not add external knowledge or assumptions.
 
-           TODAY'S DATE: {today}
+            TODAY'S DATE: {today}
 
             INSTRUCTIONS:
             1. **Accuracy First:** Ground every claim in the CONTEXT. If information is missing or ambiguous, state "Based on available data, I cannot confirm [topic]." Avoid speculation—e.g., do not infer future events or unstated details.
