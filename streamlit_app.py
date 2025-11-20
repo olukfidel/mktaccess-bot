@@ -70,7 +70,7 @@ if not nse_bot.has_data() or hours_since_update > 24:
 
 # --- CHAT INTERFACE ---
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Hi! I'm the NSE Digital Assistant. Ask me about trading rules, board members, or listed companies."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Hi! I'm the NSE Digital Assistant."}]
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
