@@ -143,7 +143,7 @@ class NSEKnowledgeBase:
         found_content_urls = set() # HTML pages
         found_pdf_urls = set()     # PDF files
         
-        # Start with the hardcoded important PDFs to ensure they are included
+        # Hardcoded important PDFs
         hardcoded_pdfs = [
             "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Kenya-Orchards-Ltd-Cautionary-Announcement.pdf",
@@ -232,7 +232,6 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/wp-content/uploads/NSE-2025-2029-Strategy.pdf",
             "https://www.nse.co.ke/wp-content/uploads/BBO-standards.pdf"
         ]
-        
         count = 0
         while to_visit and count < MAX_PAGES_TO_CRAWL:
             url = to_visit.pop()
@@ -289,42 +288,11 @@ class NSEKnowledgeBase:
         
         if "statistics" in url: tag = "[MARKET_DATA]"
         elif "management" in url or "directors" in url or "leadership" in url: tag = "[LEADERSHIP]"
-        elif "contact" in url: tag = "[CONTACT]"
         elif "rules" in url: tag = "[REGULATION]"
-        elif "news" in url: tag = "[NEWS]"
-        elif "calendar" in url: tag = "[CALENDAR]"
         elif "financial" in url or "result" in url: tag = "[FINANCIALS]"
-        elif "training" in url or "masterclass" in url or "academy" in url: tag = "[EDUCATION]"
-        elif "market-segment" in url or "ibuka" in url or "usp" in url: tag = "[MARKET_SEGMENT]"
-        elif "products" in url or "bonds" in url or "funds" in url or "trusts" in url or "m-akiba" in url: tag = "[PRODUCT]"
-        elif "careers" in url: tag = "[CAREERS]"
-        elif "tenders" in url: tag = "[TENDERS]"
-        elif "privacy" in url or "cookies" in url: tag = "[LEGAL]"
-        elif "about-nse" in url or "story" in url or "vision" in url: tag = "[ABOUT]"
-        elif "trading" in url: tag = "[TRADING]"
-        elif "announcement" in url: tag = "[ANNOUNCEMENT]"
-        elif "forum" in url: tag = "[EVENT]"
-        elif "price-list" in url or "pricelist" in url: tag = "[DATA_PRICING]"
-        elif "historical" in url: tag = "[HISTORICAL_DATA]"
-        elif "isin" in url: tag = "[ISIN_DATA]"
-        elif "real-time" in url: tag = "[REALTIME_DATA]"
-        elif "end-of-day" in url: tag = "[EOD_DATA]"
-        elif "specification" in url or "api" in url: tag = "[API_DOCS]"
-        elif "sustainability" in url: tag = "[SUSTAINABILITY]"
-        elif "login" in url: tag = "[LOGIN]"
-        elif "cart" in url: tag = "[CART]"
-        elif "advisors" in url: tag = "[ADVISORS]"
-        elif "guidelines" in url: tag = "[GUIDELINES]"
-        elif "corporate-actions" in url: tag = "[CORPORATE_ACTION]"
-        elif "circulars" in url: tag = "[CIRCULAR]"
-        elif "listed-companies" in url: tag = "[COMPANY_DATA]"
-        elif "investor-calendar" in url: tag = "[CALENDAR]"
-        elif "derivatives" in url: tag = "[DERIVATIVES]"
-        elif "csr" in url: tag = "[CSR]"
-        elif "e-digest" in url: tag = "[DIGEST]"
-        elif "press-releases" in url: tag = "[PRESS_RELEASE]"
-        elif "publications" in url: tag = "[PUBLICATION]"
-        elif "strategy" in url: tag = "[STRATEGY]"
+        elif "products" in url or "etf" in url or "bonds" in url: tag = "[PRODUCT]"
+        elif "market-data" in url: tag = "[DATA_PRICING]"
+        elif "press-release" in url: tag = "[PRESS_RELEASE]"
 
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
@@ -343,7 +311,6 @@ class NSEKnowledgeBase:
 
     def scrape_and_index(self, urls, content_type="html"):
         """Scrapes list of URLs and indexes them if changed"""
-        
         new_chunks = 0
         
         def task(url):
@@ -364,7 +331,6 @@ class NSEKnowledgeBase:
                     text = self._process_content(url, content_type, content)
                     if not text: continue
 
-                    # Differential Update: Check Hash (Simulated for now)
                     chunks = self.simple_text_splitter(text)
                     ids = [str(uuid.uuid4()) for _ in chunks]
                     metadatas = [{"source": url, "date": datetime.date.today().isoformat()} for _ in chunks]
@@ -384,9 +350,8 @@ class NSEKnowledgeBase:
     def build_knowledge_base(self):
         """Full rebuild logic with crawling"""
         
-        # 1. Seed URLs for crawling
         seeds = [
-            "https://www.nse.co.ke/",
+           "https://www.nse.co.ke/",
             "https://www.nse.co.ke/home/",
             "https://www.nse.co.ke/about-nse/",
             "https://www.nse.co.ke/about-nse/history/",
@@ -519,36 +484,19 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/trading-participant-financials/"
         ]
         
-        # External/Social links (might be skipped by crawler logic, but included as requested)
-        external_seeds = [
-             "https://www.facebook.com/NSEPLC/",
-             "https://twitter.com/NSE_PLC",
-             "https://www.youtube.com/channel/UCual_P_eQvhLllXRvSdZtxw",
-             "https://www.linkedin.com/company/nairobi-securities-exchange-plc/posts/?feedView=all",
-             "https://apps.apple.com/us/app/dosikaa/id6451129448",
-             "https://play.google.com/store/apps/details?id=ke.co.synergy.dosikaa"
-        ]
-        
-        # 3. Crawl to discover new stuff
         print("🕷️ Crawling NSE website...")
-        discovered_pages, discovered_pdfs = self.crawl_site(seeds + external_seeds)
-        
-        # Combine lists
+        discovered_pages, discovered_pdfs = self.crawl_site(seeds)
         all_pages = list(set(discovered_pages))
-        
         print(f"📝 Found {len(all_pages)} pages and {len(discovered_pdfs)} PDFs.")
         
-        # 4. Reset DB (Simple approach for now to ensure cleanliness)
         try:
             self.chroma_client.delete_collection("nse_data")
         except: pass
         self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
         
-        # 5. Index Everything
         chunks_1 = self.scrape_and_index(all_pages, "html")
         chunks_2 = self.scrape_and_index(discovered_pdfs, "pdf") 
         
-        # 6. Mark timestamp
         try:
             with open("last_update.txt", "w") as f: f.write(str(time.time()))
         except: pass
@@ -557,11 +505,13 @@ class NSEKnowledgeBase:
 
     def generate_context_queries(self, original_query):
         today = datetime.date.today().strftime("%Y-%m-%d")
-        prompt = f"""Generate 3 search queries for the NSE database for: "{original_query}"
+        # Explicitly adding NSE context to the prompt generation
+        prompt = f"""Generate 3 specific search queries for the NSE (Nairobi Securities Exchange) database for: "{original_query}"
         Current Date: {today}
-        1. Keyword match.
-        2. Concept/Definition.
-        3. Document type (e.g. "Daily Report {today}").
+        INSTRUCTION: Ensure all queries implicitly or explicitly target the Nairobi Securities Exchange context.
+        1. Exact match specifically for NSE regulations or products (e.g., "{original_query} NSE").
+        2. Concept/Definition in the context of the Kenyan Market.
+        3. Document type (e.g., "NSE Rules for {original_query}").
         Output ONLY 3 lines."""
         try:
             response = self.client.chat.completions.create(
@@ -569,23 +519,18 @@ class NSEKnowledgeBase:
             )
             return [q.strip() for q in response.choices[0].message.content.split('\n') if q.strip()][:3]
         except:
-            return [original_query]
+            return [original_query + " NSE", original_query]
 
     def llm_rerank(self, query, documents, sources):
-        """
-        Advanced LLM-based re-ranking.
-        Uses GPT-4o-mini to grade the relevance of each chunk.
-        """
         if not documents: return []
         
-        # Prepare text for LLM
         candidates = ""
         for i, doc in enumerate(documents):
             candidates += f"\n--- DOC {i} ---\nSource: {sources[i]}\nContent: {doc[:300]}...\n"
             
-        prompt = f"""Rank these documents by relevance to the query: "{query}".
+        prompt = f"""Rank these documents by relevance to the user's query: "{query}" in the context of the Nairobi Securities Exchange.
         Return the IDs of the top 5 most relevant documents in order (e.g., "0, 3, 1").
-        If a document is a PDF report or contains data tables, prioritize it.
+        Prioritize NSE official PDF reports and rules.
         
         Documents:
         {candidates}"""
@@ -596,36 +541,31 @@ class NSEKnowledgeBase:
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0
             )
-            # Extract indices
             indices_str = response.choices[0].message.content
             indices = [int(x) for x in re.findall(r'\d+', indices_str)]
             
-            # Map back to docs
             reranked = []
             for idx in indices:
                 if idx < len(documents):
                     reranked.append((documents[idx], sources[idx]))
             return reranked
         except:
-            # Fallback to original order if LLM fails
             return list(zip(documents, sources))
 
     def answer_question(self, query):
         try:
-            # 0. Auto-Update Check
             if self.is_data_stale():
-                pass # Handled by main app thread
+                pass 
 
             if self.collection is None: return "System initializing...", []
 
-            # 1. Multi-Query
+            # 1. Multi-Query with Enforced NSE Context
             search_queries = self.generate_context_queries(query)
             
-            # 2. Retrieval (Hybrid-ish via multiple queries)
+            # 2. Retrieval
             query_embeddings = self.get_embeddings_batch(search_queries)
             results = self.collection.query(query_embeddings=query_embeddings, n_results=15)
             
-            # Flatten
             raw_docs = []
             raw_sources = []
             seen = set()
@@ -637,34 +577,36 @@ class NSEKnowledgeBase:
                         raw_docs.append(text)
                         raw_sources.append(meta_list[j]['source'])
             
-            if not raw_docs: return "I couldn't find that information in my NSE database.", []
+            if not raw_docs: return "I couldn't find that information in the NSE database.", []
 
             # 3. LLM Re-Ranking
             top_results = self.llm_rerank(query, raw_docs, raw_sources)
             
             context_text = ""
             visible_sources = []
-            for doc, source in top_results[:5]: # Top 5 after rerank
+            for doc, source in top_results[:5]: 
                 context_text += f"\n[Source: {source}]\n{doc}\n---"
                 if source not in visible_sources: visible_sources.append(source)
 
-            # 4. Final Response
+            # 4. Final Response with FORCED CONTEXT
             today = datetime.date.today().strftime("%Y-%m-%d")
-            system_prompt = f"""You are the NSE Digital Assistant (similar to Zuri), an expert on the Nairobi Securities Exchange. Your responses must be factual, based solely on the provided CONTEXT. Do not add external knowledge or assumptions.
+            
+            system_prompt = f"""You are the NSE Digital Assistant, an expert specifically on the Nairobi Securities Exchange (NSE).
+
+            CRITICAL INSTRUCTION: The user is ALWAYS asking about the Nairobi Securities Exchange, even if they do not explicitly say "at the NSE" or "in Kenya".
+            - If the user asks "What is an ETF?", you MUST answer "An ETF at the NSE is..." and describe the specific ETFs listed on the Nairobi Securities Exchange.
+            - Do NOT provide generic, global, or US-market definitions unless they match NSE regulations found in the CONTEXT.
+            - If the CONTEXT does not contain NSE-specific info for the query, state: "I couldn't find specific information regarding [topic] at the NSE in my database."
 
             TODAY'S DATE: {today}
 
-            INSTRUCTIONS:
-            1. **Accuracy First:** Ground every claim in the CONTEXT. If information is missing or ambiguous, state "Based on available data, I cannot confirm [topic]." Avoid speculation—e.g., do not infer future events or unstated details.
-            2. **Date Awareness:** Always check dates in the CONTEXT. Prioritize the most recent data (e.g., prefer 2025 over 2024). If data is outdated (older than 1 year from today's date), qualify your answer: "According to the latest available document (dated [extracted date]), ... Note: This may not reflect current status—recommend checking NSE's official site for updates."
-               - For time-sensitive queries (e.g., market stats, leadership changes), cross-reference multiple sources in CONTEXT if available and note any discrepancies.
-            3. **Comprehensiveness:** Cover all relevant aspects of the query. Break down complex topics into key components (e.g., for "financial results": include revenue, profits, dates, comparisons to prior periods). If CONTEXT provides pros/cons, historical trends, or related entities (e.g., listed companies), include them for a fuller picture.
-               - Use chain-of-thought: First, identify key facts from CONTEXT. Second, validate against query. Third, structure response logically.
-            4. **Be Concise Yet Detailed:** Answer directly without fluff. Use bullet points, tables, or numbered lists for clarity. For lists (e.g., board members), include names, roles, and dates if available.
-            5. **Hallucination Check:** Before finalizing, verify: Does this match CONTEXT exactly? If unsure, default to "Insufficient data in available sources."
-            6. **Formatting:** - Use markdown for readability (e.g., **bold** for key terms, tables for data comparisons).
-               - End with sources: "Sources: [list unique URLs from CONTEXT]."
-
+            GUIDELINES:
+            1. **Contextual Enforcement:** Treat every query as if it ends with "...at the Nairobi Securities Exchange."
+            2. **Accuracy First:** Ground every claim in the CONTEXT. 
+            3. **Date Awareness:** Prioritize the most recent data (e.g., 2025 documents over 2020).
+            4. **Comprehensiveness:** Break down complex topics into key components based on NSE rules.
+            5. **Formatting:** Use markdown (bullet points, bold text).
+            
             CONTEXT:
             {context_text}"""
 
