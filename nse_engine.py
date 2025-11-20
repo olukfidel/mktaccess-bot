@@ -12,6 +12,7 @@ import re
 import random
 import datetime
 import hashlib
+import pdfplumber
 from pypdf import PdfReader
 from urllib.parse import urljoin, urlparse
 from tenacity import retry, stop_after_attempt, wait_fixed
@@ -407,34 +408,74 @@ The constituent assets or securities shall be housed in a trust arrangement with
         return text.strip()
 
     def simple_text_splitter(self, text, chunk_size=1500, overlap=300):
+        header_match = text.split('\n\n')[0] if "DOCUMENT:" in text[:100] else ""
         chunks = []
         start = 0
         text_len = len(text)
+        
         while start < text_len:
             end = start + chunk_size
             if end < text_len:
                 last_period = text.rfind('.', start, end)
                 if last_period != -1 and last_period > start + (chunk_size // 2):
                     end = last_period + 1
-            chunk = text[start:end]
-            chunks.append(chunk)
+            chunk_content = text[start:end]
+            
+            # POWER MOVE: Inject header into EVERY chunk if it's missing
+            if header_match and header_match not in chunk_content:
+                final_chunk = f"{header_match}\n[FRAGMENT]\n{chunk_content}"
+            else:
+                final_chunk = chunk_content
+                
+            chunks.append(final_chunk)
             start += chunk_size - overlap
             if start >= end: start = end
         return chunks
-
     def _extract_text_from_pdf(self, pdf_content):
+        """
+        POWER UPGRADE: Extracts text while preserving Table structures as Markdown.
+        Uses 'pdfplumber' for table detection.
+        """
+        
+        text_content = []
+        
         try:
-            pdf_file = io.BytesIO(pdf_content)
-            reader = PdfReader(pdf_file)
-            text = ""
-            for page in reader.pages:
-                try:
-                    page_text = page.extract_text(extraction_mode="layout")
-                except:
+            with pdfplumber.open(io.BytesIO(pdf_content)) as pdf:
+                for i, page in enumerate(pdf.pages):
+                    # 1. Extract Tables and convert to Markdown
+                    tables = page.extract_tables()
                     page_text = page.extract_text()
-                text += page_text + "\n"
-            return text
-        except Exception:
+                    
+                    # If tables exist, format them nicely for the LLM
+                    if tables:
+                        for table in tables:
+                            # Clean None values and convert to Markdown format
+                            clean_table = [[str(cell).replace('\n', ' ') if cell else "" for cell in row] for row in table]
+                            # Create a markdown table string
+                            if len(clean_table) > 0:
+                                headers = clean_table[0]
+                                header_row = "| " + " | ".join(headers) + " |"
+                                separator = "| " + " | ".join(["---"] * len(headers)) + " |"
+                                body = "\n".join(["| " + " | ".join(row) + " |" for row in clean_table[1:]])
+                                table_md = f"\n\n[TABLE_DATA_PAGE_{i+1}]\n{header_row}\n{separator}\n{body}\n\n"
+                                
+                                # Append table to content
+                                text_content.append(table_md)
+
+                    # 2. Append regular text (avoiding duplicates effectively is hard, 
+                    # but typically appending text after tables works for context)
+                    if page_text:
+                        # Inject Page Numbers for Citations
+                        text_content.append(f"\n[PAGE {i+1}] {page_text}")
+                        
+            return "\n".join(text_content)
+            
+        except ImportError:
+            print("Please install pdfplumber for advanced table extraction.")
+            # Fallback to original pypdf
+            return self._extract_text_from_pdf_fallback(pdf_content)
+        except Exception as e:
+            print(f"PDF Error: {e}")
             return ""
 
     def _get_random_header(self):
@@ -612,10 +653,12 @@ The constituent assets or securities shall be housed in a trust arrangement with
         elif "financial" in url: tag = "[FINANCIALS]"
         elif "etf" in url or "bond" in url: tag = "[PRODUCT]"
 
+        filename = url.split('/')[-1].replace('.pdf', '').replace('-', ' ').title()
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
             if len(raw_text) > 100:
-                text = f"{tag} SOURCE: {url}\nTYPE: OFFICIAL PDF\n\n" + self.clean_text_chunk(raw_text)
+                header = f"DOCUMENT: {filename}\nSOURCE: {url}\nTAGS: {tag}\nTYPE: OFFICIAL PDF\n\n"
+                text = header + self.clean_text_chunk(raw_text)
         else:
             soup = BeautifulSoup(content_bytes, 'html.parser')
             for item in soup(["script", "style", "nav", "footer", "header", "aside"]):
