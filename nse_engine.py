@@ -23,8 +23,8 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # --- CONFIGURATION ---
 EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
-MAX_CRAWL_DEPTH = 2
-MAX_PAGES_TO_CRAWL = 50
+MAX_CRAWL_DEPTH = 4
+MAX_PAGES_TO_CRAWL = 300
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key):
@@ -775,6 +775,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
             "https://www.nse.co.ke/site-map/",
             "https://www.nse.co.ke/mobile-and-online-trading/",
             "https://www.nse.co.ke/dataservices/historical-data-request-form/",
+            "https://www.nse.co.ke/derivatives/about-next"
             "https://www.nse.co.ke/investor-news/",
             
             # Newly added links
