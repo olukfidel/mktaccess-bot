@@ -104,7 +104,7 @@ class NSEKnowledgeBase:
         }
         tag = "[GENERAL]"
         if "statistics" in url: tag = "[MARKET_DATA]"
-        elif "management" in url or "directors" in url: tag = "[LEADERSHIP]"
+        elif "management" in url or "directors" in url or "leadership" in url: tag = "[LEADERSHIP]"
         elif "contact" in url: tag = "[CONTACT]"
         elif "listed-companies" in url or "announcement" in url: tag = "[COMPANY_UPDATE]"
         elif "rules" in url or "guidelines" in url: tag = "[REGULATION]"
@@ -150,11 +150,10 @@ class NSEKnowledgeBase:
         scraped_data = []
         logs = []
         
-        # Scrape Main URLs (Parallel)
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             future_to_url = {executor.submit(self._scrape_single_url, url): url for url in urls}
             for future in concurrent.futures.as_completed(future_to_url):
-                data, log_msg, _ = future.result() # Ignore nested PDF discovery for explicit list
+                data, log_msg, _ = future.result()
                 logs.append(log_msg)
                 if data: scraped_data.append(data)
         
@@ -173,6 +172,7 @@ class NSEKnowledgeBase:
                 "https://www.nse.co.ke/site-map/",
                 "https://www.nse.co.ke/about-nse/management-team/",
                 "https://www.nse.co.ke/about-nse/board-of-directors/",
+                "https://www.nse.co.ke/leadership/", # Added Leadership URL
                 "https://www.nse.co.ke/contact-us/",
                 "https://www.nse.co.ke/market-statistics/",
                 "https://www.nse.co.ke/market-statistics/daily-market-report/",
@@ -189,7 +189,7 @@ class NSEKnowledgeBase:
                 "https://www.nse.co.ke/investor-news/",
                 "https://www.nse.co.ke/nse-investor-calendar/",
                 
-                # Specific PDF Documents (Reports, Calendars, Announcements)
+                # Specific PDF Documents
                 "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
                 "https://www.nse.co.ke/wp-content/uploads/Kenya-Orchards-Ltd-Cautionary-Announcement.pdf",
                 "https://www.nse.co.ke/wp-content/uploads/Equity-Group-Holdings-Plc-EQUITY-GROUP-HOLDINGS-PLC-CHANGE-OF-BOARD.pdf",
@@ -276,7 +276,7 @@ class NSEKnowledgeBase:
     def rerank_results(self, original_query, documents, sources):
         scored_results = []
         query_lower = original_query.lower()
-        people_intent = any(w in query_lower for w in ['ceo', 'chairman', 'director', 'manager', 'who'])
+        people_intent = any(w in query_lower for w in ['ceo', 'chairman', 'director', 'manager', 'who', 'leadership', 'board'])
         loc_intent = any(w in query_lower for w in ['location', 'address', 'where', 'contact'])
         data_intent = any(w in query_lower for w in ['price', 'value', 'volume', 'rate', 'today', 'gainers'])
         
@@ -285,7 +285,7 @@ class NSEKnowledgeBase:
             doc_lower = doc.lower()
             source_lower = sources[i].lower()
             if query_lower in doc_lower: score += 10
-            if people_intent and ("[LEADERSHIP]" in doc or "management" in source_lower): score += 20
+            if people_intent and ("[LEADERSHIP]" in doc or "management" in source_lower or "leadership" in source_lower): score += 20
             elif loc_intent and ("[CONTACT]" in doc or "contact" in source_lower): score += 20
             elif data_intent and ("[MARKET_DATA]" in doc or "statistics" in source_lower): score += 15
             if ".pdf" in source_lower and (data_intent or "report" in query_lower): score += 10
