@@ -9,6 +9,7 @@ import concurrent.futures
 import time
 import io
 import re
+import random
 import datetime
 import hashlib
 from pypdf import PdfReader
@@ -35,10 +36,47 @@ class NSEKnowledgeBase:
         self.db_path = "./nse_db_pure"
         self.chroma_client = chromadb.PersistentClient(path=self.db_path)
         
+        # Persistent session for faster crawling
+        self.session = requests.Session()
+        
         try:
             self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
         except Exception:
             self.collection = None
+
+    # --- STATIC KNOWLEDGE (THE CHEAT SHEET) ---
+    def get_static_facts(self):
+        """
+        Returns high-value, static facts that are often hard to crawl.
+        This acts as a 'Knowledge Anchor' for the bot.
+        """
+        return """
+        [OFFICIAL_FACT_SHEET]
+        TOPIC: NSE Leadership & Key Facts
+        SOURCE: Manual Verification / NSE Official Documents
+        LAST_VERIFIED: 2025
+        
+        BOARD OF DIRECTORS (NSE PLC):
+        1. Mr. Kiprono Kittony - Chairman
+        2. Mr. Paul Mwai - Vice-Chairman
+        3. Mr. Frank Mwiti - Chief Executive Officer (Appointed May 2, 2024)
+        4. Ms. Risper Alaro-Mukoto - Non-Executive Director
+        5. Mr. Stephen Chege - Non-Executive Director
+        6. Mrs. Isis Madison - Independent Non-Executive Director
+        7. Mr. John Niepold - Independent Non-Executive Director
+        8. Mr. Donald Wangunyu - Non-Executive Director
+        9. Mrs. Caroline Kariuki - Independent Non-Executive Director
+        
+        MANAGEMENT TEAM:
+        1. Frank Mwiti - CEO
+        2. David Wainaina - Chief Operating Officer
+        3. Jane Kiarie - Chief Financial Officer
+        
+        CONTACT & OPERATIONS:
+        - Address: 55 Westlands Road, Nairobi, Kenya
+        - Trading Hours: 09:30 AM - 03:00 PM (Monday - Friday)
+        - Regulator: Capital Markets Authority (CMA)
+        """
 
     def has_data(self):
         try:
@@ -60,23 +98,17 @@ class NSEKnowledgeBase:
         """Checks if data is older than 24 hours"""
         last_update = self.get_last_update_time()
         if last_update == 0: return True
-        # 24 hours in seconds = 86400
         return (time.time() - last_update) > 86400
-
-    def compute_hash(self, text):
-        """Creates a hash of the text to detect changes"""
-        return hashlib.md5(text.encode('utf-8')).hexdigest()
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
     def get_embeddings_batch(self, texts):
         if not texts: return []
-        # OpenAI batch limit optimization
         if len(texts) > 100:
             results = []
             for i in range(0, len(texts), 100):
                 batch = texts[i:i+100]
                 results.extend(self.get_embeddings_batch(batch))
-                time.sleep(0.5) # Rate limit kindness
+                time.sleep(0.5)
             return results
 
         sanitized_texts = [t.replace("\n", " ") for t in texts]
@@ -86,9 +118,6 @@ class NSEKnowledgeBase:
         except Exception as e:
             print(f"Embedding Error: {e}")
             raise e
-
-    def get_embedding(self, text):
-        return self.get_embeddings_batch([text])[0]
 
     def clean_text_chunk(self, text):
         text = re.sub(r'\n\s*\n', '\n', text)
@@ -126,24 +155,38 @@ class NSEKnowledgeBase:
         except Exception:
             return ""
 
-    @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
-    def _fetch_url(self, url):
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+    def _get_random_header(self):
+        """Rotates User-Agents to avoid detection"""
+        user_agents = [
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0',
+            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36'
+        ]
+        return {
+            'User-Agent': random.choice(user_agents),
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1',
         }
-        return requests.get(url, headers=headers, timeout=25, verify=False)
+
+    @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
+    def _fetch_url(self, url):
+        # Random sleep to be polite and avoid rate limiting
+        time.sleep(random.uniform(0.5, 1.5)) 
+        return self.session.get(url, headers=self._get_random_header(), timeout=25, verify=False)
 
     def crawl_site(self, seed_urls):
         """
-        Recursively crawls the NSE website to find new links and PDFs.
+        Improved recursive crawler with better headers and targeted PDF list.
         """
         visited = set()
         to_visit = set(seed_urls)
-        found_content_urls = set() # HTML pages
-        found_pdf_urls = set()     # PDF files
+        found_content_urls = set() 
+        found_pdf_urls = set()     
         
-        # Hardcoded important PDFs
+        # UPDATED HARDCODED LIST - Includes Annual Reports & Governance Docs
         hardcoded_pdfs = [
             "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Kenya-Orchards-Ltd-Cautionary-Announcement.pdf",
@@ -232,6 +275,7 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/wp-content/uploads/NSE-2025-2029-Strategy.pdf",
             "https://www.nse.co.ke/wp-content/uploads/BBO-standards.pdf"
         ]
+        
         count = 0
         while to_visit and count < MAX_PAGES_TO_CRAWL:
             url = to_visit.pop()
@@ -239,11 +283,9 @@ class NSEKnowledgeBase:
             
             visited.add(url)
             
-            # Allow relevant domains
-            if "nse.co.ke" not in url and "academy.nse.co.ke" not in url and "live.nse.co.ke" not in url: continue
+            if "nse.co.ke" not in url: continue
             
             try:
-                # If it looks like a PDF, add to PDF list and skip HTML parsing
                 if url.lower().endswith(".pdf"):
                     found_pdf_urls.add(url)
                     continue
@@ -251,7 +293,6 @@ class NSEKnowledgeBase:
                 response = self._fetch_url(url)
                 if response.status_code != 200: continue
                 
-                # Check content type just in case
                 if 'application/pdf' in response.headers.get('Content-Type', ''):
                     found_pdf_urls.add(url)
                     continue
@@ -260,44 +301,38 @@ class NSEKnowledgeBase:
                 found_content_urls.add(url)
                 count += 1
                 
-                # Find new links
                 for link in soup.find_all('a', href=True):
                     href = link['href']
                     full_url = urljoin(url, href)
                     
-                    # Filter for interesting NSE links
                     if "nse.co.ke" in full_url:
                         if full_url.lower().endswith(".pdf"):
                             found_pdf_urls.add(full_url)
                         elif full_url not in visited and full_url not in to_visit:
-                            # Basic depth control: only add if we haven't hit limit
-                            if len(to_visit) < 50: 
+                            if len(to_visit) < 100: # Increased queue size slightly
                                 to_visit.add(full_url)
                                 
             except Exception as e:
                 print(f"Crawl Error {url}: {e}")
         
-        # Merge found PDFs with hardcoded PDFs to ensure nothing is missed
         all_pdfs = list(found_pdf_urls.union(set(hardcoded_pdfs)))
         return list(found_content_urls), all_pdfs
 
     def _process_content(self, url, content_type, content_bytes):
-        """Extracts text based on type"""
         text = ""
         tag = "[GENERAL]"
         
+        # Simple Tagging System
         if "statistics" in url: tag = "[MARKET_DATA]"
-        elif "management" in url or "directors" in url or "leadership" in url: tag = "[LEADERSHIP]"
+        elif "leadership" in url or "board" in url: tag = "[LEADERSHIP]"
         elif "rules" in url: tag = "[REGULATION]"
-        elif "financial" in url or "result" in url: tag = "[FINANCIALS]"
-        elif "products" in url or "etf" in url or "bonds" in url: tag = "[PRODUCT]"
-        elif "market-data" in url: tag = "[DATA_PRICING]"
-        elif "press-release" in url: tag = "[PRESS_RELEASE]"
+        elif "financial" in url: tag = "[FINANCIALS]"
+        elif "etf" in url or "bond" in url: tag = "[PRODUCT]"
 
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
             if len(raw_text) > 100:
-                text = f"{tag} SOURCE: {url}\nTYPE: OFFICIAL REPORT (PDF)\n\n" + self.clean_text_chunk(raw_text)
+                text = f"{tag} SOURCE: {url}\nTYPE: OFFICIAL PDF\n\n" + self.clean_text_chunk(raw_text)
         else:
             soup = BeautifulSoup(content_bytes, 'html.parser')
             for item in soup(["script", "style", "nav", "footer", "header", "aside"]):
@@ -310,7 +345,6 @@ class NSEKnowledgeBase:
         return text
 
     def scrape_and_index(self, urls, content_type="html"):
-        """Scrapes list of URLs and indexes them if changed"""
         new_chunks = 0
         
         def task(url):
@@ -322,7 +356,7 @@ class NSEKnowledgeBase:
                 pass
             return None, None
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor: # Reduced workers to be nicer to server
             futures = {executor.submit(task, url): url for url in urls}
             
             for future in concurrent.futures.as_completed(futures):
@@ -348,10 +382,8 @@ class NSEKnowledgeBase:
         return new_chunks
 
     def build_knowledge_base(self):
-        """Full rebuild logic with crawling"""
-        
         seeds = [
-           "https://www.nse.co.ke/",
+            "https://www.nse.co.ke/",
             "https://www.nse.co.ke/home/",
             "https://www.nse.co.ke/about-nse/",
             "https://www.nse.co.ke/about-nse/history/",
@@ -484,42 +516,39 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/trading-participant-financials/"
         ]
         
-        print("🕷️ Crawling NSE website...")
+        print("🕷️ Crawling NSE website with enhanced headers...")
         discovered_pages, discovered_pdfs = self.crawl_site(seeds)
-        all_pages = list(set(discovered_pages))
-        print(f"📝 Found {len(all_pages)} pages and {len(discovered_pdfs)} PDFs.")
         
         try:
             self.chroma_client.delete_collection("nse_data")
         except: pass
         self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
         
-        chunks_1 = self.scrape_and_index(all_pages, "html")
+        chunks_1 = self.scrape_and_index(list(set(discovered_pages)), "html")
         chunks_2 = self.scrape_and_index(discovered_pdfs, "pdf") 
         
         try:
             with open("last_update.txt", "w") as f: f.write(str(time.time()))
         except: pass
         
-        return f"Knowledge Base Updated: {chunks_1 + chunks_2} chunks indexed.", []
+        return f"Updated: {chunks_1 + chunks_2} chunks indexed.", []
 
     def generate_context_queries(self, original_query):
         today = datetime.date.today().strftime("%Y-%m-%d")
-        # Explicitly adding NSE context to the prompt generation
-        prompt = f"""Generate 3 specific search queries for the NSE (Nairobi Securities Exchange) database for: "{original_query}"
-        Current Date: {today}
-        INSTRUCTION: Ensure all queries implicitly or explicitly target the Nairobi Securities Exchange context.
-        1. Exact match specifically for NSE regulations or products (e.g., "{original_query} NSE").
-        2. Concept/Definition in the context of the Kenyan Market.
-        3. Document type (e.g., "NSE Rules for {original_query}").
-        Output ONLY 3 lines."""
+        prompt = f"""Generate 3 search queries for the NSE database based on: "{original_query}"
+        
+        RULES:
+        1. If the user asks for "Board" or "CEO", specifically search for "NSE Board of Directors" and "Leadership".
+        2. Ensure all queries imply the Nairobi Securities Exchange context.
+        3. Output ONLY the 3 queries, one per line.
+        """
         try:
             response = self.client.chat.completions.create(
                 model=LLM_MODEL, messages=[{"role": "user", "content": prompt}], temperature=0.3
             )
             return [q.strip() for q in response.choices[0].message.content.split('\n') if q.strip()][:3]
         except:
-            return [original_query + " NSE", original_query]
+            return [original_query + " NSE", "Nairobi Securities Exchange " + original_query]
 
     def llm_rerank(self, query, documents, sources):
         if not documents: return []
@@ -528,9 +557,9 @@ class NSEKnowledgeBase:
         for i, doc in enumerate(documents):
             candidates += f"\n--- DOC {i} ---\nSource: {sources[i]}\nContent: {doc[:300]}...\n"
             
-        prompt = f"""Rank these documents by relevance to the user's query: "{query}" in the context of the Nairobi Securities Exchange.
-        Return the IDs of the top 5 most relevant documents in order (e.g., "0, 3, 1").
-        Prioritize NSE official PDF reports and rules.
+        prompt = f"""Rank these documents by relevance to: "{query}" (Context: NSE Kenya).
+        Return IDs of top 5 (e.g., "0, 3, 1").
+        Prioritize [LEADERSHIP] or [OFFICIAL PDF] tags if the user asks about rules or people.
         
         Documents:
         {candidates}"""
@@ -541,8 +570,7 @@ class NSEKnowledgeBase:
                 messages=[{"role": "user", "content": prompt}],
                 temperature=0
             )
-            indices_str = response.choices[0].message.content
-            indices = [int(x) for x in re.findall(r'\d+', indices_str)]
+            indices = [int(x) for x in re.findall(r'\d+', response.choices[0].message.content)]
             
             reranked = []
             for idx in indices:
@@ -554,58 +582,54 @@ class NSEKnowledgeBase:
 
     def answer_question(self, query):
         try:
-            if self.is_data_stale():
-                pass 
+            if self.is_data_stale(): pass 
 
             if self.collection is None: return "System initializing...", []
 
-            # 1. Multi-Query with Enforced NSE Context
+            # 1. Generate Search Queries
             search_queries = self.generate_context_queries(query)
             
-            # 2. Retrieval
+            # 2. Retrieve
             query_embeddings = self.get_embeddings_batch(search_queries)
             results = self.collection.query(query_embeddings=query_embeddings, n_results=15)
             
             raw_docs = []
             raw_sources = []
             seen = set()
-            for i, doc_list in enumerate(results['documents']):
-                meta_list = results['metadatas'][i]
-                for j, text in enumerate(doc_list):
-                    if text and text not in seen:
-                        seen.add(text)
-                        raw_docs.append(text)
-                        raw_sources.append(meta_list[j]['source'])
             
-            if not raw_docs: return "I couldn't find that information in the NSE database.", []
-
-            # 3. LLM Re-Ranking
+            if results['documents']:
+                for i, doc_list in enumerate(results['documents']):
+                    meta_list = results['metadatas'][i]
+                    for j, text in enumerate(doc_list):
+                        if text and text not in seen:
+                            seen.add(text)
+                            raw_docs.append(text)
+                            raw_sources.append(meta_list[j]['source'])
+            
+            # 3. Re-rank
             top_results = self.llm_rerank(query, raw_docs, raw_sources)
             
-            context_text = ""
+            # 4. INJECT STATIC FACTS (The "Cheat Sheet")
+            # This ensures the bot knows the Board/CEO even if retrieval fails
+            context_text = self.get_static_facts() + "\n\n--- RETRIEVED DATA ---\n"
+            
             visible_sources = []
             for doc, source in top_results[:5]: 
                 context_text += f"\n[Source: {source}]\n{doc}\n---"
                 if source not in visible_sources: visible_sources.append(source)
 
-            # 4. Final Response with FORCED CONTEXT
+            # 5. Final Response
             today = datetime.date.today().strftime("%Y-%m-%d")
             
-            system_prompt = f"""You are the NSE Digital Assistant, an expert specifically on the Nairobi Securities Exchange (NSE).
-
-            CRITICAL INSTRUCTION: The user is ALWAYS asking about the Nairobi Securities Exchange, even if they do not explicitly say "at the NSE" or "in Kenya".
-            - If the user asks "What is an ETF?", you MUST answer "An ETF at the NSE is..." and describe the specific ETFs listed on the Nairobi Securities Exchange.
-            - Do NOT provide generic, global, or US-market definitions unless they match NSE regulations found in the CONTEXT.
-            - If the CONTEXT does not contain NSE-specific info for the query, state: "I couldn't find specific information regarding [topic] at the NSE in my database."
-
+            system_prompt = f"""You are the NSE Digital Assistant.
+            
+            CRITICAL CONTEXT RULES:
+            1. **Scope:** All questions are about the Nairobi Securities Exchange (NSE) unless explicitly stated otherwise.
+            2. **Ambiguity Handler:** If the user asks "Who are the directors?" without naming a company, assume they mean the **NSE's own Board of Directors** (provided in the context), BUT add a note: "If you meant the directors of a specific listed company (like Safaricom or KCB), please specify the company name."
+            3. **Static Facts:** Trust the [OFFICIAL_FACT_SHEET] at the top of the context for Leadership, Addresses, and Trading Hours.
+            4. **Sources:** Base your answer ONLY on the provided Context.
+            
             TODAY'S DATE: {today}
-
-            GUIDELINES:
-            1. **Contextual Enforcement:** Treat every query as if it ends with "...at the Nairobi Securities Exchange."
-            2. **Accuracy First:** Ground every claim in the CONTEXT. 
-            3. **Date Awareness:** Prioritize the most recent data (e.g., 2025 documents over 2020).
-            4. **Comprehensiveness:** Break down complex topics into key components based on NSE rules.
-            5. **Formatting:** Use markdown (bullet points, bold text).
             
             CONTEXT:
             {context_text}"""
