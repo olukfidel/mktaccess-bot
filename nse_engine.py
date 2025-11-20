@@ -23,7 +23,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
 # OPTIMIZED FOR DEEPER SEARCH AS DISCUSSED
-MAX_CRAWL_DEPTH = 4
+MAX_CRAWL_DEPTH = 3
 MAX_PAGES_TO_CRAWL = 300
 
 class NSEKnowledgeBase:
