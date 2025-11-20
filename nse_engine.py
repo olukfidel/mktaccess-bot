@@ -170,6 +170,7 @@ class NSEKnowledgeBase:
                 # Core Pages
                 "https://www.nse.co.ke/",
                 "https://www.nse.co.ke/site-map/",
+                "https://www.nse.co.ke/faqs/",
                 "https://www.nse.co.ke/about-nse/management-team/",
                 "https://www.nse.co.ke/about-nse/board-of-directors/",
                 "https://www.nse.co.ke/leadership/", # Added Leadership URL
