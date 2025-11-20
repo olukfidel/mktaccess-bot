@@ -12,7 +12,6 @@ import re
 import random
 import datetime
 import hashlib
-import pdfplumber
 from pypdf import PdfReader
 from urllib.parse import urljoin, urlparse
 from tenacity import retry, stop_after_attempt, wait_fixed
@@ -23,6 +22,7 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # --- CONFIGURATION ---
 EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
+# OPTIMIZED FOR DEEPER SEARCH AS DISCUSSED
 MAX_CRAWL_DEPTH = 4
 MAX_PAGES_TO_CRAWL = 300
 
@@ -47,12 +47,8 @@ class NSEKnowledgeBase:
 
     # --- STATIC KNOWLEDGE (THE CHEAT SHEET) ---
     def get_static_facts(self):
-        """
-        Returns high-value, static facts that are often hard to crawl.
-        This acts as a 'Knowledge Anchor' for the bot.
-        """
         return """
-        [OFFICIAL_FACT_SHEET]
+         [OFFICIAL_FACT_SHEET]
         TOPIC: NSE Leadership, Structure & Market Rules
         SOURCE: Manual Verification / NSE Official Documents
         LAST_VERIFIED: 2025
@@ -358,7 +354,6 @@ The ETF is backed by its constituent underlying assets or assets of an equivalen
 Issuers produce a factsheet for their ETFs which states what investors are being exposed to and how the Net Asset Value of the ETF is calculated. By contrast, unit trusts, typically only provide historical information on portfolio holdings and not current holdings, for competitive reasons. Tracking performance is also published.
 6.Investor owned assets
 The constituent assets or securities shall be housed in a trust arrangement with a CMA approved trustee being appointed. Even in the case of insolvency by the ETF manager, administrator or issuer, through the trust arrangement, these assets are ring fenced, protected by law, and are the exclusive property of the ETF. Therefore owning an ETF does not give the investor the right to vote at Annual General Meetings (AGMs) of the underlying securities, as you own a portion (unit) in the fund and not the underlying securities themselves.
-
         """
 
     def has_data(self):
@@ -378,7 +373,6 @@ The constituent assets or securities shall be housed in a trust arrangement with
         return 0.0
 
     def is_data_stale(self):
-        """Checks if data is older than 24 hours"""
         last_update = self.get_last_update_time()
         if last_update == 0: return True
         return (time.time() - last_update) > 86400
@@ -408,7 +402,9 @@ The constituent assets or securities shall be housed in a trust arrangement with
         return text.strip()
 
     def simple_text_splitter(self, text, chunk_size=1500, overlap=300):
+        # Extract the header to keep context in every chunk
         header_match = text.split('\n\n')[0] if "DOCUMENT:" in text[:100] else ""
+        
         chunks = []
         start = 0
         text_len = len(text)
@@ -419,9 +415,10 @@ The constituent assets or securities shall be housed in a trust arrangement with
                 last_period = text.rfind('.', start, end)
                 if last_period != -1 and last_period > start + (chunk_size // 2):
                     end = last_period + 1
+            
             chunk_content = text[start:end]
             
-            # POWER MOVE: Inject header into EVERY chunk if it's missing
+            # Inject header into EVERY chunk if it's missing
             if header_match and header_match not in chunk_content:
                 final_chunk = f"{header_match}\n[FRAGMENT]\n{chunk_content}"
             else:
@@ -431,87 +428,79 @@ The constituent assets or securities shall be housed in a trust arrangement with
             start += chunk_size - overlap
             if start >= end: start = end
         return chunks
+
     def _extract_text_from_pdf(self, pdf_content):
         """
-        POWER UPGRADE: Extracts text while preserving Table structures as Markdown.
-        Uses 'pdfplumber' for table detection.
+        Preserves Table structures as Markdown using pdfplumber if available.
         """
-        
-        text_content = []
-        
         try:
+            import pdfplumber 
+            
+            text_content = []
             with pdfplumber.open(io.BytesIO(pdf_content)) as pdf:
                 for i, page in enumerate(pdf.pages):
-                    # 1. Extract Tables and convert to Markdown
                     tables = page.extract_tables()
                     page_text = page.extract_text()
                     
-                    # If tables exist, format them nicely for the LLM
                     if tables:
                         for table in tables:
-                            # Clean None values and convert to Markdown format
                             clean_table = [[str(cell).replace('\n', ' ') if cell else "" for cell in row] for row in table]
-                            # Create a markdown table string
                             if len(clean_table) > 0:
                                 headers = clean_table[0]
                                 header_row = "| " + " | ".join(headers) + " |"
                                 separator = "| " + " | ".join(["---"] * len(headers)) + " |"
                                 body = "\n".join(["| " + " | ".join(row) + " |" for row in clean_table[1:]])
                                 table_md = f"\n\n[TABLE_DATA_PAGE_{i+1}]\n{header_row}\n{separator}\n{body}\n\n"
-                                
-                                # Append table to content
                                 text_content.append(table_md)
 
-                    # 2. Append regular text (avoiding duplicates effectively is hard, 
-                    # but typically appending text after tables works for context)
                     if page_text:
-                        # Inject Page Numbers for Citations
                         text_content.append(f"\n[PAGE {i+1}] {page_text}")
                         
             return "\n".join(text_content)
             
         except ImportError:
-            print("Please install pdfplumber for advanced table extraction.")
-            # Fallback to original pypdf
-            return self._extract_text_from_pdf_fallback(pdf_content)
+            try:
+                pdf_file = io.BytesIO(pdf_content)
+                reader = PdfReader(pdf_file)
+                text = ""
+                for page in reader.pages:
+                    try:
+                        page_text = page.extract_text(extraction_mode="layout")
+                    except:
+                        page_text = page.extract_text()
+                    text += page_text + "\n"
+                return text
+            except Exception:
+                return ""
         except Exception as e:
             print(f"PDF Error: {e}")
             return ""
 
     def _get_random_header(self):
-        """Rotates User-Agents to avoid detection"""
         user_agents = [
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
             'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.3 Safari/605.1.15',
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:89.0) Gecko/20100101 Firefox/89.0',
-            'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36'
         ]
         return {
             'User-Agent': random.choice(user_agents),
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1',
         }
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
     def _fetch_url(self, url):
-        # Random sleep to be polite and avoid rate limiting
         time.sleep(random.uniform(0.5, 1.5)) 
         return self.session.get(url, headers=self._get_random_header(), timeout=25, verify=False)
 
     def crawl_site(self, seed_urls):
-        """
-        Improved recursive crawler with better headers and targeted PDF list.
-        """
         visited = set()
         to_visit = set(seed_urls)
         found_content_urls = set() 
         found_pdf_urls = set()     
         
-        # UPDATED HARDCODED LIST - Includes Annual Reports & Governance Docs
+        # You can paste your specific hardcoded links here
         hardcoded_pdfs = [
-          "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
+        "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Kenya-Orchards-Ltd-Cautionary-Announcement.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Equity-Group-Holdings-Plc-EQUITY-GROUP-HOLDINGS-PLC-CHANGE-OF-BOARD.pdf",
             "https://www.nse.co.ke/wp-content/uploads/StanChart-Corporate-Calendar-2025.pdf",
@@ -603,7 +592,6 @@ The constituent assets or securities shall be housed in a trust arrangement with
         while to_visit and count < MAX_PAGES_TO_CRAWL:
             url = to_visit.pop()
             if url in visited: continue
-            
             visited.add(url)
             
             if "nse.co.ke" not in url: continue
@@ -632,7 +620,8 @@ The constituent assets or securities shall be housed in a trust arrangement with
                         if full_url.lower().endswith(".pdf"):
                             found_pdf_urls.add(full_url)
                         elif full_url not in visited and full_url not in to_visit:
-                            if len(to_visit) < 100: # Increased queue size slightly
+                            # Limit queue size to prevent memory issues
+                            if len(to_visit) < 1000: 
                                 to_visit.add(full_url)
                                 
             except Exception as e:
@@ -645,8 +634,8 @@ The constituent assets or securities shall be housed in a trust arrangement with
         text = ""
         tag = "[GENERAL]"
         
-        if "faq" in url.lower(): 
-            tag = "[OFFICIAL_FAQ]" # <--- New High Priority Tag
+        # --- TAGGING SYSTEM ---
+        if "faq" in url.lower(): tag = "[OFFICIAL_FAQ]"
         elif "statistics" in url: tag = "[MARKET_DATA]"
         elif "leadership" in url or "board" in url: tag = "[LEADERSHIP]"
         elif "rules" in url: tag = "[REGULATION]"
@@ -654,6 +643,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
         elif "etf" in url or "bond" in url: tag = "[PRODUCT]"
 
         filename = url.split('/')[-1].replace('.pdf', '').replace('-', ' ').title()
+
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
             if len(raw_text) > 100:
@@ -666,7 +656,8 @@ The constituent assets or securities shall be housed in a trust arrangement with
             raw_text = soup.get_text(separator="\n")
             clean = self.clean_text_chunk(raw_text)
             if len(clean) > 100:
-                text = f"{tag} SOURCE: {url}\nTYPE: Webpage\n\n{clean}"
+                header = f"DOCUMENT: {filename}\nSOURCE: {url}\nTAGS: {tag}\nTYPE: Webpage\n\n"
+                text = header + clean
         
         return text
 
@@ -682,7 +673,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
                 pass
             return None, None
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor: # Reduced workers to be nicer to server
+        with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
             futures = {executor.submit(task, url): url for url in urls}
             
             for future in concurrent.futures.as_completed(futures):
@@ -709,7 +700,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
 
     def build_knowledge_base(self):
         seeds = [
-            "https://www.nse.co.ke/",
+           "https://www.nse.co.ke/",
             "https://www.nse.co.ke/home/",
             "https://www.nse.co.ke/about-nse/",
             "https://www.nse.co.ke/about-nse/history/",
@@ -843,7 +834,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
             "https://www.nse.co.ke/trading-participant-financials/"
         ]
         
-        print("🕷️ Crawling NSE website with enhanced headers...")
+        print("🕷️ Crawling NSE website...")
         discovered_pages, discovered_pdfs = self.crawl_site(seeds)
         
         try:
@@ -861,10 +852,6 @@ The constituent assets or securities shall be housed in a trust arrangement with
         return f"Updated: {chunks_1 + chunks_2} chunks indexed.", []
 
     def enrich_query_with_tickers(self, query):
-        """
-        POWER TOOL: Automatically maps common company names to their NSE Ticker Symbols.
-        This helps the search engine find data even if the user uses colloquial names.
-        """
         ticker_map = {
             "safaricom": "SCOM",
             "equity": "EQTY", "equity group": "EQTY", "equity bank": "EQTY",
@@ -892,18 +879,23 @@ The constituent assets or securities shall be housed in a trust arrangement with
             return f"{query} ({' '.join(found_tickers)})"
         return query
 
+    def _extract_keywords(self, query):
+        """
+        NEW: Extracts core keywords (removing stop words) to check against URLs.
+        """
+        stops = set(["the", "is", "at", "which", "on", "and", "a", "an", "of", "for", "in", "to", "how", "what", "where", "does", "about"])
+        # Simple regex to get words > 2 chars
+        words = re.findall(r'\w+', query.lower())
+        return [w for w in words if w not in stops and len(w) > 2]
+
     def generate_context_queries(self, original_query):
         today = datetime.date.today().strftime("%Y-%m-%d")
-        
-        # Step 1: Enrich query with Tickers (e.g., "Safaricom" -> "Safaricom (SCOM)")
         enriched_query = self.enrich_query_with_tickers(original_query)
         
         prompt = f"""Generate 3 search queries for the NSE database based on: "{enriched_query}"
-        
         RULES:
-        1. You MUST append "NSE" or "Nairobi Securities Exchange" to every single query.
-        2. If the user asks for "Board" or "CEO", specifically search for "NSE Board of Directors" and "Leadership".
-        3. Output ONLY the 3 queries, one per line.
+        1. Append "NSE" or "Nairobi Securities Exchange".
+        2. Output ONLY the 3 queries, one per line.
         """
         try:
             response = self.client.chat.completions.create(
@@ -911,8 +903,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
             )
             return [q.strip() for q in response.choices[0].message.content.split('\n') if q.strip()][:3]
         except:
-            # Fallback: Aggressively append context if LLM generation fails
-            return [enriched_query + " NSE", "Nairobi Securities Exchange " + enriched_query, "NSE Kenya " + enriched_query]
+            return [enriched_query + " NSE", "NSE Kenya " + enriched_query]
 
     def llm_rerank(self, query, documents, sources):
         if not documents: return []
@@ -921,17 +912,16 @@ The constituent assets or securities shall be housed in a trust arrangement with
         for i, doc in enumerate(documents):
             candidates += f"\n--- DOC {i} ---\nSource: {sources[i]}\nContent: {doc[:300]}...\n"
             
-        # --- UPDATE START: Explicit Instruction to Prioritize FAQs ---
         prompt = f"""Rank these documents by relevance to: "{query}" (Context: NSE Kenya).
         Return IDs of top 5 (e.g., "0, 3, 1").
         
         CRITICAL RANKING RULES:
         1. If a document has the tag [OFFICIAL_FAQ], it MUST be ranked #1.
-        2. Next, prioritize [LEADERSHIP] or [OFFICIAL PDF].
+        2. If the Source URL contains exact keywords from the query, Rank it HIGH.
+        3. Prioritize [LEADERSHIP] or [OFFICIAL PDF] tags.
         
         Documents:
         {candidates}"""
-        # --- UPDATE END ---
         
         try:
             response = self.client.chat.completions.create(
@@ -955,12 +945,11 @@ The constituent assets or securities shall be housed in a trust arrangement with
 
             if self.collection is None: return "System initializing...", []
 
-            # 1. Generate Search Queries (Now with Ticker Intelligence)
             search_queries = self.generate_context_queries(query)
             
-            # 2. Retrieve
+            # Retrieve (Broaden search to find URL matches that might have low vector scores)
             query_embeddings = self.get_embeddings_batch(search_queries)
-            results = self.collection.query(query_embeddings=query_embeddings, n_results=15)
+            results = self.collection.query(query_embeddings=query_embeddings, n_results=25)
             
             raw_docs = []
             raw_sources = []
@@ -975,18 +964,48 @@ The constituent assets or securities shall be housed in a trust arrangement with
                             raw_docs.append(text)
                             raw_sources.append(meta_list[j]['source'])
             
-            # 3. Re-rank
-            top_results = self.llm_rerank(query, raw_docs, raw_sources)
+            # --- NEW: KEYWORD URL BOOSTING ---
+            # This sorts the raw results *before* the LLM sees them.
+            # We verify if the URL contains key terms from the user's query.
+            keywords = self._extract_keywords(query)
+            scored_results = []
             
-            # 4. INJECT STATIC FACTS (The "Cheat Sheet")
+            for doc, source in zip(raw_docs, raw_sources):
+                score = 0
+                source_lower = source.lower()
+                
+                # Boost 1: URL Match (The feature you requested)
+                for kw in keywords:
+                    if kw in source_lower:
+                        score += 10 # Significant boost
+                
+                # Boost 2: FAQ Priority
+                if "faq" in source_lower:
+                    score += 20
+                
+                # Boost 3: PDFs are usually better than random HTML pages
+                if ".pdf" in source_lower:
+                    score += 2
+                    
+                scored_results.append((score, doc, source))
+            
+            # Sort by calculated score (descending), then pass to LLM
+            scored_results.sort(key=lambda x: x[0], reverse=True)
+            
+            # Extract back to lists, taking top 15 best candidates
+            sorted_docs = [x[1] for x in scored_results[:15]]
+            sorted_sources = [x[2] for x in scored_results[:15]]
+
+            # Re-rank with LLM (Now the LLM sees the URL-matched docs first)
+            top_results = self.llm_rerank(query, sorted_docs, sorted_sources)
+            
+            # Final Context Construction
             context_text = self.get_static_facts() + "\n\n--- RETRIEVED DATA ---\n"
-            
             visible_sources = []
             for doc, source in top_results[:5]: 
                 context_text += f"\n[Source: {source}]\n{doc}\n---"
                 if source not in visible_sources: visible_sources.append(source)
 
-            # 5. Final Response
             today = datetime.date.today().strftime("%Y-%m-%d")
             
             system_prompt = f"""You are the NSE Digital Assistant.
@@ -996,11 +1015,10 @@ The constituent assets or securities shall be housed in a trust arrangement with
             
             POWER RULES:
             1. **FAQ Authority:** If the context contains text tagged [OFFICIAL_FAQ], that is the GROUND TRUTH. Answer using that information exactly as stated.
-            2. **Implicit Scope:** If the user asks "What is an ETF?", answer "An ETF at the NSE is...".
-            3. **Financial Responsibility:** NEVER provide investment advice (Buy/Sell/Hold). If asked, provide the data and state: "I cannot provide investment advice; please consult a licensed financial advisor."
-            4. **Tabular Data:** If the query asks for financial performance (Revenue, Profit, Dividends), YOU MUST format the answer as a Markdown Table.
-            5. **Currency Standardization:** Always convert financial figures to "KES" or "Ksh" for consistency.
-            6. **Fact Sheet Priority:** Use the [OFFICIAL_FACT_SHEET] at the top of the context for NSE Leadership/Hours/Market Structure.
+            2. **URL Relevance:** Documents where the Source URL matches the user's keywords are likely the most correct.
+            3. **Financial Responsibility:** NEVER provide investment advice (Buy/Sell/Hold).
+            4. **Tabular Data:** If the query asks for financial performance, format as a Markdown Table.
+            5. **Fact Sheet Priority:** Use the [OFFICIAL_FACT_SHEET] for Leadership/Hours/Market Structure.
             
             TODAY'S DATE: {today}
             
