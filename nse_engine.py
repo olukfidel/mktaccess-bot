@@ -106,33 +106,42 @@ class NSEKnowledgeBase:
         if "statistics" in url: tag = "[MARKET_DATA]"
         elif "management" in url or "directors" in url: tag = "[LEADERSHIP]"
         elif "contact" in url: tag = "[CONTACT]"
-        elif "listed-companies" in url: tag = "[COMPANY_PROFILE]"
-        elif "rules" in url: tag = "[REGULATION]"
-        elif "news" in url: tag = "[NEWS]"
+        elif "listed-companies" in url or "announcement" in url: tag = "[COMPANY_UPDATE]"
+        elif "rules" in url or "guidelines" in url: tag = "[REGULATION]"
+        elif "news" in url or "press-release" in url: tag = "[NEWS]"
+        elif "financial-results" in url: tag = "[FINANCIALS]"
+        elif "calendar" in url: tag = "[CALENDAR]"
         
-        found_pdfs = []
         try:
             response = requests.get(url, headers=headers, timeout=25, verify=False)
+            
             if url.lower().endswith(".pdf") or 'application/pdf' in response.headers.get('Content-Type', ''):
                 pdf_text = self._extract_text_from_pdf(response.content)
                 if len(pdf_text) > 100:
                     clean_text = f"{tag} SOURCE: {url}\nTYPE: OFFICIAL REPORT (PDF)\n\n" + self.clean_text_chunk(pdf_text)
                     return {"url": url, "text": clean_text}, f"📄 PDF Processed: {url}", []
                 return None, f"⚠️ Empty PDF: {url}", []
+
             elif response.status_code == 200:
                 soup = BeautifulSoup(response.content, 'html.parser')
+                
+                found_pdfs = []
                 for link in soup.find_all('a', href=True):
                     href = link['href']
                     if href.lower().endswith('.pdf'):
                         found_pdfs.append(urljoin(url, href))
+
                 for item in soup(["script", "style", "nav", "footer", "header", "aside"]):
                     item.decompose()
+                
                 text = soup.get_text(separator="\n")
                 clean_text = self.clean_text_chunk(text)
+                
                 if len(clean_text) > 100:
                     final_text = f"{tag} SOURCE: {url}\nTYPE: Webpage\n\n{clean_text}"
                     return {"url": url, "text": final_text}, f"✅ Scraped: {url}", found_pdfs
                 return None, f"⚠️ Empty: {url}", found_pdfs
+            
             return None, f"❌ Failed {url}: {response.status_code}", []
         except Exception as e:
             return None, f"❌ Error {url}: {str(e)}", []
@@ -140,26 +149,15 @@ class NSEKnowledgeBase:
     def scrape_nse_website(self, urls):
         scraped_data = []
         logs = []
-        discovered_pdfs = set()
+        
+        # Scrape Main URLs (Parallel)
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             future_to_url = {executor.submit(self._scrape_single_url, url): url for url in urls}
             for future in concurrent.futures.as_completed(future_to_url):
-                data, log_msg, pdfs_found = future.result()
+                data, log_msg, _ = future.result() # Ignore nested PDF discovery for explicit list
                 logs.append(log_msg)
                 if data: scraped_data.append(data)
-                for pdf in pdfs_found: discovered_pdfs.add(pdf)
         
-        high_value_pdfs = [p for p in discovered_pdfs if "report" in p.lower() or "list" in p.lower() or "stat" in p.lower()]
-        remaining_pdfs = list(discovered_pdfs - set(high_value_pdfs))
-        final_pdf_list = (high_value_pdfs + remaining_pdfs)[:30]
-
-        if final_pdf_list:
-            with concurrent.futures.ThreadPoolExecutor(max_workers=5) as executor:
-                future_to_url = {executor.submit(self._scrape_single_url, url): url for url in final_pdf_list}
-                for future in concurrent.futures.as_completed(future_to_url):
-                    data, log_msg, _ = future.result()
-                    logs.append(log_msg)
-                    if data: scraped_data.append(data)
         return scraped_data, logs
 
     def build_knowledge_base(self, urls=None):
@@ -170,22 +168,67 @@ class NSEKnowledgeBase:
 
         if not urls:
             urls = [
-                "https://www.nse.co.ke/", 
+                # Core Pages
+                "https://www.nse.co.ke/",
+                "https://www.nse.co.ke/site-map/",
                 "https://www.nse.co.ke/about-nse/management-team/",
                 "https://www.nse.co.ke/about-nse/board-of-directors/",
                 "https://www.nse.co.ke/contact-us/",
-                "https://www.nse.co.ke/market-statistics/", 
+                "https://www.nse.co.ke/market-statistics/",
                 "https://www.nse.co.ke/market-statistics/daily-market-report/",
                 "https://www.nse.co.ke/dataservices/market-statistics/",
-                "https://www.nse.co.ke/listed-companies/", 
-                "https://www.nse.co.ke/products/equities/", 
-                "https://www.nse.co.ke/products/derivatives/",
-                "https://www.nse.co.ke/products/reits/", 
-                "https://www.nse.co.ke/products/etfs/",
-                "https://www.nse.co.ke/products/bonds/", 
-                "https://www.nse.co.ke/news/announcements/",
-                "https://www.nse.co.ke/faqs/",
-                "https://www.nse.co.ke/rules/"
+                "https://www.nse.co.ke/dataservices/historical-data-request-form/",
+                "https://www.nse.co.ke/listed-companies/",
+                "https://www.nse.co.ke/mobile-and-online-trading/",
+                "https://www.nse.co.ke/listed-company-announcements/",
+                "https://www.nse.co.ke/financial-results/",
+                "https://www.nse.co.ke/press-releases/",
+                "https://www.nse.co.ke/publications/",
+                "https://www.nse.co.ke/rules/",
+                "https://www.nse.co.ke/guidelines/",
+                "https://www.nse.co.ke/investor-news/",
+                "https://www.nse.co.ke/nse-investor-calendar/",
+                
+                # Specific PDF Documents (Reports, Calendars, Announcements)
+                "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Kenya-Orchards-Ltd-Cautionary-Announcement.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Equity-Group-Holdings-Plc-EQUITY-GROUP-HOLDINGS-PLC-CHANGE-OF-BOARD.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/StanChart-Corporate-Calendar-2025.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/TotalEnergies-Marketing-Kenya-PLC-Corporate-Events-Calendar-2025.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Derivatives_Pricelist_23-FEB-2023.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/27-NOV-23.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/nse-derivatives-rules.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/nse-listing-rules.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/nse-market-participants-rules.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/NSE-Equity-Trading-Rules-Amended-Jul-2025.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/policy-guidance-note-for-green-bonds.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/NSE-OPERATIONAL-GUIDELINES-FOR-THE-BOND-QUOTATIONS-BOARD.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/nse-fixed-income-trading-rules.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Equity-Group-Holdings-Plc-Unaudited-Financial-Statements-Other-Disclosures-for-the-Period-Ended-30-Sep-2025.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/The-Kenya-Power-Lighting-Company-Plc-Audited-Financial-Results-for-the-Year-Ended-30-Jun-2025.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Limuru-Tea-Plc-Unaudited-Results-for-the-Six-Months-Ended-30-06-2025.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/NSE_Press-Release-Nairobi-Securities-Exchange-Plc-takes-a-bold-step-to-expand-investment-access-for-retail-investors-1.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Press-Release-Nairobi-Securities-Exchange-Plc-Admits-Fintrust-Securities-Limited-as-an-Authorized-Securities-Dealer-ASD-in-the-Fixed-Income-Market_-update_-16_0.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Investors-on-Kenyas-securities-exchange-will-soon-get-access-to-trade-global-markets-as-Satrix-lists-MSCI-World-Feeder-ETF-on-the-NSE.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Press-Release-Nairobi-Securities-Exchange-Plc-Appoints-Sterling-Capital-Limited-as-a-market-maker-in-the-NEXT-Derivatives-Market.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/board-diversity-inclusion-2021-kim-research-report.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/equileap_kenya-report-2019_final_print.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/FOB_Book_Digital_2020.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/Groundrules-nse-NSE-BankingSector-share-index_-V1.0.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/GroundRules-NSE-Bond-Index-NSE-BI-v2-Index-final-2.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/groundrules-nse-20-share-index_-v1.6.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/GroundRules-NSE-10v2-Share-Index.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/groundrules-nse-25-share-index_-v1.4.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/East-African-Exchanges-EAE-20-Share-Index-Methodology-F-.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/NSE-Fixed-Income-Trading-Rules-2024.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/NSE-Implied-Yields-Yield-Curve-Generation-Methodology-1.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/NSE-ESG-Disclosures-Guidance-Manual.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/NSE-Day-Trading-Operational-Guidelines.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/guidelines-on-direct-market-access-october-2019.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/guidelines-on-financial-resource-requirements-for-market-intermediaries.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/guidelines-on-managementsupervision-and-internal-control-of-cma-licensed-entities-may-2012.pdf",
+                "https://www.nse.co.ke/wp-content/uploads/guidelines-on-the-prevention-of-money-laundering-and-terrorism-financing-in-the-capital-markets.pdf"
             ]
 
         data, logs = self.scrape_nse_website(urls)

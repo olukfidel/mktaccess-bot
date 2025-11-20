@@ -12,19 +12,29 @@ import time
 # Minimalist Configuration
 st.set_page_config(page_title="NSE Assistant", page_icon="💬", layout="centered")
 
-# Custom CSS for "Clean" Look (WhatsApp/Zuri style)
+# --- CUSTOM CSS FOR ADAPTIVE THEME ---
+# We use CSS variables (var(--...)) so it adapts to light/dark mode automatically.
 st.markdown("""
     <style>
-    .stApp {background-color: #f9f9f9;}
-    .stChatInput {border-radius: 20px; border: 1px solid #ddd;}
+    /* Chat Input Styling */
+    .stChatInput {
+        border-radius: 20px;
+    }
+    
+    /* Main Header Styling */
     .main-header {
         font-family: 'Helvetica Neue', sans-serif;
         font-size: 24px;
         font-weight: 600;
-        color: #333;
         margin-bottom: 20px;
         text-align: center;
+        /* Uses Streamlit's primary text color variable */
+        color: var(--text-color); 
     }
+    
+    /* Hide the default Streamlit hamburger menu and footer for a cleaner look */
+    #MainMenu {visibility: hidden;}
+    footer {visibility: hidden;}
     </style>
 """, unsafe_allow_html=True)
 
@@ -96,9 +106,10 @@ if prompt := st.chat_input("Type your message..."):
                 
                 # Append sources unobtrusively at the bottom of the response
                 if sources:
-                    source_text = "\n\n*Sources: " + ", ".join([s.replace("https://www.nse.co.ke", "nse.co.ke") for s in sources]) + "*"
-                    st.markdown(source_text) # Display strictly
-                    response += source_text  # Add to history
+                    # We create a clean, small footnote for sources
+                    source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke')}]({s})" for s in sources])
+                    st.markdown(source_text) 
+                    response += source_text  # Add to history so it persists
 
                 st.session_state.messages.append({"role": "assistant", "content": response})
         
@@ -106,3 +117,9 @@ if prompt := st.chat_input("Type your message..."):
             err_msg = "I'm having trouble connecting to the market data. Please try again."
             st.markdown(err_msg)
             st.session_state.messages.append({"role": "assistant", "content": err_msg})
+
+# Add a subtle reset button in the sidebar (optional, keeps main UI clean)
+with st.sidebar:
+    if st.button("Clear Chat", type="secondary"):
+        st.session_state.messages = [{"role": "assistant", "content": "Hi there! I'm your NSE assistant. How can I help you today?"}]
+        st.rerun()
