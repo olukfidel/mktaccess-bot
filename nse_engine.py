@@ -212,7 +212,23 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/wp-content/uploads/nse-press-briefing-presentation-final.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-2018-half-year-results-.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-2017-half-year-results-presentation-22-.08.2017.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/nse-2015-full-year-results-ceo-presentation_version-3_24-03-2016.pdf"
+            "https://www.nse.co.ke/wp-content/uploads/nse-2015-full-year-results-ceo-presentation_version-3_24-03-2016.pdf",
+            
+            # Newly added PDFs
+            "https://www.nse.co.ke/wp-content/uploads/East-Africa-Debt-Capital-Markets-Masterclass-brochure.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/NSE-Masterclass-brochure-final-1-1.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/NSE-training-calendar-2024-1.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/ESG-training-brochure-August-2024.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/Sharia-updated-1.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/KenGen-Audited-Results-for-the-Year-Ended-30th-June-2025-1.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/NSE-ESOP-Public-Announcement-2025.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/Carbacid-Investments-Plc-Audited-Group-Results-for-the-Year-Ended-31st-July-2025-1.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/Olympia-Capital-Holdings-Limited-Half-year-unaudited-reports-as-at-August-2025.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/Nairobi-Securities-Exchange-Plc-Notice-of-Appointment-of-Director.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/Nairobi-Securities-Exchange-Plc-Appointment-of-Non-Executive-Director.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/Press-Release-Nairobi-Securities-Exchange-Plc-Launches-Banking-Sector-Index.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/NSE-Market-Data-Pricelist.pdf",
+            "https://www.nse.co.ke/wp-content/uploads/broker-back-office-prequalified-vendors.pdf"
         ]
         
         count = 0
@@ -222,7 +238,7 @@ class NSEKnowledgeBase:
             
             visited.add(url)
             
-            # Skip non-NSE domains to avoid wandering the internet
+            # Allow relevant domains
             if "nse.co.ke" not in url and "academy.nse.co.ke" not in url and "live.nse.co.ke" not in url: continue
             
             try:
@@ -270,10 +286,38 @@ class NSEKnowledgeBase:
         tag = "[GENERAL]"
         
         if "statistics" in url: tag = "[MARKET_DATA]"
-        elif "management" in url or "directors" in url: tag = "[LEADERSHIP]"
+        elif "management" in url or "directors" in url or "leadership" in url: tag = "[LEADERSHIP]"
         elif "contact" in url: tag = "[CONTACT]"
         elif "rules" in url: tag = "[REGULATION]"
         elif "news" in url: tag = "[NEWS]"
+        elif "calendar" in url: tag = "[CALENDAR]"
+        elif "financial" in url or "result" in url: tag = "[FINANCIALS]"
+        elif "training" in url or "masterclass" in url or "academy" in url: tag = "[EDUCATION]"
+        elif "market-segment" in url or "ibuka" in url or "usp" in url: tag = "[MARKET_SEGMENT]"
+        elif "products" in url or "bonds" in url or "funds" in url or "trusts" in url or "m-akiba" in url: tag = "[PRODUCT]"
+        elif "careers" in url: tag = "[CAREERS]"
+        elif "tenders" in url: tag = "[TENDERS]"
+        elif "privacy" in url or "cookies" in url: tag = "[LEGAL]"
+        elif "about-nse" in url or "story" in url or "vision" in url: tag = "[ABOUT]"
+        elif "trading" in url: tag = "[TRADING]"
+        elif "announcement" in url: tag = "[ANNOUNCEMENT]"
+        elif "forum" in url: tag = "[EVENT]"
+        elif "price-list" in url or "pricelist" in url: tag = "[DATA_PRICING]"
+        elif "historical" in url: tag = "[HISTORICAL_DATA]"
+        elif "isin" in url: tag = "[ISIN_DATA]"
+        elif "real-time" in url: tag = "[REALTIME_DATA]"
+        elif "end-of-day" in url: tag = "[EOD_DATA]"
+        elif "specification" in url or "api" in url: tag = "[API_DOCS]"
+        elif "sustainability" in url: tag = "[SUSTAINABILITY]"
+        elif "login" in url: tag = "[LOGIN]"
+        elif "cart" in url: tag = "[CART]"
+        elif "advisors" in url: tag = "[ADVISORS]"
+        elif "guidelines" in url: tag = "[GUIDELINES]"
+        elif "corporate-actions" in url: tag = "[CORPORATE_ACTION]"
+        elif "circulars" in url: tag = "[CIRCULAR]"
+        elif "listed-companies" in url: tag = "[COMPANY_DATA]"
+        elif "investor-calendar" in url: tag = "[CALENDAR]"
+        elif "derivatives" in url: tag = "[DERIVATIVES]"
 
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
@@ -313,10 +357,7 @@ class NSEKnowledgeBase:
                     text = self._process_content(url, content_type, content)
                     if not text: continue
 
-                    # Differential Update: Check Hash
-                    # (In a real production DB we would query by ID=Hash, here we just append for simplicity
-                    # because Chroma deletion is slow. We rely on rebuilds for cleanups in this prototype)
-                    
+                    # Differential Update: Check Hash (Simulated for now)
                     chunks = self.simple_text_splitter(text)
                     ids = [str(uuid.uuid4()) for _ in chunks]
                     metadatas = [{"source": url, "date": datetime.date.today().isoformat()} for _ in chunks]
@@ -336,7 +377,7 @@ class NSEKnowledgeBase:
     def build_knowledge_base(self):
         """Full rebuild logic with crawling"""
         
-        # 1. Seed URLs
+        # 1. Seed URLs for crawling
         seeds = [
             "https://www.nse.co.ke/",
             "https://www.nse.co.ke/home/",
@@ -345,6 +386,7 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/about-nse/vision-mission/",
             "https://www.nse.co.ke/about-nse/board-of-directors/",
             "https://www.nse.co.ke/about-nse/management-team/",
+            "https://www.nse.co.ke/leadership/",
             "https://www.nse.co.ke/listed-companies/",
             "https://www.nse.co.ke/listed-companies/list/",
             "https://www.nse.co.ke/share-price/",
@@ -389,14 +431,10 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/indices/nse-20/",
             "https://www.nse.co.ke/indices/nse-25/",
             "https://www.nse.co.ke/indices/nse-bond-index/",
-            "https://www.nse.co.ke/usp/",
             "https://academy.nse.co.ke/",
-            "https://www.nse.co.ke/dataservices/market-statistics/",
-            "https://www.nse.co.ke/tenders/",
             "https://www.nse.co.ke/nominated-advisors/",
             "https://www.nse.co.ke/corporate-actions/",
             "https://www.nse.co.ke/investor-presentations/",
-            "https://www.nse.co.ke/dataservices/historical-data/",
             "https://onlinetrading.nse.co.ke/",
             "https://www.nse.co.ke/listed-company-announcements/",
             "https://www.nse.co.ke/financial-results/",
@@ -407,12 +445,76 @@ class NSEKnowledgeBase:
             "https://www.nse.co.ke/site-map/",
             "https://www.nse.co.ke/mobile-and-online-trading/",
             "https://www.nse.co.ke/dataservices/historical-data-request-form/",
-            "https://www.nse.co.ke/investor-news/"
+            "https://www.nse.co.ke/investor-news/",
+            
+            # Newly added links
+            "https://www.nse.co.ke/growth-enterprise-market-segment/",
+            "https://www.nse.co.ke/real-estate-investment-trusts/",
+            "https://www.nse.co.ke/main-investment-market-segment/",
+            "https://www.nse.co.ke/equities-market/",
+            "https://www.nse.co.ke/exchange-traded-funds/",
+            "https://www.nse.co.ke/green-bonds/",
+            "https://www.nse.co.ke/alternative-investment-market-segment/",
+            "https://www.nse.co.ke/training/",
+            "https://www.nse.co.ke/careers/",
+            "https://www.nse.co.ke/leadership/",
+            "https://www.nse.co.ke/about-nse/",
+            "https://www.nse.co.ke/our-story/",
+            "https://www.nse.co.ke/cookies-policy/",
+            "https://www.nse.co.ke/contact-us/",
+            "https://www.nse.co.ke/privacy-policy/",
+            "https://www.nse.co.ke/tenders/",
+            "https://www.nse.co.ke/mobile-and-online-trading/",
+            "https://www.nse.co.ke/listed-company-announcements/",
+            "https://www.nse.co.ke/corporate-bonds/",
+            "https://www.nse.co.ke/faqs/",
+            "https://www.nse.co.ke/the-east-africa-islamic-finance-forum-2025/",
+            "https://www.nse.co.ke/government-bonds/",
+            "https://www.nse.co.ke/ibuka-2/",
+            "https://www.nse.co.ke/m-akiba/",
+            "https://www.nse.co.ke/usp/",
+            
+            # New Data Services Links
+            "https://www.nse.co.ke/dataservices/market-statistics/",
+            "https://www.nse.co.ke/dataservices/real-time-data/",
+            "https://www.nse.co.ke/dataservices/end-of-day-data/",
+            "https://www.nse.co.ke/dataservices/historical-data/",
+            "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/",
+            "https://www.nse.co.ke/dataservices/api-specification-documents/",
+            
+            # Additional links added
+            "https://www.nse.co.ke/dataservices/",
+            "https://www.nse.co.ke/dataservices/market-data-overview/",
+            "https://www.nse.co.ke/sustainability/",
+            "https://www.nse.co.ke/login/",
+            "https://www.nse.co.ke/cart/",
+            "https://www.nse.co.ke/nominated-advisors/",
+            
+            # Latest Batch
+            "https://www.nse.co.ke/guidelines/",
+            "https://www.nse.co.ke/corporate-actions/",
+            "https://www.nse.co.ke/rules/",
+            "https://www.nse.co.ke/listed-companies/",
+            "https://www.nse.co.ke/listed-company-announcements/",
+            "https://www.nse.co.ke/derivatives/",
+            "https://www.nse.co.ke/nse-investor-calendar/",
+            "https://www.nse.co.ke/policy-guidance-notes/",
+            "https://www.nse.co.ke/circulars/"
+        ]
+        
+        # External/Social links (might be skipped by crawler logic, but included as requested)
+        external_seeds = [
+             "https://www.facebook.com/NSEPLC/",
+             "https://twitter.com/NSE_PLC",
+             "https://www.youtube.com/channel/UCual_P_eQvhLllXRvSdZtxw",
+             "https://www.linkedin.com/company/nairobi-securities-exchange-plc/posts/?feedView=all",
+             "https://apps.apple.com/us/app/dosikaa/id6451129448",
+             "https://play.google.com/store/apps/details?id=ke.co.synergy.dosikaa"
         ]
         
         # 3. Crawl to discover new stuff
         print("🕷️ Crawling NSE website...")
-        discovered_pages, discovered_pdfs = self.crawl_site(seeds)
+        discovered_pages, discovered_pdfs = self.crawl_site(seeds + external_seeds)
         
         # Combine lists
         all_pages = list(set(discovered_pages))
@@ -495,9 +597,7 @@ class NSEKnowledgeBase:
         try:
             # 0. Auto-Update Check
             if self.is_data_stale():
-                # In a real app, trigger background thread. Here we just warn or run.
-                # We assume the Streamlit app handles the threading.
-                pass
+                pass # Handled by main app thread
 
             if self.collection is None: return "System initializing...", []
 
@@ -535,7 +635,7 @@ class NSEKnowledgeBase:
             today = datetime.date.today().strftime("%Y-%m-%d")
             system_prompt = f"""You are the NSE Digital Assistant (similar to Zuri), an expert on the Nairobi Securities Exchange. Your responses must be factual, based solely on the provided CONTEXT. Do not add external knowledge or assumptions.
 
-            TODAY'S DATE: {today}
+           TODAY'S DATE: {today}
 
             INSTRUCTIONS:
             1. **Accuracy First:** Ground every claim in the CONTEXT. If information is missing or ambiguous, state "Based on available data, I cannot confirm [topic]." Avoid speculation—e.g., do not infer future events or unstated details.
