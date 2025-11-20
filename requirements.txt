@@ -6,4 +6,3 @@ requests
 pysqlite3-binary
 tiktoken
 pypdf
-pandas
