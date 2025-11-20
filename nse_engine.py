@@ -52,30 +52,44 @@ class NSEKnowledgeBase:
         """
         return """
         [OFFICIAL_FACT_SHEET]
-        TOPIC: NSE Leadership & Key Facts
+        TOPIC: NSE Leadership, Structure & Market Rules
         SOURCE: Manual Verification / NSE Official Documents
         LAST_VERIFIED: 2025
         
-        BOARD OF DIRECTORS (NSE PLC):
-        1. Mr. Kiprono Kittony - Chairman
-        2. Mr. Paul Mwai - Vice-Chairman
-        3. Mr. Frank Mwiti - Chief Executive Officer (Appointed May 2, 2024)
-        4. Ms. Risper Alaro-Mukoto - Non-Executive Director
-        5. Mr. Stephen Chege - Non-Executive Director
-        6. Mrs. Isis Madison - Independent Non-Executive Director
-        7. Mr. John Niepold - Independent Non-Executive Director
-        8. Mr. Donald Wangunyu - Non-Executive Director
-        9. Mrs. Caroline Kariuki - Independent Non-Executive Director
-        
-        MANAGEMENT TEAM:
-        1. Frank Mwiti - CEO
-        2. David Wainaina - Chief Operating Officer
-        3. Jane Kiarie - Chief Financial Officer
-        
-        CONTACT & OPERATIONS:
-        - Address: 55 Westlands Road, Nairobi, Kenya
-        - Trading Hours: 09:30 AM - 03:00 PM (Monday - Friday)
-        - Regulator: Capital Markets Authority (CMA)
+        1. LEADERSHIP (NSE PLC)
+        - Chairman: Mr. Kiprono Kittony
+        - Vice-Chairman: Mr. Paul Mwai
+        - CEO: Mr. Frank Mwiti (Appointed May 2, 2024)
+        - Board Members: Ms. Risper Alaro-Mukoto, Mr. Stephen Chege, Mrs. Isis Madison, Mr. John Niepold, Mr. Donald Wangunyu, Mrs. Caroline Kariuki.
+        - Management: David Wainaina (COO), Jane Kiarie (CFO).
+
+        2. OPERATIONAL DETAILS
+        - Address: 55 Westlands Road, Nairobi, Kenya.
+        - Website: www.nse.co.ke
+        - Currency: Kenyan Shilling (KES / Ksh).
+        - Regulator: Capital Markets Authority (CMA).
+        - Depository: CDSC (Central Depository & Settlement Corporation) - Handles share holding accounts (CDS Accounts).
+
+        3. TRADING HOURS (Monday - Friday, Excluding Public Holidays)
+        - Pre-Open Session: 09:00 AM - 09:30 AM
+        - Continuous Trading: 09:30 AM - 03:00 PM
+        - Closing Session: 03:00 PM onwards
+
+        4. MARKET SEGMENTS
+        - MIMS (Main Investment Market Segment): For large, established companies.
+        - AIMS (Alternative Investment Market Segment): For mid-sized companies.
+        - GEMS (Growth Enterprise Market Segment): For SMEs and growth companies.
+        - FIMS (Fixed Income Market Segment): For Corporate and Government Bonds.
+        - NEXT (Derivatives Market): For Futures and Options trading.
+
+        5. INDICES DEFINITIONS
+        - NASI (NSE All Share Index): Tracks performance of ALL listed companies. Best for overall market health.
+        - NSE 20 Share Index: Tracks the top 20 "Blue Chip" companies. Best for tracking stability.
+        - NSE 25 Share Index: Tracks top 25 companies based on liquidity and market capitalization.
+
+        6. SETTLEMENT CYCLES
+        - Equities (Shares): T+3 (Transaction date + 3 business days).
+        - Bonds: T+1 (typically) or T+3 depending on the bond type.
         """
 
     def has_data(self):
@@ -188,7 +202,7 @@ class NSEKnowledgeBase:
         
         # UPDATED HARDCODED LIST - Includes Annual Reports & Governance Docs
         hardcoded_pdfs = [
-            "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
+          "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Kenya-Orchards-Ltd-Cautionary-Announcement.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Equity-Group-Holdings-Plc-EQUITY-GROUP-HOLDINGS-PLC-CHANGE-OF-BOARD.pdf",
             "https://www.nse.co.ke/wp-content/uploads/StanChart-Corporate-Calendar-2025.pdf",
@@ -533,13 +547,49 @@ class NSEKnowledgeBase:
         
         return f"Updated: {chunks_1 + chunks_2} chunks indexed.", []
 
+    def enrich_query_with_tickers(self, query):
+        """
+        POWER TOOL: Automatically maps common company names to their NSE Ticker Symbols.
+        This helps the search engine find data even if the user uses colloquial names.
+        """
+        ticker_map = {
+            "safaricom": "SCOM",
+            "equity": "EQTY", "equity group": "EQTY", "equity bank": "EQTY",
+            "kcb": "KCB", "kcb group": "KCB",
+            "co-op": "COOP", "cooperative bank": "COOP", "coop": "COOP",
+            "absa": "ABSA", "barclays": "ABSA",
+            "eabl": "EABL", "breweries": "EABL",
+            "kenya power": "KPLC", "kplc": "KPLC",
+            "kenya airways": "KQ", "kq": "KQ",
+            "standard chartered": "SCBK", "stanchart": "SCBK",
+            "ncba": "NCBA",
+            "britam": "BRIT",
+            "cic": "CIC",
+            "centum": "CTUM",
+            "total": "TOTL", "totalenergies": "TOTL"
+        }
+        
+        lower_query = query.lower()
+        found_tickers = []
+        for name, ticker in ticker_map.items():
+            if name in lower_query and ticker not in lower_query.upper():
+                found_tickers.append(ticker)
+        
+        if found_tickers:
+            return f"{query} ({' '.join(found_tickers)})"
+        return query
+
     def generate_context_queries(self, original_query):
         today = datetime.date.today().strftime("%Y-%m-%d")
-        prompt = f"""Generate 3 search queries for the NSE database based on: "{original_query}"
+        
+        # Step 1: Enrich query with Tickers (e.g., "Safaricom" -> "Safaricom (SCOM)")
+        enriched_query = self.enrich_query_with_tickers(original_query)
+        
+        prompt = f"""Generate 3 search queries for the NSE database based on: "{enriched_query}"
         
         RULES:
-        1. If the user asks for "Board" or "CEO", specifically search for "NSE Board of Directors" and "Leadership".
-        2. Ensure all queries imply the Nairobi Securities Exchange context.
+        1. You MUST append "NSE" or "Nairobi Securities Exchange" to every single query.
+        2. If the user asks for "Board" or "CEO", specifically search for "NSE Board of Directors" and "Leadership".
         3. Output ONLY the 3 queries, one per line.
         """
         try:
@@ -548,7 +598,8 @@ class NSEKnowledgeBase:
             )
             return [q.strip() for q in response.choices[0].message.content.split('\n') if q.strip()][:3]
         except:
-            return [original_query + " NSE", "Nairobi Securities Exchange " + original_query]
+            # Fallback: Aggressively append context if LLM generation fails
+            return [enriched_query + " NSE", "Nairobi Securities Exchange " + enriched_query, "NSE Kenya " + enriched_query]
 
     def llm_rerank(self, query, documents, sources):
         if not documents: return []
@@ -586,7 +637,7 @@ class NSEKnowledgeBase:
 
             if self.collection is None: return "System initializing...", []
 
-            # 1. Generate Search Queries
+            # 1. Generate Search Queries (Now with Ticker Intelligence)
             search_queries = self.generate_context_queries(query)
             
             # 2. Retrieve
@@ -610,7 +661,6 @@ class NSEKnowledgeBase:
             top_results = self.llm_rerank(query, raw_docs, raw_sources)
             
             # 4. INJECT STATIC FACTS (The "Cheat Sheet")
-            # This ensures the bot knows the Board/CEO even if retrieval fails
             context_text = self.get_static_facts() + "\n\n--- RETRIEVED DATA ---\n"
             
             visible_sources = []
@@ -622,12 +672,16 @@ class NSEKnowledgeBase:
             today = datetime.date.today().strftime("%Y-%m-%d")
             
             system_prompt = f"""You are the NSE Digital Assistant.
+
+            MANDATORY CONTEXT INTERPRETATION:
+            You must treat the user's query as if it ends with "...in the context of the Nairobi Securities Exchange (NSE)".
             
-            CRITICAL CONTEXT RULES:
-            1. **Scope:** All questions are about the Nairobi Securities Exchange (NSE) unless explicitly stated otherwise.
-            2. **Ambiguity Handler:** If the user asks "Who are the directors?" without naming a company, assume they mean the **NSE's own Board of Directors** (provided in the context), BUT add a note: "If you meant the directors of a specific listed company (like Safaricom or KCB), please specify the company name."
-            3. **Static Facts:** Trust the [OFFICIAL_FACT_SHEET] at the top of the context for Leadership, Addresses, and Trading Hours.
-            4. **Sources:** Base your answer ONLY on the provided Context.
+            POWER RULES:
+            1. **Implicit Scope:** If the user asks "What is an ETF?", answer "An ETF at the NSE is...".
+            2. **Financial Responsibility:** NEVER provide investment advice (Buy/Sell/Hold). If asked, provide the data and state: "I cannot provide investment advice; please consult a licensed financial advisor."
+            3. **Tabular Data:** If the query asks for financial performance (Revenue, Profit, Dividends), YOU MUST format the answer as a Markdown Table.
+            4. **Currency Standardization:** Always convert financial figures to "KES" or "Ksh" for consistency.
+            5. **Fact Sheet Priority:** Use the [OFFICIAL_FACT_SHEET] at the top of the context for NSE Leadership/Hours/Market Structure.
             
             TODAY'S DATE: {today}
             
