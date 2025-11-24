@@ -194,7 +194,7 @@ if not nse_bot.has_data() or hours_since_update > 6:
 
 # --- CHAT LOGIC ---
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Hello! I am the NSE Digital Assistant. You can ask me about share prices, trading rules, or market reports."}]
+    st.session_state.messages = [{"role": "assistant", "content": "Hello! I am the NSE Digital Assistant here to help you with information about the Nairobi Securities Exchange. How can I assist you today?"}]
 
 for message in st.session_state.messages:
     with st.chat_message(message["role"], avatar="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png" if message["role"] == "assistant" else None):
