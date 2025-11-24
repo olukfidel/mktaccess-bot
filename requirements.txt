@@ -6,5 +6,10 @@ requests
 pysqlite3-binary
 tiktoken
 pypdf
+pandas
 tenacity
 pdfplumber
+rank_bm25
+fastapi
+uvicorn
+redis
