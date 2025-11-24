@@ -748,7 +748,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
             "https://www.nse.co.ke/site-map/",
             "https://www.nse.co.ke/mobile-and-online-trading/",
             "https://www.nse.co.ke/dataservices/historical-data-request-form/",
-            "https://www.nse.co.ke/derivatives/about-next"
+            "https://www.nse.co.ke/derivatives/about-next",
             "https://www.nse.co.ke/investor-news/",
             
             # Newly added links
