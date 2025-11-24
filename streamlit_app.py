@@ -30,7 +30,7 @@ if "theme" not in st.session_state:
 
 # --- TOGGLE BUTTON IN SIDEBAR ---
 with st.sidebar:
-    st.image("https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", width=100) 
+    st.image("https://i.postimg.cc/vBh5LSLT/logo.webp", width=100) 
     if st.button("Toggle Dark/Light Mode"):
         if st.session_state.theme == "light":
             st.session_state.theme = "dark"
