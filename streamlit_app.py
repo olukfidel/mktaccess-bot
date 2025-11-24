@@ -11,17 +11,18 @@ import time
 import base64
 
 # --- CONFIGURATION ---
-st.set_page_config(
-    page_title="NSE Digital Assistant",
-    page_icon="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png",
-    layout="centered"
-)
+st.set_page_config(page_title="NSE Digital Assistant", page_icon="📈", layout="centered")
 
 # --- HELPER: LOAD IMAGE AS BASE64 ---
 def get_base64_of_bin_file(bin_file):
-    with open(bin_file, 'rb') as f:
-        data = f.read()
-    return base64.b64encode(data).decode()
+    try:
+        with open(bin_file, 'rb') as f:
+            data = f.read()
+        return base64.b64encode(data).decode()
+    except FileNotFoundError:
+        return ""
+
+logo_base64 = get_base64_of_bin_file("logo.webp")
 
 # --- THEME TOGGLE STATE ---
 if "theme" not in st.session_state:
@@ -29,7 +30,7 @@ if "theme" not in st.session_state:
 
 # --- TOGGLE BUTTON IN SIDEBAR ---
 with st.sidebar:
-    st.image("https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", width=100) # Bot Logo
+    st.image("https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", width=100) 
     if st.button("Toggle Dark/Light Mode"):
         if st.session_state.theme == "light":
             st.session_state.theme = "dark"
@@ -37,49 +38,51 @@ with st.sidebar:
             st.session_state.theme = "light"
         st.rerun()
 
-# --- DYNAMIC CSS ---
-# Define colors based on theme state
+# --- DYNAMIC CSS (THEME AWARE) ---
 if st.session_state.theme == "light":
+    # Light Mode Colors
     text_color = "#333333"
-    bg_overlay_color = "rgba(255, 255, 255, 0.85)" # Slightly less opaque (more visible BG)
-    chat_bg = "rgba(255, 255, 255, 0.9)"
+    bg_overlay_color = "rgba(255, 255, 255, 0.85)"
+    chat_bg = "#ffffff"
     user_border = "#0F4C81"
     bot_border = "#4CAF50"
     header_color = "#0F4C81"
+    input_bg = "#ffffff"
+    input_text = "#333333"
 else:
-    text_color = "#ffffff"
-    bg_overlay_color = "rgba(30, 30, 30, 0.85)" # Dark overlay
-    chat_bg = "rgba(50, 50, 50, 0.9)"
+    # Dark Mode Colors
+    text_color = "#f0f0f0"
+    bg_overlay_color = "rgba(20, 20, 20, 0.9)" # Darker overlay for contrast
+    chat_bg = "#2b2b2b"
     user_border = "#4da6ff"
     bot_border = "#81c784"
     header_color = "#ffffff"
+    input_bg = "#2b2b2b"
+    input_text = "#ffffff"
 
-# Background Image Logic
-bg_image_url = "https://i.postimg.cc/vBh5LSLT/logo.webp"
-
+# Construct CSS with explicit colors to override browser defaults
 st.markdown(f"""
     <style>
-    /* GLOBAL FONT & COLORS */
-    html, body, [class*="css"] {{
+    /* Force text color on all elements to match our theme */
+    html, body, [class*="css"], .stMarkdown, .stText {{
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        color: {text_color}; 
+        color: {text_color} !important; 
     }}
     
-    /* BACKGROUND IMAGE (WATERMARK) */
+    /* Background Image with Overlay */
     .stApp {{
-        background-image: url("{bg_image_url}");
+        background-image: url("data:image/webp;base64,{logo_base64}");
         background-size: 50%;
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
-        /* Dynamic Overlay */
         background-color: {bg_overlay_color}; 
         background-blend-mode: overlay;
     }}
 
-    /* HEADER STYLING */
+    /* Header Styling */
     .main-header {{
-        color: {header_color};
+        color: {header_color} !important;
         font-size: 2.5rem;
         font-weight: 700;
         text-align: center;
@@ -89,7 +92,7 @@ st.markdown(f"""
     }}
     
     .sub-header {{
-        color: {text_color};
+        color: {text_color} !important;
         opacity: 0.8;
         font-size: 1.1rem;
         text-align: center;
@@ -97,35 +100,55 @@ st.markdown(f"""
         font-weight: 300;
     }}
 
-    /* CHAT INPUT STYLING */
-    .stChatInput {{
-        border-radius: 25px !important;
-        border: 2px solid {header_color} !important;
+    /* Chat Input Styling */
+    .stChatInput textarea {{
+        background-color: {input_bg} !important;
+        color: {input_text} !important;
+        border-radius: 20px !important;
     }}
     
-    /* CHAT BUBBLES */
+    .stChatInputContainer {{
+        border-radius: 25px !important;
+        border: 2px solid {header_color} !important;
+        background-color: {input_bg} !important;
+    }}
+
+    /* Chat Message Bubbles */
     .stChatMessage {{
-        background-color: {chat_bg};
+        background-color: {chat_bg} !important;
         border-radius: 10px;
         padding: 10px;
         box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         margin-bottom: 10px;
     }}
     
-    /* USER MESSAGE BUBBLE */
+    /* Message Text Color Inside Bubbles */
+    .stChatMessage p {{
+        color: {text_color} !important;
+    }}
+
+    /* Borders for User vs Assistant */
     .stChatMessage[data-testid="stChatMessage"]:nth-child(odd) {{
         border-left: 5px solid {user_border};
     }}
     
-    /* ASSISTANT MESSAGE BUBBLE */
     .stChatMessage[data-testid="stChatMessage"]:nth-child(even) {{
         border-left: 5px solid {bot_border};
     }}
 
-    /* HIDE STREAMLIT ELEMENTS */
+    /* Hide Standard Elements */
     #MainMenu {{visibility: hidden;}}
     footer {{visibility: hidden;}}
     header {{visibility: hidden;}}
+    
+    /* Fix Link Colors */
+    a {{
+        color: {user_border} !important;
+        text-decoration: none;
+    }}
+    a:hover {{
+        text-decoration: underline;
+    }}
     </style>
 """, unsafe_allow_html=True)
 
@@ -192,7 +215,6 @@ if prompt := st.chat_input("Ask about the market..."):
             else:
                 response = st.write_stream(stream)
                 if sources:
-                    # Clean source formatting
                     source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke').split('/')[-1]}]({s})" for s in sources])
                     st.markdown(source_text)
                     response += source_text
