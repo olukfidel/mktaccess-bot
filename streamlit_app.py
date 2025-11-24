@@ -71,7 +71,7 @@ st.markdown(f"""
     
     /* Background Image with Overlay */
     .stApp {{
-        background-image: url("data:image/webp;base64,{logo_base64}");
+        background-image: url("https://i.postimg.cc/vBh5LSLT/logo.webp");
         background-size: 50%;
         background-repeat: no-repeat;
         background-attachment: fixed;
