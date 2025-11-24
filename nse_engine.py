@@ -96,6 +96,302 @@ class NSEKnowledgeBase:
         Depository: CDSC
         Key Indices: NASI (All Share), NSE 20, NSE 25
         Settlement: T+3 (Equities), T+1/T+3 (Bonds)
+        2. OPERATIONAL DETAILS
+        - Address: 55 Westlands Road, Nairobi, Kenya.
+        - Website: www.nse.co.ke
+        - Currency: Kenyan Shilling (KES / Ksh).
+        - Regulator: Capital Markets Authority (CMA).
+        - Depository: CDSC (Central Depository & Settlement Corporation) - Handles share holding accounts (CDS Accounts).
+
+        3. TRADING HOURS (Monday - Friday, Excluding Public Holidays)
+        - Pre-Open Session: 09:00 AM - 09:30 AM
+        - Continuous Trading: 09:30 AM - 03:00 PM
+        - Closing Session: 03:00 PM onwards
+
+        4. MARKET SEGMENTS
+        - MIMS (Main Investment Market Segment): For large, established companies.
+        - AIMS (Alternative Investment Market Segment): For mid-sized companies.
+        - GEMS (Growth Enterprise Market Segment): For SMEs and growth companies.
+        - FIMS (Fixed Income Market Segment): For Corporate and Government Bonds.
+        - NEXT (Derivatives Market): For Futures and Options trading.
+
+        5. INDICES DEFINITIONS
+        - NASI (NSE All Share Index): Tracks performance of ALL listed companies. Best for overall market health.
+        - NSE 20 Share Index: Tracks the top 20 "Blue Chip" companies. Best for tracking stability.
+        - NSE 25 Share Index: Tracks top 25 companies based on liquidity and market capitalization.
+
+        6. SETTLEMENT CYCLES
+        - Equities (Shares): T+3 (Transaction date + 3 business days).
+        - Bonds: T+1 (typically) or T+3 depending on the bond type.
+
+        7. OFFICIAL FAQs (Verbatim Answers)
+        Q:What products are traded at the Nairobi Securities Exchange?
+        A:The products traded at the NSE are Shares and Bonds. Shares and Bonds are money or financial products. Another name for Shares is Equities, while Bonds are also known as Debt Instruments.
+
+        Q:What is different the difference between a stock market and any other market?
+        A:The main difference about the Stock Exchange market from other local markets is in the types of products traded, how they are traded and how they are paid for and transferred.
+
+        Q:What is the NSE?
+        A:The Nairobi Securities Exchange is a Market, and commonly known as the NSE.
+
+        Q:What is the importance of this market to the economy?
+        A:For an economy to grow, money needs to shift from les to more productive activities. In other words, idle money and savings should be invested in productive activity for the economy to grow. The Nairobi Stock Exchange makes this possible by:
+
+Enabling idle money and savings to become productive by bringing the borrowers and lenders of money together at a low cost. The lenders (all savers) become the investors. They lend/invest and expect a profit/financial reward. The borrowers also known as issuers in the markets borrow and promise to pay the lenders a profit. We therefore encourage savings and investments.
+
+Educating the public about the higher profits in shares and bonds; how to buy and sell; when and why to buy and sell. We also educate the public on how to invest together as a group.
+
+Facilitating good management of companies by asking them to give periodic reports of their performance.
+
+Providing a daily market reports and price list to ensure that investors know the worth of their assets at all times.
+
+Providing financial solutions to common problems. Shares and bonds are accepted guarantees for Co-operative Society’s and bank loans. Shares and bonds can be planned, with the help of a money manager, to pay for school fees, medical, car and other insurance schemes, pension or retirement plans etc.
+
+Through shares and bonds, the government, small and big companies, cooperatives societies and other organizations can raise money to expand their business activities, make a profit, create employment and generally help the economy to grow.
+
+        Q:How is the NSE market organized?
+        A:Market days.
+
+The market is open Monday to Friday from 8.00 a.m. to 5.00 p.m. trading activities start at 9.00 a.m. and continues until 3.00 p.m. Members of the public can view the market from the public gallery at any time while the market is open. The market is closed during public holidays.
+
+Display of Shares
+Shares are grouped into 4 sectors namely Agriculture, Commercial and Services, Financial and Industrial & Allied sectors. The shares are displayed in alphabetical order in each group for easy location by investors viewing trading from the public gallery.
+
+Display of Bonds
+Bonds are in two groups namely: Treasury Bonds – issued by the government; and Corporate Bonds – issued by companies.
+
+They are displayed as and when the government or a company issues one.
+
+        Q:What Amounts Can an Investor Buy?
+        A:An investor can buy as little or as much as he or she can afford. It is also possible to invest very little money in groups of small investors pooled together by money managers in the market.
+
+Minimum number of shares.
+
+Share are bundled in minimum lots of 100 shares and above in the main market boards. Fewer shares that 100 are available on the odd lots board.
+
+Minimum number of Bonds.
+
+Bonds are sold in minimum bundles of KShs. 50,000.00. Small investors can pool their money together and buy a bond with the help of a money manager.
+
+        Q:Delivery & Settlement
+        A:This is where share accounts and bond accounts are transferred from one investor to another and payments completed. It is also here that shares and bonds of deceased persons are transferred to beneficiaries at a small administrative fee.
+
+        Q:Information Centre
+        A:Here, investors and members of the public get answers to their questions about the stock exchange. An individual or group can also register to attend a educational session organized by the Nairobi Securities Exchange every Wednesday. The NSE also gives lectures to groups in their own premises through invitation. There are other operational structures in the market which include Market Research and Development, Compliance, Legal, Accounting and Administration.
+
+        Q:Our History
+        A:This market was started in the 1920’s by the British as an informal market for Europeans only. In 1954, the market was formalized through incorporation into a company.
+
+In 1963, Africans were allowed to join and trade in the market. For many years, the market operated through the telephone with a weekly meeting at the Stanley Hotel. In 1991, this market mover to IPS building and was opened to the public. In 1994, the market moved to its current location, on the 1st Floor of the Nation Centre, with the introduction of the Central Depository and Settlement Corporation (CDSC) investors will open share and bond accounts, in electronic accounts similar to their bank accounts. Buying and selling of shares and bonds will be made much easier and quicker. All the benefits of shares and bonds will remain the same. For example, an investor will still be able to use a Share Account or Bond Account as a guarantor for a Co-operative loan or as collateral for a bank loan.
+
+        Q:More About Us.
+        A:More information about the NSE can be found at the Nairobi Securities Exchange information centre; website: www.nse.co.ke; Handbook; NSE Annual Report; Brochures; public Education Sessions; Newspapers; Television and Radio. You can also speak to Stockbrokers; Money Managers; Browse Company Annual Reports and Accounts and talk to other investors in the market.
+
+        Q:What Is A Share?
+        A:A share is a piece of ownership of a company or enterprise. When you buy a share, you become an investor and thereby an owner of a piece of the company’s profit or losses.
+
+        Q:Why do companies sell shares?
+        A:Companies sell shares to raise (borrow) money from members of the public to expand their business activities in order to make more profits. They invite members of the public to buy shares and by so doing have a say in the running of the company as lenders of money and owners.
+
+Shareholders expect a profit as a reward from lending their money to expand the business of the company.
+
+        Q:Who is a shareholder?
+        A:A shareholder is an investor who buys shares with an expectation of profit. Profits in shares are through dividends, gains in share prices, bonuses, rights etc.
+
+A shareholder owns a piece of the company and its profits equal to the number of shares he/she owns.
+
+        Q:What are the benefits of owning shares?
+        A:A source of profits;
+A guarantor for borrowing loans from Cooperative Societies and Banks;
+A way of saving your money for the future;
+An easy and quick asset to buy and sell;
+A new business activity that is beneficial in many ways. An investor can trade in other markets trade in maize, bananas, potatoes, tomatoes, onions, mangos etc.
+Buying at low prices and selling at high prices to make a profit;
+A solution that increases financial activity and economic growth.
+
+        Q:What are the qualities of a good share?
+        A:Frequent and generous dividends
+The company is managed productively, transparently and is accountable to shareholders
+No wastage in the use of resources
+Respect of shareholders and their opinions
+Shares that are easy to buy and sell quickly in the market
+The company abides by the rules, regulations and laws
+
+        Q:What is a Bond?
+        A:A bond is a loan between a borrower and a lender. The borrower promises to pay the lender some interest quarterly or semi-annually at some date in the future. The borrower also promised to repay the initial money invested by the lender. The lender lends and expects to make a profit. The profit from a bond is gained in the form of an interest. At the moment some bonds in the market have an interest rate of 14%, 12%, 10%,8% depending on the type of bond it is, and when it was issued.
+
+
+        Q:I OWE YOU.
+        A:At the Nairobi Securities Exchange, the lender is called an investor and the borrower the issuer.
+
+        Q:Who can Buy Bonds?
+        A:Any individual, Co-operative Society, Women Group, Kiama, Youth Club, Church, School, College, University, Investment Group, Insurance Company, Bank, Pension Scheme, and many other can buy bonds.
+
+        Q:Can a Bond be sold before Maturity?
+        A:Yes. In times of need or emergencies, an investor can sell his or her bond easily and quickly in the market. The interest on a bond grows on a daily basis and so a bond has new value and price every day. An investor can therefore buy or sell a bond on any day of his or her choice. There are no penalties for selling a bond before the maturity date.
+
+For example, an investor can buy a bond of 5 years and expect an interest of 12%. The interest is paid after every 3 or 6 months. Such an investor can sell the bond at any time of his or her choice at the current market price. The market price of a bond will depend on the number of other willing sellers and buyers in the market on that particular day. When there are many sellers in any market, prices go down and vice versa.
+
+        Q:Who Borrows Money through Bonds?
+        A:In Kenya, it is the government and companies. In other Stock Markets, Municipal Councils, Cooperative Societies, Hospitals, Universities, Schools and other organizations can borrow money from the public through bonds. All that is required is that the organization has a good reputation and members of the public have trust in the other lending situations, a lender must trust the borrower before he or she can lend any money. The borrower must therefore be creditworthy in the eyes of the lenders or investors.
+
+Bonds are therefore a very easy, quick and transparent way of raising money. For example, trusted and credit worthy Municipal Councils can borrow money from the public with a promise to pay a reasonable interest rate. The Council can borrow money from public with a promise to pay a reasonable interest rate. The Council can use the money to build roads, improve security, cleanliness, water supply and streetlights. A Co-operative Society can do the same and build milk cooling and processing factory or a food processing factory. These and many more money solutions are available with the help of money managers.
+
+        Q:What are the benefits of buying bonds?
+        A:A bond is a very convenient asset to own;
+Accepted guarantors for may types of loans by Cooperative Societies and Banks;
+A sure source of income;
+A good money planner to meet specific needs. For example an investor can buy a bond whose interest matches payment of school fees, car or medical insurance, rent, pension allowance and much more;
+Easy and quick to sell in the market in times of need;
+A way of saving money for the future;
+Convenient and confidential;
+Easily transferable.
+
+        Q:What is the difference between a bondholder and a shareholder?
+        A:A Bondholder
+
+A bondholder is only a lender to a company
+Expects a profit in form of an interest at a specific agreed date in future
+Does not vote or participate in the management of the company
+Invests to earn a reasonable return at a low risk
+A watchdog of the borrowers activities
+A Shareholder
+
+A shareholder is a lender and an owner
+Expects a profit in form of a dividend, gain in share price, bonuses and cheaper shares (right issues)
+Attends Annual General Meetings, gives personal pinions about the company and votes thereby participating in the running of the company
+Invests expecting the highest return possible
+Accept risk as part of any business
+A watchdog of the management and company’s activities
+An influencer of the company’s performance
+Can one be Bondholder and a Shareholder at the same time?
+Yes. This gives an investor the opportunity to diversify and enjoy a balance between reasonable and very high profits.
+
+        Q:What are the eligibility requirements for listing at the Nairobi Securities Exchange
+        A:There are three investment market Segments at the Nairobi Securities Exchange namely:
+
+Main Investment Market Segment (MIMS);
+Alternative Investment Market Segment (AIMS); and
+Fixed Income Securities Market Segment (FISMS).
+To list securities on any of these boards, the following eligibility criteria must be satisfied:
+Requirements:
+1.)Incorporation status
+MIMS:The issuer must be a public company limited by shares and registered under the Companies Act (Cap 486)
+AIMS:The issuer must be a public company limited by shares and registered under the Companies Act (Cap 486)
+FISMS:The issuer must be a public company limited by shares and registered under the Companies Act (Cap 486) or any other corporate body.
+
+2.)Share Capital
+MIMS:The minimum authorized, issued and fully paid up capital must be Kshs. 50 Million.
+AIMS:The minimum authorized, issued and fully paid capital should be Kshs.20 Million
+FISMS:The minimum authorized, issued and fully paid up capital must be Kshs. 50 Million
+
+3.)Net Assets
+MIMS:The net assets should not be less than Kshs. 100 Million immediately before the public offer.
+AIMS:Net assets immediately before the public offer should not be less than Kshs.20 Million
+FISMS:The net assets should not be less than Kshs. 100 Million immediately before the offer.
+
+4.)Financial records
+MIMS:The audited financial statements of the issuer for five preceding years be availed.
+AIMS:The audited financial statements of the issuer for three preceding years be availed.
+FISMS:The audited financial statements of the issuer for three preceding years be availed (except for the government)
+
+5.)Directors and Management
+MIMS:The directors of the issuer must be competent persons without any legal encumbrances
+AIMS:The directors of the issuer must be competent persons without any legal encumbrances.
+FISMS:The directors of the issuer must be competent persons without any legal encumbrances
+
+6.)Track record
+MIMS:The issuer must have declared positive profits after tax attributable to shareholders in at least three years within five years prior to application.
+AIMS:The issuer must have been operating on the same line of business for at least two years one of which it must have made profit with good growth potential.
+FISMS:Not a requirement.
+
+7.)Solvency
+MIMS:The issuer should be solvent and have adequate working capital.
+AIMS:The issuer should be solvent and have adequate working capital.
+FISMS:Not a requirement
+
+8.)Share ownership structure
+MIMS:At least 25 percent of the shares must be held by not less than 1000 shareholders excluding employees of the issuer.
+AIMS:At least 20 percent of the shares must be held by not less than 100 shareholders excluding employees of the issuer or family members of the controlling shareholders.
+FISMS:Not a requirement
+
+9.)Certificate of comfort
+MIMS:May be required from the primary regulator of the issuer if there is one.
+AIMS:May be required from the primary regulator of the issuer if there is one.
+FISMS:May be required from the primary regulator of the issuer if there is one.
+
+10.)Dividend policy
+MIMS:The issuer must have a clear future dividend policy
+AIMS:The issuer must have a clear future dividend policy
+FISMS:Not a requirement
+
+11.)Debt ratios
+MIMS:Not a requirement
+AIMS:Not a requirement
+FISMS:Major ratios:
+    Total indebtedness including the new issue not to exceed 400% of the company’s net worth as at the latest balance sheet.
+    The funds from operations to total debt for the three trading periods preceding the issue to be kept at a weighted average of at least 40%.
+    A range of other ratios to be certified by the issuer’s external auditors.
+
+12.)Issue lots
+MIMS:Not a requirement
+AIMS:Not a requirement
+FISMS:Minimum issue lot size shall be:
+
+Kshs. 100,000 for corporate bonds or preference shares
+Kshs. 1,000,000 for commercial paper programme.
+
+13.)Renewal date
+MIMS:Not a requirement
+AIMS:Not a requirement
+FISMS:Every issuer of commercial paper to apply for renewal at least three months before the expiry of the approved period of twelve months from the date of approval.
+
+14.)Transferability of shares
+MIMS:The shares to be listed shall be freely transferable.
+AIMS:The shares to be listed shall be freely transferable.
+FISMS:May or may not be transferable.
+
+
+
+
+
+
+        Q:Can one be Bondholder and a Shareholder at the same time?
+        A:Yes. This gives an investor the opportunity to diversify and enjoy a balance between reasonable and very high profits.
+
+        Q:What is a Real Estate Investment Trust (REIT)
+        A:A REIT is a regulated investment vehicle that enables the issuer to pool investors’ funds for the purpose of investing in real estate. In exchange, the investors receive units in the trust, and as beneficiaries of the trust,share in the profits or income from the real estate assets owned by the
+trust.
+
+        Q:What types of REIT's are provided for in Kenya?
+        A:There are 2 types of REITS; D-REITS and I-REITS.
+
+Income Real estate investment Trusts (I-REITs)
+An Income-REIT (I-REIT) is a real estate investment scheme which owns and manages income generating real estate for the benefit of its investors therefore providing both liquidity and a stable income stream. Distributions to investors are underpinned by commercial leases. This
+means that income returns are generally predictable.
+
+Development Real Estate Investment Trusts (D-REITs)
+A Development Real Estate Investment Trust (D-REIT) is a development and construction real estate trust involved in the development or construction projects for housing, commercial and other real estate assets.
+
+        Q:What is an Exchange Traded Fund(ETF) ?
+        A:An Exchange Traded Fund (ETF) is a listed investment product that track the performance of a basket of Shares, Bonds or Commodities. An ETF can also track a single commodity such as oil or a precious metal like gold.
+
+        Q:Why invest in ETFs ?
+        A:1. Diversification
+One fund can hold potentially hundreds—sometimes thousands—of individual stocks and bonds, which helps spread out risk. ETFs allow access to asssets that were previously not available to all investors such as gold.
+2. Professional management
+You do not have to keep track of every single investment your ETF owns. The fund is managed by fund experts who take care of that for you. Reporting is done daily to the investor through the NSE.
+3.Liquidity
+ETFs offer you the same liquidity you get when trading stocks and bonds listed on the NSE.
+4.Lower cost
+Funds that track an index, like ETFs and index mutual funds, generally offer lower expense ratios than conventional mutual funds.
+5.Transparency
+The ETF is backed by its constituent underlying assets or assets of an equivalent value.
+Issuers produce a factsheet for their ETFs which states what investors are being exposed to and how the Net Asset Value of the ETF is calculated. By contrast, unit trusts, typically only provide historical information on portfolio holdings and not current holdings, for competitive reasons. Tracking performance is also published.
+6.Investor owned assets
+The constituent assets or securities shall be housed in a trust arrangement with a CMA approved trustee being appointed. Even in the case of insolvency by the ETF manager, administrator or issuer, through the trust arrangement, these assets are ring fenced, protected by law, and are the exclusive property of the ETF. Therefore owning an ETF does not give the investor the right to vote at Annual General Meetings (AGMs) of the underlying securities, as you own a portion (unit) in the fund and not the underlying securities themselves.
+
+
         """
 
     def has_data(self):
