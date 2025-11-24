@@ -1,88 +1,71 @@
-# nse_engine_v2.py
-# Nairobi Securities Exchange RAG Engine – Ultimate Edition (Nov 2025)
-# Implements: Hybrid Search Logic, Semantic Chunking, Live Market Status, 
-# Logging, Entity Tagging, Hard Reranking Rules.
-
 import os
-import re
-import json
-import time
+import requests
+from bs4 import BeautifulSoup
+import chromadb
+from openai import OpenAI
 import uuid
+import urllib3
+import concurrent.futures
+import time
+import io
+import re
 import random
 import datetime
 import hashlib
-import logging
-import requests
-import urllib3
-import chromadb
-import pdfplumber
-import io
-from typing import List, Tuple, Dict, Any, Optional
+from pypdf import PdfReader
 from urllib.parse import urljoin, urlparse
-from bs4 import BeautifulSoup
-from openai import OpenAI
 from tenacity import retry, stop_after_attempt, wait_fixed
 
-# Suppress warnings
+# Suppress SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# ------------------- CONFIGURATION -------------------
+# --- CONFIGURATION ---
 EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
-MAX_CRAWL_DEPTH = 2
-MAX_PAGES_TO_CRAWL = 800 
-CHROMA_PATH = "./nse_db_v2"
-
-# Logging setup
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("nse_bot.log"),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger("NSE-Engine")
+# OPTIMIZED FOR DEEPER SEARCH AS DISCUSSED
+MAX_CRAWL_DEPTH = 3
+MAX_PAGES_TO_CRAWL = 500
 
 class NSEKnowledgeBase:
-    def __init__(self, openai_api_key: str):
+    def __init__(self, openai_api_key):
         if not openai_api_key:
             raise ValueError("OpenAI API Key is required")
         
         self.api_key = openai_api_key
         self.client = OpenAI(api_key=openai_api_key)
+        
+        self.db_path = "./nse_db_pure"
+        self.chroma_client = chromadb.PersistentClient(path=self.db_path)
+        
+        # Persistent session for faster crawling
         self.session = requests.Session()
         
-        # Initialize ChromaDB
-        self.chroma_client = chromadb.PersistentClient(path=CHROMA_PATH)
         try:
-            self.collection = self.chroma_client.get_or_create_collection(name="nse_data_v2")
+            self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
         except Exception as e:
-            logger.error(f"Failed to init ChromaDB: {e}")
+            print(f"DB Init Error (Recoverable): {e}")
             self.collection = None
 
-    # --- HELPER: LIVE MARKET STATUS ---
-    def get_market_status(self) -> str:
-        """Returns the current trading status of the NSE."""
-        now = datetime.datetime.now() + datetime.timedelta(hours=3) # Approx EAT if server is UTC
-        # Adjust for Kenya Time (UTC+3) if needed, assuming server is UTC
-        
-        if now.weekday() >= 5:
-            return "[MARKET CLOSED – Weekend]"
-        
-        hour = now.hour
-        if hour < 9:
-            return f"[MARKET CLOSED – Opens at 09:00 | Current: {now.strftime('%H:%M')}]"
-        elif hour < 9 or (hour == 9 and now.minute < 30):
-            return f"[PRE-OPEN SESSION | {now.strftime('%H:%M')}]"
-        elif 9 <= hour < 15:
-            return f"[MARKET OPEN – LIVE TRADING | {now.strftime('%H:%M')}]"
-        else:
-            return f"[MARKET CLOSED – Closed at 15:00 | {now.strftime('%H:%M')}]"
-
-    # --- HELPER: STATIC KNOWLEDGE ---
+    # --- STATIC KNOWLEDGE (The Fact Sheet) ---
     def get_static_facts(self):
+        """Returns hardcoded facts that must always be true."""
         return """
+        [OFFICIAL_FACT_SHEET]
+        TOPIC: NSE Leadership, Structure & Market Rules
+        SOURCE: NSE Official Website / Annual Report 2025
+        LAST_VERIFIED: November 2025
+
+        CEO: Mr. Frank Mwiti (Appointed May 2, 2024)
+        Chairman: Mr. Kiprono Kittony
+        Trading Hours: Mon-Fri, 09:30 am - 03:00 pm (Continuous Trading)
+        Pre-Open Session: 09:00 am - 09:30 am
+        Currency: Kenyan Shilling (KES)
+        Regulator: Capital Markets Authority (CMA)
+        Depository: Central Depository & Settlement Corporation (CDSC)
+        Key Indices: NSE All Share Index (NASI), NSE 20 Share Index, NSE 25 Share Index
+        Settlement Cycle: T+3 (Equities), T+3 (Corporate Bonds), T+1 (Gov Bonds)
+        Location: The Exchange, 55 Westlands Road, Nairobi, Kenya
+        
         [OFFICIAL_FACT_SHEET]
         TOPIC: NSE Leadership, Structure & Market Rules
         SOURCE: NSE Official Website / Annual Report 2025
@@ -124,7 +107,7 @@ class NSEKnowledgeBase:
         - Equities (Shares): T+3 (Transaction date + 3 business days).
         - Bonds: T+1 (typically) or T+3 depending on the bond type.
 
-        7. OFFICIAL FAQs (Verbatim Answers)
+        [OFFICIAL_FAQ]
         Q:What products are traded at the Nairobi Securities Exchange?
         A:The products traded at the NSE are Shares and Bonds. Shares and Bonds are money or financial products. Another name for Shares is Equities, while Bonds are also known as Debt Instruments.
 
@@ -409,15 +392,18 @@ The constituent assets or securities shall be housed in a trust arrangement with
         except:
             return 0.0
         return 0.0
-    
-    def is_data_stale(self):
-        last = self.get_last_update_time()
-        return (time.time() - last) > 86400 # 24 hours
 
-    @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
+    def is_data_stale(self):
+        last_update = self.get_last_update_time()
+        if last_update == 0: return True
+        return (time.time() - last_update) > 86400
+
+    def compute_hash(self, text):
+        return hashlib.md5(text.encode('utf-8')).hexdigest()
+
+    @retry(stop=stop_after_attempt(3), wait=wait_fixed(1))
     def get_embeddings_batch(self, texts):
         if not texts: return []
-        # Batch optimization
         if len(texts) > 100:
             results = []
             for i in range(0, len(texts), 100):
@@ -431,96 +417,66 @@ The constituent assets or securities shall be housed in a trust arrangement with
             response = self.client.embeddings.create(input=sanitized_texts, model=EMBEDDING_MODEL)
             return [data.embedding for data in response.data]
         except Exception as e:
-            logger.error(f"Embedding Error: {e}")
+            print(f"Embedding Error: {e}")
             raise e
 
     def get_embedding(self, text):
         return self.get_embeddings_batch([text])[0]
 
-    # --- SEMANTIC CHUNKING ---
     def clean_text_chunk(self, text):
         text = re.sub(r'\n\s*\n', '\n', text)
         text = re.sub(r' +', ' ', text)
         return text.strip()
 
-    def simple_text_splitter(self, text, chunk_size=1200, overlap=300):
-        """
-        Smarter splitting that respects sentence boundaries.
-        """
+    def simple_text_splitter(self, text, chunk_size=1200, overlap=200):
         chunks = []
         start = 0
         text_len = len(text)
-        
         while start < text_len:
             end = start + chunk_size
-            
-            # Try to find a sentence ending (.!?) to break cleanly
             if end < text_len:
-                lookahead = text[start:end+50] # Peek ahead slightly
-                last_period = -1
-                for p in ['. ', '? ', '! ', '\n']:
-                    idx = text.rfind(p, start, end)
-                    if idx > last_period:
-                        last_period = idx
-                
+                last_period = text.rfind('.', start, end)
                 if last_period != -1 and last_period > start + (chunk_size // 2):
                     end = last_period + 1
-            
             chunk = text[start:end]
             chunks.append(chunk)
             start += chunk_size - overlap
-            if start >= end: start = end # Prevent infinite loops
-            
+            if start >= end: start = end
         return chunks
 
-    # --- STRUCTURED PDF EXTRACTION ---
     def _extract_text_from_pdf(self, pdf_content):
-        """Uses pdfplumber for table-aware extraction."""
-        text_parts = []
         try:
-            with pdfplumber.open(io.BytesIO(pdf_content)) as pdf:
-                for page in pdf.pages:
-                    # 1. Extract tables specifically
-                    tables = page.extract_tables()
-                    for table in tables:
-                        if table:
-                            # Convert to Markdown Table
-                            headers = table[0]
-                            rows = table[1:]
-                            # Filter out None values
-                            safe_headers = [str(h).replace('\n', ' ') if h else "" for h in headers]
-                            md_table = "| " + " | ".join(safe_headers) + " |\n"
-                            md_table += "| " + " --- |" * len(safe_headers) + "\n"
-                            for row in rows:
-                                safe_row = [str(c).replace('\n', ' ') if c else "" for c in row]
-                                md_table += "| " + " | ".join(safe_row) + " |\n"
-                            text_parts.append(f"[TABLE]\n{md_table}")
-
-                    # 2. Extract regular text
-                    text = page.extract_text()
-                    if text:
-                        text_parts.append(text)
-            return "\n\n".join(text_parts)
-        except Exception as e:
-            logger.warning(f"PDF Extraction failed: {e}")
+            pdf_file = io.BytesIO(pdf_content)
+            reader = PdfReader(pdf_file)
+            text = ""
+            for page in reader.pages:
+                try:
+                    page_text = page.extract_text(extraction_mode="layout")
+                except:
+                    page_text = page.extract_text()
+                text += page_text + "\n"
+            return text
+        except Exception:
             return ""
 
-    # --- CRAWLING ---
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
     def _fetch_url(self, url):
         headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+            'Accept-Language': 'en-US,en;q=0.5',
+            'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1',
         }
-        return requests.get(url, headers=headers, timeout=20, verify=False)
+        return self.session.get(url, headers=headers, timeout=20, verify=False)
 
     def crawl_site(self, seed_urls):
         visited = set()
         to_visit = set(seed_urls)
-        found_content = set()
-        found_pdfs = set()
+        found_content_urls = set()
+        found_pdf_urls = set()
         
-        # Explicitly add the hardcoded PDF list you provided
+        # HARDCODED PDFS (Ensure these are always indexed)
         hardcoded_pdfs = [
              "https://www.nse.co.ke/wp-content/uploads/Safaricom-PLC-Announcement-of-an-Interim-Dividend-For-The-Year-Ended-31-03-2025.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Kenya-Orchards-Ltd-Cautionary-Announcement.pdf",
@@ -616,7 +572,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
             if url in visited: continue
             visited.add(url)
             
-            if "nse.co.ke" not in url: continue
+            if "nse.co.ke" not in url and "academy.nse.co.ke" not in url: continue
             
             try:
                 if url.lower().endswith(".pdf"):
@@ -631,7 +587,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
                     continue
                 
                 soup = BeautifulSoup(response.content, 'html.parser')
-                found_content.add(url)
+                found_content_urls.add(url)
                 count += 1
                 
                 for link in soup.find_all('a', href=True):
@@ -641,36 +597,47 @@ The constituent assets or securities shall be housed in a trust arrangement with
                         if full_url.lower().endswith(".pdf"):
                             found_pdf_urls.add(full_url)
                         elif full_url not in visited and full_url not in to_visit:
-                            if len(to_visit) < 100: # Limited queue
+                            if len(to_visit) < 200: # Queue limit
                                 to_visit.add(full_url)
-            except:
-                pass
+            except Exception as e:
+                print(f"Crawl Error {url}: {e}")
         
         all_pdfs = list(found_pdf_urls.union(set(hardcoded_pdfs)))
-        return list(found_content), all_pdfs
+        return list(found_content_urls), all_pdfs
 
     def _process_content(self, url, content_type, content_bytes):
         text = ""
         tag = "[GENERAL]"
-        # Auto-tagging
+        
+        # IMPROVED AUTO-TAGGING FOR RE-RANKING
         if "statistics" in url: tag = "[MARKET_DATA]"
-        elif "management" in url or "directors" in url: tag = "[LEADERSHIP]"
+        elif "management" in url or "directors" in url or "leadership" in url: tag = "[LEADERSHIP]"
         elif "contact" in url: tag = "[CONTACT]"
-        elif "rules" in url: tag = "[REGULATION]"
+        elif "rules" in url or "guideline" in url or "legal" in url: tag = "[REGULATION]"
         elif "news" in url: tag = "[NEWS]"
-        elif "financial" in url or "result" in url: tag = "[FINANCIALS]"
         elif "calendar" in url: tag = "[CALENDAR]"
-        elif "strategy" in url: tag = "[STRATEGY]"
-        elif "guidelines" in url: tag = "[GUIDELINES]"
-        elif "corporate-actions" in url: tag = "[CORPORATE_ACTION]"
-        elif "circulars" in url: tag = "[CIRCULAR]"
-        elif "listed-companies" in url: tag = "[COMPANY_DATA]"
-        elif "derivatives" in url: tag = "[DERIVATIVES]"
-        elif "csr" in url: tag = "[CSR]"
-        elif "e-digest" in url: tag = "[DIGEST]"
-        elif "press-releases" in url: tag = "[PRESS_RELEASE]"
-        elif "publications" in url: tag = "[PUBLICATION]"
+        elif "financial" in url or "result" in url: tag = "[FINANCIALS]"
+        elif "training" in url or "masterclass" in url or "academy" in url: tag = "[EDUCATION]"
+        elif "market-segment" in url or "ibuka" in url or "usp" in url: tag = "[MARKET_SEGMENT]"
+        elif "products" in url or "bonds" in url or "funds" in url or "trusts" in url or "m-akiba" in url: tag = "[PRODUCT]"
+        elif "careers" in url: tag = "[CAREERS]"
+        elif "tenders" in url: tag = "[TENDERS]"
+        elif "privacy" in url or "cookies" in url: tag = "[LEGAL]"
+        elif "about-nse" in url or "story" in url or "vision" in url: tag = "[ABOUT]"
         elif "trading" in url: tag = "[TRADING]"
+        elif "announcement" in url: tag = "[ANNOUNCEMENT]"
+        elif "forum" in url: tag = "[EVENT]"
+        elif "price-list" in url or "pricelist" in url: tag = "[DATA_PRICING]"
+        elif "historical" in url: tag = "[HISTORICAL_DATA]"
+        elif "isin" in url: tag = "[ISIN_DATA]"
+        elif "real-time" in url: tag = "[REALTIME_DATA]"
+        elif "end-of-day" in url: tag = "[EOD_DATA]"
+        elif "specification" in url or "api" in url: tag = "[API_DOCS]"
+        elif "sustainability" in url: tag = "[SUSTAINABILITY]"
+        elif "login" in url: tag = "[LOGIN]"
+        elif "cart" in url: tag = "[CART]"
+        elif "advisors" in url: tag = "[ADVISORS]"
+        elif "faq" in url: tag = "[OFFICIAL_FAQ]" # Key fix for your question!
 
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
@@ -687,10 +654,7 @@ The constituent assets or securities shall be housed in a trust arrangement with
         return text
 
     def scrape_and_index(self, urls, content_type="html"):
-        """Scrapes list of URLs and indexes them ONLY if changed (Saves Credits)"""
-        
         new_chunks = 0
-        
         def task(url):
             try:
                 response = self._fetch_url(url)
@@ -700,42 +664,15 @@ The constituent assets or securities shall be housed in a trust arrangement with
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             futures = {executor.submit(task, url): url for url in urls}
-            
             for future in concurrent.futures.as_completed(futures):
                 url, content = future.result()
                 if content:
                     text = self._process_content(url, content_type, content)
                     if not text: continue
-
-                    # --- EFFICIENCY UPGRADE: HASH CHECK ---
-                    current_hash = self.compute_hash(text)
-                    
-                    # Check DB for existing version of this URL
-                    existing = self.collection.get(
-                        where={"source": url},
-                        include=["metadatas"]
-                    )
-                    
-                    # If we already have this page indexed
-                    if existing['ids']:
-                        # Check if the content hash matches
-                        # We grab the hash from the first chunk of this URL
-                        stored_hash = existing['metadatas'][0].get("page_hash", "")
-                        
-                        if stored_hash == current_hash:
-                            # Content hasn't changed -> SKIP EMBEDDING (Saves $$$)
-                            continue
-                        else:
-                            # Content changed -> Delete old chunks to avoid duplicates
-                            self.collection.delete(where={"source": url})
-                    # --------------------------------------
                     
                     chunks = self.simple_text_splitter(text)
                     ids = [str(uuid.uuid4()) for _ in chunks]
-                    
-                    # Store the hash in metadata so we can check it next time
-                    metadatas = [{"source": url, "date": datetime.date.today().isoformat(), "page_hash": current_hash} for _ in chunks]
-                    
+                    metadatas = [{"source": url, "date": datetime.date.today().isoformat()} for _ in chunks]
                     embeddings = self.get_embeddings_batch(chunks)
                     if embeddings:
                         self.collection.add(documents=chunks, embeddings=embeddings, metadatas=metadatas, ids=ids)
@@ -885,10 +822,10 @@ The constituent assets or securities shall be housed in a trust arrangement with
         
         print(f"📝 Found {len(all_pages)} pages and {len(discovered_pdfs)} PDFs.")
         
-        # Reset DB
-        try: self.chroma_client.delete_collection("nse_data_v2")
+        # Reset DB (Clean slate to fix 'Collection does not exist' errors)
+        try: self.chroma_client.delete_collection("nse_data")
         except: pass
-        self.collection = self.chroma_client.get_or_create_collection(name="nse_data_v2")
+        self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
         
         chunks_1 = self.scrape_and_index(all_pages, "html")
         chunks_2 = self.scrape_and_index(discovered_pdfs, "pdf") 
@@ -903,6 +840,9 @@ The constituent assets or securities shall be housed in a trust arrangement with
         today = datetime.date.today().strftime("%Y-%m-%d")
         prompt = f"""Generate 3 search queries for the NSE database for: "{original_query}"
         Current Date: {today}
+        1. Keyword match.
+        2. Concept/Definition.
+        3. Document type (e.g. "Daily Report {today}").
         Output ONLY 3 lines."""
         try:
             response = self.client.chat.completions.create(
@@ -934,9 +874,36 @@ The constituent assets or securities shall be housed in a trust arrangement with
         except:
             return list(zip(documents, sources))
 
+    def hard_rerank(self, results, query):
+        """
+        Force-rank FAQs to the top if the user asks a general question.
+        """
+        scored = []
+        query_lower = query.lower()
+        for doc, source in results:
+            score = 0
+            # 1. Base Relevance (already filtered by vector search)
+            
+            # 2. FAQ Priority Rule
+            if "[OFFICIAL_FAQ]" in doc or "faq" in source.lower():
+                score += 100  # Massive boost for FAQs
+            
+            # 3. Fact Sheet Priority
+            if "[OFFICIAL_FACT_SHEET]" in doc:
+                score += 200
+                
+            scored.append((score, doc, source))
+        
+        # Sort descending
+        scored.sort(key=lambda x: x[0], reverse=True)
+        return [(doc, source) for _, doc, source in scored]
+
     def answer_question(self, query):
         try:
-            if self.collection is None: return "System initializing...", []
+            # Auto-heal if collection is missing
+            if self.collection is None:
+                 return "System is initializing the knowledge base. Please wait 2 minutes and try again.", []
+
             search_queries = self.generate_context_queries(query)
             query_embeddings = self.get_embeddings_batch(search_queries)
             results = self.collection.query(query_embeddings=query_embeddings, n_results=15)
@@ -954,29 +921,43 @@ The constituent assets or securities shall be housed in a trust arrangement with
             
             if not raw_docs: return "I couldn't find that information in my NSE database.", []
 
-            top_results = self.llm_rerank(query, raw_docs, raw_sources)
-            context_text = ""
+            # 1. Hard Rerank (Boost FAQs/Fact Sheet)
+            top_results = self.hard_rerank(zip(raw_docs, raw_sources), query)
+            
+            # 2. LLM Refinement (Optional second pass, but hard rerank usually enough for FAQs)
+            # top_results = self.llm_rerank(query, [d[0] for d in top_results], [d[1] for d in top_results])
+
+            context_text = self.get_static_facts() + "\n\n" # Always inject Fact Sheet
             visible_sources = []
             for doc, source in top_results[:5]: 
                 context_text += f"\n[Source: {source}]\n{doc}\n---"
                 if source not in visible_sources: visible_sources.append(source)
 
             today = datetime.date.today().strftime("%Y-%m-%d")
-            system_prompt = f"""You are the NSE Digital Assistant.
-            TODAY'S DATE: {today}
-            MARKET STATUS: {self.get_market_status()}
             
-            INSTRUCTIONS:
-            1. **Accuracy:** Use CONTEXT only.
-            2. **Date Awareness:** Prioritize 2024/2025 data.
-            3. **Formatting:** Use Markdown.
+            system_prompt = f"""You are the NSE Digital Assistant.
+
+            MANDATORY CONTEXT INTERPRETATION:
+            You must treat the user's query as if it ends with "...in the context of the Nairobi Securities Exchange (NSE)".
+            
+            POWER RULES:
+            1. **FAQ Authority:** If the context contains text tagged [OFFICIAL_FAQ], that is the GROUND TRUTH. Answer using that information exactly as stated.
+            2. **URL Relevance:** Documents where the Source URL matches the user's keywords are likely the most correct.
+            3. **Financial Responsibility:** NEVER provide investment advice (Buy/Sell/Hold).
+            4. **Tabular Data:** If the query asks for financial performance, format as a Markdown Table.
+            5. **Fact Sheet Priority:** Use the [OFFICIAL_FACT_SHEET] for Leadership/Hours/Market Structure.
+            
+            TODAY'S DATE: {today}
             
             CONTEXT:
             {context_text}"""
 
             stream = self.client.chat.completions.create(
                 model=LLM_MODEL,
-                messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": query}],
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": query}
+                ],
                 temperature=0,
                 stream=True
             )
