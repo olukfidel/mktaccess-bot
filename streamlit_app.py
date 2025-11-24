@@ -13,10 +13,9 @@ import base64
 # --- CONFIGURATION ---
 st.set_page_config(
     page_title="NSE Digital Assistant",
-    page_icon="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png",  # Direct URL to your NSE logo
+    page_icon="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png",
     layout="centered"
 )
-#st.set_page_config(page_title="NSE Digital Assistant", page_icon="📈", layout="centered")
 
 # --- HELPER: LOAD IMAGE AS BASE64 ---
 def get_base64_of_bin_file(bin_file):
@@ -24,35 +23,63 @@ def get_base64_of_bin_file(bin_file):
         data = f.read()
     return base64.b64encode(data).decode()
 
-try:
-    logo_base64 = get_base64_of_bin_file("logo.webp")
-except:
-    logo_base64 = "" # Fallback if image missing
+# --- THEME TOGGLE STATE ---
+if "theme" not in st.session_state:
+    st.session_state.theme = "light"
 
-# --- CUSTOM CSS (NSE BRANDING) ---
+# --- TOGGLE BUTTON IN SIDEBAR ---
+with st.sidebar:
+    st.image("https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", width=100) # Bot Logo
+    if st.button("Toggle Dark/Light Mode"):
+        if st.session_state.theme == "light":
+            st.session_state.theme = "dark"
+        else:
+            st.session_state.theme = "light"
+        st.rerun()
+
+# --- DYNAMIC CSS ---
+# Define colors based on theme state
+if st.session_state.theme == "light":
+    text_color = "#333333"
+    bg_overlay_color = "rgba(255, 255, 255, 0.85)" # Slightly less opaque (more visible BG)
+    chat_bg = "rgba(255, 255, 255, 0.9)"
+    user_border = "#0F4C81"
+    bot_border = "#4CAF50"
+    header_color = "#0F4C81"
+else:
+    text_color = "#ffffff"
+    bg_overlay_color = "rgba(30, 30, 30, 0.85)" # Dark overlay
+    chat_bg = "rgba(50, 50, 50, 0.9)"
+    user_border = "#4da6ff"
+    bot_border = "#81c784"
+    header_color = "#ffffff"
+
+# Background Image Logic
+bg_image_url = "https://i.postimg.cc/vBh5LSLT/logo.webp"
+
 st.markdown(f"""
     <style>
     /* GLOBAL FONT & COLORS */
     html, body, [class*="css"] {{
         font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-        color: #333333; 
+        color: {text_color}; 
     }}
     
-    /* BACKGROUND IMAGE (FADED WATERMARK) */
+    /* BACKGROUND IMAGE (WATERMARK) */
     .stApp {{
-        background-image: url("https://i.postimg.cc/vBh5LSLT/logo.webp");
+        background-image: url("{bg_image_url}");
         background-size: 50%;
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
-        /* Overlay to fade the image */
-        background-color: rgba(255, 255, 255, 0.92); 
+        /* Dynamic Overlay */
+        background-color: {bg_overlay_color}; 
         background-blend-mode: overlay;
     }}
 
-    /* HEADER STYLING (NSE BLUE) */
+    /* HEADER STYLING */
     .main-header {{
-        color: #0F4C81; /* Approx NSE Blue */
+        color: {header_color};
         font-size: 2.5rem;
         font-weight: 700;
         text-align: center;
@@ -62,7 +89,8 @@ st.markdown(f"""
     }}
     
     .sub-header {{
-        color: #666;
+        color: {text_color};
+        opacity: 0.8;
         font-size: 1.1rem;
         text-align: center;
         margin-bottom: 2rem;
@@ -72,26 +100,26 @@ st.markdown(f"""
     /* CHAT INPUT STYLING */
     .stChatInput {{
         border-radius: 25px !important;
-        border: 2px solid #0F4C81 !important; /* NSE Blue border */
+        border: 2px solid {header_color} !important;
     }}
     
     /* CHAT BUBBLES */
     .stChatMessage {{
-        background-color: rgba(255, 255, 255, 0.8);
+        background-color: {chat_bg};
         border-radius: 10px;
         padding: 10px;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         margin-bottom: 10px;
     }}
     
     /* USER MESSAGE BUBBLE */
     .stChatMessage[data-testid="stChatMessage"]:nth-child(odd) {{
-        border-left: 5px solid #0F4C81;
+        border-left: 5px solid {user_border};
     }}
     
     /* ASSISTANT MESSAGE BUBBLE */
     .stChatMessage[data-testid="stChatMessage"]:nth-child(even) {{
-        border-left: 5px solid #4CAF50; /* Growth Green */
+        border-left: 5px solid {bot_border};
     }}
 
     /* HIDE STREAMLIT ELEMENTS */
@@ -102,7 +130,6 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # --- UI HEADER ---
-# We use columns to center the logo if you want it at the top too, but the background covers it.
 st.markdown('<div class="main-header">Nairobi Securities Exchange</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">Digital Assistant & Market Intelligence</div>', unsafe_allow_html=True)
 
@@ -147,7 +174,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Hello! I am the NSE Digital Assistant. You can ask me about share prices, trading rules, or market reports."}]
 
 for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
+    with st.chat_message(message["role"], avatar="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png" if message["role"] == "assistant" else None):
         st.markdown(message["content"])
 
 if prompt := st.chat_input("Ask about the market..."):
@@ -155,7 +182,7 @@ if prompt := st.chat_input("Ask about the market..."):
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    with st.chat_message("assistant"):
+    with st.chat_message("assistant", avatar="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png"):
         try:
             stream, sources = nse_bot.answer_question(prompt)
             
