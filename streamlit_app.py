@@ -11,7 +11,7 @@ import time
 import base64
 
 # --- CONFIGURATION ---
-st.set_page_config(page_title="NSE Digital Assistant", page_icon="📈", layout="centered")
+st.set_page_config(page_title="NSE Digital Assistant", page_icon="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", layout="centered")
 
 # --- HELPER: LOAD IMAGE AS BASE64 ---
 def get_base64_of_bin_file(bin_file):
