@@ -5,7 +5,7 @@ import base64
 import os
 
 # --- CONFIGURATION ---
-st.set_page_config(page_title="NSE Digital Assistant", page_icon="📈", layout="centered")
+st.set_page_config(page_title="NSE Digital Assistant", page_icon="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", layout="centered")
 
 # --- HELPER: LOAD IMAGE AS BASE64 ---
 def get_base64_of_bin_file(bin_file):
@@ -59,7 +59,7 @@ st.markdown(f"""
         color: {text_color} !important; 
     }}
     .stApp {{
-        background-image: url("data:image/webp;base64,{logo_base64}");
+        background-image: url("https://i.postimg.cc/vBh5LSLT/logo.webp");
         background-size: 50%;
         background-repeat: no-repeat;
         background-attachment: fixed;
