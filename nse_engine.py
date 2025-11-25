@@ -34,26 +34,19 @@ class NSEKnowledgeBase:
         self.client = OpenAI(api_key=openai_api_key)
         
         self.db_path = "./nse_db_pure"
-        
-        # Initialize ChromaDB with error handling
-        try:
-            self.chroma_client = chromadb.PersistentClient(path=self.db_path)
-            # Force create if get fails
-            try:
-                self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
-            except:
-                self.collection = self.chroma_client.create_collection(name="nse_data")
-        except Exception as e:
-            print(f"CRITICAL DB ERROR: {e}")
-            self.collection = None # Graceful degradation
-        
+        self.chroma_client = chromadb.PersistentClient(path=self.db_path)
         self.session = requests.Session()
+        
+        try:
+            self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
+        except Exception as e:
+            print(f"DB Init Error (Recoverable): {e}")
+            self.collection = None
 
-    # --- STATIC KNOWLEDGE (Ground Truth) ---
+    # --- STATIC KNOWLEDGE (The Fact Sheet) ---
     def get_static_facts(self):
-        """Hardcoded facts that serve as a fallback/priority source."""
         return """
-       [OFFICIAL_FACT_SHEET]
+        [OFFICIAL_FACT_SHEET]
         TOPIC: NSE Leadership, Structure & Market Rules
         SOURCE: NSE Official Website / Annual Report 2025
         LAST_VERIFIED: November 2025
@@ -630,9 +623,9 @@ Flexibility: Implement various strategies to profit in different market conditio
         found_content_urls = set()
         found_pdf_urls = set()
         
-        # Ensure your specific PDFs are here
+        # HARDCODED PDFS
         hardcoded_pdfs = [
-            "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
+             "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-listing-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Groundrules-nse-NSE-BankingSector-share-index_-V1.0.pdf",
             "https://www.nse.co.ke/wp-content/uploads/GroundRules-NSE-Bond-Index-NSE-BI-v2-Index-final-2.pdf",
@@ -691,7 +684,6 @@ Flexibility: Implement various strategies to profit in different market conditio
             if url in visited: continue
             visited.add(url)
             
-            # Skip external sites
             if "nse.co.ke" not in url and "academy.nse.co.ke" not in url: continue
             
             try:
@@ -777,8 +769,9 @@ Flexibility: Implement various strategies to profit in different market conditio
         return new_chunks
 
     def build_knowledge_base(self):
-        # Your seed list here (abbreviated for clarity, but keep your full list)
-        seeds = ["https://www.nse.co.ke/",
+        # 1. Comprehensive Seed List
+        seeds = [
+            "https://www.nse.co.ke/",
             "https://www.nse.co.ke/site-map/",
             "https://www.nse.co.ke/home/",
             "https://www.nse.co.ke/about-nse/",
@@ -833,7 +826,7 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/dataservices/historical-data/",
             "https://www.nse.co.ke/dataservices/historical-data-request-form/",
             "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/"  
-            ]
+        ]
         
         print("🕷️ Crawling NSE website...")
         discovered_pages, discovered_pdfs = self.crawl_site(seeds)
@@ -841,7 +834,7 @@ Flexibility: Implement various strategies to profit in different market conditio
         
         print(f"📝 Found {len(all_pages)} pages and {len(discovered_pdfs)} PDFs.")
         
-        # SAFETY: Reset DB to clear corruption
+        # Reset DB (Clean slate to fix 'Collection does not exist' errors)
         try: self.chroma_client.delete_collection("nse_data")
         except: pass
         self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
@@ -859,6 +852,9 @@ Flexibility: Implement various strategies to profit in different market conditio
         today = datetime.date.today().strftime("%Y-%m-%d")
         prompt = f"""Generate 3 search queries for the NSE database for: "{original_query}"
         Current Date: {today}
+        1. Keyword match.
+        2. Concept/Definition.
+        3. Document type (e.g. "Daily Report {today}").
         Output ONLY 3 lines."""
         try:
             response = self.client.chat.completions.create(
