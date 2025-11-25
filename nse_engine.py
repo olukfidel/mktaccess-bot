@@ -24,7 +24,7 @@ EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
 # OPTIMIZED FOR DEEPER SEARCH AS DISCUSSED
 MAX_CRAWL_DEPTH = 3
-MAX_PAGES_TO_CRAWL = 1300
+MAX_PAGES_TO_CRAWL = 300
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key):
@@ -41,16 +41,21 @@ class NSEKnowledgeBase:
         self.session = requests.Session()
         
         try:
+            # Try to get or create - this handles the "Collection does not exist" error
             self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
         except Exception as e:
             print(f"DB Init Error (Recoverable): {e}")
-            self.collection = None
+            # Fallback: try creating it again or just set to None and let build_knowledge_base handle it
+            try:
+                self.collection = self.chroma_client.create_collection(name="nse_data")
+            except:
+                self.collection = None
 
     # --- STATIC KNOWLEDGE (The Fact Sheet) ---
     def get_static_facts(self):
         """Returns hardcoded facts that must always be true."""
         return """
-        [OFFICIAL_FACT_SHEET]
+       [OFFICIAL_FACT_SHEET]
         TOPIC: NSE Leadership, Structure & Market Rules
         SOURCE: NSE Official Website / Annual Report 2025
         LAST_VERIFIED: November 2025
@@ -686,7 +691,7 @@ Flexibility: Implement various strategies to profit in different market conditio
             if url in visited: continue
             visited.add(url)
             
-            if "nse.co.ke" not in url and "academy.nse.co.ke" not in url: continue
+            if "nse.co.ke" not in url: continue
             
             try:
                 if url.lower().endswith(".pdf"):
@@ -711,10 +716,10 @@ Flexibility: Implement various strategies to profit in different market conditio
                         if full_url.lower().endswith(".pdf"):
                             found_pdf_urls.add(full_url)
                         elif full_url not in visited and full_url not in to_visit:
-                            if len(to_visit) < 200: # Queue limit
+                            if len(to_visit) < 200: # Limited queue
                                 to_visit.add(full_url)
-            except Exception as e:
-                print(f"Crawl Error {url}: {e}")
+            except:
+                pass
         
         all_pdfs = list(found_pdf_urls.union(set(hardcoded_pdfs)))
         return list(found_content_urls), all_pdfs
@@ -722,12 +727,11 @@ Flexibility: Implement various strategies to profit in different market conditio
     def _process_content(self, url, content_type, content_bytes):
         text = ""
         tag = "[GENERAL]"
-        
-        # IMPROVED AUTO-TAGGING FOR RE-RANKING
+        # Auto-tagging
         if "statistics" in url: tag = "[MARKET_DATA]"
         elif "management" in url or "directors" in url or "leadership" in url: tag = "[LEADERSHIP]"
         elif "contact" in url: tag = "[CONTACT]"
-        elif "rules" in url or "guideline" in url or "legal" in url: tag = "[REGULATION]"
+        elif "rules" in url: tag = "[REGULATION]"
         elif "news" in url: tag = "[NEWS]"
         elif "calendar" in url: tag = "[CALENDAR]"
         elif "financial" in url or "result" in url: tag = "[FINANCIALS]"
@@ -751,7 +755,17 @@ Flexibility: Implement various strategies to profit in different market conditio
         elif "login" in url: tag = "[LOGIN]"
         elif "cart" in url: tag = "[CART]"
         elif "advisors" in url: tag = "[ADVISORS]"
-        elif "faq" in url: tag = "[OFFICIAL_FAQ]" # Key fix for your question!
+        elif "guidelines" in url: tag = "[GUIDELINES]"
+        elif "corporate-actions" in url: tag = "[CORPORATE_ACTION]"
+        elif "circulars" in url: tag = "[CIRCULAR]"
+        elif "listed-companies" in url: tag = "[COMPANY_DATA]"
+        elif "investor-calendar" in url: tag = "[CALENDAR]"
+        elif "derivatives" in url: tag = "[DERIVATIVES]"
+        elif "csr" in url: tag = "[CSR]"
+        elif "e-digest" in url: tag = "[DIGEST]"
+        elif "press-releases" in url: tag = "[PRESS_RELEASE]"
+        elif "publications" in url: tag = "[PUBLICATION]"
+        elif "strategy" in url: tag = "[STRATEGY]"
 
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
@@ -759,7 +773,7 @@ Flexibility: Implement various strategies to profit in different market conditio
                 text = f"{tag} SOURCE: {url}\nTYPE: OFFICIAL REPORT (PDF)\n\n" + self.clean_text_chunk(raw_text)
         else:
             soup = BeautifulSoup(content_bytes, 'html.parser')
-            for item in soup(["script", "style", "nav", "footer", "header"]):
+            for item in soup(["script", "style", "nav", "footer", "header", "aside"]):
                 item.decompose()
             raw_text = soup.get_text(separator="\n")
             clean = self.clean_text_chunk(raw_text)
@@ -796,7 +810,7 @@ Flexibility: Implement various strategies to profit in different market conditio
     def build_knowledge_base(self):
         # 1. Comprehensive Seed List
         seeds = [
-            "https://www.nse.co.ke/",
+             "https://www.nse.co.ke/",
             "https://www.nse.co.ke/site-map/",
             "https://www.nse.co.ke/home/",
             "https://www.nse.co.ke/about-nse/",
@@ -850,7 +864,7 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/dataservices/end-of-day-data/",
             "https://www.nse.co.ke/dataservices/historical-data/",
             "https://www.nse.co.ke/dataservices/historical-data-request-form/",
-            "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/"          
+            "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/"  
         ]
         
         print("🕷️ Crawling NSE website...")
