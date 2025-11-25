@@ -55,10 +55,22 @@ class NSEKnowledgeBase:
         SOURCE: NSE Official Website / Annual Report 2025
         LAST_VERIFIED: November 2025
 
-        CEO: Mr. Frank Mwiti (Appointed May 2, 2024)
+        CEO: Mr. Frank Mwiti
         Chairman: Mr. Kiprono Kittony
-        Trading Hours: Mon-Fri, 09:30 am - 03:00 pm (Continuous Trading)
-        Pre-Open Session: 09:00 am - 09:30 am
+        Non-Executive Director representing listed companies: Ms. Risper Alaro-Mukoto
+        Independent Non-Executive Director: Ms. Isis Nyong'o Madison
+        Non-Executive Director representing Trading Participants: Mr. Donald Wangunyu
+        Non-Executive Director representing Listed Companies: Mr. Stephen Chege
+        Independent Non-Executive Director :Mr. John Niepold
+        Independent Non-Executive Director: Ms. Carole Kariuki
+        Independent Non-Executive Director: Mr. Thomas Mulwa
+        
+        Trading Hours:(Monday - Friday, Excluding Public Holidays)
+    - Pre-Open Session: 09:00 AM - 09:30 AM
+    - Continuous Trading: 09:30 AM - 03:00 PM
+    - Closing Session: 03:00 PM onwards
+    Pre-Open Session: 09:00 am - 09:30 am
+
         Currency: Kenyan Shilling (KES)
         Regulator: Capital Markets Authority (CMA)
         Depository: Central Depository & Settlement Corporation (CDSC)
@@ -66,30 +78,9 @@ class NSEKnowledgeBase:
         Settlement Cycle: T+3 (Equities), T+3 (Corporate Bonds), T+1 (Gov Bonds)
         Location: The Exchange, 55 Westlands Road, Nairobi, Kenya
         
-        [OFFICIAL_FACT_SHEET]
-        TOPIC: NSE Leadership, Structure & Market Rules
-        SOURCE: NSE Official Website / Annual Report 2025
-        LAST_VERIFIED: November 2025
-
-        CEO: Mr. Frank Mwiti
-        Chairman: Mr. Kiprono Kittony
-        Trading Hours: Mon-Fri, 09:30–15:00 (Continuous)
-        Currency: KES
-        Regulator: Capital Markets Authority (CMA)
-        Depository: CDSC
-        Key Indices: NASI (All Share), NSE 20, NSE 25
-        Settlement: T+3 (Equities), T+1/T+3 (Bonds)
+        
         2. OPERATIONAL DETAILS
-        - Address: 55 Westlands Road, Nairobi, Kenya.
         - Website: www.nse.co.ke
-        - Currency: Kenyan Shilling (KES / Ksh).
-        - Regulator: Capital Markets Authority (CMA).
-        - Depository: CDSC (Central Depository & Settlement Corporation) - Handles share holding accounts (CDS Accounts).
-
-        3. TRADING HOURS (Monday - Friday, Excluding Public Holidays)
-        - Pre-Open Session: 09:00 AM - 09:30 AM
-        - Continuous Trading: 09:30 AM - 03:00 PM
-        - Closing Session: 03:00 PM onwards
 
         4. MARKET SEGMENTS
         - MIMS (Main Investment Market Segment): For large, established companies.
@@ -102,10 +93,6 @@ class NSEKnowledgeBase:
         - NASI (NSE All Share Index): Tracks performance of ALL listed companies. Best for overall market health.
         - NSE 20 Share Index: Tracks the top 20 "Blue Chip" companies. Best for tracking stability.
         - NSE 25 Share Index: Tracks top 25 companies based on liquidity and market capitalization.
-
-        6. SETTLEMENT CYCLES
-        - Equities (Shares): T+3 (Transaction date + 3 business days).
-        - Bonds: T+1 (typically) or T+3 depending on the bond type.
 
         [OFFICIAL_FAQ]
         Q:What products are traded at the Nairobi Securities Exchange?
