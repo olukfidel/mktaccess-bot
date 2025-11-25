@@ -13,3 +13,4 @@ rank_bm25
 fastapi
 uvicorn
 redis
+python-multipart
