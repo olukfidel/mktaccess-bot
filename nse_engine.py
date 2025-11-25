@@ -50,7 +50,7 @@ class NSEKnowledgeBase:
         self.index = self.pc.Index(PINECONE_INDEX_NAME)
         self.session = requests.Session()
 
-        # Auto-build if empty
+        # Auto-build if empty!
         try:
             if self.index.describe_index_stats()['total_vector_count'] == 0:
                 print("Index empty. Starting build process...")
