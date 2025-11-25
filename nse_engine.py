@@ -27,7 +27,7 @@ LLM_MODEL = "gpt-4o-mini"
 MAX_CRAWL_DEPTH = 3
 MAX_PAGES_TO_CRAWL = 1200
 PINECONE_INDEX_NAME = "nse-data"
-PINECONE_DIMENSION = 1536  # For text-embedding-3-small
+PINECONE_DIMENSION = 1536
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key, pinecone_api_key):
