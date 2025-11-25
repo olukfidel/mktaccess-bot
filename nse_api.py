@@ -41,49 +41,36 @@ async def lifespan(app: FastAPI):
 # --- App Definition ---
 app = FastAPI(title="NSE Assistant API", lifespan=lifespan)
 
-# Add CORS to allow requests from any frontend
+# Add CORS (Important for frontend to talk to backend)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=["*"], # Allow all for now, restrict in production
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# --- Pydantic Models ---
 class QueryRequest(BaseModel):
     query: str
 
-# --- Endpoints ---
-
 @app.get("/")
 def home():
-    """Health check endpoint."""
-    status = "ready" if nse_engine else "engine_failed"
     return {
-        "status": "running", 
-        "service": "NSE Assistant API", 
-        "engine_status": status
+        "status": "running",
+        "service": "NSE Assistant API",
+        "engine_ready": nse_engine is not None,
+        "backend": "Pinecone"
     }
 
 @app.post("/ask")
 def ask_question(request: QueryRequest):
-    """
-    Main endpoint to query the Knowledge Base.
-    Note: Defined as 'def' (not async) to run in a threadpool 
-    since the engine uses synchronous requests.
-    """
     if not nse_engine:
-        raise HTTPException(status_code=503, detail="Engine not initialized. Check server logs.")
-
+        raise HTTPException(status_code=503, detail="Engine not initialized (Check Keys)")
+        
     try:
-        # The engine returns a generator (stream) and a list of sources
         stream, sources = nse_engine.answer_question(request.query)
         
+        # Consume stream for API response (FastAPI -> Streamlit)
         full_response = ""
-        
-        # Consume the stream to build the full text response for JSON output
-        # (If you wanted a streaming API response, you would use StreamingResponse here instead)
         if hasattr(stream, '__iter__') and not isinstance(stream, str):
             for chunk in stream:
                 if chunk.choices[0].delta.content:
