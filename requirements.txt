@@ -1,9 +1,8 @@
 streamlit
 openai
-chromadb
+pinecone-client
 beautifulsoup4
 requests
-pysqlite3-binary
 tiktoken
 pypdf
 pandas

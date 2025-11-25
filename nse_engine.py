@@ -1,7 +1,7 @@
 import os
 import requests
 from bs4 import BeautifulSoup
-import chromadb
+from pinecone import Pinecone, ServerlessSpec
 from openai import OpenAI
 import uuid
 import urllib3
@@ -15,43 +15,53 @@ import hashlib
 from pypdf import PdfReader
 from urllib.parse import urljoin, urlparse
 from tenacity import retry, stop_after_attempt, wait_fixed
+from rank_bm25 import BM25Okapi
+from collections import defaultdict
 
 # Suppress SSL warnings
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-# --- CONFIGURATION ---
+# Constants
 EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
-MAX_CRAWL_DEPTH = 3
-MAX_PAGES_TO_CRAWL = 300
+MAX_CRAWL_DEPTH = 1
+MAX_PAGES_TO_CRAWL = 50
+PINECONE_INDEX_NAME = "nse-data"
+PINECONE_DIMENSION = 1536  # For text-embedding-3-small
 
 class NSEKnowledgeBase:
-    def __init__(self, openai_api_key):
-        if not openai_api_key:
-            raise ValueError("OpenAI API Key is required")
+    def __init__(self, openai_api_key, pinecone_api_key):
+        if not openai_api_key or not pinecone_api_key:
+            raise ValueError("API Keys are required")
         
         self.api_key = openai_api_key
-        
-        # FIX: Explicitly pass the API key here
         self.client = OpenAI(api_key=self.api_key)
+        self.pc = Pinecone(api_key=pinecone_api_key)
         
-        self.db_path = "./nse_db_pure"
-        self.chroma_client = chromadb.PersistentClient(path=self.db_path)
+        # Check and create index if necessary
+        if PINECONE_INDEX_NAME not in [i.name for i in self.pc.list_indexes()]:
+            self.pc.create_index(
+                name=PINECONE_INDEX_NAME,
+                dimension=PINECONE_DIMENSION,
+                metric="cosine",
+                spec=ServerlessSpec(cloud="aws", region="us-east-1")
+            )
+            
+        self.index = self.pc.Index(PINECONE_INDEX_NAME)
         self.session = requests.Session()
-        
-        try:
-            self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
-        except Exception as e:
-            print(f"DB Init Error (Recoverable): {e}")
-            try:
-                 self.chroma_client.delete_collection("nse_data")
-            except: pass
-            self.collection = self.chroma_client.create_collection(name="nse_data")
 
-    # --- STATIC KNOWLEDGE (The Fact Sheet) ---
+        # Auto-build if empty
+        try:
+            if self.index.describe_index_stats()['total_vector_count'] == 0:
+                print("Index empty. Starting build process...")
+                self.build_knowledge_base()
+        except Exception as e:
+            print(f"Error checking index stats: {e}")
+
     def get_static_facts(self):
+        """Returns the static official fact sheet."""
         return """
-         [OFFICIAL_FACT_SHEET]
+        [OFFICIAL_FACT_SHEET]
         TOPIC: NSE Leadership, Structure & Market Rules
         SOURCE: NSE Official Website / Annual Report 2025
         LAST_VERIFIED: November 2025
@@ -528,108 +538,18 @@ Flexibility: Implement various strategies to profit in different market conditio
 
         Q:How can I start trading options on the NSE?
         A:Open an account with a derivatives licensed trading member (stockbroker or investment bank). The member will provide you with access to the online trading platform.
-        """
+"""
 
-    def has_data(self):
-        try:
-            if self.collection is None: return False
-            return self.collection.count() > 0
-        except:
-            return False
-
-    def get_last_update_time(self):
-        try:
-            if os.path.exists("last_update.txt"):
-                with open("last_update.txt", "r") as f:
-                    return float(f.read().strip())
-        except:
-            return 0.0
-        return 0.0
-
-    def is_data_stale(self):
-        last_update = self.get_last_update_time()
-        if last_update == 0: return True
-        return (time.time() - last_update) > 86400
-
-    def compute_hash(self, text):
-        return hashlib.md5(text.encode('utf-8')).hexdigest()
-
-    @retry(stop=stop_after_attempt(3), wait=wait_fixed(1))
-    def get_embeddings_batch(self, texts):
-        if not texts: return []
-        if len(texts) > 100:
-            results = []
-            for i in range(0, len(texts), 100):
-                batch = texts[i:i+100]
-                results.extend(self.get_embeddings_batch(batch))
-                time.sleep(0.2)
-            return results
-
-        sanitized_texts = [t.replace("\n", " ") for t in texts]
-        try:
-            response = self.client.embeddings.create(input=sanitized_texts, model=EMBEDDING_MODEL)
-            return [data.embedding for data in response.data]
-        except Exception as e:
-            print(f"Embedding Error: {e}")
-            raise e
-
-    def get_embedding(self, text):
-        return self.get_embeddings_batch([text])[0]
-
-    def clean_text_chunk(self, text):
-        text = re.sub(r'\n\s*\n', '\n', text)
-        text = re.sub(r' +', ' ', text)
-        return text.strip()
-
-    def simple_text_splitter(self, text, chunk_size=1200, overlap=200):
-        chunks = []
-        start = 0
-        text_len = len(text)
-        while start < text_len:
-            end = start + chunk_size
-            if end < text_len:
-                last_period = text.rfind('.', start, end)
-                if last_period != -1 and last_period > start + (chunk_size // 2):
-                    end = last_period + 1
-            chunk = text[start:end]
-            chunks.append(chunk)
-            start += chunk_size - overlap
-            if start >= end: start = end
-        return chunks
-
-    def _extract_text_from_pdf(self, pdf_content):
-        try:
-            pdf_file = io.BytesIO(pdf_content)
-            reader = PdfReader(pdf_file)
-            text = ""
-            for page in reader.pages:
-                try:
-                    page_text = page.extract_text(extraction_mode="layout")
-                except:
-                    page_text = page.extract_text()
-                text += page_text + "\n"
-            return text
-        except Exception:
-            return ""
-
-    @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
-    def _fetch_url(self, url):
-        headers = {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Connection': 'keep-alive',
-            'Upgrade-Insecure-Requests': '1',
-        }
-        return self.session.get(url, headers=headers, timeout=20, verify=False)
-
-    def crawl_site(self, seed_urls):
+    def crawl_site(self, seeds):
+        """Crawls the website to find pages and PDFs."""
         visited = set()
-        to_visit = set(seed_urls)
+        to_visit = set(seeds)
         found_content_urls = set()
         found_pdf_urls = set()
         
+        # List of hardcoded PDFs (Truncated list from original code preserved here)
         hardcoded_pdfs = [
-             "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
+           "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-listing-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Groundrules-nse-NSE-BankingSector-share-index_-V1.0.pdf",
             "https://www.nse.co.ke/wp-content/uploads/GroundRules-NSE-Bond-Index-NSE-BI-v2-Index-final-2.pdf",
@@ -688,16 +608,19 @@ Flexibility: Implement various strategies to profit in different market conditio
             if url in visited: continue
             visited.add(url)
             
+            # Simple domain filter
             if "nse.co.ke" not in url and "academy.nse.co.ke" not in url: continue
             
             try:
+                # Check if URL looks like a PDF before fetching
                 if url.lower().endswith(".pdf"):
                     found_pdf_urls.add(url)
                     continue
-
+                
                 response = self._fetch_url(url)
                 if response.status_code != 200: continue
                 
+                # Check content type header
                 if 'application/pdf' in response.headers.get('Content-Type', ''):
                     found_pdf_urls.add(url)
                     continue
@@ -706,16 +629,19 @@ Flexibility: Implement various strategies to profit in different market conditio
                 found_content_urls.add(url)
                 count += 1
                 
+                # Find links
                 for link in soup.find_all('a', href=True):
                     href = link['href']
                     full_url = urljoin(url, href)
+                    
                     if "nse.co.ke" in full_url:
                         if full_url.lower().endswith(".pdf"):
                             found_pdf_urls.add(full_url)
                         elif full_url not in visited and full_url not in to_visit:
-                            if len(to_visit) < 200: 
+                            if len(to_visit) < 200:
                                 to_visit.add(full_url)
-            except:
+            except Exception as e:
+                print(f"Error crawling {url}: {e}")
                 pass
         
         all_pdfs = list(found_pdf_urls.union(set(hardcoded_pdfs)))
@@ -725,6 +651,7 @@ Flexibility: Implement various strategies to profit in different market conditio
         text = ""
         tag = "[GENERAL]"
         
+        # Tagging logic
         if "statistics" in url: tag = "[MARKET_DATA]"
         elif "management" in url or "directors" in url or "leadership" in url: tag = "[LEADERSHIP]"
         elif "contact" in url: tag = "[CONTACT]"
@@ -755,10 +682,12 @@ Flexibility: Implement various strategies to profit in different market conditio
             clean = self.clean_text_chunk(raw_text)
             if len(clean) > 100:
                 text = f"{tag} SOURCE: {url}\nTYPE: Webpage\n\n{clean}"
+                
         return text
 
     def scrape_and_index(self, urls, content_type="html"):
         new_chunks = 0
+        
         def task(url):
             try:
                 response = self._fetch_url(url)
@@ -775,18 +704,26 @@ Flexibility: Implement various strategies to profit in different market conditio
                     if not text: continue
                     
                     chunks = self.simple_text_splitter(text)
+                    if not chunks: continue
+
                     ids = [str(uuid.uuid4()) for _ in chunks]
-                    metadatas = [{"source": url, "date": datetime.date.today().isoformat()} for _ in chunks]
-                    embeddings = self.get_embeddings_batch(chunks)
-                    if embeddings:
-                        self.collection.add(documents=chunks, embeddings=embeddings, metadatas=metadatas, ids=ids)
-                        new_chunks += len(chunks)
+                    metadatas = [{"source": url, "date": datetime.date.today().isoformat(), "text": chunk} for chunk in chunks]
+                    
+                    try:
+                        embeddings = self.get_embeddings_batch(chunks)
+                        if embeddings:
+                            vectors = [{"id": ids[i], "values": embeddings[i], "metadata": metadatas[i]} for i in range(len(chunks))]
+                            self.index.upsert(vectors=vectors, namespace="nse")
+                            new_chunks += len(chunks)
+                    except Exception as e:
+                        print(f"Error indexing chunks for {url}: {e}")
+
         return new_chunks
 
     def build_knowledge_base(self):
-        # 1. Comprehensive Seed List
+        # 1. Comprehensive but Reduced Seed List
         seeds = [
-            "https://www.nse.co.ke/",
+           "https://www.nse.co.ke/",
             "https://www.nse.co.ke/site-map/",
             "https://www.nse.co.ke/home/",
             "https://www.nse.co.ke/about-nse/",
@@ -846,16 +783,16 @@ Flexibility: Implement various strategies to profit in different market conditio
         print("🕷️ Crawling NSE website...")
         discovered_pages, discovered_pdfs = self.crawl_site(seeds)
         all_pages = list(set(discovered_pages))
-        
         print(f"📝 Found {len(all_pages)} pages and {len(discovered_pdfs)} PDFs.")
         
-        # Reset DB (Clean slate to fix 'Collection does not exist' errors)
-        try: self.chroma_client.delete_collection("nse_data")
-        except: pass
-        self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
-        
+        # Clear existing vectors
+        try:
+            self.index.delete(delete_all=True, namespace="nse")
+        except Exception as e:
+            print(f"Warning clearing index: {e}")
+
         chunks_1 = self.scrape_and_index(all_pages, "html")
-        chunks_2 = self.scrape_and_index(discovered_pdfs, "pdf") 
+        chunks_2 = self.scrape_and_index(discovered_pdfs, "pdf")
         
         try:
             with open("last_update.txt", "w") as f: f.write(str(time.time()))
@@ -866,11 +803,11 @@ Flexibility: Implement various strategies to profit in different market conditio
     def generate_context_queries(self, original_query):
         today = datetime.date.today().strftime("%Y-%m-%d")
         prompt = f"""Generate 3 search queries for the NSE database for: "{original_query}"
-        Current Date: {today}
-        1. Keyword match.
-        2. Concept/Definition.
-        3. Document type (e.g. "Daily Report {today}").
-        Output ONLY 3 lines."""
+Current Date: {today}
+1. Keyword match.
+2. Concept/Definition.
+3. Document type (e.g. "Daily Report {today}").
+Output ONLY 3 lines."""
         try:
             response = self.client.chat.completions.create(
                 model=LLM_MODEL, messages=[{"role": "user", "content": prompt}], temperature=0.3
@@ -878,6 +815,38 @@ Flexibility: Implement various strategies to profit in different market conditio
             return [q.strip() for q in response.choices[0].message.content.split('\n') if q.strip()][:3]
         except:
             return [original_query]
+
+    def hybrid_search(self, query, top_k=10):
+        # Semantic search
+        query_embedding = self.get_embeddings_batch([query])[0]
+        semantic_results = self.index.query(
+            namespace="nse",
+            vector=query_embedding,
+            top_k=top_k * 2,
+            include_metadata=True
+        )
+        
+        if not semantic_results['matches']:
+            return []
+
+        # Keyword search with BM25 (Reranking top vector results)
+        docs = [match['metadata']['text'] for match in semantic_results['matches']]
+        if not docs: return []
+        
+        tokenized_docs = [doc.lower().split() for doc in docs]
+        bm25 = BM25Okapi(tokenized_docs)
+        tokenized_query = query.lower().split()
+        bm25_scores = bm25.get_scores(tokenized_query)
+        
+        # Combine scores
+        hybrid_scores = defaultdict(float)
+        for i, match in enumerate(semantic_results['matches']):
+            hybrid_scores[match['id']] = match['score'] * 0.7 + bm25_scores[i] * 0.3
+            
+        # Sort and select top_k
+        sorted_ids = sorted(hybrid_scores, key=hybrid_scores.get, reverse=True)[:top_k]
+        top_results = [(match['metadata']['text'], match['metadata']['source']) for match in semantic_results['matches'] if match['id'] in sorted_ids]
+        return top_results
 
     def hard_rerank(self, results, query):
         scored = []
@@ -896,46 +865,40 @@ Flexibility: Implement various strategies to profit in different market conditio
         # 1. Always start with the Static Facts
         context_text = self.get_static_facts() + "\n\n"
         visible_sources = []
-
+        
         try:
-            # 2. Try Database Retrieval (Fail-safe)
-            if self.collection is not None:
-                search_queries = self.generate_context_queries(query)
-                query_embeddings = self.get_embeddings_batch(search_queries)
-                results = self.collection.query(query_embeddings=query_embeddings, n_results=10)
+            # 2. Hybrid Retrieval
+            search_queries = self.generate_context_queries(query)
+            raw_docs = []
+            raw_sources = []
+            
+            for q in search_queries:
+                results = self.hybrid_search(q, top_k=5)
+                for doc, source in results:
+                    raw_docs.append(doc)
+                    raw_sources.append(source)
+                    
+            # De-dupe and re-rank
+            unique_results = list(dict.fromkeys(zip(raw_docs, raw_sources))) 
+            top_results = self.hard_rerank(unique_results, query)
+            
+            for doc, source in top_results[:5]:
+                context_text += f"\n[Source: {source}]\n{doc}\n---"
+                if source not in visible_sources: visible_sources.append(source)
                 
-                raw_docs = []
-                raw_sources = []
-                if results['documents']:
-                    for i, doc_list in enumerate(results['documents']):
-                        meta_list = results['metadatas'][i]
-                        for j, text in enumerate(doc_list):
-                            raw_docs.append(text)
-                            raw_sources.append(meta_list[j]['source'])
-                
-                # Re-rank results
-                top_results = self.hard_rerank(zip(raw_docs, raw_sources), query)
-                
-                for doc, source in top_results[:5]: 
-                    context_text += f"\n[Source: {source}]\n{doc}\n---"
-                    if source not in visible_sources: visible_sources.append(source)
         except Exception as e:
             print(f"Retrieval Failed (Using Fact Sheet only): {e}")
-            # Even if DB fails, we continue with just the static facts!
 
         today = datetime.date.today().strftime("%Y-%m-%d")
-        
         system_prompt = f"""You are the NSE Digital Assistant.
+MANDATORY RULES:
+1. Fact Sheet: Use the [OFFICIAL_FACT_SHEET] at the start of context for CEO, Location, and Hours.
+2. FAQ Authority: If context contains [OFFICIAL_FAQ], use it exactly.
+3. Fallback: If the answer is not in the context, say "I cannot find that specific information in my current database, but here are the general contact details..." and provide the static contact info.
 
-        MANDATORY RULES:
-        1. **Fact Sheet:** Use the [OFFICIAL_FACT_SHEET] at the start of context for CEO, Location, and Hours.
-        2. **FAQ Authority:** If context contains [OFFICIAL_FAQ], use it exactly.
-        3. **Fallback:** If the answer is not in the context, say "I cannot find that specific information in my current database, but here are the general contact details..." and provide the static contact info.
-        
-        TODAY: {today}
-        
-        CONTEXT:
-        {context_text}"""
+TODAY: {today}
+CONTEXT:
+{context_text}"""
 
         stream = self.client.chat.completions.create(
             model=LLM_MODEL,
@@ -944,3 +907,43 @@ Flexibility: Implement various strategies to profit in different market conditio
             stream=True
         )
         return stream, visible_sources
+
+    # Helper methods
+    @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
+    def _fetch_url(self, url):
+        return self.session.get(url, verify=False, timeout=10)
+
+    def _extract_text_from_pdf(self, pdf_bytes):
+        try:
+            reader = PdfReader(io.BytesIO(pdf_bytes))
+            text = ""
+            for page in reader.pages:
+                text += page.extract_text() or ""
+            return text
+        except:
+            return ""
+
+    def clean_text_chunk(self, text):
+        text = re.sub(r'\s+', ' ', text)
+        text = re.sub(r'[^\x00-\x7F]+', ' ', text)
+        return text.strip()
+
+    def simple_text_splitter(self, text, chunk_size=1000, overlap=200):
+        chunks = []
+        start = 0
+        while start < len(text):
+            end = min(start + chunk_size, len(text))
+            chunks.append(text[start:end])
+            start = end - overlap
+        return chunks
+
+    def get_embeddings_batch(self, texts, batch_size=32):
+        embeddings = []
+        for i in range(0, len(texts), batch_size):
+            batch = texts[i:i+batch_size]
+            try:
+                response = self.client.embeddings.create(input=batch, model=EMBEDDING_MODEL)
+                embeddings.extend([e.embedding for e in response.data])
+            except Exception as e:
+                print(f"Embedding error: {e}")
+        return embeddings
