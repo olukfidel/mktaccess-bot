@@ -31,7 +31,9 @@ class NSEKnowledgeBase:
             raise ValueError("OpenAI API Key is required")
         
         self.api_key = openai_api_key
-        self.client = OpenAI(api_key=openai_api_key)
+        
+        # FIX: Explicitly pass the API key here
+        self.client = OpenAI(api_key=self.api_key)
         
         self.db_path = "./nse_db_pure"
         self.chroma_client = chromadb.PersistentClient(path=self.db_path)
@@ -41,12 +43,15 @@ class NSEKnowledgeBase:
             self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
         except Exception as e:
             print(f"DB Init Error (Recoverable): {e}")
-            self.collection = None
+            try:
+                 self.chroma_client.delete_collection("nse_data")
+            except: pass
+            self.collection = self.chroma_client.create_collection(name="nse_data")
 
     # --- STATIC KNOWLEDGE (The Fact Sheet) ---
     def get_static_facts(self):
         return """
-        [OFFICIAL_FACT_SHEET]
+         [OFFICIAL_FACT_SHEET]
         TOPIC: NSE Leadership, Structure & Market Rules
         SOURCE: NSE Official Website / Annual Report 2025
         LAST_VERIFIED: November 2025
@@ -623,7 +628,6 @@ Flexibility: Implement various strategies to profit in different market conditio
         found_content_urls = set()
         found_pdf_urls = set()
         
-        # HARDCODED PDFS
         hardcoded_pdfs = [
              "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-listing-rules.pdf",
@@ -727,6 +731,17 @@ Flexibility: Implement various strategies to profit in different market conditio
         elif "rules" in url: tag = "[REGULATION]"
         elif "news" in url: tag = "[NEWS]"
         elif "faq" in url: tag = "[OFFICIAL_FAQ]"
+        elif "guidelines" in url: tag = "[GUIDELINES]"
+        elif "corporate-actions" in url: tag = "[CORPORATE_ACTION]"
+        elif "listed-companies" in url: tag = "[COMPANY_DATA]"
+        elif "investor-calendar" in url: tag = "[CALENDAR]"
+        elif "derivatives" in url: tag = "[DERIVATIVES]"
+        elif "csr" in url: tag = "[CSR]"
+        elif "press-releases" in url: tag = "[PRESS_RELEASE]"
+        elif "publications" in url: tag = "[PUBLICATION]"
+        elif "trading-participant" in url: tag = "[TRADING_PARTICIPANT]"
+        elif "bbo" in url or "back-office" in url: tag = "[TECHNICAL_STANDARDS]"
+        elif "circular" in url: tag = "[CIRCULAR]"
 
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
@@ -825,7 +840,7 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/dataservices/end-of-day-data/",
             "https://www.nse.co.ke/dataservices/historical-data/",
             "https://www.nse.co.ke/dataservices/historical-data-request-form/",
-            "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/"  
+            "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/"
         ]
         
         print("🕷️ Crawling NSE website...")
