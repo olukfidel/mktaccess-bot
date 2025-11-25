@@ -22,7 +22,6 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 # --- CONFIGURATION ---
 EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
-# OPTIMIZED FOR DEEPER SEARCH AS DISCUSSED
 MAX_CRAWL_DEPTH = 3
 MAX_PAGES_TO_CRAWL = 300
 
@@ -35,25 +34,24 @@ class NSEKnowledgeBase:
         self.client = OpenAI(api_key=openai_api_key)
         
         self.db_path = "./nse_db_pure"
-        self.chroma_client = chromadb.PersistentClient(path=self.db_path)
         
-        # Persistent session for faster crawling
-        self.session = requests.Session()
-        
+        # Initialize ChromaDB with error handling
         try:
-            # Try to get or create - this handles the "Collection does not exist" error
-            self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
-        except Exception as e:
-            print(f"DB Init Error (Recoverable): {e}")
-            # Fallback: try creating it again or just set to None and let build_knowledge_base handle it
+            self.chroma_client = chromadb.PersistentClient(path=self.db_path)
+            # Force create if get fails
             try:
-                self.collection = self.chroma_client.create_collection(name="nse_data")
+                self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
             except:
-                self.collection = None
+                self.collection = self.chroma_client.create_collection(name="nse_data")
+        except Exception as e:
+            print(f"CRITICAL DB ERROR: {e}")
+            self.collection = None # Graceful degradation
+        
+        self.session = requests.Session()
 
-    # --- STATIC KNOWLEDGE (The Fact Sheet) ---
+    # --- STATIC KNOWLEDGE (Ground Truth) ---
     def get_static_facts(self):
-        """Returns hardcoded facts that must always be true."""
+        """Hardcoded facts that serve as a fallback/priority source."""
         return """
        [OFFICIAL_FACT_SHEET]
         TOPIC: NSE Leadership, Structure & Market Rules
@@ -532,7 +530,6 @@ Flexibility: Implement various strategies to profit in different market conditio
 
         Q:How can I start trading options on the NSE?
         A:Open an account with a derivatives licensed trading member (stockbroker or investment bank). The member will provide you with access to the online trading platform.
-
         """
 
     def has_data(self):
@@ -622,7 +619,6 @@ Flexibility: Implement various strategies to profit in different market conditio
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Language': 'en-US,en;q=0.5',
             'Connection': 'keep-alive',
             'Upgrade-Insecure-Requests': '1',
         }
@@ -634,7 +630,7 @@ Flexibility: Implement various strategies to profit in different market conditio
         found_content_urls = set()
         found_pdf_urls = set()
         
-        # HARDCODED PDFS (Ensure these are always indexed)
+        # Ensure your specific PDFs are here
         hardcoded_pdfs = [
             "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-listing-rules.pdf",
@@ -682,16 +678,21 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/wp-content/uploads/Press-Release-Nairobi-Securities-Exchange-Plc-Appoints-Sterling-Capital-Limited-as-a-market-maker-in-the-NEXT-Derivatives-Market.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Press-Release-Nairobi-Securities-Exchange-Plc-Launches-Banking-Sector-Index.pdf",
             "https://www.nse.co.ke/wp-content/uploads/broker-back-office-prequalified-vendors.pdf",
-            "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/derivatives-document-1.pdf",
+            "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/derivatives-document-1.pdf"
         ]
         
         count = 0
         while to_visit and count < MAX_PAGES_TO_CRAWL:
-            url = to_visit.pop()
+            try:
+                url = to_visit.pop()
+            except KeyError:
+                break
+                
             if url in visited: continue
             visited.add(url)
             
-            if "nse.co.ke" not in url: continue
+            # Skip external sites
+            if "nse.co.ke" not in url and "academy.nse.co.ke" not in url: continue
             
             try:
                 if url.lower().endswith(".pdf"):
@@ -716,7 +717,7 @@ Flexibility: Implement various strategies to profit in different market conditio
                         if full_url.lower().endswith(".pdf"):
                             found_pdf_urls.add(full_url)
                         elif full_url not in visited and full_url not in to_visit:
-                            if len(to_visit) < 200: # Limited queue
+                            if len(to_visit) < 200: 
                                 to_visit.add(full_url)
             except:
                 pass
@@ -727,45 +728,13 @@ Flexibility: Implement various strategies to profit in different market conditio
     def _process_content(self, url, content_type, content_bytes):
         text = ""
         tag = "[GENERAL]"
-        # Auto-tagging
+        
         if "statistics" in url: tag = "[MARKET_DATA]"
         elif "management" in url or "directors" in url or "leadership" in url: tag = "[LEADERSHIP]"
         elif "contact" in url: tag = "[CONTACT]"
         elif "rules" in url: tag = "[REGULATION]"
         elif "news" in url: tag = "[NEWS]"
-        elif "calendar" in url: tag = "[CALENDAR]"
-        elif "financial" in url or "result" in url: tag = "[FINANCIALS]"
-        elif "training" in url or "masterclass" in url or "academy" in url: tag = "[EDUCATION]"
-        elif "market-segment" in url or "ibuka" in url or "usp" in url: tag = "[MARKET_SEGMENT]"
-        elif "products" in url or "bonds" in url or "funds" in url or "trusts" in url or "m-akiba" in url: tag = "[PRODUCT]"
-        elif "careers" in url: tag = "[CAREERS]"
-        elif "tenders" in url: tag = "[TENDERS]"
-        elif "privacy" in url or "cookies" in url: tag = "[LEGAL]"
-        elif "about-nse" in url or "story" in url or "vision" in url: tag = "[ABOUT]"
-        elif "trading" in url: tag = "[TRADING]"
-        elif "announcement" in url: tag = "[ANNOUNCEMENT]"
-        elif "forum" in url: tag = "[EVENT]"
-        elif "price-list" in url or "pricelist" in url: tag = "[DATA_PRICING]"
-        elif "historical" in url: tag = "[HISTORICAL_DATA]"
-        elif "isin" in url: tag = "[ISIN_DATA]"
-        elif "real-time" in url: tag = "[REALTIME_DATA]"
-        elif "end-of-day" in url: tag = "[EOD_DATA]"
-        elif "specification" in url or "api" in url: tag = "[API_DOCS]"
-        elif "sustainability" in url: tag = "[SUSTAINABILITY]"
-        elif "login" in url: tag = "[LOGIN]"
-        elif "cart" in url: tag = "[CART]"
-        elif "advisors" in url: tag = "[ADVISORS]"
-        elif "guidelines" in url: tag = "[GUIDELINES]"
-        elif "corporate-actions" in url: tag = "[CORPORATE_ACTION]"
-        elif "circulars" in url: tag = "[CIRCULAR]"
-        elif "listed-companies" in url: tag = "[COMPANY_DATA]"
-        elif "investor-calendar" in url: tag = "[CALENDAR]"
-        elif "derivatives" in url: tag = "[DERIVATIVES]"
-        elif "csr" in url: tag = "[CSR]"
-        elif "e-digest" in url: tag = "[DIGEST]"
-        elif "press-releases" in url: tag = "[PRESS_RELEASE]"
-        elif "publications" in url: tag = "[PUBLICATION]"
-        elif "strategy" in url: tag = "[STRATEGY]"
+        elif "faq" in url: tag = "[OFFICIAL_FAQ]"
 
         if content_type == "pdf":
             raw_text = self._extract_text_from_pdf(content_bytes)
@@ -773,7 +742,7 @@ Flexibility: Implement various strategies to profit in different market conditio
                 text = f"{tag} SOURCE: {url}\nTYPE: OFFICIAL REPORT (PDF)\n\n" + self.clean_text_chunk(raw_text)
         else:
             soup = BeautifulSoup(content_bytes, 'html.parser')
-            for item in soup(["script", "style", "nav", "footer", "header", "aside"]):
+            for item in soup(["script", "style", "nav", "footer", "header"]):
                 item.decompose()
             raw_text = soup.get_text(separator="\n")
             clean = self.clean_text_chunk(raw_text)
@@ -808,9 +777,8 @@ Flexibility: Implement various strategies to profit in different market conditio
         return new_chunks
 
     def build_knowledge_base(self):
-        # 1. Comprehensive Seed List
-        seeds = [
-             "https://www.nse.co.ke/",
+        # Your seed list here (abbreviated for clarity, but keep your full list)
+        seeds = ["https://www.nse.co.ke/",
             "https://www.nse.co.ke/site-map/",
             "https://www.nse.co.ke/home/",
             "https://www.nse.co.ke/about-nse/",
@@ -865,7 +833,7 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/dataservices/historical-data/",
             "https://www.nse.co.ke/dataservices/historical-data-request-form/",
             "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/"  
-        ]
+            ]
         
         print("🕷️ Crawling NSE website...")
         discovered_pages, discovered_pdfs = self.crawl_site(seeds)
@@ -873,7 +841,7 @@ Flexibility: Implement various strategies to profit in different market conditio
         
         print(f"📝 Found {len(all_pages)} pages and {len(discovered_pdfs)} PDFs.")
         
-        # Reset DB (Clean slate to fix 'Collection does not exist' errors)
+        # SAFETY: Reset DB to clear corruption
         try: self.chroma_client.delete_collection("nse_data")
         except: pass
         self.collection = self.chroma_client.get_or_create_collection(name="nse_data")
@@ -891,9 +859,6 @@ Flexibility: Implement various strategies to profit in different market conditio
         today = datetime.date.today().strftime("%Y-%m-%d")
         prompt = f"""Generate 3 search queries for the NSE database for: "{original_query}"
         Current Date: {today}
-        1. Keyword match.
-        2. Concept/Definition.
-        3. Document type (e.g. "Daily Report {today}").
         Output ONLY 3 lines."""
         try:
             response = self.client.chat.completions.create(
@@ -903,115 +868,68 @@ Flexibility: Implement various strategies to profit in different market conditio
         except:
             return [original_query]
 
-    def llm_rerank(self, query, documents, sources):
-        if not documents: return []
-        candidates = ""
-        for i, doc in enumerate(documents):
-            candidates += f"\n--- DOC {i} ---\nSource: {sources[i]}\nContent: {doc[:300]}...\n"
-        
-        prompt = f"""Rank these documents by relevance to: "{query}".
-        Return IDs of top 5 documents (e.g. 0, 3, 1).
-        Documents: {candidates}"""
-        
-        try:
-            response = self.client.chat.completions.create(
-                model=LLM_MODEL, messages=[{"role": "user", "content": prompt}], temperature=0
-            )
-            indices = [int(x) for x in re.findall(r'\d+', response.choices[0].message.content)]
-            reranked = []
-            for idx in indices:
-                if idx < len(documents): reranked.append((documents[idx], sources[idx]))
-            return reranked
-        except:
-            return list(zip(documents, sources))
-
     def hard_rerank(self, results, query):
-        """
-        Force-rank FAQs to the top if the user asks a general question.
-        """
         scored = []
         query_lower = query.lower()
         for doc, source in results:
             score = 0
-            # 1. Base Relevance (already filtered by vector search)
-            
-            # 2. FAQ Priority Rule
-            if "[OFFICIAL_FAQ]" in doc or "faq" in source.lower():
-                score += 100  # Massive boost for FAQs
-            
-            # 3. Fact Sheet Priority
-            if "[OFFICIAL_FACT_SHEET]" in doc:
-                score += 200
-                
+            if "[OFFICIAL_FAQ]" in doc or "faq" in source.lower(): score += 100
+            if "[OFFICIAL_FACT_SHEET]" in doc: score += 200
+            if any(w in query_lower for w in source.lower().split("/")): score += 50
             scored.append((score, doc, source))
         
-        # Sort descending
         scored.sort(key=lambda x: x[0], reverse=True)
         return [(doc, source) for _, doc, source in scored]
 
     def answer_question(self, query):
+        # 1. Always start with the Static Facts
+        context_text = self.get_static_facts() + "\n\n"
+        visible_sources = []
+
         try:
-            # Auto-heal if collection is missing
-            if self.collection is None:
-                 return "System is initializing the knowledge base. Please wait 2 minutes and try again.", []
-
-            search_queries = self.generate_context_queries(query)
-            query_embeddings = self.get_embeddings_batch(search_queries)
-            results = self.collection.query(query_embeddings=query_embeddings, n_results=15)
-            
-            raw_docs = []
-            raw_sources = []
-            seen = set()
-            for i, doc_list in enumerate(results['documents']):
-                meta_list = results['metadatas'][i]
-                for j, text in enumerate(doc_list):
-                    if text and text not in seen:
-                        seen.add(text)
-                        raw_docs.append(text)
-                        raw_sources.append(meta_list[j]['source'])
-            
-            if not raw_docs: return "I couldn't find that information in my NSE database.", []
-
-            # 1. Hard Rerank (Boost FAQs/Fact Sheet)
-            top_results = self.hard_rerank(zip(raw_docs, raw_sources), query)
-            
-            # 2. LLM Refinement (Optional second pass, but hard rerank usually enough for FAQs)
-            # top_results = self.llm_rerank(query, [d[0] for d in top_results], [d[1] for d in top_results])
-
-            context_text = self.get_static_facts() + "\n\n" # Always inject Fact Sheet
-            visible_sources = []
-            for doc, source in top_results[:5]: 
-                context_text += f"\n[Source: {source}]\n{doc}\n---"
-                if source not in visible_sources: visible_sources.append(source)
-
-            today = datetime.date.today().strftime("%Y-%m-%d")
-            
-            system_prompt = f"""You are the NSE Digital Assistant.
-
-            MANDATORY CONTEXT INTERPRETATION:
-            You must treat the user's query as if it ends with "...in the context of the Nairobi Securities Exchange (NSE)".
-            
-            POWER RULES:
-            1. **FAQ Authority:** If the context contains text tagged [OFFICIAL_FAQ], that is the GROUND TRUTH. Answer using that information exactly as stated.
-            2. **URL Relevance:** Documents where the Source URL matches the user's keywords are likely the most correct.
-            3. **Financial Responsibility:** NEVER provide investment advice (Buy/Sell/Hold).
-            4. **Tabular Data:** If the query asks for financial performance, format as a Markdown Table.
-            5. **Fact Sheet Priority:** Use the [OFFICIAL_FACT_SHEET] for Leadership/Hours/Market Structure.
-            
-            TODAY'S DATE: {today}
-            
-            CONTEXT:
-            {context_text}"""
-
-            stream = self.client.chat.completions.create(
-                model=LLM_MODEL,
-                messages=[
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": query}
-                ],
-                temperature=0,
-                stream=True
-            )
-            return stream, visible_sources
+            # 2. Try Database Retrieval (Fail-safe)
+            if self.collection is not None:
+                search_queries = self.generate_context_queries(query)
+                query_embeddings = self.get_embeddings_batch(search_queries)
+                results = self.collection.query(query_embeddings=query_embeddings, n_results=10)
+                
+                raw_docs = []
+                raw_sources = []
+                if results['documents']:
+                    for i, doc_list in enumerate(results['documents']):
+                        meta_list = results['metadatas'][i]
+                        for j, text in enumerate(doc_list):
+                            raw_docs.append(text)
+                            raw_sources.append(meta_list[j]['source'])
+                
+                # Re-rank results
+                top_results = self.hard_rerank(zip(raw_docs, raw_sources), query)
+                
+                for doc, source in top_results[:5]: 
+                    context_text += f"\n[Source: {source}]\n{doc}\n---"
+                    if source not in visible_sources: visible_sources.append(source)
         except Exception as e:
-            return f"Error: {str(e)}", []
+            print(f"Retrieval Failed (Using Fact Sheet only): {e}")
+            # Even if DB fails, we continue with just the static facts!
+
+        today = datetime.date.today().strftime("%Y-%m-%d")
+        
+        system_prompt = f"""You are the NSE Digital Assistant.
+
+        MANDATORY RULES:
+        1. **Fact Sheet:** Use the [OFFICIAL_FACT_SHEET] at the start of context for CEO, Location, and Hours.
+        2. **FAQ Authority:** If context contains [OFFICIAL_FAQ], use it exactly.
+        3. **Fallback:** If the answer is not in the context, say "I cannot find that specific information in my current database, but here are the general contact details..." and provide the static contact info.
+        
+        TODAY: {today}
+        
+        CONTEXT:
+        {context_text}"""
+
+        stream = self.client.chat.completions.create(
+            model=LLM_MODEL,
+            messages=[{"role": "system", "content": system_prompt}, {"role": "user", "content": query}],
+            temperature=0,
+            stream=True
+        )
+        return stream, visible_sources
