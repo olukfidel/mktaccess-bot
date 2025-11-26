@@ -1,7 +1,12 @@
 # --- CRITICAL FIX FOR STREAMLIT CLOUD ---
-__import__('pysqlite3')
-import sys
-sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+# This swaps the system sqlite3 with the newer pysqlite3-binary
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    # Fallback if pysqlite3 isn't installed (e.g., local Windows dev)
+    pass
 # ----------------------------------------
 
 import streamlit as st
@@ -9,7 +14,6 @@ import requests
 import time
 import base64
 import os
-import threading
 
 # --- CONFIGURATION ---
 st.set_page_config(page_title="NSE Digital Assistant", page_icon="https://i.postimg.cc/NF1qzmFV/nse_small_logo.png", layout="centered")
@@ -29,42 +33,6 @@ logo_base64 = get_base64_of_bin_file("logo.webp")
 if "theme" not in st.session_state:
     st.session_state.theme = "light"
 
-# --- SILENT AUTHENTICATION ---
-# Try to get key from secrets. If not there, show error (but don't ask user).
-if "OPENAI_API_KEY" in st.secrets:
-    # We don't need to do anything with it here if using the API backend,
-    # but it's good practice to check it exists.
-    pass 
-else:
-    st.error("System Configuration Error: API Key missing in secrets.")
-    st.stop()
-
-# --- API CONFIGURATION ---
-# Get URL from secrets or default to local for testing
-API_URL = st.secrets.get("API_URL", "http://localhost:8000")
-
-# --- BACKGROUND SCRAPER ---
-# This runs ONCE when the app script first executes, but outside the Streamlit reruns
-if "startup_scrape_triggered" not in st.session_state:
-    st.session_state.startup_scrape_triggered = True
-    
-    def silent_refresh():
-        """Calls the backend refresh endpoint without blocking the UI."""
-        try:
-            # We add a small delay to ensure backend is ready if it's a cold start
-            time.sleep(2) 
-            requests.post(f"{API_URL}/refresh", timeout=1) # Short timeout, we don't wait for result
-        except:
-            pass # Fail silently if backend is unreachable (user will see error on chat attempt)
-
-    # Launch the thread
-    t = threading.Thread(target=silent_refresh)
-    t.start()
-    
-    # Optional: Show a small toast to the first user
-    st.toast("System initializing... syncing market data.", icon="🔄")
-
-
 # --- TOGGLE BUTTON IN SIDEBAR ---
 with st.sidebar:
     st.image("https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", width=100) 
@@ -74,10 +42,6 @@ with st.sidebar:
         else:
             st.session_state.theme = "light"
         st.rerun()
-        
-    # We keep this manual button hidden or small for admins, or remove it entirely
-    # st.markdown("---")
-    # if st.button("Force Refresh"): ...
 
 # --- DYNAMIC CSS (THEME AWARE) ---
 if st.session_state.theme == "light":
@@ -169,18 +133,25 @@ st.markdown(f"""
 st.markdown('<div class="main-header">Nairobi Securities Exchange</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">Digital Assistant & Market Intelligence</div>', unsafe_allow_html=True)
 
+# --- AUTHENTICATION ---
+# We rely on the backend having the keys. The frontend just needs the API URL.
+# Check if API_URL is set
+if "API_URL" not in st.secrets:
+    st.warning("API_URL not found in secrets. Defaulting to localhost for testing.")
+
 # --- API CONNECTION FUNCTION ---
 def query_api(user_query):
+    api_url = st.secrets.get("API_URL", "http://localhost:8000")
     try:
         response = requests.post(
-            f"{API_URL}/ask", 
+            f"{api_url}/ask", 
             json={"query": user_query},
             timeout=60
         )
         response.raise_for_status()
         return response.json()
     except requests.exceptions.ConnectionError:
-        return {"error": "Unable to connect to the NSE Engine. The backend might be offline or waking up."}
+        return {"error": "Backend unavailable. Please check connection."}
     except Exception as e:
         return {"error": f"System Error: {str(e)}"}
 
@@ -210,9 +181,8 @@ if prompt := st.chat_input("Ask about the market..."):
                 
                 full_response = answer
                 if sources:
-                    source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke').split('/')[-1]}]({s})" for s in sources])
-                    st.markdown(full_response + source_text)
-                    st.session_state.messages.append({"role": "assistant", "content": full_response + source_text})
-                else:
-                    st.markdown(full_response)
-                    st.session_state.messages.append({"role": "assistant", "content": full_response})
+                    source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.get('title', s.get('url', 'Link')).replace('https://www.nse.co.ke', 'nse.co.ke')}]({s.get('url', s)})" if isinstance(s, dict) else f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke')}]({s})" for s in sources])
+                    full_response += source_text
+                
+                st.markdown(full_response)
+                st.session_state.messages.append({"role": "assistant", "content": full_response})
