@@ -1,6 +1,7 @@
-streamlit
+fastapi
+uvicorn[standard]
 openai
-pinecone
+pinecone>=3.0.0
 beautifulsoup4
 requests
 tiktoken
@@ -9,7 +10,4 @@ pandas
 tenacity
 pdfplumber
 rank_bm25
-fastapi
-uvicorn
-redis
 python-multipart

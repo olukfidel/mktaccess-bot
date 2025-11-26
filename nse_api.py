@@ -1,6 +1,7 @@
 import uvicorn
 import os
 import logging
+import traceback
 from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
@@ -31,20 +32,19 @@ async def lifespan(app: FastAPI):
             logger.info("NSE Engine Initialized Successfully.")
         except Exception as e:
             logger.error(f"Failed to initialize engine: {e}")
+            logger.error(traceback.format_exc())
     else:
-        logger.warning("CRITICAL: API keys not found in environment variables.")
+        logger.warning("CRITICAL: API keys not found in environment variables. Queries will fail.")
     
     yield
-    # Cleanup code (if needed) goes here
     logger.info("Shutting down NSE API.")
 
 # --- App Definition ---
 app = FastAPI(title="NSE Assistant API", lifespan=lifespan)
 
-# Add CORS (Important for frontend to talk to backend)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # Allow all for now, restrict in production
+    allow_origins=["*"], 
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -64,19 +64,17 @@ def home():
 @app.post("/ask")
 def ask_question(request: QueryRequest):
     if not nse_engine:
-        raise HTTPException(status_code=503, detail="Engine not initialized (Check Keys)")
+        raise HTTPException(status_code=503, detail="Engine not initialized (Check server logs)")
         
     try:
         stream, sources = nse_engine.answer_question(request.query)
         
-        # Consume stream for API response (FastAPI -> Streamlit)
         full_response = ""
         if hasattr(stream, '__iter__') and not isinstance(stream, str):
             for chunk in stream:
                 if chunk.choices[0].delta.content:
                     full_response += chunk.choices[0].delta.content
         else:
-            # Fallback if the engine returns a string directly
             full_response = str(stream)
 
         return {
@@ -86,11 +84,11 @@ def ask_question(request: QueryRequest):
 
     except Exception as e:
         logger.error(f"Error processing query: {e}")
+        logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/refresh")
 def trigger_refresh(background_tasks: BackgroundTasks):
-    """Triggers a background crawl and re-index of the NSE data."""
     if not nse_engine:
         raise HTTPException(status_code=503, detail="Engine not initialized")
 
@@ -101,13 +99,11 @@ def trigger_refresh(background_tasks: BackgroundTasks):
             logger.info(f"Refresh complete: {msg}")
         except Exception as e:
             logger.error(f"Refresh failed: {e}")
+            logger.error(traceback.format_exc())
 
-    # Add the task to run in the background after returning the response
     background_tasks.add_task(run_update_task)
-    
     return {"message": "Knowledge base refresh started in background."}
 
-# --- Entry Point ---
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)

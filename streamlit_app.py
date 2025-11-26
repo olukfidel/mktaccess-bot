@@ -5,7 +5,7 @@ import base64
 import os
 
 # --- CONFIGURATION ---
-st.set_page_config(page_title="NSE Digital Assistant", page_icon="https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", layout="centered")
+st.set_page_config(page_title="NSE Digital Assistant", page_icon="📈", layout="centered")
 
 # --- HELPER: LOAD IMAGE AS BASE64 ---
 def get_base64_of_bin_file(bin_file):
@@ -31,6 +31,19 @@ with st.sidebar:
         else:
             st.session_state.theme = "light"
         st.rerun()
+        
+    st.markdown("---")
+    if st.button("⚠️ Rebuild Database"):
+         # Call backend refresh
+         api_url = st.secrets.get("API_URL", "http://localhost:8000")
+         try:
+             res = requests.post(f"{api_url}/refresh", timeout=5)
+             if res.status_code == 200:
+                 st.success("Refresh triggered on backend.")
+             else:
+                 st.error(f"Failed: {res.status_code}")
+         except Exception as e:
+             st.error(f"Connection error: {e}")
 
 # --- DYNAMIC CSS (THEME AWARE) ---
 if st.session_state.theme == "light":
@@ -59,7 +72,7 @@ st.markdown(f"""
         color: {text_color} !important; 
     }}
     .stApp {{
-        background-image: url("https://i.postimg.cc/vBh5LSLT/logo.webp");
+        background-image: url("data:image/webp;base64,{logo_base64}");
         background-size: 50%;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -122,22 +135,28 @@ st.markdown(f"""
 st.markdown('<div class="main-header">Nairobi Securities Exchange</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-header">Digital Assistant & Market Intelligence</div>', unsafe_allow_html=True)
 
+# --- AUTHENTICATION ---
+if "OPENAI_API_KEY" in st.secrets:
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
+else:
+    openai_api_key = st.text_input("OpenAI API Key", type="password")
+
+if not openai_api_key:
+    st.stop()
+
 # --- API CONNECTION FUNCTION ---
 def query_api(user_query):
-    # Get URL from secrets or default to local for testing
-    # In production, set API_URL in Streamlit secrets
     api_url = st.secrets.get("API_URL", "http://localhost:8000")
-    
     try:
         response = requests.post(
             f"{api_url}/ask", 
             json={"query": user_query},
-            timeout=60 # Wait up to 60s for the answer
+            timeout=60
         )
         response.raise_for_status()
         return response.json()
     except requests.exceptions.ConnectionError:
-        return {"error": "Unable to connect to the NSE Engine. The backend might be offline or waking up."}
+        return {"error": "Backend unavailable. Please check connection."}
     except Exception as e:
         return {"error": f"System Error: {str(e)}"}
 
@@ -165,10 +184,9 @@ if prompt := st.chat_input("Ask about the market..."):
                 answer = result.get("answer", "No response.")
                 sources = result.get("sources", [])
                 
-                # Format Response
                 full_response = answer
                 if sources:
-                    source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.get('title', s.get('url', 'Link')).replace('https://www.nse.co.ke', 'nse.co.ke')}]({s.get('url', s)})" if isinstance(s, dict) else f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke')}]({s})" for s in sources])
+                    source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke').split('/')[-1]}]({s})" for s in sources])
                     full_response += source_text
                 
                 st.markdown(full_response)

@@ -25,9 +25,9 @@ urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 EMBEDDING_MODEL = "text-embedding-3-small"
 LLM_MODEL = "gpt-4o-mini"
 MAX_CRAWL_DEPTH = 3
-MAX_PAGES_TO_CRAWL = 1200
+MAX_PAGES_TO_CRAWL = 1000
 PINECONE_INDEX_NAME = "nse-data"
-PINECONE_DIMENSION = 1536
+PINECONE_DIMENSION = 1536  # For text-embedding-3-small
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key, pinecone_api_key):
@@ -42,13 +42,16 @@ class NSEKnowledgeBase:
         existing_indexes = [i.name for i in self.pc.list_indexes()]
         if PINECONE_INDEX_NAME not in existing_indexes:
             print(f"Creating Pinecone Index: {PINECONE_INDEX_NAME}...")
-            self.pc.create_index(
-                name=PINECONE_INDEX_NAME,
-                dimension=PINECONE_DIMENSION,
-                metric="cosine",
-                spec=ServerlessSpec(cloud="aws", region="us-east-1")
-            )
-            time.sleep(10) # Wait for init
+            try:
+                self.pc.create_index(
+                    name=PINECONE_INDEX_NAME,
+                    dimension=PINECONE_DIMENSION,
+                    metric="cosine",
+                    spec=ServerlessSpec(cloud="aws", region="us-east-1")
+                )
+                time.sleep(10) # Wait for init
+            except Exception as e:
+                print(f"Index creation warning (might already exist): {e}")
             
         self.index = self.pc.Index(PINECONE_INDEX_NAME)
         self.session = requests.Session()
@@ -533,7 +536,6 @@ Flexibility: Implement various strategies to profit in different market conditio
 
         Q:How can I start trading options on the NSE?
         A:Open an account with a derivatives licensed trading member (stockbroker or investment bank). The member will provide you with access to the online trading platform.
-
         """
 
     # --- VECTOR OPERATIONS ---
@@ -541,11 +543,17 @@ Flexibility: Implement various strategies to profit in different market conditio
     def get_embeddings_batch(self, texts):
         if not texts: return []
         sanitized = [t.replace("\n", " ") for t in texts]
-        res = self.client.embeddings.create(input=sanitized, model=EMBEDDING_MODEL)
-        return [d.embedding for d in res.data]
+        try:
+            res = self.client.embeddings.create(input=sanitized, model=EMBEDDING_MODEL)
+            return [d.embedding for d in res.data]
+        except Exception as e:
+            print(f"Embedding failed: {e}")
+            return []
 
     def get_embedding(self, text):
-        return self.get_embeddings_batch([text])[0]
+        res = self.get_embeddings_batch([text])
+        if res: return res[0]
+        return [0.0] * PINECONE_DIMENSION # Fallback zero vector
 
     def build_knowledge_base(self):
         """Full crawl and index to Pinecone."""
@@ -611,7 +619,7 @@ Flexibility: Implement various strategies to profit in different market conditio
         
         # Also prioritize specific PDFs you listed (Hardcoded list)
         hardcoded_pdfs = [
-            "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
+             "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-listing-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/Groundrules-nse-NSE-BankingSector-share-index_-V1.0.pdf",
             "https://www.nse.co.ke/wp-content/uploads/GroundRules-NSE-Bond-Index-NSE-BI-v2-Index-final-2.pdf",
@@ -659,7 +667,6 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/wp-content/uploads/broker-back-office-prequalified-vendors.pdf",
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/derivatives-document-1.pdf"
 
-             # ... (Add all other PDFs here)
         ]
 
         print("🕷️ Crawling NSE website...")
@@ -676,7 +683,6 @@ Flexibility: Implement various strategies to profit in different market conditio
     def scrape_and_upload(self, urls):
         """Scrapes URLs, chunks text, and uploads to Pinecone"""
         total_uploaded = 0
-        batch_size = 50  # Pinecone batch limit recommended
         
         def process_url(url):
             try:
@@ -693,15 +699,18 @@ Flexibility: Implement various strategies to profit in different market conditio
                 vectors = []
                 embeddings = self.get_embeddings_batch(chunks)
                 
+                if not embeddings: return None
+                
                 for i, chunk in enumerate(chunks):
+                    if i >= len(embeddings): break # Safety check
                     vector_id = str(uuid.uuid5(uuid.NAMESPACE_URL, url + str(i)))
                     metadata = {
-                        "text": chunk,
+                        "text": chunk[:30000], # Pinecone metadata limit safety
                         "source": url,
                         "date": datetime.date.today().isoformat(),
                         "type": ctype
                     }
-                    vectors.append((vector_id, embeddings[i], metadata))
+                    vectors.append({"id": vector_id, "values": embeddings[i], "metadata": metadata})
                 
                 return vectors
             except Exception as e:
@@ -717,12 +726,18 @@ Flexibility: Implement various strategies to profit in different market conditio
                 if res: vectors_to_upload.extend(res)
         
         # Batch Upload to Pinecone
-        # We upload in batches of 100 to be safe
+        if not vectors_to_upload:
+            print("No content found to upload.")
+            return 0
+
         for i in range(0, len(vectors_to_upload), 100):
             batch = vectors_to_upload[i:i+100]
-            self.index.upsert(vectors=batch)
-            total_uploaded += len(batch)
-            time.sleep(0.2) # Small delay to prevent rate limits
+            try:
+                self.index.upsert(vectors=batch)
+                total_uploaded += len(batch)
+            except Exception as e:
+                print(f"Pinecone Upsert Error: {e}")
+            time.sleep(0.2) 
             
         return total_uploaded
 
@@ -743,43 +758,37 @@ Flexibility: Implement various strategies to profit in different market conditio
         try:
             # 2. Vector Search
             queries = self.generate_context_queries(query)
-            # We use the first query (most specific) for the main vector search
             q_emb = self.get_embedding(queries[0])
             
             # Fetch top 15 matches
-            results = self.index.query(vector=q_emb, top_k=15, include_metadata=True)
+            try:
+                results = self.index.query(vector=q_emb, top_k=15, include_metadata=True)
+            except Exception as e:
+                print(f"Pinecone Query Error: {e}")
+                results = {'matches': []}
             
             # 3. Client-Side Re-Ranking (Hybrid)
-            # We use BM25 on the retrieved chunks to boost exact keyword matches
             if results['matches']:
                 docs = [m['metadata']['text'] for m in results['matches']]
                 metas = [m['metadata'] for m in results['matches']]
                 
-                # Tokenize query for BM25
                 tokenized_query = query.lower().split()
                 tokenized_docs = [doc.lower().split() for doc in docs]
                 
                 bm25 = BM25Okapi(tokenized_docs)
                 doc_scores = bm25.get_scores(tokenized_query)
                 
-                # Combine Vector Score + Keyword Score
                 final_ranking = []
                 for i, match in enumerate(results['matches']):
-                    # Vector score is usually 0.7 - 0.9
-                    # BM25 score can be 0 - 10+
-                    # We normalize BM25 contribution
                     hybrid_score = match['score'] + (doc_scores[i] * 0.1)
                     
-                    # Hard Rules Boosting
                     if "[OFFICIAL_FAQ]" in docs[i]: hybrid_score += 0.5
                     if "[OFFICIAL_FACT_SHEET]" in docs[i]: hybrid_score += 1.0
                     
                     final_ranking.append((hybrid_score, docs[i], metas[i]['source']))
                 
-                # Sort by new hybrid score
                 final_ranking.sort(key=lambda x: x[0], reverse=True)
                 
-                # Take Top 5
                 for _, text, source in final_ranking[:5]:
                     context_text += f"\n[Source: {source}]\n{text}\n---"
                     visible_sources.add(source)
@@ -805,14 +814,13 @@ Flexibility: Implement various strategies to profit in different market conditio
         )
         return stream, list(visible_sources)
 
-    # Helper methods (Crawling logic same as before)
+    # Helper methods
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
     def _fetch_url(self, url):
         headers = {'User-Agent': 'Mozilla/5.0'}
         return self.session.get(url, headers=headers, verify=False, timeout=10)
 
     def crawl_site(self, seed_urls):
-        # (Same crawler logic as previous file - keeps it robust)
         visited = set()
         to_visit = set(seed_urls)
         found_pages = set()
@@ -854,10 +862,8 @@ Flexibility: Implement various strategies to profit in different market conditio
             return ""
 
     def _process_content(self, url, ctype, content):
-        # (Same tagging logic as before)
         tag = "[GENERAL]"
         if "statistics" in url: tag = "[MARKET_DATA]"
-        # ... add all your tags here ...
         
         if ctype == "pdf":
             text = self._extract_text_from_pdf(content)
