@@ -7,9 +7,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, HTTPException, BackgroundTasks
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-
-# Don't import engine at top level to prevent blocking import
-# from nse_engine import NSEKnowledgeBase 
+from nse_engine import NSEKnowledgeBase
 
 # --- Logging Setup ---
 logging.basicConfig(
@@ -20,45 +18,33 @@ logger = logging.getLogger("NSE-API")
 
 # --- Global State ---
 nse_engine = None
-engine_loading = False
 
 # --- Lifespan Manager (Startup/Shutdown) ---
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # We start the initialization in a non-blocking way
-    asyncio.create_task(init_engine())
-    yield
-    logger.info("Shutting down NSE API.")
-
-async def init_engine():
-    global nse_engine, engine_loading
-    if nse_engine is not None or engine_loading:
-        return
-
-    engine_loading = True
-    logger.info("Starting background engine initialization...")
-    
+    global nse_engine
     api_key = os.getenv("OPENAI_API_KEY")
     pinecone_key = os.getenv("PINECONE_API_KEY")
 
     if api_key and pinecone_key:
         try:
-            # Import here to avoid top-level blocking
-            from nse_engine import NSEKnowledgeBase
-            # Run blocking init in a threadpool
+            logger.info("Initializing NSE Knowledge Base...")
+            # Initialize engine in a thread to avoid blocking startup
             nse_engine = await asyncio.to_thread(NSEKnowledgeBase, api_key, pinecone_key)
-            logger.info("NSE Engine Initialized Successfully (Background).")
+            logger.info("NSE Engine Initialized Successfully.")
         except Exception as e:
             logger.error(f"Failed to initialize engine: {e}")
             logger.error(traceback.format_exc())
     else:
-        logger.warning("CRITICAL: API keys missing. Queries will fail.")
+        logger.warning("CRITICAL: API keys not found in environment variables.")
     
-    engine_loading = False
+    yield
+    logger.info("Shutting down NSE API.")
 
 # --- App Definition ---
 app = FastAPI(title="NSE Assistant API", lifespan=lifespan)
 
+# Add CORS (Important for frontend to talk to backend)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"], 
@@ -71,28 +57,26 @@ class QueryRequest(BaseModel):
 
 @app.get("/")
 def home():
-    """Health check endpoint - responds immediately."""
-    status = "initializing" if engine_loading else ("ready" if nse_engine else "failed")
     return {
         "status": "running",
-        "engine_status": status,
-        "service": "NSE Assistant API"
+        "service": "NSE Assistant API",
+        "engine_ready": nse_engine is not None,
+        "backend": "Pinecone"
     }
 
 @app.post("/ask")
 async def ask_question(request: QueryRequest):
     if not nse_engine:
-        if engine_loading:
-            raise HTTPException(status_code=503, detail="System is warming up. Please try again in 30 seconds.")
-        raise HTTPException(status_code=503, detail="Engine failed to initialize. Check server logs.")
+        raise HTTPException(status_code=503, detail="Engine not initialized (Check Keys)")
         
     try:
         # Offload heavy blocking logic to thread
-        response_data = await asyncio.to_thread(get_answer_sync, request.query)
-        return response_data
+        response = await asyncio.to_thread(get_answer_sync, request.query)
+        return response
 
     except Exception as e:
         logger.error(f"Error processing query: {e}")
+        logger.error(traceback.format_exc())
         raise HTTPException(status_code=500, detail=str(e))
 
 def get_answer_sync(query):
@@ -107,20 +91,21 @@ def get_answer_sync(query):
     return {"answer": full_response, "sources": sources}
 
 @app.post("/refresh")
-async def trigger_refresh(background_tasks: BackgroundTasks):
+def trigger_refresh(background_tasks: BackgroundTasks):
     if not nse_engine:
         raise HTTPException(status_code=503, detail="Engine not initialized")
 
     def run_update_task():
-        logger.info("Starting background refresh...")
+        logger.info("Starting background knowledge base refresh...")
         try:
             msg, _ = nse_engine.build_knowledge_base()
             logger.info(f"Refresh complete: {msg}")
         except Exception as e:
             logger.error(f"Refresh failed: {e}")
+            logger.error(traceback.format_exc())
 
     background_tasks.add_task(run_update_task)
-    return {"message": "Refresh started in background."}
+    return {"message": "Knowledge base refresh started in background."}
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 8000))

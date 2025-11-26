@@ -1,14 +1,3 @@
-# --- CRITICAL FIX FOR STREAMLIT CLOUD ---
-# This swaps the system sqlite3 with the newer pysqlite3-binary
-try:
-    __import__('pysqlite3')
-    import sys
-    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
-except ImportError:
-    # Fallback if pysqlite3 isn't installed (e.g., local Windows dev)
-    pass
-# ----------------------------------------
-
 import streamlit as st
 import requests
 import time
@@ -42,6 +31,19 @@ with st.sidebar:
         else:
             st.session_state.theme = "light"
         st.rerun()
+        
+    st.markdown("---")
+    if st.button("⚠️ Rebuild Database"):
+         # Call backend refresh
+         api_url = st.secrets.get("API_URL", "http://localhost:8000")
+         try:
+             res = requests.post(f"{api_url}/refresh", timeout=5)
+             if res.status_code == 200:
+                 st.success("Refresh triggered on backend.")
+             else:
+                 st.error(f"Failed: {res.status_code}")
+         except Exception as e:
+             st.error(f"Connection error: {e}")
 
 # --- DYNAMIC CSS (THEME AWARE) ---
 if st.session_state.theme == "light":
@@ -134,10 +136,13 @@ st.markdown('<div class="main-header">Nairobi Securities Exchange</div>', unsafe
 st.markdown('<div class="sub-header">Digital Assistant & Market Intelligence</div>', unsafe_allow_html=True)
 
 # --- AUTHENTICATION ---
-# We rely on the backend having the keys. The frontend just needs the API URL.
-# Check if API_URL is set
-if "API_URL" not in st.secrets:
-    st.warning("API_URL not found in secrets. Defaulting to localhost for testing.")
+if "OPENAI_API_KEY" in st.secrets:
+    openai_api_key = st.secrets["OPENAI_API_KEY"]
+else:
+    openai_api_key = st.text_input("OpenAI API Key", type="password")
+
+if not openai_api_key:
+    st.stop()
 
 # --- API CONNECTION FUNCTION ---
 def query_api(user_query):
@@ -181,7 +186,7 @@ if prompt := st.chat_input("Ask about the market..."):
                 
                 full_response = answer
                 if sources:
-                    source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.get('title', s.get('url', 'Link')).replace('https://www.nse.co.ke', 'nse.co.ke')}]({s.get('url', s)})" if isinstance(s, dict) else f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke')}]({s})" for s in sources])
+                    source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke').split('/')[-1]}]({s})" for s in sources])
                     full_response += source_text
                 
                 st.markdown(full_response)

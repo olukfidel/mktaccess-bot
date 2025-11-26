@@ -27,7 +27,7 @@ LLM_MODEL = "gpt-4o-mini"
 MAX_CRAWL_DEPTH = 3
 MAX_PAGES_TO_CRAWL = 1000
 PINECONE_INDEX_NAME = "nse-data"
-PINECONE_DIMENSION = 1536  # For text-embedding-3-small
+PINECONE_DIMENSION = 1536 
 
 class NSEKnowledgeBase:
     def __init__(self, openai_api_key, pinecone_api_key):
@@ -51,10 +51,13 @@ class NSEKnowledgeBase:
                 )
                 time.sleep(10) # Wait for init
             except Exception as e:
-                print(f"Index creation warning (might already exist): {e}")
+                print(f"Index creation warning: {e}")
             
         self.index = self.pc.Index(PINECONE_INDEX_NAME)
         self.session = requests.Session()
+
+    # ... (Rest of the engine logic: get_static_facts, get_embeddings_batch, get_embedding, build_knowledge_base, scrape_and_upload, generate_context_queries, answer_question, helper methods) ...
+    # (This part is identical to the previously provided complete nse_engine.py code. Ensure you copy the full content from previous responses if needed)
 
     # --- STATIC KNOWLEDGE ---
     def get_static_facts(self):
@@ -538,29 +541,19 @@ Flexibility: Implement various strategies to profit in different market conditio
         A:Open an account with a derivatives licensed trading member (stockbroker or investment bank). The member will provide you with access to the online trading platform.
         """
 
-    # --- VECTOR OPERATIONS ---
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(1))
     def get_embeddings_batch(self, texts):
         if not texts: return []
         sanitized = [t.replace("\n", " ") for t in texts]
-        try:
-            res = self.client.embeddings.create(input=sanitized, model=EMBEDDING_MODEL)
-            return [d.embedding for d in res.data]
-        except Exception as e:
-            print(f"Embedding failed: {e}")
-            return []
+        res = self.client.embeddings.create(input=sanitized, model=EMBEDDING_MODEL)
+        return [d.embedding for d in res.data]
 
     def get_embedding(self, text):
-        res = self.get_embeddings_batch([text])
-        if res: return res[0]
-        return [0.0] * PINECONE_DIMENSION # Fallback zero vector
+        return self.get_embeddings_batch([text])[0]
 
     def build_knowledge_base(self):
-        """Full crawl and index to Pinecone."""
-        
-        # Seed URLs (Your extensive list here)
         seeds = [
-            "https://www.nse.co.ke/",
+           "https://www.nse.co.ke/",
             "https://www.nse.co.ke/site-map/",
             "https://www.nse.co.ke/home/",
             "https://www.nse.co.ke/about-nse/",
@@ -617,7 +610,6 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/"
         ]
         
-        # Also prioritize specific PDFs you listed (Hardcoded list)
         hardcoded_pdfs = [
              "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-listing-rules.pdf",
@@ -674,14 +666,11 @@ Flexibility: Implement various strategies to profit in different market conditio
         all_urls = list(set(found_pages + found_pdfs + hardcoded_pdfs))
         
         print(f"📝 Found {len(all_urls)} total documents.")
-        
-        # Process & Upload
         total_chunks = self.scrape_and_upload(all_urls)
         
         return f"Knowledge Base Updated: {total_chunks} chunks uploaded to Pinecone.", []
 
     def scrape_and_upload(self, urls):
-        """Scrapes URLs, chunks text, and uploads to Pinecone"""
         total_uploaded = 0
         
         def process_url(url):
@@ -699,13 +688,10 @@ Flexibility: Implement various strategies to profit in different market conditio
                 vectors = []
                 embeddings = self.get_embeddings_batch(chunks)
                 
-                if not embeddings: return None
-                
                 for i, chunk in enumerate(chunks):
-                    if i >= len(embeddings): break # Safety check
                     vector_id = str(uuid.uuid5(uuid.NAMESPACE_URL, url + str(i)))
                     metadata = {
-                        "text": chunk[:30000], # Pinecone metadata limit safety
+                        "text": chunk[:30000], 
                         "source": url,
                         "date": datetime.date.today().isoformat(),
                         "type": ctype
@@ -717,7 +703,6 @@ Flexibility: Implement various strategies to profit in different market conditio
                 print(f"Error processing {url}: {e}")
                 return None
 
-        # Parallel Processing
         vectors_to_upload = []
         with concurrent.futures.ThreadPoolExecutor(max_workers=10) as executor:
             futures = {executor.submit(process_url, u): u for u in urls}
@@ -725,11 +710,6 @@ Flexibility: Implement various strategies to profit in different market conditio
                 res = future.result()
                 if res: vectors_to_upload.extend(res)
         
-        # Batch Upload to Pinecone
-        if not vectors_to_upload:
-            print("No content found to upload.")
-            return 0
-
         for i in range(0, len(vectors_to_upload), 100):
             batch = vectors_to_upload[i:i+100]
             try:
@@ -737,11 +717,10 @@ Flexibility: Implement various strategies to profit in different market conditio
                 total_uploaded += len(batch)
             except Exception as e:
                 print(f"Pinecone Upsert Error: {e}")
-            time.sleep(0.2) 
+            time.sleep(0.2)
             
         return total_uploaded
 
-    # --- RETRIEVAL ---
     def generate_context_queries(self, query):
         today = datetime.date.today().strftime("%Y-%m-%d")
         prompt = f"Generate 3 search queries for: '{query}'\nDate: {today}\n1. Keyword\n2. Concept\n3. Doc type\nOutput 3 lines."
@@ -751,23 +730,15 @@ Flexibility: Implement various strategies to profit in different market conditio
         except: return [query]
 
     def answer_question(self, query):
-        # 1. Static Facts Injection
         context_text = self.get_static_facts() + "\n\n"
         visible_sources = set()
         
         try:
-            # 2. Vector Search
             queries = self.generate_context_queries(query)
             q_emb = self.get_embedding(queries[0])
             
-            # Fetch top 15 matches
-            try:
-                results = self.index.query(vector=q_emb, top_k=15, include_metadata=True)
-            except Exception as e:
-                print(f"Pinecone Query Error: {e}")
-                results = {'matches': []}
+            results = self.index.query(vector=q_emb, top_k=15, include_metadata=True)
             
-            # 3. Client-Side Re-Ranking (Hybrid)
             if results['matches']:
                 docs = [m['metadata']['text'] for m in results['matches']]
                 metas = [m['metadata'] for m in results['matches']]
@@ -796,7 +767,6 @@ Flexibility: Implement various strategies to profit in different market conditio
         except Exception as e:
             print(f"Retrieval Error: {e}")
         
-        # 4. Generation
         today = datetime.date.today().strftime("%Y-%m-%d")
         system_prompt = f"""You are the NSE Digital Assistant.
         TODAY: {today}
@@ -814,7 +784,6 @@ Flexibility: Implement various strategies to profit in different market conditio
         )
         return stream, list(visible_sources)
 
-    # Helper methods
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(2))
     def _fetch_url(self, url):
         headers = {'User-Agent': 'Mozilla/5.0'}
@@ -825,7 +794,6 @@ Flexibility: Implement various strategies to profit in different market conditio
         to_visit = set(seed_urls)
         found_pages = set()
         found_pdfs = set()
-        
         count = 0
         while to_visit and count < MAX_PAGES_TO_CRAWL:
             try: url = to_visit.pop()
@@ -864,13 +832,11 @@ Flexibility: Implement various strategies to profit in different market conditio
     def _process_content(self, url, ctype, content):
         tag = "[GENERAL]"
         if "statistics" in url: tag = "[MARKET_DATA]"
-        
         if ctype == "pdf":
             text = self._extract_text_from_pdf(content)
         else:
             soup = BeautifulSoup(content, 'html.parser')
             text = soup.get_text(separator="\n")
-            
         return f"{tag} SOURCE: {url}\n\n{text.strip()}"
 
     def clean_text_chunk(self, text):
