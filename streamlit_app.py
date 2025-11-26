@@ -3,6 +3,7 @@ import requests
 import time
 import base64
 import os
+import threading
 
 # --- CONFIGURATION ---
 st.set_page_config(page_title="NSE Digital Assistant", page_icon="https://i.postimg.cc/NF1qzmFV/nse_small_logo.png", layout="centered")
@@ -22,6 +23,35 @@ logo_base64 = get_base64_of_bin_file("logo.webp")
 if "theme" not in st.session_state:
     st.session_state.theme = "light"
 
+# --- API CONFIGURATION ---
+# Get URL from secrets or default to local for testing
+# In production, set API_URL in Streamlit secrets
+api_url = st.secrets.get("API_URL", "http://localhost:8000")
+
+# --- AUTO-REBUILD LOGIC ---
+if "db_rebuild_triggered" not in st.session_state:
+    st.session_state.db_rebuild_triggered = False
+
+def trigger_backend_rebuild():
+    """Triggers the backend to rebuild the knowledge base in the background."""
+    try:
+        # We send a request to the refresh endpoint but don't wait for full completion
+        # The backend handles it asynchronously
+        requests.post(f"{api_url}/refresh", timeout=1)
+    except requests.exceptions.ReadTimeout:
+        # This is expected behavior as we set a very short timeout to not block UI
+        pass
+    except Exception as e:
+        print(f"Failed to trigger rebuild: {e}")
+
+if not st.session_state.db_rebuild_triggered:
+    # Start the rebuild in a separate thread to avoid blocking the UI load
+    threading.Thread(target=trigger_backend_rebuild).start()
+    st.session_state.db_rebuild_triggered = True
+    # Show a toast to inform the user
+    st.toast("System initializing... syncing with latest market data.", icon="🔄")
+
+
 # --- TOGGLE BUTTON IN SIDEBAR ---
 with st.sidebar:
     st.image("https://i.postimg.cc/NF1qzmFV/nse-small-logo.png", width=100) 
@@ -31,19 +61,10 @@ with st.sidebar:
         else:
             st.session_state.theme = "light"
         st.rerun()
-        
+    
     st.markdown("---")
-    if st.button("⚠️ Rebuild Database"):
-         # Call backend refresh
-         api_url = st.secrets.get("API_URL", "http://localhost:8000")
-         try:
-             res = requests.post(f"{api_url}/refresh", timeout=5)
-             if res.status_code == 200:
-                 st.success("Refresh triggered on backend.")
-             else:
-                 st.error(f"Failed: {res.status_code}")
-         except Exception as e:
-             st.error(f"Connection error: {e}")
+    st.caption(f"Backend Status: Connected to {api_url}")
+    st.caption("Data Sync: Auto-triggered on startup")
 
 # --- DYNAMIC CSS (THEME AWARE) ---
 if st.session_state.theme == "light":
@@ -139,6 +160,7 @@ st.markdown('<div class="sub-header">Digital Assistant & Market Intelligence</di
 if "OPENAI_API_KEY" in st.secrets:
     openai_api_key = st.secrets["OPENAI_API_KEY"]
 else:
+    # Fallback for local dev if not in secrets
     openai_api_key = st.text_input("OpenAI API Key", type="password")
 
 if not openai_api_key:
@@ -146,7 +168,6 @@ if not openai_api_key:
 
 # --- API CONNECTION FUNCTION ---
 def query_api(user_query):
-    api_url = st.secrets.get("API_URL", "http://localhost:8000")
     try:
         response = requests.post(
             f"{api_url}/ask", 
@@ -156,7 +177,7 @@ def query_api(user_query):
         response.raise_for_status()
         return response.json()
     except requests.exceptions.ConnectionError:
-        return {"error": "Backend unavailable. Please check connection."}
+        return {"error": "Backend unavailable. The system might be updating or offline."}
     except Exception as e:
         return {"error": f"System Error: {str(e)}"}
 
@@ -187,7 +208,8 @@ if prompt := st.chat_input("Ask about the market..."):
                 full_response = answer
                 if sources:
                     source_text = "\n\n**Sources:** \n" + "  \n".join([f"• [{s.replace('https://www.nse.co.ke', 'nse.co.ke').split('/')[-1]}]({s})" for s in sources])
-                    full_response += source_text
-                
-                st.markdown(full_response)
-                st.session_state.messages.append({"role": "assistant", "content": full_response})
+                    st.markdown(full_response + source_text)
+                    st.session_state.messages.append({"role": "assistant", "content": full_response + source_text})
+                else:
+                    st.markdown(full_response)
+                    st.session_state.messages.append({"role": "assistant", "content": full_response})
