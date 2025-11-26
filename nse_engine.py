@@ -105,6 +105,564 @@ class NSEKnowledgeBase:
         - NASI (NSE All Share Index): Tracks performance of ALL listed companies. Best for overall market health.
         - NSE 20 Share Index: Tracks the top 20 "Blue Chip" companies. Best for tracking stability.
         - NSE 25 Share Index: Tracks top 25 companies based on liquidity and market capitalization.
+        [OFFICIAL_NSE_20_SHARE_INDEX_RULES_V1.6_MAY_2025]
+SOURCE: https://www.nse.co.ke/rules/ – Ground Rules for the Management of the NSE 20 Share Index v1.6 (Approved 21/05/2025)
+
+The NSE 20 Share Index is a market capitalization-weighted index consisting of 20 of the most liquid and largest companies listed on the Nairobi Securities Exchange.
+
+Objective: The objective of the NSE 20 Share Index is to reflect the performance of the top 20 companies by market capitalization and liquidity.
+
+Selection Criteria:
+1. The company must be listed on the Main Investment Market Segment (MIMS) or the Growth Enterprise Market Segment (GEMS) of the Nairobi Securities Exchange.
+2. The company must have a minimum free-float market capitalization of KES 1 billion.
+3. The company must have a minimum average daily trading value of KES 5 million over the previous six months.
+4. The company must have traded on at least 70% of the trading days over the previous six months.
+
+Index Calculation: The NSE 20 Share Index is calculated using the Laspeyres formula with market capitalization weighting. The index is price-return only (dividends are not reinvested).
+
+Review Frequency: The index constituents are reviewed semi-annually in May and November each year.
+
+Capping: No single constituent shall exceed 15% of the total index weight. If a constituent exceeds 15% at review, its weight will be capped at 15% and the excess weight redistributed proportionally among the remaining constituents.
+
+Buffering: To minimize turnover, a buffer rule is applied. Existing constituents ranked 25 or better remain in the index, while non-constituents must rank 15 or better to enter.
+
+Corporate Actions Treatment:
+- Bonus issues, stock splits, and rights issues are adjusted by changing the number of shares without affecting the price.
+- Cash dividends are not adjusted (price-return index).
+- In case of delisting, suspension, or merger, the company is removed from the index at the earliest opportunity.
+
+Current Constituents (as at 21 May 2025):
+1. Safaricom Plc
+2. Equity Group Holdings Plc
+3. KCB Group Plc
+4. East African Breweries Plc
+5. ABSA Bank Kenya Plc
+6. Co-operative Bank of Kenya Plc
+7. NCBA Group Plc
+8. Standard Chartered Bank Kenya Ltd
+9. BK Group Plc (Bank of Kigali)
+10. I&M Group Plc
+11. CIC Insurance Group Plc
+12. Britam Holdings Plc
+13. Kenya Reinsurance Corporation Ltd
+14. Jubilee Holdings Ltd
+15. Centum Investment Company Plc
+16. B.O.C Kenya Plc
+17. Kakuzi Plc
+18. HF Group Plc
+19. Diamond Trust Bank Kenya Ltd
+20. Williamson Tea Kenya Plc
+
+Latest Changes (21 May 2025):
+- Bamburi Cement Plc removed
+- Nation Media Group Plc removed
+- HF Group Plc added
+- Diamond Trust Bank Kenya Ltd added
+
+The index is calculated and disseminated in real-time during trading hours. The base date is 1st February 2008 with a base value of 5,000 points.
+
+This document is reviewed and approved by the NSE Trading Committee. The latest version is always available at https://www.nse.co.ke/rules/
+
+
+
+[OFFICIAL_NSE_BANKING_SECTOR_SHARE_INDEX_RULES_V1.0_SEPTEMBER_2025]
+SOURCE: NSE Official Document – Ground Rules for the Management of the NSE Banking Sector Share Index v1.0 (Approved 01/09/2025)
+
+The NSE Banking Sector Share Index is a market capitalization-weighted index that tracks the performance of all licensed commercial banks and banking groups listed on the Nairobi Securities Exchange.
+
+Objective: To provide a benchmark for the performance of the banking sector in Kenya and serve as an investable index for financial products.
+
+Index Constituents (as at 1st September 2025):
+1. ABSA Bank Kenya Plc
+2. BK Group Plc (Bank of Kigali)
+3. Co-operative Bank of Kenya Plc
+4. Diamond Trust Bank Kenya Ltd
+5. Equity Group Holdings Plc
+6. HF Group Plc
+7. I&M Group Plc
+8. KCB Group Plc
+9. NCBA Group Plc
+10. Standard Chartered Bank Kenya Ltd
+
+Index Calculation Methodology:
+- The index is calculated using the Laspeyres price index formula with free-float market capitalization weighting.
+- It is a price-return index (dividends are not included).
+- Base Date: 3rd January 2022
+- Base Value: 1,000 points
+
+Eligibility Criteria:
+All companies classified under the "Banking" sub-sector by the Nairobi Securities Exchange and licensed by the Central Bank of Kenya are automatically included in the index.
+
+Weighting and Capping:
+- Weights are based on free-float market capitalization.
+- No single constituent shall exceed 25% of the total index weight.
+- If a constituent exceeds 25% during quarterly reviews, its weight is capped at 25% and the excess redistributed proportionally among remaining constituents.
+
+Review Frequency:
+The index is reviewed quarterly (March, June, September, December) with changes implemented on the first trading day following the third Friday of the review month.
+
+Corporate Actions:
+- Bonus issues, stock splits, and rights issues are adjusted by modifying the number of shares.
+- Cash dividends are not adjusted (price-return index).
+- In case of delisting, merger, or acquisition, the affected company is removed and weights redistributed.
+
+Publication:
+The index is calculated and disseminated in real-time during trading hours. End-of-day values are published on the NSE website and data services.
+
+This document was drafted by the Operations Department, reviewed by Trading Data & Analytics, and approved by the Trading Committee on 1st September 2025.
+
+[OFFICIAL_EAE_20_SHARE_INDEX_RULES_2025]
+
+SOURCE: East African Securities Exchanges Association (EASEA) – Ground Rules for the Management of the EAE 20 Share Index (2025)
+
+The EAE 20 Share Index is a market capitalization-weighted index consisting of 20 of the largest and most liquid blue-chip companies listed on the participating East African securities exchanges (Nairobi Securities Exchange, Dar es Salaam Stock Exchange, Rwanda Stock Exchange, Uganda Securities Exchange).
+
+Objective: The index reflects the total market value of component stocks relative to the base period and serves as a barometer of market performance across the East African region.
+
+Base Date: 7th March 2025
+Base Value: 100
+
+Eligibility Criteria:
+1. The company’s shares must be primarily listed on one of the participating East African securities exchanges.
+2. The company must have maintained a continuous listing for a minimum of one year on the respective exchange.
+3. The company should be a recognized blue-chip firm, demonstrating strong profitability and a consistent dividend payment history.
+
+Current Constituents (as at 2025):
+1. CRDB Bank
+2. NMB Bank
+3. Tanzania Breweries Limited
+4. Tanga Cement Company Limited
+5. Tanzania Cigarette Corporation
+6. Bralirwa Limited
+7. Bank of Kigali
+8. I&M Rwanda
+9. Cimerwa Plc
+10. MTN Rwandacell
+11. Safaricom Plc
+12. KCB Group Plc
+13. Equity Group Holdings Plc
+14. The Co-operative Bank of Kenya Ltd
+15. ABSA Bank Kenya Plc
+16. MTN Uganda
+17. Stanbic Uganda Holdings
+18. Bank of Baroda Uganda
+19. Airtel Uganda
+20. Quality Chemicals Industry Limited
+
+Review: Semi-annual by the EASEA Secretariat. Reserve list of the five highest-ranking non-constituents is published after each review.
+
+Corporate Actions: Adjustments are made for delistings, suspensions, mergers, new issues, etc. The index uses the Laspeyres formula with market capitalization weighting.
+
+The index is calculated and disseminated in real-time during trading hours by the member exchanges.
+
+
+[OFFICIAL_NSE_25_SHARE_INDEX_RULES_V1.4_MAY_2025]
+SOURCE: Nairobi Securities Exchange – Ground Rules for the Management of the NSE 25 Share Index v1.4 (Approved 21/05/2025)
+
+The NSE 25 Share Index represents the performance of the top 25 Kenyan companies listed on the Nairobi Securities Exchange.
+
+Eligibility Criteria:
+i. Shares must have their primary listing on the Nairobi Securities Exchange.
+ii. Must have at least 20% of its shares quoted on the NSE.
+iii. Must have been continuously quoted for at least 1 year.
+iv. Must have a minimum market capitalization of Kes.1 billion.
+v. Should ideally be a “blue chip” with superior profitability and dividend record.
+
+Current Constituents (as at 21 May 2025):
+1. ABSA Bank Kenya Plc
+2. Stanbic Holdings Plc
+3. Diamond Trust Bank Kenya Ltd
+4. Equity Group Holdings Plc
+5. I&M Holdings Plc
+6. KCB Group Plc
+7. NCBA Group Plc
+8. Standard Chartered Bank Kenya Ltd
+9. The Co-operative Bank of Kenya Ltd
+10. BK Group Plc
+11. Trans-Century Plc
+12. Jubilee Holdings Ltd
+13. HF Group Plc
+14. KenGen Co. Plc
+15. Carbacid Investments Plc
+16. Kenya Power & Lighting Co Plc
+17. Britam Holdings Plc
+18. CIC Insurance Group Ltd
+19. Kenya Re Insurance Corporation Ltd
+20. Liberty Kenya Holdings Ltd
+21. Centum Investment Co Plc
+22. Nairobi Securities Exchange Plc
+23. British American Tobacco Kenya Plc
+24. East African Breweries Ltd
+25. Safaricom Plc
+
+Review: Semi-annual (last week of May and November). Ranking by market capitalization with buffering rules.
+
+Latest Changes (21 May 2025): Replaced Bamburi Cement Plc, Nation Media Group Plc, WPP Scangroup Plc and Total Kenya Ltd with HF Group Plc, BK Group Plc, Trans-Century Plc and Carbacid Investments Plc respectively.
+
+The index is calculated using market capitalization weighting and disseminated in real-time.
+
+[OFFICIAL_NSE_10_SHARE_INDEX_RULES_V2.0_MAY_2025]
+SOURCE: Nairobi Securities Exchange – Ground Rules for the Management of the NSE 10 Share Index v2.0 (Approved 21/05/2025)
+
+The NSE 10 Share Index (N10) represents the performance of the 10 most liquid stocks listed on the Nairobi Securities Exchange.
+
+Eligibility & Selection: Top 10 companies screened by liquidity measures – Market capitalization (float adjusted) 40%, Turnover 30%, Volume 20%, Deals 10%. Reviewed semi-annually.
+
+Base Date: 30th August 2023
+Base Value: 1000
+
+Current Constituents (as at 21 May 2025):
+1. ABSA Bank Kenya Plc
+2. Equity Group Holdings Plc
+3. KCB Group Plc
+4. The Co-operative Bank of Kenya Ltd
+5. Kenya Re Insurance Corporation Ltd
+6. HF Group Plc
+7. KenGen Co. Plc
+8. East African Breweries Ltd
+9. I&M Group Plc
+10. Safaricom Plc
+
+Calculation: Base-weighted aggregate methodology (market capitalization/value weighted, float adjusted). Formula: NSE10 = (Current Market Value / Base Market Value) × 1000
+
+The index is reviewed during the last week of every calendar year with divisor adjustments for corporate actions.
+
+
+[OFFICIAL_NSE_FIXED_INCOME_TRADING_RULES_JANUARY_2024]
+SOURCE: Nairobi Securities Exchange – Trading Rules for Fixed Income Securities (January 2024)
+
+The Fixed Income Securities Market operates as a Hybrid Bond Market Structure combining Onscreen Trading and OTC Trading.
+
+Trading Hours: Daily sessions from 9:00 a.m. to 3:00 p.m.
+
+Boards:
+- Unrestricted Board: Publicly offered listed fixed income securities.
+- Restricted Board: Securities from restricted public offers (sophisticated investors only).
+
+Settlement: T+3 for all fixed income securities transactions.
+
+Quotations Board: Authorized Participants must provide two-way indicative quotes for Benchmark Bonds before 9:00 a.m. Spread not exceeding 100 basis points.
+
+Order Input & Execution:
+- Onscreen: Price-time priority matching in ATRS.
+- OTC: Bilateral trades reported within 30 minutes to the Central Trade Repository.
+
+Board Lot: Minimum as prescribed by issuer, not less than one unit.
+
+Sell Buy Backs: Must be pre-agreed in writing and reported.
+
+Trading Halts: Market or security halts may be imposed by the Chief Executive in consultation with the Authority.
+
+Reference Price: Volume-weighted yield of trades > KES 50 million; otherwise based on indicative yields.
+
+All listed fixed income securities are traded through the ATRS unless exempted. English is the official language. Disaster recovery provisions apply.
+
+
+[OFFICIAL_NSE_NOMINATED_ADVISORS_RULES_2012]
+SOURCE: Nairobi Securities Exchange – Nominated Advisors (NomAds) Rules, 2012 (as amended)
+
+A Nominated Advisor (NomAd) is an advisory firm approved by the Nairobi Securities Exchange to guide and advise companies listed or seeking listing on the Growth Enterprise Market Segment (GEMS).
+
+Eligibility Criteria for NomAds:
+- Must be a corporation licensed by the Capital Markets Authority as an investment bank, stockbroker or fund manager.
+- Must have at least two key professionals with a minimum of five years relevant experience in corporate finance.
+- Must demonstrate capacity to advise on CMA and NSE regulations.
+- Must not have been censured by CMA or NSE in the last three years.
+
+Key Responsibilities of NomAds:
+- Advise the issuer on compliance with GEMS continuing listing obligations.
+- Ensure all announcements and disclosures are accurate and timely.
+- Guide the issuer on corporate governance best practices.
+- Confirm to the NSE that the issuer is suitable for GEMS listing.
+- Act as the primary point of contact between the issuer and the NSE.
+- Monitor the issuer’s compliance and report any breaches immediately.
+
+NomAd Appointment:
+- Every GEMS issuer must appoint and retain a NomAd at all times.
+- The appointment must be formalised through a written agreement.
+- Any change of NomAd must be notified to the NSE within 14 days.
+
+Disciplinary Actions:
+The NSE may suspend or cancel NomAd approval for misconduct, incompetence or failure to supervise issuers properly.
+
+NomAds are jointly liable with the issuer for any false or misleading statements in listing documents.
+
+
+[OFFICIAL_NSE_MARKET_PARTICIPANTS_RULES_2014]
+SOURCE: Nairobi Securities Exchange – Market Participants Rules, 2014 (as amended)
+
+These rules govern the conduct of all Trading Participants (stockbrokers), Authorized Securities Dealers, and other market participants.
+
+Categories of Trading Participants:
+1. Full Trading Participant – may trade equities, bonds and derivatives.
+2. Fixed Income Trading Participant – restricted to bonds only.
+3. Derivatives Trading Participant – restricted to derivatives only.
+
+Eligibility for Trading Participant License:
+- Must be licensed by CMA as a stockbroker or investment bank.
+- Minimum paid-up share capital of KES 50 million (full participant).
+- At least two qualified traders with NSE/CIS certification.
+- Adequate systems, risk management and business continuity plans.
+
+Key Obligations:
+- Act honestly, fairly and in the best interests of clients.
+- Maintain minimum liquid capital requirements at all times.
+- Segregate client funds and securities.
+- Execute client orders on best execution terms.
+- Report all trades accurately and within required timelines.
+- Cooperate fully with NSE surveillance and investigations.
+
+Disciplinary Actions:
+The NSE Disciplinary Committee may impose fines, suspension or termination for breaches including insider trading, market manipulation, failure to settle, or inadequate capital.
+
+All Trading Participants must contribute to the NSE Fidelity Fund for investor protection.
+
+[OFFICIAL_NSE_LISTING_RULES_2025]
+SOURCE: Nairobi Securities Exchange Limited – Listing Rules (as amended to November 2025)
+
+Market Segments:
+1. Main Investment Market Segment (MIMS) – large established companies.
+2. Alternative Investment Market Segment (AIMS) – medium-sized companies.
+3. Growth Enterprise Market Segment (GEMS) – SMEs and high-growth companies.
+4. Fixed Income Securities Market Segment (FIMS) – corporate and government bonds.
+
+MIMS Equity Listing Requirements:
+- Minimum paid-up capital KES 500 million.
+- Minimum 25% public float (at least 1 million shares in public hands).
+- Profitable for at least 3 of the last 5 years.
+- Minimum 1,000 shareholders.
+
+AIMS Equity Listing Requirements:
+- Minimum paid-up capital KES 100 million.
+- Minimum 20% public float.
+- No profitability track record required but must demonstrate growth potential.
+
+GEMS Listing Requirements:
+- Minimum paid-up capital KES 50 million.
+- Minimum 10% public float.
+- Must appoint a Nominated Advisor (NomAd) at all times.
+- Fast-track listing within 3 months.
+
+Continuing Obligations (All Segments):
+- Timely disclosure of price-sensitive information.
+- Annual and half-year financial reporting.
+- Minimum 10% public float maintained.
+- Corporate governance code compliance.
+- Immediate notification of board changes, substantial transactions, or related party transactions.
+
+Corporate Bonds Listing Requirements:
+- Issuer credit rating or guarantee required.
+- Minimum issue size KES 300 million.
+- Trustee appointment mandatory.
+
+The NSE reserves the right to suspend or delist securities for non-compliance.
+
+
+[OFFICIAL_NSE_DERIVATIVES_RULES_JULY_2017_AS_AMENDED_2025]
+SOURCE: Nairobi Securities Exchange – NSE Derivatives (NEXT) Rules, July 2017 (as amended to November 2025)
+
+The NEXT Derivatives Market offers single stock futures, index futures and options.
+
+Eligible Participants:
+- Derivatives Trading Participants (licensed by CMA and NSE).
+- Clients must sign risk disclosure and suitability acknowledgements.
+
+Contracts Currently Available:
+- Single Stock Futures on Safaricom, Equity Group, KCB Group, EABL, ABSA Kenya, Co-op Bank, StanChart Kenya.
+- NSE 25 Share Index Futures.
+
+Contract Specifications:
+- Contract size: 100 shares per contract.
+- Quotation: In Kenyan Shillings per share/index point.
+- Minimum price movement: KES 0.05 (futures), KES 0.01 (options).
+- Settlement: Cash settlement on expiry.
+- Expiry: Third Thursday of March, June, September, December.
+
+Trading Hours: 10:00 a.m. to 3:00 p.m.
+
+Margins:
+- Initial margin set by NSE Clear based on volatility (SPAN methodology).
+- Variation margin paid daily.
+- Intra-day margin calls if required.
+
+Position Limits:
+- Maximum 20% of open interest per client per contract.
+- Higher limits possible with NSE approval.
+
+Market Makers:
+Appointed market makers must provide continuous two-way quotes.
+
+Default Handling:
+NSE Clear acts as central counterparty. Defaults handled via close-out, use of margins, fidelity fund and penalties.
+
+All trades are cleared and guaranteed by NSE Clear Limited.
+
+[NSE Clear Status on IOSCO PFMI Principles]
+Source File: nse-clear-status-on-pfmi-principles-april-2021.pdf
+Legal Basis (Principle 1):
+
+NSE Clear is licensed under the Capital Markets Act and the Capital Markets (Derivatives Markets) Regulations 2015.
+
+NSE Derivatives Rules (approved by CMA in 2016) govern all aspects of mandated responsibilities.
+
+Governance (Principle 2):
+
+NSE Clear was established in 2014 as the Central Counterparty (CCP).
+
+It has a separate Board of Directors.
+
+Key committees include the Oversight Committee, Advisory Committee, and Risk Management Committee.
+
+Margin (Principle 6):
+
+NSE Clear calculates margin through the Historical Value-at-Risk (VaR) methodology.
+
+Settlement Finality (Principle 8):
+
+The Financial Market Infrastructure (FMI) provides clear and certain final settlement.
+
+Money Settlements (Principle 9):
+
+NSE Clear uses prefunded money in the commercial bank system for settlement purposes.
+
+Segregation and Portability (Principle 14):
+
+The CCP has rules and procedures that enable the segregation and portability of positions of a participant’s customers and the collateral provided to the CCP with respect to those positions.
+
+Custody and Investment Risks (Principle 16):
+
+The FMI safeguards its own and its participants’ assets and minimizes the risk of loss on and delay in access to these assets.
+
+
+Mark-to-Market MethodologySource File: mark-to-market-methodology-april-2021.pdfOverview:All futures positions are marked-to-market based on the daily settlement price at the end of each trading day7.Profits/losses are computed as the difference between the trade price (or previous day's settlement price) and the current day's settlement price8.Settlement Price Methodologies:Volume Weighted Average Price (VWAP): Preferred for liquid contracts. Calculated as Total Value Traded divided by Total Volume Traded9.Theoretical Price (Spot Price + Cost of Carry): Used if there are no trades or the contract is illiquid.Formula: $F = S \times e^{(r-y)t}$Where $F$ = Futures price, $S$ = Spot price, $r$ = Risk-free rate, $y$ = Dividend yield, $t$ = Time to maturity10.Spot Price Definition: The closing price of the underlying security as published by the Exchange11.Settlement of Profits/Losses:Pay-in and pay-out of mark-to-market settlement amounts is done on T+112.Final Settlement Price:On expiry, positions are marked to the final settlement price (closing price of the underlying asset on expiry day) and settled in cash
+
+
+ [Corporate Action Handling Guide]
+ Source File: corporate-action-management-guide.pdf
+ Definition: A Corporate Action is an action that brings material change to a company and impacts shareholders14.Types of Corporate Actions Considered:Special Dividends: One-time distribution of earnings from exceptional profits15.Bonus/Script Issue: Awarding additional securities free of payment16.Rights Issue: Issue of new ordinary shares to existing shareholders at a discounted price17.Mergers & Acquisitions: Combination of companies where shares are exchanged18.Stock Splits/Reverse Splits: Splitting or consolidating shares according to a set ratio19.Adjustment Formulas:Special Dividends: Adjustment Factor (AF) = $(P_{cum} - D) / P_{cum}$20.Bonus Issue: $AF = O / (O + N)$ where O is old shares and N is new shares21.Rights Issue: $AF = P_{ex} / P_{cum}$ (Theoretical ex-right price / Cum-right price)22.Stock Split: $AF = O / N$23.Mergers: If liquid, old instruments are replaced with new ones using ratio $O/N$24.
+
+ 
+ [Margin Calculation Methodology]
+ Source File: initial-margin-calculation-methodology.pdf
+ Methodology: Initial Margins (IMs) are calculated based on the Historical Value at Risk (VaR) methodology25.Parameters:Historical Data: 750 trading days (3 years) of spot market data is used26.Daily Returns: Calculated as the natural log of daily returns ($ln(P_t / P_{t-1})$)27.Confidence Interval: A conservative confidence interval of 99.95% is used28.VaR Calculation: Rank returns from largest to smallest and pick the return falling in the 99.95 percentile29.Initial Margin Formula: $IM = Contract Size \times VaR \times Current Market Price$30.Liquidation Period Scale Up:The Exchange uses a two-day liquidation period.IM is scaled by $\sqrt{2}$ ($IM \times \sqrt{2}$)31.Further-Dated Contracts: Calculated using a 50% confidence interval to determine the increment between contract expiries
+
+[NSE Derivatives Market Membership Criteria & Fees]
+Source File: nse-derivatives-membership-criteria-and-fees-february-2021.pdf
+
+Membership Categories:
+
+Clearing Member (CM): Performs clearing and settlement for the market. Requires KES 1 Billion Net Worth.
+
+Trading Member (TM): Trades on behalf of clients or own proprietary account. Requires 13 weeks operating costs capital adequacy.
+
+Trading Member (Proprietary): Trades only for own proprietary account. Requires 10 weeks operating costs capital adequacy.
+
+
+Non-Executing Member (Custodians): Accepts trades executed on behalf of custodial clients to facilitate settlement.
+
+Fees:
+
+Clearing Member: Joining KES 500,000; Annual KES 100,000.
+
+Trading Member: Joining KES 100,000; Annual KES 100,000.
+
+Proprietary TM: Joining KES 50,000; Annual KES 50,000.
+
+Non-Executing Member: Joining KES 100,000; Annual KES 100,000.
+
+
+Application Documents: Cover letter, Certificate of Incorporation, Company PIN, CR12, etc..
+
+[Default Handling Procedure]
+Source File: default-handling-procedure.pdf
+Scope: Covers defaults by Clients, Trading Members (TM), and Clearing Members (CM).
+Client Default: Typically handled by the TM who performed KYC and collects margin. The TM is required to stand good for their direct clients.
+TM Default: Handled by the CM. The CM performs KYC on the TM and collects margin.
+
+
+CM Default: Handled by the Exchange/Clearing House (NSE Clear).
+
+Settlement Guarantee Fund (SGF) Usage Order:
+Defaulter's Collateral.
+Defaulter's SGF Contribution.
+NSE Clear's Skin-in-the-Game (25% of SGF contribution).
+Non-defaulting Members' SGF Contributions.
+NSE Clear Equity.
+Liquidation Strategies:
+Auctioning: Selling off the portfolio to select clients or brokers.
+Prop Book: Taking positions onto the TM's prop books at a fair price.
+Market Closeout: Executing trades in the market to net off positions.
+
+[Internal Control Guidelines for Clearing and Trading Members]
+Source File: internal-controls-for-clearing-and-trading-members.pdf
+
+Adequacy of Systems:
+Members must ensure systems and connections operate properly and have adequate capacity.
+Must have adequate trade execution, recording, reporting, clearing, and settlement procedures.
+Must have sufficient staff with adequate knowledge and training.
+
+Planning and Assessment:
+Members should establish comprehensive planning and assessment programs to test system operation, capacity, and security.
+Programs can be established under outsourcing arrangements.
+
+Compliance:
+Members must appoint one or more compliance officers competent to advise on the application of these guidelines and Rules.
+
+ [NSE Clear Backtesting Policy]
+Source File: nse-clear-backtesting-policy.pdf
+Definition: Backtesting compares margin collected against a portfolio of positions to the realized losses at the end of the liquidation period had a default occurred.
+
+Frequency: Backtests are carried out daily.
+Parameters Tested:
+Every single client portfolio.
+Every single contract (underlying and expiry date combination).
+
+Process:
+Isolate client portfolio and margin collected.
+Determine actual (realized) profit/loss using the Margin Period of Risk (MPOR).
+Identify instances where margin was insufficient (exceptions).
+
+Governance:
+Carried out by NSE Derivatives Risk Management Team.
+Results shared with NSE Clear Management team.
+Exceptions reported to Derivatives Risk Management Committee and Derivatives Market Oversight Committee quarterly.
+
+
+[NSE Derivatives Settlement Guarantee Fund Rules]
+Source File: nse-derivatives-settlement-guarantee-fund-rules.pdf
+
+Name: NSE Derivatives Settlement Guarantee Fund ("the Guarantee Fund").
+
+Administration:
+Trustees (Board of Directors of NSE or appointed persons) are the controlling body.
+NSE acts as the secretary.
+
+Assets:
+Held in the name of the Fund or a nominee company.
+Includes contributions from members, penalties, interest, and other sources.
+
+Claims:
+The Fund is used to discharge claims accepted by the trustees and obligations arising from the derivatives exchange business.
+Used only after the defaulter's assets are exhausted.
+
+[NSE Derivatives Investor Protection Fund Rules]
+Source File: nse-derivatives-investor-protection-fund-rules.pdf
+Purpose: To provide compensation to investors (Claimants) in the Derivatives Market.
+
+Claimant Definition: Any client of a Trading Member and/or Non-Executing Member making a genuine and bonafide claim.
+
+Claim Eligibility:
+Claims relate to defalcation or fraudulent misuse of property/authority by a Trading Member.
+Claimant must have given authority over property to the Member.
+
+
+Trustees: Acquire, hold, and administer the Assets of the Fund.
+
+Claims Process:
+Claims must be submitted to Trustees.
+Trustees refer claims to the Management Committee for consideration.
+Payment is made from the Fund's assets (NSE/NSE Clear money is not available for these claims)
+
 
         [OFFICIAL_FAQ]
         Q:What products are traded at the Nairobi Securities Exchange?
@@ -539,6 +1097,23 @@ Flexibility: Implement various strategies to profit in different market conditio
 
         Q:How can I start trading options on the NSE?
         A:Open an account with a derivatives licensed trading member (stockbroker or investment bank). The member will provide you with access to the online trading platform.
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
         """
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(1))
