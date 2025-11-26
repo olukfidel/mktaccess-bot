@@ -1,6 +1,6 @@
 streamlit
 openai
-pinecone
+pinecone>=3.0.0
 beautifulsoup4
 requests
 tiktoken
