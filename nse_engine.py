@@ -542,19 +542,13 @@ Mark-to-Market MethodologySource File: mark-to-market-methodology-april-2021.pdf
  Definition: A Corporate Action is an action that brings material change to a company and impacts shareholders14.Types of Corporate Actions Considered:Special Dividends: One-time distribution of earnings from exceptional profits15.Bonus/Script Issue: Awarding additional securities free of payment16.Rights Issue: Issue of new ordinary shares to existing shareholders at a discounted price17.Mergers & Acquisitions: Combination of companies where shares are exchanged18.Stock Splits/Reverse Splits: Splitting or consolidating shares according to a set ratio19.Adjustment Formulas:Special Dividends: Adjustment Factor (AF) = $(P_{cum} - D) / P_{cum}$20.Bonus Issue: $AF = O / (O + N)$ where O is old shares and N is new shares21.Rights Issue: $AF = P_{ex} / P_{cum}$ (Theoretical ex-right price / Cum-right price)22.Stock Split: $AF = O / N$23.Mergers: If liquid, old instruments are replaced with new ones using ratio $O/N$24.
 
  
- [Margin Calculation Methodology]
- Source File: initial-margin-calculation-methodology.pdf
- Methodology: Initial Margins (IMs) are calculated based on the Historical Value at Risk (VaR) methodology25.Parameters:Historical Data: 750 trading days (3 years) of spot market data is used26.Daily Returns: Calculated as the natural log of daily returns ($ln(P_t / P_{t-1})$)27.Confidence Interval: A conservative confidence interval of 99.95% is used28.VaR Calculation: Rank returns from largest to smallest and pick the return falling in the 99.95 percentile29.Initial Margin Formula: $IM = Contract Size \times VaR \times Current Market Price$30.Liquidation Period Scale Up:The Exchange uses a two-day liquidation period.IM is scaled by $\sqrt{2}$ ($IM \times \sqrt{2}$)31.Further-Dated Contracts: Calculated using a 50% confidence interval to determine the increment between contract expiries
-
 [NSE Derivatives Market Membership Criteria & Fees]
 Source File: nse-derivatives-membership-criteria-and-fees-february-2021.pdf
 
 Membership Categories:
 
 Clearing Member (CM): Performs clearing and settlement for the market. Requires KES 1 Billion Net Worth.
-
 Trading Member (TM): Trades on behalf of clients or own proprietary account. Requires 13 weeks operating costs capital adequacy.
-
 Trading Member (Proprietary): Trades only for own proprietary account. Requires 10 weeks operating costs capital adequacy.
 
 
@@ -1348,7 +1342,7 @@ Flexibility: Implement various strategies to profit in different market conditio
         RULES: 
         - Use [OFFICIAL_FACT_SHEET] for basics.
         - Prioritize [OFFICIAL_FAQ] content.
-        - If unsure, say "I cannot find that specific info."
+        - If unsure, say "My apologies. I cannot find that specific info. I will continue updating my market knowlegde"
         CONTEXT: {context_text}"""
 
         stream = self.client.chat.completions.create(
