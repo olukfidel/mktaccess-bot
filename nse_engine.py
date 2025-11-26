@@ -78,10 +78,10 @@ class NSEKnowledgeBase:
         Independent Non-Executive Director: Mr. Thomas Mulwa
         
         Trading Hours:(Monday - Friday, Excluding Public Holidays)
-    - Pre-Open Session: 09:00 AM - 09:30 AM
-    - Continuous Trading: 09:30 AM - 03:00 PM
-    - Closing Session: 03:00 PM onwards
-    Pre-Open Session: 09:00 am - 09:30 am
+        - Pre-Open Session: 09:00 AM - 09:30 AM
+        - Continuous Trading: 09:30 AM - 03:00 PM
+        - Closing Session: 03:00 PM onwards
+        -Pre-Open Session: 09:00 am - 09:30 am
 
         Currency: Kenyan Shilling (KES)
         Regulator: Capital Markets Authority (CMA)
@@ -160,7 +160,6 @@ Latest Changes (21 May 2025):
 - Diamond Trust Bank Kenya Ltd added
 
 The index is calculated and disseminated in real-time during trading hours. The base date is 1st February 2008 with a base value of 5,000 points.
-
 This document is reviewed and approved by the NSE Trading Committee. The latest version is always available at https://www.nse.co.ke/rules/
 
 
@@ -324,8 +323,1237 @@ Current Constituents (as at 21 May 2025):
 10. Safaricom Plc
 
 Calculation: Base-weighted aggregate methodology (market capitalization/value weighted, float adjusted). Formula: NSE10 = (Current Market Value / Base Market Value) × 1000
-
 The index is reviewed during the last week of every calendar year with divisor adjustments for corporate actions.
+
+[OFFICIAL_NSE_LISTED_COMPANIES_NOVEMBER_2025]
+SOURCE: Nairobi Securities Exchange – Full List of Listed Companies (as at 26 November 2025)
+
+MAIN INVESTMENT MARKET SEGMENT (MIMS) – EQUITY
+1. ABSA Bank Kenya Plc – ABSA
+2. Bakri Energy Kenya Ltd – BAKRI
+3. B.O.C Kenya Plc – BOC
+4. British American Tobacco Kenya Plc – BAT
+5. Carbacid Investments Plc – CARB
+6. Centum Investment Company Plc – CTUM
+7. Diamond Trust Bank Kenya Ltd – DTK
+8. East African Breweries Plc – EABL
+9. Equity Group Holdings Plc – EQTY
+10. HF Group Plc – HFCK
+11. I&M Group Plc – IMH
+12. Jubilee Holdings Ltd – JUB
+13. KCB Group Plc – KCB
+14. KenGen Company Plc – KEGN
+15. Kenya Power & Lighting Company Plc – KPLC
+16. Kenya Reinsurance Corporation Ltd – KNRE
+17. Liberty Kenya Holdings Plc – LBTY
+18. Nairobi Securities Exchange Plc – NSE
+19. NCBA Group Plc – NCBA
+20. Safaricom Plc – SCOM
+21. Standard Chartered Bank Kenya Ltd – SCBK
+22. Stanbic Holdings Plc – SBIC
+23. The Co-operative Bank of Kenya Ltd – COOP
+24. TotalEnergies Marketing Kenya Plc – TOTL
+25. Umeme Limited – UMME
+26. BK Group Plc (Bank of Kigali) – BKG
+27. Britam Holdings Plc – BRIT
+28. CIC Insurance Group Ltd – CIC
+29. Flame Tree Group Holdings Ltd – FTGH
+30. Home Afrika Ltd – HAFR
+31. ILAM Fahari I-REIT – ILAFM
+32. Kakuzi Plc – KUKZ
+33. Kapchorua Tea Kenya Plc – KAPC
+34. Limuru Tea Plc – LIMT
+35. Longhorn Publishers Plc – LKL
+36. Nation Media Group Plc – NMG
+37. NewGold Issuer Ltd – NEWGOLD
+38. Olympia Capital Holdings Ltd – OCH
+39. Sameer Africa Plc – SMER
+40. Sanlam Kenya Plc – SLAM
+41. Sasini Plc – SASN
+42. TPS Eastern Africa (Serena) Ltd – TPSE
+43. Trans-Century Plc – TCL
+44. WPP Scangroup Plc – SCAN
+45. Williamson Tea Kenya Plc – WTJK
+
+GROWTH ENTERPRISE MARKET SEGMENT (GEMS)
+1. Homeboyz Entertainment Plc – HBE
+
+FIXED INCOME SECURITIES (CORPORATE BONDS & COMMERCIAL PAPER)
+Over 120 active fixed-income instruments from Government of Kenya, Kenya Electricity Generating Company, Centum Investment, Britam, Family Bank, Housing Finance, I&M Bank, KCB Bank, NCBA Bank, Co-operative Bank, ABSA Bank, Stanbic Bank, etc. Full list available at https://www.nse.co.ke/bonds/
+
+REAL ESTATE INVESTMENT TRUSTS (REITs)
+1. ILAM Fahari I-REIT (I-REIT) – ILAFM
+2. Laptrust Imara I-REIT (I-REIT) – Under registration
+3. Acorn D-REIT & I-REIT – In process
+
+EXCHANGE TRADED FUNDS (ETFs)
+1. NewGold ETF – Tracks price of physical gold
+
+TOTAL LISTED EQUITY SECURITIES: 66 companies (65 MIMS + 1 GEMS)
+TOTAL MARKET CAPITALIZATION (Nov 2025): Approximately KES 2.4 trillion
+CEO: Mr. Frank Mwiti
+Trading Hours: Monday–Friday, 10:00 a.m. – 3:00 p.m. (Pre-open 9:30–10:00 a.m.)
+Official Website: https://www.nse.co.ke
+Data Room: https://www.nse.co.ke/market-data/
+
+
+[OFFICIAL_NSE_10_SHARE_INDEX_FUTURES_RULES_V2]
+SOURCE: https://www.nse.co.ke/derivatives/equity-index-futures/ – NSE 10 Share Index Futures Ground Rules v2 (November 26, 2025)
+
+NEXT Equity Index Futures are derivative instruments that give investors exposure to price movements on an underlying index. Market participants can profit from the price movements of a basket of equities without trading the individual constituents.
+
+An index futures contract gives investors the ability to buy or sell an underlying listed financial instrument at a fixed price on a future date. These products are cash settled and easily accessible via NEXT members. The NSE shall initially construct Equity Index Futures contracts based on the NSE 10 Share Index.
+
+NSE Derivatives Market
+
+Category of contract: Equity Index Future
+
+Underlying financial instrument: Equity Index listed on the NSE E.g. NSE10 Share Index – N10I
+
+System code: Jun19 N10I
+
+Contract months: Quarterly (March, June, September and December).
+
+Expiry dates: Third Thursday of expiry month. (If the expiry date is a public holiday then the previous business day will be used.)
+
+Expiry times: 15H00 Kenyan time.
+
+Listing program: Quarterly
+
+Valuation method on expiry: Based on the volume weighted average price (VWAP) of the underlying instrument for liquid contracts, and the theoretical price (spot + cost of carry) for illiquid contracts.
+
+Settlement methodology: Cash settlement.
+
+Contract size: One index point equals one hundred Kenyan Shillings. (KES 100.00)
+
+Minimum price movement (Quote spread): One index point (KES 100.00)
+
+Initial Margin requirements: As determined by the NSE Methodology.
+
+Mark-to-market: Explicit daily. Based on the volume weighted average price (VWAP) of the underlying for liquid contracts, and the theoretical price (spot + cost of carry) for illiquid contracts.
+
+Market trading times: As determined by the NSE 09H30 to 15H00 Kenyan time
+
+Market fees:
+
+| Participant | Percentage |
+|-------------|------------|
+| NSE Clear   | 0.02%      |
+| Clearing Member | 0.02% |
+| Trading Member | 0.08% |
+| IPF Levy    | 0.01%      |
+| CMA Fee     | 0.01%      |
+| TOTAL       | 0.14%      |
+
+The percentages indicated above will be used to calculate the fees based on the notional contract value.
+
+NEXT Equity Index Futures allow investors to get some form of "insurance" for their stock portfolio by protecting portfolios from potential price declines;
+
+Benefits of trading NEXT Equity Index Futures:
+
+- Price transparency and liquidity. These contracts can be sold as easily as they can be bought;
+
+- Lower transaction fees than those incurred when buying or selling the basket of securities making up the index;
+
+- Reduction of counter-party risk a result of trading via the exchange; and
+
+- Centralized clearing.
+
+
+
+[OFFICIAL_NSE_SINGLE_STOCK_FUTURES_RULES_V2]
+SOURCE: https://www.nse.co.ke/derivatives/single-stock-futures/ – NEXT Single Stock Futures Ground Rules v2 (November 26, 2025)
+
+NEXT Single Stock Futures are derivative instruments that give investors exposure to price movements on an underlying stock. Parties agree to exchange a specified number of stocks in a company for a price agreed today (the futures price). NEXT Single Stock Futures will initially be cash settled.
+
+Benefits:
+- Provide an effective and transparent hedge against unfavorable share price movements;
+- They are liquid and easy to trade instruments;
+- Positions in single stock futures allow investors to benefit from downwards or upwards movement of share prices; and
+- Investors can have exposure on share price movements without owning the underlying share.
+
+Contract Specifications:
+- Category of contract: Single Stock Future
+- Underlying financial instrument: Single stock listed on the NSE E.g. Equity Group Holdings Plc. – EQTY
+- System code: Jun19 EQTY
+- Contract months: Quarterly (March, June, September and December).
+- Expiry dates: Third Thursday of expiry month. (If the expiry date is a public holiday then the previous business day will be used.)
+- Expiry times: 15H00 Kenyan time.
+- Listing program: Quarterly
+- Valuation method on expiry: Based on the volume weighted average price (VWAP) of the underlying instrument for liquid contracts, and the theoretical price (spot + cost of carry) for illiquid contracts.
+- Settlement methodology: Cash settlement.
+- Contract size: For shares trading below KES 100: One contract equals 1,000 underlying shares. For shares trading above KES 100: One contract equals 100 underlying shares.
+- Minimum price movement (Quote spread):
+
+| Price Range   | Tick Size (KES) |
+|---------------|-----------------|
+| Below 100.00  | 0.01            |
+| ≥ 100.00 < 500.00 | 0.05        |
+| ≥ 500.00      | 0.25            |
+
+- Initial Margin requirements: As determined by the NSE Methodology.
+- Mark-to-market: Explicit daily. Based on the volume weighted average price (VWAP) of the underlying for liquid contracts, and the theoretical price (spot + cost of carry) for illiquid contracts.
+
+Trading Hours: Market trading times: As determined by the NSE 09H30 to 15H00 Kenyan time.
+
+Market fees:
+
+| Participant   | Percentage |
+|---------------|------------|
+| NSE Clear     | 0.025%     |
+| Clearing Member | 0.025%  |
+| Trading Member | 0.10%   |
+| IPF Levy      | 0.01%     |
+| CMA Fee       | 0.01%     |
+| TOTAL         | 0.17%     |
+
+The percentages indicated above will be used to calculate the fees based on the notional contract value.
+
+
+[OFFICIAL_NSE_OPTIONS_ON_FUTURES_RULES_V1]
+SOURCE: https://www.nse.co.ke/derivatives/options-on-futures/ – NSE Options on Futures Ground Rules v1 (November 26, 2025)
+
+An option is a contract that gives the buyer the right, but not the obligation, to sell or buy a particular asset at a particular price, on or before a specified date. The seller of the option, conversely, assumes an obligation in respect of the underlying asset upon which the option has been traded.
+
+Types:
+- A call option is an option to buy an asset (the underlying) for a specified price (the strike or exercise price), on or before a specified date.
+- A put option is an option to sell an asset for a specified price on or before a specified date.
+
+Buyer and Seller: The buyer of an options contract is said to be long, or the holder or owner of the contract. The seller of an options contract is said to be short, or the writer of the contract.
+
+Underlying Assets: Options are available on a variety of underlying assets – physical assets, like oil and sugar, and financial assets, such as cash shares and FX forwards. The option may be based on a futures contract, where the underlying asset is a future; these are known as options on futures.
+
+NSE Derivatives Market - Options on Single Stock Future
+
+Category of Contract: Options on Single Stock Future
+
+Underlying Financial Instrument: Single stock futures listed on the NSE – Safaricom Plc – SCOM
+
+System Code: 19 SEP 24 SCOM 20.00 CALL/PUT
+
+Contract Months: Monthly or quarterly (March, June, September and December).
+
+Expiry Dates: The third Thursday of every expiry month. (If the expiry date is a public holiday then the previous business day will be used.)
+
+Expiry Times: At 15H00 Kenyan time.
+
+Listing Program: Monthly or Quarterly
+
+Valuation Method on Expiry: This will be based on the volume weighted average price of the underlying for liquid contracts, and the theoretical price (spot + cost of carry) for illiquid contracts.
+
+Settlement Methodology: Cash settled through the NSE.
+
+Contract Size: One options contract equals 1 underlying single stock futures contract.
+
+Minimum Price Movement (Quote Spread): In Kenyan Shillings per two decimal places. (KES 0.01)
+
+Mark-to-Market: Explicit daily. This is based on the volume weighted average price of the underlying for liquid contracts, and the theoretical price (spot + cost of carry) for illiquid contracts.
+
+Market Trading Times: As determined by the NSE (09H00 to 15H00) local Kenyan time.
+
+Market Fees:
+
+| Participant    | Percentage |
+|----------------|------------|
+| NSE Clear      | 0.0125%    |
+| Clearing Member| 0.0125%    |
+| Trading Member | 0.05%      |
+| IPF Levy       | 0.005%     |
+| CMA Fee        | 0.005%     |
+| TOTAL          | 0.085%     |
+
+The percentages indicated above will be used to calculate the fees based on the notional contract value.
+
+Benefits of Trading NEXT Options on Futures:
+- Leverage: Control a large position with a relatively small investment.
+- Risk Management: option holders are protected from adverse movements in the market whereby risk is limited to the premium paid while potential gains are
+- Investors can incorporate options trading strategies to their portfolio’s to enhance returns and manage market risk.
+- Flexibility: Implement various strategies to profit in different market conditions.
+
+
+[OFFICIAL_NSE_DERIVATIVES_MEMBERSHIP_REQUIREMENTS_2025]
+SOURCE: https://www.nse.co.ke/derivatives/membership-requirements/ – NSE NEXT Derivatives Membership Requirements (as at November 26, 2025)
+
+Undertaking to Comply with NSE Rules: Signed undertaking to comply with Rule 3 on NEXT Membership.
+
+Key Responsibilities:
+- Clearing Member: Perform clearing and settlement for the market.
+- Trading Member: Trade on behalf of clients or own proprietary account.
+- Trading Members (Proprietary Trading): Trade only for own proprietary account.
+- Non-Executing Member (Custodians): Acceptance of trades executed on behalf of custodial clients in order to facilitate settlement.
+
+Net Worth/Capital Adequacy:
+- Clearing Member: KES 1 Billion and as mandated by the Central Bank of Kenya.
+- Trading Member: Thirteen weeks operating costs.
+- Trading Members (Proprietary Trading): Ten weeks operating costs.
+- Non-Executing Member (Custodians): Thirteen weeks operating costs.
+
+NEXT Membership Fees:
+- Clearing Member: Joining: KES 500,000; Annual: KES 100,000.
+- Trading Member: Joining: KES 100,000; Annual: KES 100,000.
+- Trading Members (Proprietary Trading): Joining: KES 50,000; Annual: KES 50,000.
+- Non-Executing Member (Custodians): Joining: KES 100,000; Annual: KES 100,000.
+
+Guarantee Fund Deposit: All clearing members must make an undertaking with the clearing house to cover their obligations to the Clearing House to the extent of their market positions and their balance sheets.
+
+Investor Protection Fund:
+- Clearing Member: N/A.
+- Trading Member: Onetime, refundable maximum of KES 200,000. Contributions also based on regular directives issued by the NSE.
+- Trading Members (Proprietary Trading): Onetime, refundable maximum of KES 100,000. Contributions also based on regular directives issued by the NSE.
+- Non-Executing Member (Custodians): Onetime, refundable maximum of KES 200,000. Contributions also based on regular directives issued by the NSE.
+
+| Requirement                  | Clearing Member                                                                 | Trading Member                                                                 | Trading Members (Proprietary Trading)                                          | Non-Executing Member (Custodians)                                               |
+|------------------------------|---------------------------------------------------------------------------------|--------------------------------------------------------------------------------|--------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| Undertaking to Comply with NSE Rules | Signed undertaking to comply with Rule 3 on NEXT Membership.                     | Signed undertaking to comply with Rule 3 on NEXT Membership.                     | Signed undertaking to comply with Rule 3 on NEXT Membership.                     | Signed undertaking to comply with Rule 3 on NEXT Membership.                     |
+| Key Responsibilities         | Perform clearing and settlement for the market.                                  | Trade on behalf of clients or own proprietary account.                          | Trade only for own proprietary account.                                         | Acceptance of trades executed on behalf of custodial clients in order to facilitate settlement. |
+| Net Worth/Capital Adequacy   | KES 1 Billion and as mandated by the Central Bank of Kenya.                      | Thirteen weeks operating costs.                                                 | Ten weeks operating costs.                                                      | Thirteen weeks operating costs.                                                 |
+| NEXT Membership Fees         | Joining: KES 500,000 Annual: KES 100,000                                         | Joining: KES 100,000 Annual: KES 100,000                                        | Joining: KES 50,000 Annual: KES 50,000                                          | Joining: KES 100,000 Annual: KES 100,000                                        |
+| Guarantee Fund Deposit       | All clearing members must make an undertaking with the clearing house to cover their obligations to the Clearing House to the extent of their market positions and their balance sheets. | –                                                                              | –                                                                              | –                                                                              |
+| Investor Protection Fund     | N/A                                                                              | Onetime, refundable maximum of KES 200,000. Contributions also based on regular directives issued by the NSE. | Onetime, refundable maximum of KES 100,000. Contributions also based on regular directives issued by the NSE. | Onetime, refundable maximum of KES 200,000. Contributions also based on regular directives issued by the NSE. |
+
+
+
+[OFFICIAL_NSE_DERIVATIVES_ACCREDITED_MEMBERS_2025]
+SOURCE: https://www.nse.co.ke/derivatives/accredited-members/ – NSE Derivatives (NEXT) Market Accredited Members (as at November 26, 2025)
+
+Accredited Members (Trading Members):
+| Member Name              | Address                                                                 | Contact Details                                                                 | Notes |
+|--------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------|-------|
+| AIB-AXYS Africa          | The Promenade 5th Floor, General Mathenge Drive, Westlands, P.O. Box 43676-00100 | +254-020-7602525 / 0202226440                                                   | -     |
+| Faida Investment Bank Ltd| Crawford Business park, Ground Floor, State House Road, P. O. Box 45236-00100 | +254-20-7606026-35                                                              | -     |
+| Sterling Capital Ltd     | Delta Corner Annex, 5th Floor, Ring Road, Westlands, Nairobi, P.O. Box 45080-00100 | 2213914 / 244077 / 0723153219 / 0734219146                                      | -     |
+| Standard Investment Bank Ltd | ICEA Building, 16th floor, P. O. Box 13714-00800                          | 2228963 / 2228967 / 2228969                                                     | -     |
+| Genghis Capital Ltd      | 1st Floor, Purshottam Place Building, Westlands Road, P.O Box 9959-00100, Nairobi Kenya | +254 730145000 / +254 709185000                                                 | -     |
+| NCBA Investment Bank     | Mara Rd. Upper-hill, P.O Box 44599-00100, Nairobi                        | +254 20 2884444 / +254 711 056444 / +254 732 156444                             | https://investment-bank.ncbagroup.com/ |
+| Scope Markets            | Westide Towers, 4th Floor, Office 402 and 403, Lower Kabete Road, Westlands | +254 20 5005100, +254 730 831000, support@scopemarkets.co.ke                    | www.scopemarkets.co.ke |
+| Kingdom Securities Limited | Co-operative Bank House, 5th Floor, Haile Selassie Avenue, Nairobi, P.O. Box 48231-00100 | +254 711 049039 / +254 20 2776000 / +254 703 027000, info@kingdomsecurities.co.ke | www.kingdomsecurities.co.ke |
+
+Non-Executing Members / Custodians:
+| Member Name              | Address                                                                 | Contact Details                                                                 | Website                  |
+|--------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------|--------------------------|
+| Co-operative Bank of Kenya | Co-operatives Bank House, Haile Selassie Avenue, P.O. Box 48231-0100, Nairobi, Kenya | +254 20 277 6000 / +254 703 027 000                                             | www.co-opbank.co.ke      |
+| NCBA Custodial Services  | NCBA Bank Headquarters, Mara Rd, Upperhill, P.O. Box 44599-00100, Nairobi, Kenya | -                                                                               | www.ncbagroup.com        |
+
+Clearing Members:
+| Member Name              | Address                                                                 | Contact Details                                                                 | Website                  |
+|--------------------------|-------------------------------------------------------------------------|---------------------------------------------------------------------------------|--------------------------|
+| Co-operative Bank of Kenya | Co-operative Bank House, Haile Selassie Avenue, P.O. Box 48231-00100, Nairobi, Kenya | +254 20 277 6000 / +254 703 027 000                                             | www.co-opbank.co.ke      |
+
+Notes: These are the accredited members for the NSE Derivatives (NEXT) Market. Categories include Trading Members, Non-Executing Members/Custodians, and Clearing Members. For more details on membership requirements, refer to NSE Derivatives Membership Requirements.
+
+
+[OFFICIAL_NSE_TRADING_PARTICIPANTS_LIST_NOVEMBER_2025]
+SOURCE: https://www.nse.co.ke/list-of-trading-participants/ – Full List of NSE Trading Participants (as at November 26, 2025)
+
+### Full Trading Participants
+
+| Name | Address | Phone | Email | Notes |
+|------|---------|-------|-------|-------|
+| Dyer & Blair Investment Bank Ltd - B02 | Goodman Tower, 7th floor, P.O. Box 45396 00100 | 0709930000 |  |  |
+| Francis Drummond & Company Limited - B01 | Finance House, 14th Floor, Loita Street (Opposite GPO Kenyatta Avenue, Nairobi) P.O. Box 45465 00100 | 318690/318689 |  |  |
+| Suntra Investment Bank Ltd - B07 | Nation Centre,7th Floor, P.O. Box 74016-00200 | 2870000 / 247530 / 2223330 / 2211846 |  |  |
+| OMNI MARCHE SECURITE (OMS) AFRICA LTD - B08 | 4th Avenue Towers, 13th Floor, 4th Ngong Avenue, Upperhill P.O. Box 2151–00202, Kenyatta, Nairobi | 0709 004 330 / 0709 004 331 / 0709 004 332 / 0724 226 600 / 0709 004 300 | info@omsafrica.co.ke |  |
+| SBG Securities Ltd - B09 | CfC Stanbic Centre, 58 Westlands Road, P. O. Box 47198 – 00100 | 3638900 |  |  |
+| Kingdom Securities Ltd - B11 | Co-operative Bank House,5th Floor, P.O Box 48231 00100 | +254711049039, +254711049195, +254711049956, +254711049657 |  |  |
+| AIB-AXYS Africa -B12 | The Promenade 5th Floor, General Mathenge Drive, Westlands, P.O. Box 43676- 00100 | +254-020-7602525 / 0202226440 |  |  |
+| ABC Capital Ltd - B14 | Mezzanine, ABC Bank House, Woodvale Grove, Westlands P. O. BOX 34137 GPO O0100 Nairobi | (+254 20) 2246036, 2242534, 316143, 2241142, 2241046, 2241148 |  |  |
+| Sterling Capital Ltd - B15 | Delta Corner Annex building – 5th Floor, Ring Road, P.O. Box 45080- 00100 | 2213914 / 244077 / 0723153219 / 0734219146 |  |  |
+| Pergamon Investment Bank - B16 | 4th Floor, Delta Chambers, Waiyaki Way, Nairobi P.O Box 25749, Lavington | +254 709227100 |  |  |
+| Faida Investment Bank Ltd - B17 | Crawford Business park, Ground Floor, State House Road, P. O. Box 45236-00100 | +254-20-7606026-35 |  |  |
+| Standard Investment Bank Ltd - B20 | 16th floor JKUAT Building, Kenyatta Ave, Nairobi, Kenya | +254(0) 20 2277 000 / +254(0) 777 333 000 / +254(0) 793 333 000 |  |  |
+| Kestrel Capital (EA) Limited - B21 | 2nd Floor, Orbit Place, Westlands Road, P.O. Box 40005-00100 | 251758 / 2251893 / 2251815 |  |  |
+| Renaissance Capital (Kenya) Ltd -B24 | 10th Floor, Pramukh Tower, Westlands Road, Westlands, Nairobi Kenya | +254 (20) 368-2000 |  |  |
+| Genghis Capital Ltd - B19 | 1st Floor, Purshottam Place Building, Westlands Road, P.O Box 9959-00100, Nairobi Kenya | +254 730145000 / +254 709185000 |  |  |
+| NCBA Investment Bank Limited - B18 | 3rd Floor, NCBA Annex, Hospital Road, Upper Hill, P.O Box 44599-00100, Nairobi | +254 20 2884444, +254711056444, +254 732 156444 |  |  |
+| Equity Investment Bank Limited - B26 | Equity Centre, Hospital Road, Upper Hill, P.O Box 75104 – 00200 | +254-20-2262477, +254-732-112477 |  |  |
+| KCB Investment Bank | Kencom House 2nd Floor, P.O Box 48400 – 00100 | +254 711 012 000 / 734 108 200, +254 20 3270000 |  |  |
+| Absa Securities Limited - B28 | Absa Headquarters, Waiyaki Way, PO Box 30120, 00100 | +254(732)130120/ +254(722)130120 |  |  |
+| Capital A Investment Bank - B29 | Mayfair Suites 4th Floor, Parklands Road, Nairobi | +254 (20) 7605 650 / +254 (735) 571 530 / 020 205 5525 |  |  |
+| EFG Hermes Kenya Limited - B30 | Orbit Place, 8th Floor, Westlands Road, P.O Box 349, 00623 | +254 (020) 3743040 |  |  |
+| Dry Associates - B47 | Dry Associates Headquarters 188 Loresho Ridge Road, Loresho P.O. Box 684-00606, Nairobi | +254204450521 |  |  |
+
+Notes: These are the licensed stockbrokers authorized to trade on the NSE. For Fixed Income or Derivatives-specific participants, refer to respective NSE sections. Full list subject to NSE approvals and updates.
+
+
+
+[OFFICIAL_NSE_BROKER_BACK_OFFICE_STANDARDS_2024]
+SOURCE: Nairobi Securities Exchange – Guidelines and Specifications on Broker Back Office (BBO) for Trading Participants (Latest version, 2024)
+
+Purpose: To standardize Broker Back Office (BBO) systems used by all NSE Trading Participants to ensure seamless integration with the Automated Trading System (ATS), Central Depository & Settlement Corporation (CDSC), and NSE surveillance systems.
+
+Mandatory BBO Requirements (All Trading Participants):
+1. BBO systems must be certified and approved by the Nairobi Securities Exchange before going live.
+2. All BBOs must fully integrate with the NSE ATS via the approved FIX 4.4 protocol (or higher).
+3. Real-time order routing: All client and proprietary orders must pass through the BBO before hitting the ATS.
+4. Pre-trade risk controls mandatory:
+   - Maximum order size per client
+   - Maximum net position per client
+   - Maximum gross exposure per client
+   - Price deviation checks (cannot place orders >10% away from last traded price without override)
+   - Fat-finger protection
+5. All BBOs must generate and transmit the following daily files to NSE by 7:00 a.m.:
+   - Trade confirmation file
+   - Client portfolio positions file
+   - Cash movement file
+   - Corporate actions file
+6. Audit trail: Full 7-year retention of all orders, modifications, cancellations, and executions with timestamps.
+
+Connectivity Standards:
+- Primary connection: Leased line or MPLS (minimum 2 Mbps)
+- Backup connection: Mandatory secondary link (VSAT or 4G/5G failover)
+- All connections must terminate at the NSE Data Centre in NDC, Sameer Park
+
+Client Account Management:
+- Unique client code generation as per NSE naming convention: [BrokerCode][Year][Sequential6Digits]
+  Example: B0219000123
+- KYC/AML: Full CDD required before account activation
+- Segregation: Client funds and securities must be fully segregated from house accounts
+
+Reporting Obligations:
+Daily:
+- Client margin report
+- Exposure report
+- Suspicious transaction report (if any)
+
+Weekly:
+- Large exposure report (clients >5% of broker’s total exposure)
+
+Monthly:
+- Net capital computation
+- Fidelity fund contribution calculation
+
+Penalties for Non-Compliance:
+- First offence: Warning + KES 100,000 fine
+- Second offence: KES 500,000 fine + mandatory system audit
+- Third offence: Trading suspension until rectification
+
+Certification Process:
+1. Submit BBO for NSE lab testing (2-week process)
+2. Parallel run mandatory for 30 calendar days
+3. Sign-off by NSE ICT and Market Operations departments
+4. Go-live only after formal approval letter issued
+
+Approved BBO Vendors (as at 2024):
+- InfoTech BBO
+- Dymanex BBO
+- Orion BBO
+- In-house developed systems (only if fully compliant and certified)
+
+Contact for BBO Certification: bbo@nse.co.ke
+
+
+[OFFICIAL_NSE_HOW_TO_BECOME_TRADING_PARTICIPANT_2025]
+SOURCE: Nairobi Securities Exchange – "How to Become a Trading Participant" (Official NSE Document, latest as at November 2025)
+
+Step-by-Step Process to Become an NSE Trading Participant:
+
+1. Step 1 – Obtain No Objection from NSE
+   Applicant must first seek a formal “No Objection” from the Nairobi Securities Exchange before applying to the Capital Markets Authority (CMA) – as required under Regulation 15(10) of the Capital Markets (Licensing Requirements) (General) Regulations, 2002.
+
+2. Step 2 – Apply for CMA License
+   Submit formal application to the Capital Markets Authority (CMA) for a license as:
+   - Stockbroker
+   - Investment Bank
+   - Authorized Securities Dealer
+   - Or any other license category approved by CMA from time to time
+   Application governed by Regulations 14, 15 & 16 of the Capital Markets (Licensing Requirements) Regulations.
+
+3. Step 3 – Apply for Admission to NSE (After CMA License is Granted)
+   Upon receiving the CMA license, apply to the NSE for admission as a Trading Participant in accordance with the NSE Market Participants Rules, 2014.
+
+Qualification Criteria for Admission:
+✓ Must be a body corporate
+✓ Must hold a valid CMA license as stockbroker, investment bank, or authorized securities dealer
+✓ Pay the prescribed Market Access Fee (see below)
+✓ Attain all certifications required by NSE and/or CMA
+
+Application Requirements (Per Market Participants Rules 2014 – Rule 6.2 & 6.3):
+
+Information Required:
+i.   Details of operating systems and business procedures
+ii.  Amount, composition, and beneficial ownership of share capital + latest audited accounts
+iii. Confirmation that the applicant does not own (directly/indirectly) shares in any other Trading Participant
+iv.  Full board of directors and key personnel details
+v.   Declaration that no director/officer was part of a suspended/revoked Trading Participant
+vi.  Proof of arrangements with CDSC
+vii. Proof of Professional Indemnity Insurance subscription
+viii.Disclosure of multiple licenses (if any) and conflict-of-interest mitigation procedures
+ix.  Copies of risk manuals, operations procedures, and code of ethics
+
+Documents Required:
+i.   Duly signed application letter to the NSE
+ii.  Application Fee: KES 25,000,000 (non-refundable)
+iii. Annual Subscription: KES 100,000
+iv.  Certified copy of Certificate of Incorporation
+v.   Certified copy of Memorandum and Articles of Association
+vi.  Certified copy of CMA License
+vii. Any other documents reasonably required by the NSE
+
+Final Admission:
+Upon satisfaction of all requirements and full payment of the Market Access Fee (KES 25,000,000), the applicant is admitted into the Official List of Trading Participants and granted full trading rights on the NSE.
+
+Summary of Fees:
+- Application / Market Access Fee: KES 25,000,000
+- Annual Subscription: KES 100,000
+
+Note: The KES 25 million Market Access Fee is the single largest barrier to entry and is designed to ensure only well-capitalized, serious players become Trading Participants.
+
+
+
+[OFFICIAL_CMA_AML_CTF_GUIDELINES_CAPITAL_MARKETS]
+SOURCE: Capital Markets Authority – Guidelines on the Prevention of Money Laundering and Terrorism Financing in the Capital Markets (Gazette Notice No. 1421)
+
+Mandatory for all CMA-licensed entities (stockbrokers, investment banks, fund managers, REIT managers, custodians, etc.)
+
+Key Obligations:
+1. Board and senior management are ultimately responsible for AML/CTF compliance.
+2. Adopt a Risk-Based Approach – higher-risk clients require Enhanced Due Diligence (EDD).
+3. Customer Identification & Verification (KYC):
+   - Individuals: National ID / Passport + proof of address
+   - Companies: Certificate of Incorporation, Memorandum & Articles, board resolution, ID of directors & beneficial owners (>10 % ownership)
+   - PEPs (Politically Exposed Persons): Mandatory EDD + senior management approval
+4. Ongoing Monitoring of all client transactions and business relationships.
+5. Record-keeping: Minimum 7 years after account closure or transaction.
+6. Report Suspicious Transaction Reports (STRs) to the Financial Reporting Centre (FRC) within 7 days.
+7. Cash transactions above KES 1 million or USD 10,000 must be reported to FRC.
+8. No tipping-off – prohibited to inform client that a report has been filed.
+9. Annual AML/CTF training mandatory for all staff.
+10. Appoint a Money Laundering Reporting Officer (MLRO) at management level.
+11. Independent audit of AML/CTF programme at least every 2 years.
+
+Red Flags (Appendix I examples):
+- Client reluctant to provide KYC documents
+- Large or frequent cash deposits/withdrawals
+- Structuring transactions to avoid reporting thresholds
+- Use of shell companies with no real business activity
+- Sudden large activity in dormant accounts
+
+Non-compliance penalties: Up to KES 20 million fine or 10 years imprisonment.
+
+
+
+[OFFICIAL_NSE_DIRECT_MARKET_ACCESS_GUIDELINES_OCTOBER_2019]
+SOURCE: Nairobi Securities Exchange – Direct Market Access (DMA) Guidelines, October 2019
+
+Direct Market Access (DMA): A facility that allows a broker’s client to transmit orders electronically directly to the ATS without manual intervention by the broker.
+
+Types Permitted:
+- Sponsored Access (client uses broker’s member ID)
+- Direct Electronic Access (client has own connection but still under broker’s supervision)
+
+Mandatory Requirements:
+1. Only licensed Trading Participants may offer DMA.
+2. Written agreement between broker and client mandatory.
+3. Pre-trade risk controls must be applied by the broker (not the client):
+   - Price collars
+   - Maximum order size
+   - Fat-finger checks
+   - Kill switch
+4. All DMA orders must be tagged with unique client identifier.
+5. Broker remains fully responsible for all orders placed via DMA.
+6. Real-time monitoring of DMA client activity mandatory.
+7. Annual independent audit of DMA systems.
+8. NSE retains right to suspend DMA access instantly if risk controls fail.
+
+Prohibited: Naked/Unfiltered Sponsored Access (client using broker’s ID with no pre-trade checks).
+
+
+
+
+[OFFICIAL_NSE_DAY_TRADING_OPERATIONAL_GUIDELINES]
+SOURCE: Nairobi Securities Exchange – Day Trading Operational Guidelines (Latest)
+
+Day Trading: Buying and selling the same security on the same day.
+
+Key Rules:
+1. Day traders must maintain a minimum cash balance of KES 500,000 in their trading account at all times.
+2. Day traders are exempt from T+3 settlement – positions must be closed by 3:00 p.m.
+3. Brokers must tag day-trading accounts separately in the ATS.
+4. Maximum 4:1 intraday leverage allowed (25 % margin).
+5. If position not closed by market close, broker must square off automatically.
+6. Day-trading clients must sign a separate risk disclosure document.
+7. Brokers must submit daily day-trading report to NSE by 9:00 a.m. next day.
+8. Breach of any rule leads to immediate suspension of day-trading facility.
+
+Note: Only equities allowed for day trading – no bonds or derivatives.
+
+
+
+[OFFICIAL_NSE_BOND_QUOTATIONS_BOARD_GUIDELINES_MARCH_2024]
+SOURCE: Nairobi Securities Exchange – Operational Guidelines for the Bond Quotations Board, March 2024
+
+Purpose: To provide continuous two-way indicative quotes for benchmark government bonds to enhance liquidity.
+
+Mandatory for Designated Primary Dealers & Authorized Quotation Providers:
+1. Must provide live two-way quotes for all benchmark bonds (2 Y, 5 Y, 10 Y, 15 Y, 25 Y, 30 Y) from 9:00 a.m. to 3:00 p.m.
+2. Maximum bid-offer spread: 50 basis points (0.50 %).
+3. Minimum quote size: KES 50 million.
+4. Quotes must be firm and executable up to the quoted size.
+5. Failure to maintain quotes: First offence – warning; Second – KES 500,000 fine; Third – suspension from board.
+6. Daily quotation compliance report auto-generated by ATS and sent to NSE & CBK.
+7. Only bonds with remaining maturity > 1 year are eligible for quotation board.
+8. All trades executed via the board must be reported within 5 minutes.
+
+
+[OFFICIAL_NSE_STRATEGY_2025_2029]
+SOURCE: Nairobi Securities Exchange – NSE Strategic Plan 2025–2029 (Confidential, approved November 2025)
+
+Vision: To be Africa’s preferred securities exchange, inspiring the continent’s transformation.
+
+Mission: To provide a world-class trading, clearing, settlement and data dissemination platform that drives capital raising and wealth creation.
+
+Strategic Pillars (2025–2029):
+1. Deepen Capital Markets – Increase listed companies to 100+ and market cap to KES 5 trillion.
+2. Enhance Product Diversification – Launch SMEs board, commodities exchange, carbon credits, and crypto ETFs.
+3. Technology & Innovation – Full migration to cloud-based ATS, blockchain settlement pilot by 2027.
+4. Regional Integration – Operationalize EASEA single access point and cross-listing with Rwanda, Uganda, Tanzania.
+5. Investor Education & Inclusion – Target 5 million retail investors via mobile trading apps.
+6. Sustainability & ESG – Mandatory ESG reporting for all listed companies by 2028.
+
+Key Targets by 2029:
+- 100+ listed companies (from 66 in 2025)
+- 5 million active CDS accounts (from ~2.5 million)
+- 40 % of trading volume from retail investors
+- Top 3 African exchange by market capitalization
+- Full T+0 settlement for equities
+
+CEO Statement (Frank Mwiti): “The 2025–2029 strategy positions NSE as the gateway for capital into East Africa and beyond.”
+
+
+### 1. NSE Derivatives Default Handling Procedure (July 2017)
+
+There are four main categories of participants in the exchange derivatives market:  
+i. The Exchange / Clearing House;  
+ii. Clearing Members;  
+iii. Trading Members; and  
+iv. Clients  
+
+A default event can emanate from any of the above participants.  
+
+a. Default by Client  
+Typically, this will be handled by the Trading Member (TM) under whom the defaulting client signed up. The TM is best placed to handle the default because:  
+- They performed the initial KYC procedures on the Client, and so have all the appropriate details including the Client’s credit standing;  
+- They have been collecting margin from the Client, and so would have the appropriate cash buffer to pay for the costs associated with the closeout of the Client; and  
+- Participants are required to stand good for their direct clients.  
+
+b. Default by Trading Member  
+Typically, this will be handled by the Clearing Member (CM) under whom the defaulting TM signed up. The CM is best placed to handle the default because:  
+- They have been collecting margin from the TM, and so have the appropriate cash buffer to pay for the costs associated with the closeout of the TM;  
+- They have been closely examining the TM with regard to their cash flows and have information about their credit status; and  
+- A Trading Member is required to stand good for its Clients.  
+
+c. Default by Clearing Member  
+This is handled by the Exchange/ Clearing House. The Clearing House is best placed to handle the default because:  
+- They set out the criteria for clearing membership and stand above them in the market hierarchy structure; and  
+- They have some insight into the operations of the CMs through regular reports and disclosures.  
+- A Clearing Member is required to stand good for its Trading Members.
+
+
+
+
+### 2. Mark-to-Market Methodology (September 2019)
+
+All futures positions are marked-to-market based on the daily settlement price of the futures contracts at the end of each trading day.
+
+The profits/losses are computed as the difference between the price traded or the previous day's settlement price, as the case may be, and the current day's settlement price. The Clearing Members who have suffered a loss are required to pay the mark-to-market loss amount to the Clearing House which is passed on to the members who have made a profit. This is known as daily mark-to-market settlement.
+
+The mark-to-market price will be calculated through two methodologies:
+
+1. Volume Weighted Average Price (VWAP)  
+The Volume-Weighted Average Price (VWAP) is the ratio of the value of a traded security to that security's total volume traded over a particular time period. It is a means to determine a security's average trading price during a set time, taking into consideration both the price and quantity of the security being traded.  
+VWAP = Total Value Traded / Total Volume Traded  
+The full day’s VWAP will be the preferred method of calculating the settlement price for liquid contracts. All contracts that trade will be considered liquid and will be settled based on VWAP.
+
+2. Theoretical Price (Spot Price + Cost of Carry)  
+In the derivatives market, the cost of carry of a futures contract is the net cost of holding positions in the underlying security until the expiry of the futures contract. For equity futures this reflects finance (interest) costs and expected dividends.  
+All contracts that do not trade will be considered illiquid and will be settled based on the theoretical price.
+
+2.1 Single Stock Futures  
+The theoretical price will be calculated as follows:  
+𝐹 = (𝑆 × (1 + 𝑟)^(𝑡/364)) − 𝐹𝑉𝐷  
+Where;  
+F – Futures price (theoretical)  
+S – Spot price  
+r – Risk-free rate  
+FVD – Future value of expected dividends  
+t – Time to maturity  
+
+2.2 Equity Index Futures  
+The theoretical price will be calculated as follows:  
+𝐹 = 𝑆 × 𝑒^((𝑟−𝑑) 𝑡/364)  
+Where;  
+F – Futures price (theoretical)  
+S – Spot price  
+r – Risk-free rate  
+d – Index dividend yield  
+t – Time to maturity
+
+
+
+### 3. Initial Margin Calculation Methodology
+
+NSE Clear initial margins (IMs) are calculated based on the Historical Value at Risk (VaR) methodology outlined below:
+
+1. Historical Data  
+750 trading days (3 years) of spot market data is used to compute IMs for single stock futures and index futures.  
+Derivatives market data will be used once sufficient trading data is accumulated.
+
+2. Daily Returns  
+Across the dataset, calculate the natural log of daily returns and convert them into absolute figures:  
+ln (𝑃𝑡 / 𝑃𝑡−1)  
+Where;  
+Pt – Today’s price (volume weighted average price)  
+Pt-1 – Previous day’s price (volume weighted average price)
+
+3. Confidence Interval  
+As the market is still in its nascent stages, a conservative confidence interval of 99.95% will be used.
+
+4. VaR  
+Calculate VaR based on 750 data points and a 99.95% confidence interval:  
+Rank the returns from largest to smallest and pick out the return that falls in the 99.95 percentile.
+
+5. Initial Margin  
+The initial margin (IM) is calculated as:  
+𝐼𝑀 = Contract Size × VaR × Current Market Price
+
+6. Scale Up For Liquidation Period  
+The IM calculation thus far has been based on one-day returns however in practice liquidation of positions can take more than one day and the market also settles on a T+1 basis.  
+The Exchange will use a two-day liquidation period and so the IM figure will be calculated as:  
+𝐼𝑀 × √2
+
+7. Further-Dated Contracts  
+Repeat steps 1 to 6 using a 50% confidence interval and take the calculated figure as the increment between contract expiries.
+
+8. Final IMs Published  
+IMs are calculated on a daily basis as part of NSE Clear’s backtesting process. A 3-month average of these daily margins is calculated for each security and then rounded down to the nearest KES 100 before being published.  
+Initial margins are ordinarily reviewed on a quarterly basis but may also be reviewed on an ad hoc basis should market conditions require.
+
+
+
+### 4. Policy Guidance Note for Exchange Traded Funds (September 2015)
+
+About this Note  
+This Policy Guidance Note (PGN) is to be used in Kenya as a guide on the operational environment of ETFs, and to inform the ultimate design of a comprehensive legal and regulatory framework.
+
+Introduction  
+This note is a precursor to a comprehensive regulatory framework to allow for the operationalization of Exchange Traded Funds (ETFs) in Kenya.
+
+i. ETFs are a type of listed open-ended index/unit instrument bought or sold on a securities exchange. The index or unit may be composed of ordinary stocks, bonds, commodities, futures or a combination of real assets with the objective of allowing for exposure to a portfolio of securities, assets or indices whose price movement is in tandem with the price movement of the constituent underlying securities or commodities. An ETF can be a domestic or offshore product.
+
+ii. In case of any doubt, it is advised that direction be sought from the Capital Markets Authority (CMA).
+
+iii. This PGN aims to provide a guide to listing ETFs in Kenya, whilst identifying and mitigating the likely regulatory risks arising from ETF transactions in Kenya, to promote market confidence and integrity.
+
+Issuance of ETFs in Kenya  
+1. ETFs shall have their own market sub-segment – to be created by a relevant listing exchange.  
+2. ETFs shall have their own international security identification numbers and codes.  
+3. Domestic ETFs shall be subject to intra-day price fluctuation limits on trading like shares. However, off-shore ETFs’ intra-day price limits shall be based on the limits that have been imposed in their home jurisdiction and forex fluctuations. Domestic ETFs shall at the minimum, comply with internationally accepted principles of issuance and trading of ETFs.  
+4. Units in an exchange traded fund shall be listed and traded in Kenya Shillings.  
+5. For a start, the maximum ETFs’ fees charged shall not be more than that charged in the equities markets subject to revision by CMA notification. All fees shall be fully disclosed in the issuance or introduction documentation.  
+6. Where the ETF issuer is not a local entity, it shall meet the following minimum requirements:
+
+
+
+### 1. NSE Nominated Advisors (NOMAs) Rules, 2012
+
+**Key Facts – Nominated Advisors Rules, 2012**
+
+- A Nominated Advisor (NOMA) is a firm approved by the NSE to guide and advise issuers seeking listing on the Growth Enterprise Market Segment (GEMS).
+
+- Eligibility Criteria for NOMA:
+  - Must be a corporate finance advisory firm, licensed investment bank, stockbroker or commercial bank with a dedicated corporate finance division.
+  - Must have at least two qualified professionals with a minimum of five years’ relevant experience in corporate finance.
+  - Must demonstrate capacity to carry out due diligence and advise on compliance with GEMS rules.
+
+- Role of the NOMA:
+  - Advise the issuer on the application of GEMS rules.
+  - Ensure the issuer is properly guided before and during the listing process.
+  - Confirm to the Exchange that the issuer is suitable for listing on GEMS.
+  - Act as the primary point of contact between the issuer and the NSE post-listing.
+
+- Continuing Obligations:
+  - The NOMA must remain appointed for at least two years after listing.
+  - Must monitor the issuer’s compliance with continuing listing obligations.
+  - Must notify the Exchange immediately of any material breach of GEMS rules.
+
+
+
+  ### 2. NSE Market Participants Rules, 2014
+
+**Key Facts – Market Participants Rules, 2014**
+
+- Governs the conduct and obligations of all licensed Trading Participants of the Nairobi Securities Exchange.
+
+- Categories of Trading Participants:
+  - Stockbrokers
+  - Dealers
+  - Investment Banks
+  - Authorized Securities Dealers
+
+- Minimum Capital Requirements (2014):
+  - Stockbroker: KES 50 million
+  - Dealer: KES 20 million
+  - Investment Bank: KES 250 million (if undertaking brokerage)
+
+- Fidelity Fund:
+  - All Trading Participants must contribute to the Investor Compensation Fund.
+  - Minimum contribution: 0.1% of annual turnover or KES 500,000 (whichever is higher).
+
+- Client Protection:
+  - Segregation of client funds and securities is mandatory.
+  - Client assets must be held in designated trust accounts.
+  - Trading Participants must provide quarterly statements to clients.
+
+  
+### 3. NSE 25 Share Index – Ground Rules v1.4
+
+**Key Facts – NSE 25 Share Index**
+
+- Launched to track the performance of the 25 most liquid and largest companies listed on the NSE.
+
+- Selection Criteria:
+  - Market capitalization
+  - Liquidity (average daily traded value and turnover velocity)
+  - Free float
+  - Listing history (minimum 12 months)
+
+- Index Calculation:
+  - Free-float adjusted market capitalization weighted
+  - Capped at 15% individual stock weight
+  - Reviewed semi-annually (March and September)
+
+- Rebalancing:
+  - Effective on the first trading day after the third Friday of March and September
+
+
+
+
+  ### 4. NSE Fixed Income Securities Trading Rules, January 2024
+
+**Key Facts – Fixed Income Trading Rules 2024**
+
+- Applies to all government and corporate bonds listed and traded on the NSE.
+
+- Trading Segments:
+  - Government Bonds: Primary & Secondary Market
+  - Corporate Bonds: Over-the-Counter (OTC) reported trades and listed trading
+
+- Minimum Trade Size:
+  - Government Bonds: KES 100,000 face value
+  - Corporate Bonds: KES 100,000 face value
+
+- Settlement:
+  - T+1 for government bonds
+  - T+3 for corporate bonds (unless otherwise agreed)
+
+- Price Quotation:
+  - Quoted on clean price basis (excluding accrued interest)
+  - Yield displayed is Yield-to-Maturity (YTM)
+
+- Market Makers:
+  - Primary Dealer Banks are required to provide two-way quotes for benchmark government bonds.
+
+
+  ### 5. East African Exchanges (EAE) 20 Share Index
+
+**Key Facts – EAE 20 Share Index**
+
+- Regional index comprising the 20 largest and most liquid companies across Kenya, Tanzania, Uganda, and Rwanda.
+
+- Constituents selected from:
+  - Nairobi Securities Exchange (NSE)
+  - Dar es Salaam Stock Exchange (DSE)
+  - Uganda Securities Exchange (USE)
+  - Rwanda Stock Exchange (RSE)
+
+- Index Methodology:
+  - Free-float market capitalization weighted
+  - Maximum weight per country: 50%
+  - Maximum weight per stock: 15%
+  - Quarterly review and rebalancing
+
+- Base Date: 31 December 2014 = 1,000
+
+
+### 6. NSE 10 Share Index – Ground Rules v2
+
+**Key Facts – NSE 10 Share Index**
+
+- Price-weighted index of the 10 largest and most liquid companies on the NSE.
+
+- Key Features:
+  - Pure price-weighted (not market cap weighted)
+  - Includes only ordinary shares
+  - Reviewed annually in January
+
+- Index Divisor adjusted for:
+  - Stock splits
+  - Rights issues
+  - Bonus issues
+  - Constituent changes
+
+- Base Value: 1 January 1994 = 100
+
+
+### 7. NSE Derivatives Rules, July 2017
+
+**Key Facts – NSE Derivatives Rules**
+
+- Governs trading, clearing and settlement of derivatives contracts on the NSE.
+
+- Approved Contracts:
+  - Single Stock Futures
+  - Equity Index Futures (NSE 20, NSE 25)
+
+- Contract Specifications:
+  - Contract size: 100 shares per contract
+  - Quotation: Kenyan Shillings per share
+  - Tick size: KES 0.05
+  - Expiry: Third Thursday of the contract month
+
+- Margining:
+  - Initial Margin: Historical VaR at 99.95% confidence
+  - Mark-to-Market: Daily settlement
+  - Variation Margin: Paid/received daily
+
+- Trading Hours: 10:00 am – 3:00 pm (East Africa Time)
+
+
+### 8. NSE 20 Share Index – Ground Rules v1.6
+
+**Key Facts – NSE 20 Share Index**
+
+- The oldest and most widely referenced index of the Nairobi Securities Exchange.
+
+- Composition:
+  - 20 selected companies based on market capitalization and liquidity
+  - Reviewed semi-annually (June and December)
+
+- Calculation:
+  - Market capitalization weighted
+  - Adjusted for free float
+  - Base date: 25 February 2008 = 3,000 points
+
+- Used as underlying for:
+  - Equity Index Futures
+  - Benchmark for fund performance
+
+
+
+  ### 9. NSE Banking Sector Share Index – Ground Rules v1.0
+
+**Key Facts – NSE Banking Sector Share Index**
+
+- Tracks the performance of all listed commercial banks on the Main Investment Market Segment.
+
+- Constituents:
+  - All banks licensed under the Banking Act and listed on NSE
+  - Includes both Tier I and Tier II banks
+
+- Methodology:
+  - Free-float adjusted market capitalization weighted
+  - Reviewed quarterly
+  - No capping applied
+
+- Base Date: 31 December 2018 = 1,000
+
+
+### 10. NSE Listing Rules (Latest Version)
+
+**Key Facts – NSE Listing Rules**
+
+- Governs admission to listing and continuing listing obligations on all segments of the Nairobi Securities Exchange.
+
+- Market Segments:
+  - Main Investment Market Segment (MIMS)
+  - Growth Enterprise Market Segment (GEMS)
+  - Fixed Income Securities Market
+  - Derivatives Market
+
+- Minimum Requirements (MIMS – Equity):
+  - Minimum issued share capital: KES 100 million
+  - Minimum public float: 25% or KES 1 billion (whichever is lower)
+  - Minimum 1,000 shareholders for IPOs
+
+- Continuing Obligations:
+  - Quarterly, half-year and annual financial reporting
+  - Immediate disclosure of price-sensitive information
+  - Corporate governance compliance
+
+
+
+  
+
+
+  ### NSE Green Bonds Fact Sheet
+
+**Definition of Green Bonds**  
+Green Bonds are fixed income instruments whose proceeds are earmarked exclusively for projects with environmental benefits, mostly related to climate change mitigation or adaptation but also to natural resources depletion, loss of bio-diversity, and air, water or soil pollution.
+
+**Benefits of Green Bonds**  
+Green bonds deliver several benefits to both issuers and investors;
+
+**Benefits for Investors**  
+- Enhanced risk management and improved long-term financial returns  
+- Addressing climate risk: Green bonds help mitigate climate change-related risks in the portfolio due to changing policies such as carbon taxation which could lead to stranded assets.  
+- Green Bonds give investors a chance to direct capital to climate change solutions  
+- Investments in green bonds matches long-term liabilities and will also help build a sustainable society for pensioners to retire into.  
+- Asset allocation thresholds – Investments in green bonds have enabled institutional investors to exceed asset allocation thresholds especially when investing in emerging markets  
+- Alignment with National Development Agenda, the Institutional Investor Stewardship Code as well as International recognition as an innovator in green finance.  
+
+**Benefits for Issuers**  
+- Investor diversification across regions and types- Green Bonds enable issuers raise capital from a broader base on investors.  
+- Lower Cost of Capital-green bonds enable issuers to raise large amounts on the capital markets at much lower costs than other instruments.  
+- Stickier Pool of Investors – Green bond investors invest for the long term, which is a major benefit for infrastructure projects seeking longer term investments.  
+- Reputational benefits – Green credentials enhance issuer reputation overall and can be part of a wider sustainability strategy  
+- Tighter yields – given the demand for green bonds, there has been strong pricing achieved by recent green bond issuance  
+
+**Green Bonds Issuance Steps**  
+* Identify qualifying green projects and assets  
+* Develop the issuers Green Bonds Framework  
+* Arrange for independent verification  
+* Set up tracking and reporting  
+* Issue of green bond  
+* Monitor use of proceeds and report annually  
+
+**Differences between a Corporate Bond and Green Bond**  
+
+**Current Issuances**  
+In line with our commitment to connect capital to opportunities in the region, the NSE listedthe first green bond market in East and Central Africa in 2020.  
+
+Details of the issuance include:  
+
+| Issuer | Issue Date | Term | Coupon | Maturity Date |  
+| --- | --- | --- | --- | --- |  
+| [Acorn Holdings Limited](https://acornholdingsafrica.com/) | October 2019 | 5 years | 12.25% | October 2024 |  
+
+**More information on green bonds:**  
+ [Green Bonds Guide](/wp-content/uploads/green-bonds-guide-14.08.19-2.pdf)  
+
+ [Green Bonds Program Kenya Background Document](/wp-content/uploads/gbpk-background-document-2.pdf)  
+
+### NSE Equities Market Fact Sheet
+
+The Nairobi Securities Exchange PLC is the premium listing location for companies seeking to raise equity capital to support their growth needs. The NSE PLC offers a deep and liquid market for issuers enabling them to access a wide range of domestic and international retail and institutional investors.
+
+The NSE equities market is comprised of three listing segments, each specifically designed to meet capital, liquidity as well as regulatory requirements for issuers of all sizes. Below is a list of market segments and the requirements to list on each of the segments;
+
+
+### NSE M-Akiba Fact Sheet
+
+In line with our commitment to offer innovative investment products, the NSE in partnership with other players launched M-Akiba.
+
+The M-Akiba Bond is the world first retail infrastructure bond to be traded exclusively on the mobile phone. The bond was issued by the Government of Kenya (GoK) to raise money to fund infrastructural projects.
+
+Benefits of the M-Akiba Bond
+
+* Secure – It is a secure investment product as it is backed by the financial might of the government.
+* Low entry level -The M-Akiba bond offers retail investors a low entry point enabling them invest in Government securities. The entry point for the bond is only Kshs. 3,000/- as the minimum investment
+* Steady Source of Income – M-Akiba provides a steady and reliable source of income as intrest payments are paid every six months.
+* The interest income is tax free – Interest earned on investment on the M-Akiba bond are not subject to tax.
+* Provides an effective way of saving for the future while earning interest.
+* Convenience – M-Akiba provides a convenient way to buy and sell as everything is done using your phone.
+* Guaranteed exit option -That is, you can sell the bond from anywhere within normal trading hours (Weekdays from 9.00am -3.00pm)
+
+
+### NSE Corporate Bonds Fact Sheet
+
+A corporate Bond is a fixed income instruments issued by a company in order to raise capital. The corporate Bond Market in Kenya enables companies’ access long term capital at competitive rates enhancing their growth and development.
+
+Requirements to List on the Green Bond Market in Kenya
+
+| Incorporation Status | The issuer to be listed shall be a body corporate. |
+|  --  |  --  |
+| Share Capital and Net Assets of the Issuers | The issuer shall have minimum issued and fully paid up share capital of fifty million shillings and net assets of one hundred million shillings before the public offering or listing of the securities |
+| Listing and transferability of securities | All fixed income securities offered to the public or a section thereof except for commercial papers shall be listed and shall be freely transferable and not subject to any restrictions on marketability or pre-emptive rights. |
+| Availability and reliability of financial records | The issuer must have audited financial statements complying with International Financial Reporting Standards (IFRS) for an accounting period ending on a date not more than four months prior to the proposed date of the offer.<br><br>The Issuer must have prepared financial statements for the latest accounting period on a going concern basis and the audit report must not contain any emphasis of matter or qualification in this regard. |
+| Profitable historic track record and future prospects | The issuer must have declared profits after tax attributable to shareholders in at least two of the last three financial periods preceding the application for the issue. |
+| Debt ratios | Total indebtedness, including the new issue of fixed income securities shall not exceed four hundred per centum of the company’s net worth (or gearing ratio of 4:1) as at the latest balance sheet. |
+
+Benefits of Corporate Bonds to Issuers and Investors
+
+| Benefits for Investors | Benefits for Issuers |
+|  --  |  --  |
+| Corporate Bonds are less risky and less volatile compared to other asset classes. | Ability to raise long term capital at affordable rates to fund growth. |
+| Wide array of bonds to enable investors build strong portfolios. | Faster way to raise capital compared to other forms of raising capital. |
+| Corporate bonds are liquid offering investors easier exit and entry points. | Access to a wide array of investors. |
+
+Current Issuances
+
+| Issuer | Issue Date | Term | Coupon | Maturity Date |
+|  --  |  --  |  --  |  --  |  --  |
+| Family Bank Limited | 25th June 2021 | 5.5 years | 13.75% pa | 26 December 2026 |
+| East African Breweries Limited | 29 October 2021 | 5years | 12.25% pa payable semi annually | 29 October 2026 |
+| Kenya Mortgage Refinance Company | 4th March 2022 | 7years | 12.50% pa payable semi annually | 23rd Feb 2029 |
+| Real People Kenya Limited | 10 August 2015 |  |  | 24 July 2028 |
+
+
+
+### NSE Government Bonds
+
+The NSE offers issuers and investors one of the most advanced debt markets in the region. This market is composed of Treasury, Corporate Bonds, Green Bonds and the M-Akiba Bond. It is the market of choice in the region for organizations requiring to raise debt finance for projects, expansions and working capital.
+
+Treasury Bonds
+Treasury bonds are a secure, medium- to long-term investment that typically offer investors interest payments every six months throughout the bond’s maturity. Treasury Bonds enable the Government raise significant capital to support Government related initiatives such as infrastructure development.
+
+In Kenya, the Central Bank auctions Treasury bonds on a monthly basis, but offers a variety of bonds throughout the year and the bonds are listed on the NSE for secondary trading.
+
+Most Treasury bonds in Kenya are fixed rate, meaning that the interest rate determined at auction is locked in for the entire life of the bond. This makes Treasury bonds a predictable, long-term source of income. The National Treasury also occasionally issues tax-exempt infrastructure bonds for secondary market trading and is part of the investment opportunities that are frequently oversubscribed at primary and secondary levels.
+
+Benefits of Treasury Bonds
+Security-Treasury Bonds are units of Government Debt meaning you are investing I the Kenyan Government. This makes the asset a secure investment for both retail and institutional investors.
+Consistent and Regular Returns -Most treasury bonds carry a semi-annual interest payment, allowing investors to receive returns every six months.
+Flexibility -Through the varying types of infrastructure bonds issued by the Government, investors have room to invest in bonds that suit their specific investment needs.
+
+For more information of treasury bonds, visit [https://www.centralbank.go.ke/securities/treasury-bonds/](https://www.centralbank.go.ke/securities/treasury-bonds/)
+
+
+
+
+### NSE USP Fact Sheet
+
+## USP
+- The Unquoted Securities Platform (USP) is an automated solution for the issuance and trading of securities of unquoted companies.
+- The USP provides a world class electronic platform for the issuance, holding, trading and settlement of securities of unquoted companies.
+- The platform offers world class trading infrastructure and information services as well as enables company’s access capital markets for long term funding through private placements and restricted offers.
+- The USP is a product of the Nairobi Securities Exchange NSE LLP, a fully owned subsidiary of the Nairobi Securities Exchange NSE PLC.
+- The USP will be governed by a Management Committee appointed by the Board of the NSE PLC to oversee the daily operations of the USP and consists of senior representatives of the NSE PLC.
+- Escrow Financial Services Limited is the technology provider on the USP. It is a versatile FinTech company with experience in providing a range of technology solutions and related services within the capital markets and the broader financial sector.
+- The USP is governed by the USP Operational Guidelines that provides a framework for issuers, trading participating agents as well as other stakeholders with critical detailed information on the rules that govern the separate parties.
+- The Operational Guidelines of the USP are enforceable by the NSE LLP through the Management Committee.
+
+## Trading of Securities
+- The USP provides a world class electronic platform for the issuance, holding, trading and settlement of securities of unquoted companies.
+- Access to Investors
+- Periodic Reports
+
+## Benefits of the USP
+- To Issuers
+
+## Quoted Companies
+### Acorn Holdings Limited D-REIT
+- [Download Offer Memorundum](https://www.nse.co.ke/usp/wp-content/uploads/sites/5/2024/06/ASA-DREIT-2023-Financial-Statements.pdf)
+
+### Acorn Holdings Limited I-REIT
+- [Download Offer Memorundum](https://www.nse.co.ke/usp/wp-content/uploads/sites/5/2024/06/ASA-IREIT-2023-Financial-Statements.pdf)
+
+
+### NSE Real Estate Investment Trusts (REITs) Fact Sheet
+
+## REITs Overview
+A REIT is a regulated collective investment vehicle that enables persons to contribute money’s worth as consideration for the acquisition of rights or interests in a trust that is divided into units with the intention of earning profits or income from real estate as beneficiaries of the trust.
+
+## Types of REITs
+There are three main types of REITs and they include:
+
+* Development Real Estate Investment Trusts (D-REITs): A D-REIT is a type of REIT in which investors pool their capital together for purposes of acquiring real estate with a view to undertaking development and construction projects and associated activities.
+* Income Real Estate Investment Trust (I-REITs): An I-REIT is a type of REIT in which the investors pool their capital for purposes of acquiring long term income generating real estate including housing, commercial and other real estate.
+* Islamic Real Estate Investment Trusts: This is a unique type of REITs which only undertakes Shari’ah compliant activities. A fund manager is required to do a compliance test before making an investment in this type of REIT to ensure it is Shari’ah compliant.
+
+## Advantages of REITS
+* Long Term Returns- REITs offer investors competitive returns as their performance is based on the performance underlying real estate assets in the REIT structure,
+* Liquidity -REITs offer investors’ enhanced liquidity compared to direct ownership of real estate assets. REITs thus enable investors to easily buy and sell units in a trust which has invested in real estate assets.
+* Consistent Income Stream – REIT structures specifically income REITs are mandated by the law to distribute at least 80% of their net after tax profits to their unit holders as dividends. This can provide a stable and consistent form of income annually for unit holders.
+* Diversification – When combined with other asset classes, REITs provide a unique diversification tool when incorporated in an investment portfolio.
+* Tax Benefits – REITs enjoy various tax considerations making them an attractive asset class for investors. REITs are exempt from income tax except for payment of withholding tax on interest income and dividends. Equally, REITs are exempt from stamp duty, value added tax as well as capital gain tax in some instances.
+
+## Parties involved in REITS
+- Promoter – This is party involved in setting up a real estate investment trust scheme. The promoter is regarded as the initial issuer of REIT securities and is involved in making submissions to the regulatory authorities to seek relevant approvals.
+- REIT Manager: This is a company that has been incorporated in Kenya and has been issued a license by the authority (CMA) to provide real estate management and fund management services for a REIT scheme on behalf of investors.
+- Trustee : The Trustee’s main role is to act on behalf of the investors in the REIT, by assessing the feasibility of the investment proposal put forward by the REIT Manager and ensuring that the assets of the scheme are invested in accordance with the Trust Deed.
+- Project/Property Manager : The role of the project manager is to oversee the planning and delivery of the construction projects in the REITs.
+
+## Current Issuers in the market?
+|  | Issuer | Name | Type of REIT | Listing Date |
+|  | ILAM | Fahari | I-REIT | October 2015 |
+|  | Acorn Holdings Limited | Acorn ASA | I-REIT | February 2021 |
+|  | Acorn Holdings Limited | Acorn ASA | D-REIT | February 2021 |
+
+
+### NSE Ibuka 2 Fact Sheet
+
+### Ibuka 2 Overview
+Ibuka is a premium incubation and acceleration program established by the NSE PLC in 2018. The program seeks to support companies to reach their next stage of growth through an incubation and acceleration program tailor made to suit their needs. Through the various stages, the Program is designed to prepare companies to raise capital and be investor ready through various capital market options available at the NSE PLC.
+
+The program equally has a panel of advisors and consultants who provide expert advisory services to companies admitted on the program. The Ibuka program is anchored on two non-trading Boards, the incubator Board and the Accelerator Board.
+
+### Incubator Board
+The incubator Board is the first stage of the program. Once enrolled on this Board, a company undergoes an in-depth evaluation and analysis that focuses on various aspects of the enterprise including growth drivers, internal strengths and weaknesses, opportunities and threats. Following the evaluation, a diagnostics report recommending various interventions and restructuring initiatives to accelerate business growth is developed.
+
+A restructuring exercise targeted on the respective company’s financial, governance, operational, commercial, strategic, , environmental as well as legal aspects is undertaken.
+
+Following the restructuring, the company is promoted to join the Accelerator Board of the program. The minimum revenue requirement for joining the Incubator Board is Kshs. 250 Million for the previous audited financial year.
+
+### Accelerator Board
+This is the final stage of the program. Enterprises on this stage of the program are advised on available capital raising opportunities provided by the NSE. The Board enables companies develop specialized capital raising documents that will guide the enterprises fund raising initiatives. Some of the documents produced at this stage include; capital raising options report, transaction implementation plan, equity valuation report, offer pricing report, offer memorandum among others. The minimum revenue requirement for joining the Accelerator Board is Kshs. 500 Million for the previous audited financial year.
+
+### Benefits of the Ibuka Program
+The Ibuka program offers a wide range of benefits to entities including;
+
+Capital Markets Access – The Ibuka Program provides enterprises with a unique opportunity to have direct access to capital market players including regulators and advisors. The exposure provides companies knowledge of key considerations when companies want to access public capital markets to raise funds and accelerate growth.
+
+Visibility – The Ibuka program provides companies access to increased visibility opportunities that enhancing their profile. The program exposes companies to media, investors, analysts as well as other key stakeholders. Visibility of the company is supported through various media engagements initiatives by the NSE as well as a weekly list of all the companies on the program shared to a database of over 10,000 investors locally and internationally.
+
+Expert Advisory -The program provides company’s access to a host of advisors and consultants who offer expert advisory and consulting services to the enterprises.
+
+Business Sustainability -The program enables companies develop relevant corporate governance structures that enhance decision making thus enhance the probability of the business to continue operating successfully.
+
+Value Discovery – The program enables companies enhance their value as well as establish their objective market valuation through various initiatives.
+
+### The Process of Joining the NSE Ibuka Program
+All companies that would like to join the Program will be subjected to a 5 stage process as per follows:
+
++ Fill in and Submit application documents to join the program as a Hostee company.
++ Review and evaluation of the application documents by the NSE.
++ Invitation of the senior management of the applicant company to a vetting interview by the NSE.
++ Recommendation by the NSE to the Board based on steps (2) and (3) above.
+
+Based on outcome from step (4) above, the company will be hosted on the respective Boards.
+
+All advisors and consultants who would like to join the program will be subjected to a 5 stage process;
+
+* Fill in and Submitt application documents to join the program as a consultant or advisor.
+* Review and evaluation of the document by the NSE.
+* Invitation of the senior management of the applicant company to a vetting interview by the NSE.
+* Recommendation by the NSE to the Board based on steps (2) and (3) above.
+
+
+### NSE Growth Enterprise Market Segment (GEMS) Fact Sheet
+
+### GEMS Overview
+The Growth Enterprise Market Segment (GEMS) is a segment for Small and Medium Sized Companies. GEMS enables these firms to raise substantial capital and accelerate their growth within a regulatory environment designed specifically to meet their needs.
+
+The segment offers companies flexible listing requirements in recognition of the company’s growth phase.
+
+### Listing Requirements
+Below are additional requirements to list on GEMS;
+
+Requirements to List on the Growth Enterprise Market Segment
+
+| Standard | Requirement |
+|----------|-------------|
+| Incorporation status | Issuer to be limited by shares and registered under the companies act. |
+| Share capital | Shall have a minimum issued and fully paid up ordinary share capital of 10m. The issuer must have not less than one hundred thousand shares in issue. |
+| Net assets | N/A |
+| Share transferability | Shares to be listed shall be freely transferable and not subject to any restrictions on marketability or any preemptive rights. |
+| Availability and Reliability of Financial Records | N/A |
+| Competence of directors and management | The issuer must have a minimum of five directors, with a least a third of the Board as non- executive directors |
+| Dividend policy | N/A |
+| Profitability | N/A |
+| Working Capital and Solvency | Issuer shall not be insolvent, they must have adequate working capital.<br><br>The Directors of the Issuer shall give an opinion on the adequacy of working capital for at least twelve months immediately following the share offering, and the auditors of the issuer shall confirm in writing the adequacy of that capital. |
+| Share and Ownership Structure | The Issuer must ensure at least 15% of the issued shares (excluding those held by a shareholder or people associated or acting in concert with him; or the Company’s Senior Managers) are available for trade by the public.<br><br>An issuer shall cease to be eligible for listing upon the expiry of three months of the listing date, if the securities available for trade by the public are held by less than twenty-five shareholders (excluding those held by a controlling shareholder or people associated or acting in concert with<br><br>him, or the Company’s Senior Managers.) |
+| Listed Shares to be immobilized | All issued shares must be deposited at a central depository established under the Central Depositories Act, 2000 (No. 4 of 2000). |
+| Nominated Advisor | The issuer must appoint a Nominated Adviser in terms of a written contract and must ensure that it has a Nominated Adviser at all times. |
+
+### Companies on GEMS
+* Homeboyz entertainment plc
+* Home Africa ltd
+* Kurwitu ventures ltd
+* Flame tree group holdings ltd
+* Nairobi Business Ventures ltd
+  
+
+
 
 
 [OFFICIAL_NSE_FIXED_INCOME_TRADING_RULES_JANUARY_2024]
@@ -579,7 +1807,7 @@ CM Default: Handled by the Exchange/Clearing House (NSE Clear).
 Settlement Guarantee Fund (SGF) Usage Order:
 Defaulter's Collateral.
 Defaulter's SGF Contribution.
-NSE Clear's Skin-in-the-Game (25% of SGF contribution).
+NSE Clear's Skin-in-the-Game (25 percent of SGF contribution).
 Non-defaulting Members' SGF Contributions.
 NSE Clear Equity.
 Liquidation Strategies:
@@ -714,7 +1942,7 @@ Bonds are sold in minimum bundles of KShs. 50,000.00. Small investors can pool t
         A:Here, investors and members of the public get answers to their questions about the stock exchange. An individual or group can also register to attend a educational session organized by the Nairobi Securities Exchange every Wednesday. The NSE also gives lectures to groups in their own premises through invitation. There are other operational structures in the market which include Market Research and Development, Compliance, Legal, Accounting and Administration.
 
         Q:Our History
-        A:This market was started in the 1920’s by the British as an informal market for Europeans only. In 1954, the market was formalized through incorporation into a company.
+        A:This market was started in the 1920s by the British as an informal market for Europeans only. In 1954, the market was formalized through incorporation into a company.
 
 In 1963, Africans were allowed to join and trade in the market. For many years, the market operated through the telephone with a weekly meeting at the Stanley Hotel. In 1991, this market mover to IPS building and was opened to the public. In 1994, the market moved to its current location, on the 1st Floor of the Nation Centre, with the introduction of the Central Depository and Settlement Corporation (CDSC) investors will open share and bond accounts, in electronic accounts similar to their bank accounts. Buying and selling of shares and bonds will be made much easier and quicker. All the benefits of shares and bonds will remain the same. For example, an investor will still be able to use a Share Account or Bond Account as a guarantor for a Co-operative loan or as collateral for a bank loan.
 
