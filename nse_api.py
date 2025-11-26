@@ -79,7 +79,7 @@ def home():
         "service": "NSE Assistant API"
     }
 
-@app.post("/ask")
+@app.post("/")
 async def ask_question(request: QueryRequest):
     if not nse_engine:
         if engine_loading:
