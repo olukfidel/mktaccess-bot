@@ -12,7 +12,7 @@ type Message = {
 
 export default function Home() {
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'assistant', content: 'Hello! I am the NSE Digital Assistant. You can ask me about share prices, trading rules, or market reports.' }
+    { role: 'assistant', content: 'Hello! I am the NSE Digital Assistant.' }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -167,7 +167,7 @@ export default function Home() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-            placeholder="Ask about share prices, reports, or trading rules..."
+            placeholder="Ask anything about the market..."
             className={`w-full pl-6 pr-12 py-4 rounded-full shadow-lg border-2 focus:outline-none focus:border-[#4CAF50] transition-colors ${
               darkMode 
                 ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-500' 
