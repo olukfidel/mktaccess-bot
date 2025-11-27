@@ -1052,6 +1052,1005 @@ Issuance of ETFs in Kenya
 5. For a start, the maximum ETFs’ fees charged shall not be more than that charged in the equities markets subject to revision by CMA notification. All fees shall be fully disclosed in the issuance or introduction documentation.  
 6. Where the ETF issuer is not a local entity, it shall meet the following minimum requirements:
 
+### NSE Alternative Investment Market Segment (AIMS) Fact Sheet
+
+The Alternative Investment Market Segment is designed for mid-cap companies in Kenya and the wider region. The segment is aimed at assisting companies’ access capital and offers a public platform to accelerate their growth and development.
+
+Requirements to list on the Alternative Investment Market Segment;
+
+| Standard | Requirement |
+|----------|-------------|
+| Incorporation status | Issuer to be limited by shares and registered under the companies act. |
+| Share capital | Shall have a minimum authorized, issued and fully paid up ordinary share capital of Kshs. 20m. Firm must be in existence in the same line of business for a minimum of two years and demonstrate good growth potential. |
+| Net assets | Net assets immediately before the public offering or listing of shares should not be less than 20m. |
+| Share transferability | Shares to be listed shall be freely transferable and not subject to any restrictions on marketability or any preemptive rights. |
+| Availability and Reliability of Financial Records | Have audited financial records, for period ending on a date not more than 4 months prior, for issuer not listed in the exchange and 6 months for issuers listed |
+| Competence of directors and management | Directors and Management must be ethical, not bankrupt, Not have any criminal proceedings. Must have suitable senior management with relevant experience for at least one year prior. Must not be in breach with any loan covenant particularly on debt capacity. |
+| Dividend policy | N/A |
+| Track record, profitability and future prospects | N/A |
+| Working capital and solvency | Issuer shall not be insolvent, they must have adequate working capital. |
+| Share and ownership structure | Following the public share offering or immediately prior to listing in the case of an introduction, at least 20% of the shares must be held by not less than one hundred shareholders excluding employees of the issuer or family members of the controlling shareholders. |
+| Certificate of comfort | In case of listing outside the Kenyan jurisdiction obtain a cert of no objection from the foreign securities exchange and regulator. |
+| Listed shares to be immobilized |  |
+| Nominated advisor |  |
+
+Companies on AIMS
+
+- Eaagands LTD
+- Kapcharua Tea Kenya PLC
+- The Limuru Tea Co. Plc Ord 20.00
+- Williamson Tea Kenya Plc
+- Deacons east Africa plc
+- Express kenya plc
+- Longhorn publishers plc
+- Trans century plc
+- Kenya orchards ltd
+
+
+### NSE Sustainability – The Process (GSSS Bond Issuance) Fact Sheet
+
+THE PROCESS
+
+Phase 1: Strategy & Preparation
+
+1. Issuer develops a Sustainability Strategy  
+The Issuer defines a corporate sustainability strategy. The Board approves the strategy to raise capital via a Green, social, Sustainable sustainability-linked bond (GSSS Instruments).
+
+2. Issuer identifies qualifying projects and assets  
+The Issuer identifies eligible green/social/sustainability-linked projects or assets aligned with applicable taxonomies or international principles.
+
+3. Develops an appropriate Framework  
+The Transaction Adviser supports the Issuer in developing a Sustainable Finance Framework covering Use of Proceeds, Project Evaluation, Management of Proceeds, and Reporting.
+
+4. Issuer appoints an Independent Verifier to carry out pre-issuance review to confirm alignment  
+The Issuer commissions an independent Second Party Opinion (SPO) Provider to review the GSSS Framework.
+
+Phase 2: Regulatory Approval & Market Engagement
+
+5. Issuer appoints a Transaction Adviser to prepare an Information Memorandum (IM)  
+The Issuer appoints a licensed Transaction Adviser to structure the instrument and prepare the Information Memorandum, incorporating both financial and sustainability disclosures.
+
+6. Issuer submits IM and supporting documents to Regulators (CMA & NSE) for approval  
+The TA submits the GSSS Framework, SPO report, and bond documentation (Information Memorandum / Prospectus) to the CMA for approval.
+
+7. Issuer conducts Pre-Deal Road Show  
+The TA and Issuer present the GSSS bond opportunity to target investors (e.g., ESG funds, DFIs).
+
+Phase 3: Issuance & Listing
+
+8. Once approved by CMA, NSE approves the listing of the Instrument  
+Following CMA approval, the TA submits the required documentation to the NSE for formal listing of the instrument on the appropriate market segment.
+
+9. Issuer conducts Deal Road Show  
+The Issuer and TA conduct the formal investor roadshow to market the instrument and secure subscription.
+
+10. Issuer issues the Instrument and raises the capital to deploy to nominated projects  
+The instrument is issued, and capital is raised. Proceeds are allocated to the projects and assets identified under the Sustainable Finance Framework.
+
+Phase 4: Post-Issuance Accountability
+
+11. Reporting on the Use of Proceeds and Impact Annually  
+The Issuer provides annual reporting on allocation of proceeds and measurable environmental or social outcomes in line with the Framework.
+
+12. Post-Issuance Verification  
+The Issuer engages an independent Verifier to assure the accuracy of allocation and impact reports.
+
+13. Ongoing Compliance and Stakeholder Engagement  
+Ongoing adherence to regulatory rules, framework commitments, and investor communication.
+
+### NSE Listed Companies Fact Sheet
+
+AGRICULTURAL
+
+- Eaagads Ltd Ord 1.25 AIMS → Trading Symbol:EGAD → ISIN CODE: KE0000000208
+- Kapchorua Tea Co. Ltd Ord Ord 5.00 AIMS → Trading Symbol:KAPC → ISIN CODE:KE4000001760
+- Kakuzi Ord.5.00 → Trading Symbol:KUKZ → ISIN CODE:KE0000000281
+- Limuru Tea Co. Ltd Ord 20.00 → Trading Symbol:LIMT → ISIN CODE:KE0000000356
+- Sasini Ltd Ord 1.00 → Trading Symbol:SASN → ISIN CODE:KE0000000430
+- Williamson Tea Kenya Ltd Ord 5.00 → Trading Symbol:WTK → ISIN CODE:KE0000000505
+
+AUTOMOBILES AND ACCESSORIES
+
+- Car and General (K) Ltd Ord 5.00 → Trading Symbol: CGEN → ISIN CODE: KE0000000109
+
+BANKING
+
+- Absa Bank Kenya PLC → Trading Symbol:ABSA → ISIN CODE:KE0000000067
+- Stanbic Holdings Plc. ord.5.00 → Trading Symbol:SBIC → ISIN CODE:KE0000000091
+- I&M Holdings Ltd Ord 1.00 → Trading Symbol:IMH → ISIN CODE:KE0000000125
+- Diamond Trust Bank Kenya Ltd Ord 4.00 → Trading Symbol:DTK → ISIN CODE:KE0000000158
+- Standard Chartered Bank Ltd Ord 5.00 → Trading Symbol:SCBK → ISIN CODE:KE0000000448
+- Equity Group Holdings Ord 0.50 → Trading Symbol:EQTY → ISIN CODE:KE0000000554
+- The Co-operative Bank of Kenya Ltd Ord 1.00 → Trading Symbol:COOP → ISIN CODE:KE1000001568
+- BK Group PLC → Trading Symbol:BKG → ISIN CODE:KE5000008986
+- HF Group Ltd Ord 5.00 → Trading Symbol:HFCK → ISIN CODE:KE0000000240
+- KCB Group Ltd Ord 1.00 → Trading Symbol:KCB → ISIN CODE:KE0000000315
+- NCBA Group PLC → Trading Symbol:NCBA → ISIN CODE:KE0000000406
+
+COMMERCIAL AND SERVICES
+
+- Express Ltd Ord 5.00 → Trading Symbol:XPRS → ISIN CODE:KE0000000224
+- Sameer Africa PLC Ord 5.00 → Trading Symbol:SMER → ISIN CODE:KE0000000232
+- Kenya Airways Ltd Ord 5.00 → Trading Symbol:KQ → ISIN CODE:KE0000000307
+- Nation Media Group Ord. 2.50 → Trading Symbol:NMG → ISIN CODE:KE0000000380
+- Standard Group Ltd Ord 5.00 → Trading Symbol:SGL → ISIN CODE:KE0000000455
+- TPS Eastern Africa (Serena) Ltd Ord 1.00 → Trading Symbol:TPSE → ISIN CODE:KE0000000539
+- Scangroup Ltd Ord 1.00 → Trading Symbol:SCAN → ISIN CODE:KE0000000562
+- Uchumi Supermarket Ltd Ord 5.00 → Trading Symbol:UCHM → ISIN CODE:KE0000000489
+- Longhorn Publishers Ltd → Trading Symbol:LKL → ISIN CODE:KE2000002275
+- Deacons (East Africa) Plc Ord 2.50 → Trading Symbol:DCON → ISIN CODE:KE5000005438
+- Nairobi Business Ventures Ltd → Trading Symbol:NBV → ISIN CODE:KE5000000090
+
+CONSTRUCTION AND ALLIED
+
+- Athi River Mining Ord 5.00 → Trading Symbol:ARM → ISIN CODE:KE0000000034
+- Bamburi Cement PLC Ord 5.00 → Trading Symbol:BAMB → ISIN CODE:KE0000000059
+- Crown Paints Kenya PLC. 0rd 5.00 → Trading Symbol:CRWN → ISIN CODE:KE0000000141
+- E.A.Cables PLC Ord 0.50 → Trading Symbol:CABL → ISIN CODE:KE0000000174
+- E.A.Portland Cement Ltd Ord 5.00 → Trading Symbol:PORT → ISIN CODE:KE0000000190
+
+ENERGY AND PETROLEUM
+
+- Total Kenya Ltd Ord 5.00 → Trading Symbol:TOTL → ISIN CODE:KE0000000463
+- KenGen Ltd Ord. 2.50 → Trading Symbol:KEGN → ISIN CODE:KE0000000547
+- Kenya Power & Lighting Co Ltd → Trading Symbol:KPLC → ISIN CODE:KE0000000349
+- Umeme Ltd Ord 0.50 → Trading Symbol:UMME → ISIN CODE:KE2000005815
+
+INSURANCE
+
+- Jubilee Holdings Ltd Ord 5.00 → Trading Symbol:JUB → ISIN CODE:KE0000000273
+- Sanlam Allianz Holdings (Kenya) PLC 0rd 5.00 → Trading Symbol:SLAM → ISIN CODE:KE0000000414
+- Kenya Re-Insurance Corporation Ltd Ord 2.50 → Trading Symbol:KNRE → ISIN CODE:KE0000000604
+- Liberty Kenya Holdings Ltd → Trading Symbol:LBTY → ISIN CODE: KE2000002168
+- Britam Holdings Ltd Ord 0.10 → Trading Symbol:BRIT → ISIN CODE:KE2000002192
+- CIC Insurance Group Ltd Ord 1.00 → Trading Symbol:CIC → ISIN CODE:KE2000002317
+
+INVESTMENT
+
+- Olympia Capital Holdings ltd Ord 5.00 → Trading Symbol:OCH → ISIN CODE:KE0000000166
+- Centum Investment Co Ltd Ord 0.50 → Trading Symbol:CTUM → ISIN CODE:KE0000000265
+- Trans-Century Ltd → Trading Symbol:TCL → ISIN CODE:KE2000002184
+- Home Afrika Ltd Ord 1.00 → Trading Symbol:HAFR → ISIN CODE:KE2000007258
+- Kurwitu Ventures → Trading Symbol:KURV → ISIN CODE:KE4000001216
+
+INVESTMENT SERVICES
+
+- Nairobi Securities Exchange Ltd Ord 4.00 → Trading Symbol:NSE → ISIN CODE:KE3000009674
+
+MANUFACTURING AND ALLIED
+
+- B.O.C Kenya Ltd Ord 5.00 → Trading Symbol:BOC → ISIN CODE:KE0000000042
+- British American Tobacco Kenya Ltd Ord 10.00 → Trading Symbol:BAT → ISIN CODE:KE0000000075
+- Carbacid Investments Ltd Ord 5.00 → Trading Symbol:CARB → ISIN CODE:KE0000000117
+- East African Breweries Ltd Ord 2.00 → Trading Symbol:EABL → ISIN CODE:KE0000000216
+- Mumias Sugar Co. Ltd Ord 2.00 → Trading Symbol:MSC → ISIN CODE:KE0000000372
+- Unga Group Ltd Ord 5.00 → Trading Symbol:UNGA → ISIN CODE:KE0000000497
+- Eveready East Africa Ltd Ord.1.00 → Trading Symbol:EVRD → ISIN CODE:KE0000000588
+- AFRICA MEGA AGRICORP PLC 5.00 → Trading Symbol: AMAC → ISIN CODE:KE0000000331
+- Flame Tree Group Holdings Ltd Ord 0.825 → Trading Symbol:FTGH → ISIN CODE:KE4000001323
+- Shri Krishana Overseas (SKL) → Trading Symbol:SKL.O0000 → ISIN: KE9900001216
+
+TELECOMMUNICATION AND TECHNOLOGY
+
+- Safaricom PLC Ord 0.05 → Trading Symbol:SCOM → ISIN CODE:KE1000001402
+
+REAL ESTATE INVESTMENT TRUST
+
+- Laptrust Imara I-REIT → Trading Symbol:LAPR → ISIN CODE:KE9100008870
+
+EXCHANGE TRADED FUND
+
+- New Gold Issuer (RP) Ltd → Trading Symbol:GLD → ISIN CODE:ZAE000060067
+- Satrix MSCI World Feeder ETF → Trading Symbol: SMWF.E0000 → ISIN CODE:ZAE000246104
+
+
+
+# Nairobi Securities Exchange (NSE) ESG Disclosures Guidance Manual – November 2021  
+## Chatbot Fact Sheet (Exact Quotations – Ready for Copy & Paste)
+
+**Document Title**  
+"Nairobi Securities Exchange ESG Disclosures Guidance Manual"  
+**Publication Date**  
+NOVEMBER 2021  
+**Total Pages**  
+56  
+
+**Acknowledgement (Page 2)**  
+"The Nairobi Securities Exchange would like to thank the Global Reporting Initiative (GRI), the Swedish International Development Cooperation Agency (SIDA), the African Securities Exchanges Association (ASEA) and Seven Levers LLP, for their technical and financial support in the development of this ESG Disclosures Guidance Manual."
+
+**Foreword – Geoffrey O. Odundo, Chief Executive Officer, Nairobi Securities Exchange (Page 3)**  
+"By issuing these guidelines, the NSE aims at improving and standardizing ESG information reported by listed companies in Kenya. These guidelines provide a granular, tactical approach to ESG reporting that meets international standards on ESG reporting. Further guidance has been provided on how listed companies can integrate ESG considerations into their organisations, helping capture significant opportunities for stakeholders while managing critical business risks."
+
+"Consistent application of these guidelines will help improve the capital markets in Kenya by providing information that investors are now demanding to facilitate decision making and capital allocation. This is a key objective of the capital markets."
+
+**Foreword – Peter Paul van de Wijs, Chief External Affairs Officer, Global Reporting Initiative (GRI) (Page 4)**  
+"Transparency on the impacts of a business is essential for continuous improvement as well as for stakeholder relationships. Without transparency, there is no trust – and without trust, markets do not function efficiently, and institutions lose their legitimacy."
+
+"We therefore commend the Nairobi Securities Exchange (NSE) for producing this new ESG guide, which will help Kenyan companies to be accountable for their impacts while increasing their competitiveness in the global marketplace."
+
+**Recommended Reporting Framework (Page 8)**  
+"To help reduce uncertainties on which framework or standards to apply, this manual recommends the adoption of the GRI Standards as the common framework for ESG reporting by listed companies in Kenya."
+
+"The GRI Standards are the most widely used framework for sustainability reporting."
+
+**Definition – ESG Reporting (Page 7)**  
+"An organisation’s practice of reporting publicly on its economic, environmental, and/or social impacts, and hence its contributions – positive or negative – towards the goal of sustainable development. Also commonly referred to as sustainability reporting or non-financial reporting."
+
+**Definition – Materiality Assessment (Page 7)**  
+"The process of prioritizing ESG topics for reporting and based on the assessed needs of different stakeholders."
+
+**Top ESG Metrics Sought by Investors (IHS Markit) (Page 9)**  
+• Presence of an overarching ESG policy.  
+• Assignment of ESG management responsibility.  
+• Corporate code of ethics  
+• Presence of litigation.  
+• People diversity.  
+• Net employee composition.  
+• Environmental policy.  
+• Estimation of carbon footprint.  
+• Data and cybersecurity incidents.  
+• Health and safety events.
+
+**Expected Benefits for Listed Companies (Page 9)**  
+1. Transparency in ESG disclosures helps in building integrity and trust in the capital markets thus enhancing competitiveness to attract investment to the capital markets.  
+2. Investors can assess and preferentially invest in issuers that demonstrate better ESG linked financial performance, resulting in more efficient capital allocation.  
+3. Organisations that demonstrate responsible investment practices can access new sources of capital from sustainability conscious investors such as Development Finance Institutions (DFIs) and Private Equity firms.  
+4. A wholistic view of corporate value facilitates product innovation by enabling consideration and management of the embodied environmental and social impacts of products and services.  
+5. Measuring and reporting ESG performance enables organisations embed circularity in their operating models and achieve operational efficiencies by optimizing energy and raw costs in production.
+
+**Key Steps in the ESG Reporting Process (Pages 13-17)**  
+Step 1: Governance over ESG integration and reporting  
+Step 2: Situational analysis and stakeholder engagement  
+Step 3: Materiality analysis  
+Step 4: Value creation  
+Step 5: Content development  
+Step 6: Assurance and internal controls
+
+**Role of the Board (Page 14)**  
+"What is the role of the Board?  
+The Board has ultimate responsibility for ESG integration and reporting."
+
+**Role of the CEO (Page 15)**  
+"What is the role the Chief Executive Officer?  
+The CEO is responsible for the day-to-day management of ESG issues and reporting."
+
+**Mandatory Use of GRI Standards (Page 27)**  
+"Adopt reporting standard  
+This manual recommends the adoption of the GRI Standards as the common framework for ESG reporting by listed companies in Kenya."
+
+**Annex 5 Criteria (Page 48)**  
+"Criteria to claim an ESG report has been prepared in accordance with the GRI Standards"
+
+**Future Plan (Page 8)**  
+"A responsible investment index is planned by the Nairobi Securities Exchange (NSE) in future."
+
+**Primary References (Page 10)**  
+• Global Reporting Initiative (GRI) Sustainability Reporting Standards, 2018  
+• The Code of Corporate Governance Practices for Issuers of Securities to the Public, 2015 (CMA Code)  
+• United Nations Sustainable Development Goals (SDGs)
+
+**Supported By**  
+Global Reporting Initiative (GRI)  
+Swedish International Development Cooperation Agency (SIDA)  
+African Securities Exchanges Association (ASEA)  
+Seven Levers LLP
+
+
+### NSE Main Investment Market Segment (MIMS) Fact Sheet
+
+This is the premium Board for large and well established companies in Kenya and the region. It hosts leading enterprises across a wide range of sectors in the economy.
+
+Requirements to List on the Main Market Investment Segment
+
+| Standard | Requirement |
+| --- | --- |
+| Incorporation status | Issuer to be a company limited by shares and registered under the companies act. |
+| Share capital | Have a minimum authorised, issued and paid up ordinary share capital of Kshs. 50 Million. |
+| Net assets | Net assets immediately before the public offering or listing of shares should not be less than Kshs. 100m. |
+| Share transferability | Shares to be listed shall be freely transferable and not subject to any restrictions on marketability or any preemptive rights. |
+| Competence of directors and management | Directors and Management must be ethical, not bankrupt, Not have any criminal proceedings. Must have suitable senior management with relevant experience for at least one year prior. Must not be in breach with any loan covenant particularly on debt capacity. |
+| Availability and Reliability of Financial Records | The issuer shall have audited financial statements complying with International Financial Reporting Standards (IFRS) for an accounting period ending on a date not more than four months prior to the proposed date of the offer or listing for issuers whose securities are not listed at the securities exchange, and six months for issuers whose securities are listed at the securities exchange. |
+| Dividend policy | Issuer must have a clear future dividend policy. |
+| Track Record, Profitability and Future Prospects | The issuer must have declared profits after tax attributable to shareholders in at least three of the last five completed accounting periods to the date of the offer |
+| Solvency and Adequacy of Working Capital | The issuer should not be insolvent The issuer should have adequate working capital. |
+| Share and ownership structure | At least 25% of share to be held by not less than 1000 shareholders excluding employees of the issuer. |
+| Certificate of comfort | In case of listing outside the Kenyan jurisdiction obtain a cert of no objection from the foreign securities exchange and regulator. |
+| Listed shares to be immobilized | N/A |
+| Nominated advisor | N/A |
+
+### NSE Privacy Policy Fact Sheet (Last updated: May 12, 2025)
+
+Introduction
+
+This Privacy Policy outlines how we collect, use, store, and share your personal data when you register for or interact with our services. It reflects our commitment to data protection under local and international laws where applicable.
+
+By providing your personal data, you consent to its processing as described in this policy.
+
+1. Definitions
+
+- Account means a unique record created for you in our registration forms or system.
+- Company or NSE (referred to as either “the Company”, “We”, “Us”, “Our” or “NSE” in this Agreement) refers to the Nairobi Securities Exchange Plc.
+- Country refers to Kenya (or your applicable jurisdiction).
+- Device means any device that can be used to provide personal information, such as a computer, mobile phone, or tablet.
+- Personal Data means any information relating to an identified or identifiable individual.
+- Service refers to all the products and functions the Company offers, including websites, apps, and any in-person or physical services like events.
+- Service Provider means any natural or legal person who processes data on behalf of the Company.
+- Third-party refers to any platform not owned by the Company that may be used to engage with our services.
+- Usage Data refers to data collected automatically through interaction with our platforms or communications.
+- You means the individual providing information or the organization on behalf of which such individual is providing information.
+
+2. Legal Basis for Processing
+
+We process your personal data under one or more of the following legal bases:
+
+0. Consent – for marketing communications and optional services.
+1. Contractual necessity – to register and facilitate your participation in events or utilization of our services.
+2. Legal obligation – where required by law or regulatory frameworks.
+3. Legitimate interest – such as managing and improving events/services, security, and engagement analytics.
+
+3. Types of Data Collected
+
+We may collect the following types of personal data:
+
+i. Full name
+
+ii. Email address
+
+iii. Phone number
+
+iv. Gender
+
+v. Personal Identification/Passport number/Tax Identification
+
+vi. Age
+
+vii. Address, city, county, and country
+
+viii. Organization and job title
+
+ix. Education and qualifications (if necessary)
+
+x. Dietary or accessibility requirements
+
+xi. Emergency contact (if necessary)
+
+xii. Event participation history
+
+xiii. Preferences for communication or future contact
+
+xiv. Feedback, survey responses, and evaluations
+
+We do not collect sensitive personal data unless it is strictly necessary for event or service delivery and provided with explicit consent.
+
+4. Children’s Privacy
+
+We do not knowingly collect personal information from children under the age of 18 without verified parental or guardian consent. If we discover that personal data from a child has been collected without appropriate consent, we will delete it promptly. For youth-focused events or services, only essential information will be collected, and only with verified guardian authorization.
+
+5. Use of Your Personal Data
+
+We use your personal data for the following purposes:
+
+i. To register and manage your participation in events or utilization of our services.
+
+ii. To communicate updates, confirmations, and reminders
+
+iii. To provide personalized experiences and logistical support
+
+iv. To analyze service utilization, attendance, feedback, and engagement metrics
+
+v. To send marketing communications for future events (where you have consented)
+
+vi. To comply with applicable laws and regulations
+
+vii. To process applications made by you or your organization.
+
+6. Marketing Communications
+
+With your explicit consent, we may use your contact information to send promotional materials, newsletters, event invitations, or other communications we believe may interest you. You can opt out at any time by contacting us directly or utilizing opt out mechanisms that may be provided with the service.
+
+7. Data Retention
+
+We determine the length of data retention on a case-by-case basis, depending on factors such as the nature of the information, the purpose for its collection and processing, and any legal or operational retention requirements. Once your data is no longer necessary for these purposes, it will be securely deleted or anonymized.
+
+8. Cross-Border Data Transfers
+
+When personal data is transferred outside Kenya, we comply with the Data Protection Act, 2019, and ensure transfers are based on one or more of the following:
+
+• Transfers to countries recognized as having adequate data protection.
+
+• Use of standard contractual clauses, data transfer agreements, or other legally recognized safeguards.
+
+• Binding corporate rules for intra-group transfers.
+
+• Your explicit consent, where required.
+
+We recognize that recipient countries may have different and potentially less stringent data privacy laws. Where necessary, we impose contractual obligations and require adherence to international codes of conduct to ensure your data is adequately protected.
+
+9. Sharing of Personal Data
+
+We may share your data with:
+
+• Service Providers involved in service provision, event logistics, communications, and data processing
+
+• Event Partners or Sponsors (only where relevant and with your consent)
+
+• Regulators or legal authorities, when required by law or to protect rights
+
+We do not sell or rent your personal data to third parties.
+
+10. Security of Your Personal Data
+
+We have procedures in place to respond to suspected personal data breaches and will notify you and any applicable regulators of a breach where we are legally required to do so. Access to your data is restricted to employees, agents, contractors, and third parties who have a business need to know. They will process your data only on our instructions and are subject to a duty of confidentiality.
+
+11. Your Rights
+
+Under the Kenya Data Protection Act and GDPR, you have the right to:
+
+i. Access the personal data we hold about you
+
+ii. Correct inaccurate or outdated data
+
+iii. Request deletion of your data (right to be forgotten)
+
+iv. Object to processing, especially for direct marketing
+
+v. Withdraw consent at any time without affecting prior lawful processing
+
+vi. Restrict processing under certain conditions
+
+vii. Request portability of your data (where applicable)
+
+viii. Lodge a complaint with the Office of the Data Protection Commissioner (ODPC) or other supervisory authority
+
+To exercise these rights, please contact us using the details provided below.
+
+12. Automated Decision-Making
+
+Should we ever engage in automated decision-making or profiling that produces legal or similarly significant effects, we will provide you with clear information about the logic involved and the potential consequences, as well as your rights relating to such processing.
+
+13. Cloud Computing and Hosting
+
+Your personal data may be held or processed in the cloud, in data centers or systems operated by approved third-party cloud providers located within or outside Kenya. All cloud providers engaged by NSE are required to comply with the Kenya Data Protection Act, GDPR (where applicable), and relevant international standards such as ISO/IEC 27001. We conduct due diligence and require contractual commitments (including SLAs) to maintain confidentiality, integrity, and availability of your data, including clarity on server location and ongoing monitoring of provider compliance.
+
+14. External Links Disclaimer
+
+Our website or services may, from time to time, contain links to external sites operated by partner networks, advertisers, or affiliates. Please note that these sites have their own privacy policies, and NSE does not accept responsibility or liability for their practices. We recommend reviewing their privacy statements before submitting any personal data.
+
+15. Changes to This Privacy Policy
+
+We reserve the right to update this policy from time to time to reflect changes in law, technology, or our practices. When we do, we will update the “Last Updated” date and provide appropriate notice for material changes.
+
+Contact Us
+
+Email: dataprotectionoffice@nse.co.ke
+
+### NSE International Securities Identification Number (ISIN) Fact Sheet
+
+An international securities identification number (ISIN) is a 12-digit code that is used to uniquely identify a security’s issue e.g. shares, bonds, etc. This is currently the main method of securities identification worldwide.
+
+The Nairobi Securities Exchange PLC (NSE) is the recognized numbering authority for issuing ISINs for Kenya, as authorized by the Association of National Numbering Agencies (ANNA).
+
+You can read the https://www.anna-web.org/ to find out more.
+
+You can download ISIN files for Equities, Bonds and Derivatives.
+
+Disclaimers
+
+All data and information provided by the NSE, except as otherwise indicated, is proprietary to the NSE. You may not copy, reproduce, modify, reformat, download, store, distribute, publish or transmit any data and information, except for your personal use. For the avoidance of doubt, you may not develop or create any product that uses, is based on, or is developed in connection with any of the data and information available on this site. You are not permitted (except where you have been given express written permission by the NSE) to use the data and information for commercial gain.
+
+###  NSE Our Story / History Fact Sheet
+
+History of NSE
+1920s – 1953: Dealing in shares commenced with trading taking place on a gentleman’s agreement with no physical trading floor. London Stock Exchange (LSE) officials accepted to recognize the setting up of the Nairobi Stock Exchange as an overseas stock exchange (1953).
+1954 – 1962: The Nairobi Stock Exchange (NSE) was registered under the Societies Act (1954) as a voluntary association of stockbrokers and charged with the responsibility of developing the securities market and regulating trading activities. Business was transacted by telephone and prices determined through negotiation.
+1963 – 1970: The Government adopted a new policy with the primary goal of transferring economic and social control to citizens. By 1968, the number of listed public sector securities was 66 of which 45% were for Government of Kenya, 23% Government of Tanzania and 11% Government of Uganda. During this period, the NSE operated as a regional market in East Africa where a number of the listed industrial shares and public sector securities included issues by the Governments of Tanzania and Uganda (the East African Community).
+
+However, with the changing political regimes among East African Community members, various decisions taken affected the free movement of capital which ultimately led to the delisting of companies domiciled in Uganda and Tanzania from the Nairobi Stock Exchange.
+
+1975: When the EAC finally collapsed in 1975, the Government of Uganda compulsorily nationalized companies which were either quoted or subsidiaries of listed companies.
+
+1988: The first privatization through the NSE, through the successful sale of a 20% Government stake in Kenya Commercial Bank. The sale left the Government of Kenya and affiliated institutions retaining 80% ownership of the bank.
+
+1990: The CMA was constituted in January 1990 through the Capital Markets Authority Act (Cap 495A) and inaugurated in March 1990. The main purpose of setting up the CMA was to have a body specifically charged with the responsibility of promoting and facilitating the development of an orderly and efficient capital market in Kenya.
+
+1991: NSE was registered as a private company limited by shares. Share trading moved from being conducted over a cup of tea, to the floor based open outcry system, located at IPS Building, Kimathi Street, Nairobi.
+
+1993: The CMA increased the initial paid up capital for stockbrokers from Kshs.100, 000 to Kshs.5.0 million while that for investment advisors was set at Kshs.1.0 million.
+
+1994: With the 1994 CMA Act (Amendments), it became mandatory that a securities exchange approved by the CMA be a company limited by guarantee. The number of stockbrokers increased by a further seven.
+
+On February 18, 1994, the NSE 20-Share Index reached a record high of 5,030 points. The NSE was rated by the International Finance Corporation (IFC) as the best performing market in the world with a return of 179% in dollar terms.
+
+The NSE also moved to more spacious premises at the Nation Centre in July 1994, setting up a computerized delivery and settlement system – DASS.
+
+1995: An additional eight stockbrokers were licensed in June 1995 and with the suspension of one stockbroker, the total number of stockbrokers was twenty.
+
+The CMA established the Investor Compensation Fund whose purpose was to compensate investors for financial losses arising from the failure of a licensed broker or dealer to meet their contractual obligations.
+
+1996: Privatization of Kenya Airways where more than 110, 000 shareholders acquired stake in the airline and the Government of Kenya reduced its stake from 74% to 26%. The Kenya Airways Privatization team was awarded the World Bank Award for Excellence for 1996, for being a model success story in the divestiture of state-owned enterprises.
+
+1997: With the objective of developing a code of conduct, promoting professionalism, and establishing examinable courses for its members as well as facilitate liaison with the CMA and the NSE, the members of the NSE formed the Association of Kenya Stock brokers (AKS).
+
+1998: The CMA published new guidelines on the disclosure standards by listed companies. The disclosure requirements were meant for both public offerings of securities as well as continued reporting obligations, among others.
+
+January 1999: The CMA issued guidelines to promote good corporate governance practices by listed companies through the constitution of audit committees.
+
+March 23, 1999: The Central Depository and Settlement Corporation Limited (CDSC) was incorporated under the Companies Act (Cap 486).
+
+November 30, 1999: The East African Community Treaty was signed in Arusha, Tanzania between five countries, Burundi, Kenya, Rwanda, Uganda and The United Republic of Tanzania.
+
+2000: Five core shareholders of the CDSC signed an agreement and paid up some share capital.
+
+2001: The market at the NSE was split into the Main Investment Market Segment (MIMS), Alternate Investment Market Segment (AIMS) and the Fixed Income Securities Market Segment (FISMS).
+
+The EAC Secretariat formally convened the first meeting of the new Capital Markets Development Committee in Dar es Salaam, Tanzania.
+
+2003: The Central Depositories Act 2000 was operationalized in June 2003.
+
+2004: Following the successful signing of an MOU between the Dar-es-Salaam Stock Exchange, the Uganda Securities Exchange and the Nairobi Securities Exchange, the East African Securities Exchanges Association was formed.
+
+November 10, 2004: The central despository system was commissioned. For the first time in Kenya’s history, the process of clearing and settlement of shares traded in Kenya’s capital markets was automated.
+
+September 11, 2006: The NSE implemented live trading on its own automated trading systems trading equities. The ATS also had the capability of trading immobilized corporate bonds and treasury bonds. The Exchange’s trading hours were increased from two hours (10:00 am – 12:00 pm) to three hours (10:00 am – 1:00 pm).
+
+December 17, 2007: The NSE implemented its Wide Area Network (WAN) platform. With the onset of remote trading, brokers and investment banks no longer required a physical presence on the trading floor since they would be able to trade through terminals in their offices linked to the NSE trading engine.
+
+February 1, 2008: The Nairobi Stock Exchange (NSE) announced the extension of trading hours at the bourse. Trading would commence from 9.00am and close at 3.00pm each working day.
+
+February 25, 2008: In order to provide investors with a comprehensive measure of the performance of the stock market, the Nairobi Stock Exchange introduced the NSE All-Share Index (NASI).
+
+April 2008: The NSE launched the first edition of the NSE Smart Youth Investment Challenge to promote stock market investments among Kenyan youth.
+
+June 9 2008: The immobilized shares of Safaricom Ltd., commenced trading on the NSE after the trading session was opened in a colorful ceremony presided by H.E. President Mwai Kibaki. The Safaricom IPO increased the number of shares listed on the bourse to over 55.0 billion shares, from the previous 15.0 billion.
+
+2009: The Exchange launched its Complaints Handling Unit (CHU) in a bid to make it easier for investors and the general public to forward any queries and access prompt feedback.
+
+December 7, 2009: The NSE marked the first day of automated trading in government bonds through the Automated Trading System and uploaded all government bonds on the System.
+
+2011: July 4, 2011: The equity settlement cycle moved from the previous T+4 settlement cycle to the T+3 settlement cycle.
+
+July 6, 2011: The Nairobi Stock Exchange Limited changed its name to the Nairobi Securities Exchange Limited. The change of name was a reflection of the 2010 – 2014 strategic plan of the Nairobi Stock Exchange to evolve into a full service securities exchange which supports trading, clearing and settlement of equities, debt, derivatives and other associated instruments.
+
+August 1, 2011: The business segments under which our listed companies are placed were reclassified. Equities were now under ten (10) industry sectors. Debt securities including preference shares were under three (3) categories.
+
+November 8, 2011: The NSE together with FTSE International launched the FTSE NSE Kenya 15 and FTSE NSE Kenya 25 Indices.
+
+March 21, 2012: The Nairobi Securities Exchange became a member of the Financial Information Services Division (FISD) of the Software and Information Industry Association (SIIA).
+
+August 8, 2012: The Nairobi Securities Exchange entered into a Memorandum of Understanding with the Somalia Stock Exchange Investment Corporation (SSE), regarding the possibility of co-operating to establish a securities exchange business involving the trading, settlement, delivery of listed securities and other stockbrokerage activities.
+
+September 5, 2012: The NSE Broker Back Office commenced operations with a system capable of facilitating internet trading improving the integrity of the Exchange trading systems.
+
+October 3, 2012: NSE together with FTSE International launched the FTSE NSE Kenyan Shilling Government Bond Index. This was the first instrument of its kind in Eastern Africa and gave investors the opportunity to access current information and provided a reliable indication of the Kenyan Government Bond market’s performance.
+
+December 14, 2012: UMEME Holdings Limited cross listed its 1,623,878,005 shares on the Main Investment Market Segment (MIMS) of the Nairobi Stock Exchange. It was the first inward cross listing of an East African company on the NSE since the incorporation of the East African Securities Exchanges Association (EASEA) on May 15 2009.
+
+January 22, 2013: The Growth Enterprises Market Segment (GEMS) giving small and medium enterprises a great opportunity to access the capital markets was launched by Mr. Mugo Kibati, Director-General of Kenya Vision’s 2030 Delivery Board.
+
+February 25 2013: Centum Investment Company became the first company in East Africa to list an equity linked note, when its Kshs. 4.19 Billion Note Issue commenced trading on the Nairobi Stock Exchange (NSE) Fixed Income Securities Market Segment (FISMS).
+
+February 28, 2013: The Board of Association of Futures Market (AFM), admitted the Nairobi Securities Exchange (NSE) as an associate member of the Association. The Association promotes and encourages the establishment of new derivatives and related markets.
+
+June 3, 2013: The Nairobi Securities Exchange moved to its new residence outside the central business district located on 55 Westlands Road – The Exchange.
+
+June 25, 2013: The first reverse takeover transaction in East Africa was completed when I&M Holdings began trading on the NSE. I&M Holdings used the reverse takeover of City Trust which was listed on AIMS to migrate the new firm to MIMS.
+
+June 26, 2013: Moody’s Investors Service and the Nairobi Securities Exchange hosted the inaugural East Africa Credit Risk Conference in Nairobi.
+
+July 15, 2013: Home Afrika, made history by being the first company to list by introduction on the Growth Enterprise Market Segment (GEMS).
+
+August 8, 2013: The Nairobi Securities Exchange (NSE) and the Shanghai Stock Exchange (SSE) entered into a Memorandum of Understanding (MoU).
+
+August 19, 2013: The Board of Directors of the Nairobi Securities Exchange admitted CBA Capital Ltd., and Equity Investment Bank Ltd., as trading participants.
+
+September 24, 2013: As a result of its initiatives to increase company listings and diversify asset classes, the panel of distinguished judges for the 2013 Africa investor Index Series Awards, ranked the Nairobi Securities Exchange (NSE), the winner of the Most Innovative African Stock Exchange category.
+
+April 7, 2014: The 60th Anniversary Celebrations of the Nairobi Securities Exchange kicked off with the Launch of the new NSE Brand and official opening of the Exchange. Our brand migration was informed by developments we are undergoing at the bourse.
+
+June 27, 2014: The Nairobi Securities Exchange (NSE) received formal approval from the Capital Markets Authority (CMA) to operate as a demutualized entity. This is after the approval of the NSE’s final application which met the regulator’s requirements as stipulated in Section 5(3) of the Capital Markets (Demutualization of the Nairobi Stock Exchange) Regulations 2012.
+
+On June 27, 2014: The Nairobi Securities Exchange (NSE) received formal approval from the Capital Markets Authority (CMA) to offer its shares to the public through an Initial Public Offer (IPO) and subsequently Self-list its shares on the Main Investment Market Segment (MIMS) of the NSE.
+
+July 23, 2014: The Nairobi Securities Exchange Limited officially launched its Initial Public Offering (IPO) seeking to raise Kshs.627,000,000.00 by selling up to 66,000,000 new shares at a price of Ksh 9.50 per share. The minimum number of shares available for purchase were 500.
+
+September 9, 2014: The Nairobi Securities Exchange listed its 194,625,000 issued and fully paid up shares on the Main Investment Market Segment (MIMS) under a new sector – Investment Services of the bourse after a successful Initial Public Offering which sought to raise Kshs.627 million by selling 66 million new shares at a price of Kshs. 9.50 per share. 17,859 investors applied for 504,189,700 new shares worth Kshs. 4.789 billion; a subscription rate of 763.9%, garnering an oversubscription of 663.92%. Following its self-listing the Exchange becomes the second African Exchange after the Johannesburg Stock Exchange to be listed.
+
+On September 16, 2014: The Nairobi Securities Exchange was added as a constituent of the auspicious FTSE Mondo Visione Exchanges Index, the first Index in the world to focus on listed exchanges and other trading venues.
+
+September 26, 2014: The Nairobi Securities Exchange launched a new system for trading corporate bonds and Government of Kenya Treasury Bonds allowing on-line trading of debt securities and is integrated with the settlement system at the Central Bank of Kenya. The system is more efficient, scalable and flexible, and can support trading in bonds that have been issued in foreign currencies.
+
+October 24, 2014: The Nairobi Securities Exchange (NSE) and Korea Exchange (KRX) signed a memorandum of Understanding (MOU) in Korea, marking the beginning of collaboration between the Kenya and Korea Capital Markets
+
+### NSE Training Fact Sheet
+
+About NSE Training
+
+Nairobi Securities Exchange PLC offers a wide range of premium trainings by the leading market experts.Our customized trainings equip both businesses and individuals with prerequisite skills and knowledge on capital and financial markets through high quality, cost effective and accessible learning. The highly supportive and interactive learning platform incorporates technology that enhances skills, capacity building and offers certification in the Kenyan Market.
+
+Our Courses
+
+Our courses are designed to provide individuals and corporates a better understanding of the various aspects and products of the capital and finacial markets. The courses are geared towards bridging knowledge gap and offering financial inclusion to empower capital market professionals, investors and the general public.
+
+We have partnered with other leading organizations to deliver a full range of financial education courses that create impact and sustainable growth through powerful learning. The courses offers participants Continous Professional Development that allows learning in a structured and practical format and ascertain skills and knowledge in various specialities as well as maintain competence through various professional body memberships.
+
+The courses combine practical application with academic excellence through interactive face to face classroom teaching by our qualified professional instructors and e-learning innovation using collaborative learning methodology that allows participants to learn by sharing ideas which forms a core part of all our trainings.
+
+### NSE Exchange Traded Funds (ETFs) Fact Sheet
+
+An ETF is defined as a listed investment product, which tracks the performance of a particular index (e.g. NSE 20, NSE 25) or “basket” of shares, bonds, money market instruments or a single commodity. These are known as underlying securities or assets. ETF are traded on an exchange just like an ordinary share and the price of a particular ETF will be determined by the demand and supply of the ETF. An ETF can be a domestic or offshore product
+
+A. Types of exchange- traded funds
+
+- Index ETFS – Most ETFs are index funds that attempt to replicate the performance of a specific index. Indexes may be based on stocks, bonds, commodities, or currencies. An index fund seeks to track the performance of an index by holding in its portfolio either the contents of the index or a representative sample of the securities in the index.
+- Bond ETFs – They invest in bonds. They thrive during economic recessions because investors pull their money out of the stock market and into bonds (for example, government treasury bonds or those issued by companies regarded as financially stable).
+- Commodity ETFs (ETCs) – Invest in commodities such as precious metal, agricultural products and hydrocarbons.
+- Stock ETFs –This was the first and most popular ETFs. This type of ETF owns funds from other stocks
+
+B. Benefits of exchange traded funds
+
+* Diversification – ETF give investors exposure to a wide variety of securities or assets, avoiding the risk of “putting all your eggs in one basket”.
+* Regulation – ETF are well regulated by both the Nairobi Securities Exchange (NSE) and Capital Markets Authority (CMA). Investors therefore have added protection against unjust treatment.
+
+  Cash flow distributions (dividends) – Even though owning an ETF does not give direct ownership of the underlying securities of the index being tracked, owners of an ETF are still eligible to receive dividends should the securities in the tracking index pay dividends.
+* Liquidity – Buying or selling ETF can be done quickly and at a low cost at the NSE.
+* Tax – ETF are exempt from Capital Gains Tax upon sale of the ETF.
+* Hassle free investment – Investors can gain exposure to a wide variety of securities or assets without having to buy each of the underlying constituents individually, conducting extensive research, nor actively managing the underlying securities
+* Transparency – ETFs disclose their holdings on a daily basis, thereby enabling investors to know exactly what stocks or underlying assets they hold, what the value is and to make more informed investment decisions
+* Flexibility – Like an equity market, ETFs trade throughout market hours.
+
+Parties involved in an ETF issuance
+Market Maker -a market maker in Kenya’s ETF market shall play the role of creating liquidity through two-way price quotes in order to eradicate substantial price gaps and ensure a liquid market for all.
+Manager – The Fund Manager acts on its behalf for the purpose of managing the ETF or undertake to manage the ETF.
+Trustee -A trustee primary responsibility of protecting the interests of investors.
+Current Issuances in the market
+
+|  | Issuer | Name | Type of ETF | Listing Date |
+|  | --- | --- | --- | --- |
+|  | Absa Group | Absa Gold Backed | Commodity ETF | 2016 |
+
+
+
+### 2. Single Stock Futures Product Specifications
+
+**Fact Sheet: Single Stock Futures Contract Specifications (NSE Derivatives Market)**
+
+Category of contract: Single Stock Future
+
+Underlying financial instrument: Single stock listed on the NSE (E.g. Equity Group Holdings Plc. – EQTY)
+
+System code: Jun19 EQTY
+
+Contract months: Quarterly (March, June, September and December)
+
+Expiry dates: Third Thursday of expiry month. (If the expiry date is a public holiday then the previous business day will be used.)
+
+Expiry times: 15H00 Kenyan time
+
+Listing program: Quarterly
+
+Valuation method on expiry: Based on the volume weighted average price (VWAP) of the underlying instrument for liquid contracts, and the theoretical price (spot + cost of carry) for illiquid contracts.
+
+Settlement methodology: Cash settlement
+
+Contract size:
+- For shares trading below KES 100: One contract equals 1,000 underlying shares.
+- For shares trading above KES 100: One contract equals 100 underlying shares.
+
+Minimum price movement (Tick Size):
+Price Range          | Tick Size (KES)
+--------------------|----------------
+Below 100.00        | 0.01
+≥ 100.00 < 500.00   | 0.05
+≥ 500.00            | 0.25
+
+Initial Margin requirements: As determined by the NSE Methodology.
+
+Mark-to-market: Explicit daily. Based on the volume weighted average price (VWAP for liquid contracts, theoretical price for illiquid.
+
+Market trading times: 09H30 to 15H00 Kenyan time
+
+Market fees (as % of notional contract value):
+
+Participant         | Percentage
+--------------------|------------
+NSE Clear           | 0.025%
+Clearing Member     | 0.025%
+Trading Member      | 0.10%
+IPF Levy            | 0.01%
+CMA Fee             | 0.01%
+TOTAL               | 0.17%
+
+
+### NSE Bond Index (NSE-BI) Ground Rules v1.2 – Comprehensive Fact Sheet
+**Document Title**  
+GROUND RULES FOR GENERATION OF NSE BOND INDEX (NSE-BI)  
+V1.2  
+
+Approved by: Trading Committee  
+
+**Section 1: Introduction**  
+The Index shall be generated and distributed under the name, ‘the NSE Bond Index’ (NSE-BI).  
+The NSE-BI is a broad, comprehensive, market value weighted Index designed to measure the performance of the Kenyan Treasury bond market. Constituent bonds that are factored in the calculation of the NSE-BI are derived from the benchmark bonds issued by the Government.  
+The benchmark bonds are 2,5,10,15,20,25 years to maturity. Any new bond issued by the government (on the run bonds) will be included into the index on the date of listing at the NSE.  
+
+This manual outlines the procedures that guide the generation and management of the NSE-BI. It tackles issues concerning Bond eligibility criteria, index construction and maintenance methodology, determination of the index base date and dissemination of index results.
+
+**Section 2: Eligibility Criteria (Verbatim)**  
+A bond must meet all the following criteria on the rebalancing date to be Included in the index.  
+
+➢ Issuer: The bond issuer will be the Government of Kenya though its fiscal agent the Central Bank of Kenya. (CBK) and listed at the Nairobi securities Exchange.  
+➢ Denomination: The bond must be denominated in Kenya shillings (KES)  
+➢ Minimum Par Amount: The amount outstanding, or Par Amount, is used to determine the weight of the bond in the Index. The bond must have a minimum Par Amount of Kes 5 billion to be eligible for inclusion. To remain in the Index, bonds must maintain a minimum Par amount greater than or equal to Kes 1 billion as of the next rebalancing date.  
+➢ Minimum Term: As of the next Rebalancing date, the bond must have a minimum term to maturity greater than or equal to one year (364 days)  
+➢ Benchmark bond: the bond to be included in the index must be a benchmark bond. Benchmark bonds are securities or debt instruments mainly issued for market development. They are characterized by high credit quality, least default risk, are highly liquid and reasonably large in volume. As a result, these bonds are actively traded in the secondary market, have stable prices/yields and are therefore most reliable the basis for deriving benchmark measures in this case the bond index. In Kenya benchmark bonds include bonds of 2, 5, 10, 15,20 and 25-year benchmark Maturities.
+
+**Section 3: Index Construction & Maintenance Methodology (Verbatim Extracts)**  
+The NSE-BI is a clean price market-value-weighted index. The prices used to generate the index are the volume weighted prices of the selected benchmark bonds as concluded and reported via the automated trading system (ATS). Where there are no trades, the Exchange shall call for firm two-way quotes from licensed trading participants.  
+
+The Market value of a bond equals the adjusted amount outstanding, multiplied by the clean price, expressed as a percentage. Capitalization weighting effectively assumes that an investor "buys the market" and is therefore the most appropriate weighting scheme for a performance benchmark.  
+
+Valuation: The securities that make up the NSE-BI are priced each end of week by the trading desk based on the executed trades as reported via the ATS. For purposes of index calculation, the volume weighted yields or quotes where applicable are used to generate the yields input for index calculation. If an index linked issue does not trade, the last traded clean price will be used for index generation. To improve the accuracy of the index, data that will be considered will only be of trades that are Kes 50M plus to avoid trades that distort the index.  
+
+Settlement Conventions: Treasury bonds in Kenya accrue interest using an actual/364-day count convention. Accrued interest on bonds in the index is calculated assuming three-day settlement (T+3).  
+
+Index Maintenance Rules:  
+• All benchmark bonds are eligible for inclusion in the index on the rebalancing date.  
+• Any Index Bond that fails to meet any one of the eligibility factors, or that will have a term to maturity and/or call date less than or equal to one year (364-day count) of the next Rebalancing Date, will be removed from the Index on that Rebalancing Date.  
+• Par amounts of Index Bonds will be adjusted on the Rebalancing date to reflect any changes that have occurred since the previous Rebalancing Date, due to Partial calls, rediscounting etc.
+
+Re-balancing: The Index is reviewed and monthly. The Index Committee, nevertheless, reserves the right to adjust the Index at any time that it believes appropriate balancing takes place on the last business day of each month. Additions, deletions, and other changes to the Index arising from the monthly rebalancing shall be published via the NSE website.
+
+**Section 4: Index Base Date (Verbatim)**  
+The NSE-BI base date is quoted at 1000 on September 8, 2023.
+
+**Section 5: Dissemination of New Index Results (Verbatim)**  
+The Nairobi Securities Exchange shall ensure that the following information on the indices is widely published:  
+• Index values  
+• List of constituents  
+• Changes to constituents  
+• Changes and amendments to the Ground Rules  
+• Details of any recalculations or calculation amendments.  
+
+Constituent Bond data together with statistics on the indices are available from the NSE Website. The weekly index points will be published on the weekly Implied Yield Pricelist and the NSE Website before the close of business.
+
+**Section 6: Index Governance (Verbatim)**  
+The NSE Trading & Technology Committee, a Committee of the NSE Board maintains the Index. The Committee oversees the day-to-day management of the Index, including the monthly rebalancing, determinations of intra-rebalancing changes to the Index, and maintenance and inclusion policies, including additions or deletions of bonds and other matters affecting the maintenance and calculation of the Index.  
+
+In fulfilling its responsibilities, the Committee has full and complete discretion to (i) amend, apply, or exempt the application of Index rules and policies as circumstances may require and (ii) add, remove, or by-pass any bond in determining the composition of the Index.
+
+**Section 8: Current NSE-BI Constituent Bonds (As of Latest Update – Verbatim Table)**  
+
+No. | Constituents    | ISIN           | Outstanding Amount Shs'M.
+----|-----------------|----------------|----------------------------
+1.  | FXD1/2023/002  | KE8000006109  | 94,724.39
+2.  | FXD1/2024/003  | KE8000006323  | 91,555.15
+3.  | FXD1/2023/005  | KE8000005986  | 144,534.30
+4.  | FXD1/2022/010  | KE7000009436  | 80,901.70
+5.  | FXD1/2012/020  | KE4000003949  | 130,805.92
+6.  | FXD1/2024/010  | KE8000006547  | 124,539.40
+7.  | FXD1/2010/025  | KE4000003089  | 20,192.50
+8.  | FXD2/2018/020  | KE5000008655  | 89,198.60
+9.  | FXD1/2021/025  | KE7000003652  | 90,490.00
+10. | FXD1/2022/025  | KE8000005093  | 103,141.56
+
+
+
+
+### 6. NSE Corporate Social Responsibility (CSR) – Charity Trading Day
+
+**Fact Sheet: NSE CSR Initiatives (Charity Trading Day)**
+
+The NSE Charity Trading Day is an annual event that brings together celebrities, capital market participants, sponsors, and beneficiaries to network and have fun while encouraging investors to make a trade on that day in support of the event’s cause.
+
+During the Charity Trading Day, celebrities and other participants make calls to clients on behalf of dealers, with all of the day’s trading revenues being donated towards Charity.
+
+Focus Areas by Year:
+- 2015–2017 → Wildlife conservation (e.g. Borana Ranch Conservancy, Nature Kenya)
+- 2018 → Education (aligned to UN SDG 4 – inclusive and equitable quality education)
+- 2019 → Health (aligned to UN SDG 3 – National Cancer Institute of Kenya data registry system)
+- 2021 → Support for SMEs affected by COVID-19 through the KEPSA revolving fund
+
+Beneficiaries Supported:
+- Borana Ranch Conservancy
+- We The Change Foundation
+- Genevive Audrey Foundation
+- SOS Children’s Home
+- Joy Children’s Home
+- Nature Kenya
+- The National Cancer Institute of Kenya
+- KEPSA
+
+The Charity Trading Day has made a significant difference towards wildlife conservation, promotion of education and other humanitarian causes.
+
+If your organization is aligned to our cause and wishes to be a beneficiary of the Charity Trading Day please contact info@nse.co.ke.
+
+Thank you to all our sponsors for your generous contributions and continued support.
+
+
+### 3. NSE Derivatives Rules (July 2017) – Comprehensive Fact Sheet
+
+**Document Overview**  
+NSE Derivatives Rules  
+July 2017  
+
+The purpose of these Derivatives Rules and directives is to achieve the objects of the NSE as set out in its Memorandum and Articles of Association by providing the procedures necessary to establish and regulate a fair and efficient derivatives market and to ensure that the business of the NSE is carried out in an orderly manner and with due regard to the objects of the Capital Markets Act.
+
+**Key Provisions – Section 1: Derivatives Rules**  
+- The overall management and control of the derivatives market shall be exercised by the Board of Directors of the NSE (“the Board”).  
+- The Derivatives Rules and directives are binding on members, officers and their employees AND on any person utilising the services of a member or who concludes a transaction with a member.  
+- Every transaction in derivative securities entered into by a trading member must be concluded on the specific condition that the transaction is entered into subject to the provisions of the Act, these Derivatives Rules and the directives.  
+- Subject to the provisions of the Act, the NSE and the clearing house shall not be liable for any loss or damage resulting from negligence (except gross negligence), system malfunctions, or any other cause.  
+- A Settlement Guarantee Fund and Investor Protection Fund are established with mandatory contributions from members.
+
+**Key Definitions (Selected – Exact Wording)**  
+“Act” means the Capital Markets Act (Chapter 485A of the Laws of Kenya)  
+“additional margin” means the margin paid to a clearing member over and above that required by the clearing house  
+“clearing member” means a sub-category of market participant of the NSE, registered to perform clearing in the derivatives market  
+“client” means any person who uses the services of a market participant  
+“default” means a default by a client or member as contemplated in rule 9  
+“futures contract” means a contract in terms of which the seller is obliged to deliver or to pay an amount if the price/value changes  
+“initial margin” means the amount determined by the clearing house as the initial deposit  
+“mark-to-market” means the revaluation of open positions to current market prices  
+“trading member” means a sub-category of market participant of the NSE, registered to perform trading in the derivatives market  
+“variation margin” means the amount calculated daily to settle profits/losses on open positions
+
+**Key Membership Categories**  
+- Trading Member (non-clearing)  
+- Clearing Member  
+- Trading & Clearing Member  
+
+**Key Obligations**  
+- Members must maintain minimum capital requirements, fidelity insurance, and professional indemnity cover.  
+- Members must segregate client funds and positions.  
+- Daily mark-to-market and margin calls are mandatory.  
+- Position limits and large exposure reporting apply.  
+- Default waterfall: client margin → member margin → Settlement Guarantee Fund → IPF.
+
+### 4. Policy Guidance Note on Green Bonds (January 2019) – Comprehensive Fact Sheet
+
+**Document Overview**  
+POLICY GUIDANCE NOTE ON GREEN BONDS  
+
+This Policy Guidance Note (PGN) is a guide on the operational regulatory environment on Green Bonds in Kenya.  
+
+January 2019  
+Capital Markets Authority
+
+**Key Definitions (Exact Wording)**  
+“Green Bond” means a fixed income instrument, either unlisted or listed on a securities exchange, approved by the Authority, whose proceeds are used to finance or refinance new or existing projects that generate climate or other environmental benefits that conform to green guidelines and standards.  
+
+“eligible projects” means project categories that contribute to environmental objectives including but not limited to climate change mitigation, climate change adaptation, natural resource conservation, biodiversity conservation, and pollution prevention and control.  
+
+“greenwashing” means the superficial or insincere display of concern for the environment including mislabelling of a bond as green or overstatement of environmental benefits.
+
+**Core Requirements for Green Bond Issuance & Listing**  
+- Issuer must appoint an Independent Verifier (pre-issuance review and confirmation of green status).  
+- The Information Memorandum must contain a statement/report from the Independent Verifier confirming alignment with green principles.  
+- Issuer must develop a Green Bond Framework covering: Use of Proceeds, Project Evaluation & Selection, Management of Proceeds, Reporting.  
+- Annual Green Bond Report required (allocation of proceeds + impact metrics), reviewed by Independent Verifier.  
+- Proceeds can only be used for eligible green projects; tracking is mandatory.  
+- Unallocated proceeds must be disclosed and temporarily placed in cash, cash equivalents or other green investments.  
+- Breach of green requirements → Authority may direct removal of “green” label, impose sanctions, or suspend trading (for listed bonds).  
+
+**Eligible Independent Verifiers**  
+Must be CMA-approved entities with demonstrated expertise in environmental issues and green finance (e.g., CICERO, Sustainalytics, or local equivalents approved by CMA).  
+
+**Continuous Obligations**  
+- Annual reporting on allocation and impact until full allocation.  
+- Post-issuance verification recommended (at least once).  
+- Immediate disclosure if proceeds are reallocated away from green projects.
+
+
+### NSE Equity Securities Trading Rules – Comprehensive Fact Sheet (Verbatim Key Extracts)
+
+**Document Title**  
+NAIROBI SECURITIES EXCHANGE TRADING RULES FOR EQUITY SECURITIES  
+
+**Core Application (Rule 3)**  
+These Rules shall apply to all Trading Participants, their authorised representatives, and all transactions in equity securities executed through the Automated Trading System (ATS) of the Nairobi Securities Exchange.
+
+**Key Definitions (Exact from Section 2)**  
+“Auction Call Session” means the session during which orders are entered but not matched until the opening price is determined.  
+“Board Lot” or “Board Lot” means a standard trading unit of one hundred (100) equity securities.  
+“Odd Lot” means a quantity of equity securities less than one Board Lot.  
+“Reference Price” means the Volume Weighted Average Price (VWAP) of an equity security calculated from all transactions executed during the entire trading session of the previous business day.  
+“Trading Participant” means a person licensed by the Capital Markets Authority as a stockbroker or dealer and authorised by the Exchange to trade on the ATS.  
+“Manifest Error” means a transaction executed at a price that deviates significantly from the prevailing market price due to system malfunction, human error, or erroneous order entry.
+
+**Trading Sessions & Hours (Exact from Rule 6.1 & 7)**  
+Trading shall be conducted Monday to Friday (except public holidays) as follows:
+
+Session                  | Time                  | Activity
+-------------------------|-----------------------|-------------------------------------------------
+Pre-Trading Session      | 08:45 – 08:59:59     | No order entry/display. Only cancellation of GTC/GTD orders allowed.
+Open Auction Call        | 09:00 – 09:30:59     | Order entry allowed. Indicative opening price displayed. No matching until 09:31.
+Regular/Continuous Trading | 09:31 – 15:00      | Continuous matching on price-time priority.
+Close                    | 15:00 exact          | Market closes. Last traded price becomes closing price.
+
+Reference Price = VWAP of all trades during the full session (09:31 – 15:00).
+
+**Order Qualifiers (Exact Rules 5.1 – 5.6)**  
+- Immediate or Cancel (IOC): Executed immediately for available quantity at specified price or better. Unfilled portion automatically cancelled.  
+- Good Till Cancelled (GTC): Remains active until executed or manually cancelled.  
+- Good Till Day (GTD): Remains active until specified date or executed.  
+- Day Order (DO): Valid only for the trading day entered. Auto-cancelled at close if unfilled.  
+- Iceberg Order (IO): Only a portion (display quantity) shown in order book. Reserve quantity hidden and released as display quantity is filled.  
+- Minimum Fill Market Order (MFMO): Market order that executes only if a minimum specified quantity is available at the opposite best price.
+
+**Price Limits & Tick Sizes (Exact from Rule 5.10 & 5.9)**  
+Daily Price Movement Limit: ±10% from previous day’s Reference Price.
+
+No 10% limit applies to:  
+- First day of listing  
+- REITs & ETFs (except during book-build)  
+- Securities under cautionary announcement  
+- Rights issues while trading  
+- Offshore ETFs (limits based on home jurisdiction + FX fluctuations)
+
+Tick Sizes (Minimum Price Movement):  
+Price Range (KES)     | Tick Size (KES)
+----------------------|------------------
+< 100.00              | 0.01
+100.00 – 499.95       | 0.05
+500.00 – 999.95       | 0.10
+1,000.00 – 4,999.95   | 1.00
+5,000.00 – 9,999.95   | 5.00
+≥ 10,000.00           | 10.00
+
+**Order Matching Priority (Exact from Rule 7.4)**  
+1. Price priority (best price first)  
+2. Time priority (earliest entry at same price)  
+3. Market orders have priority over limit orders at the same price level  
+Partial executions retain original timestamp for remaining quantity.
+
+**Board Lots vs Odd Lots (Exact from Rule 6.3 & 6.4)**  
+- Normal Board: Minimum 100 shares (Board Lot). Market & limit orders allowed.  
+- Odd Lots Board: Maximum 99 shares. Limit orders only. Separate order book. No market orders. No entry during Open Auction Call.
+
+**Settlement (Exact from Rule 6.8)**  
+All transactions settle on T+3 basis.  
+Failed settlement by T+3 11:30 a.m. → Automatic Buy-In executed at higher of:  
+- Prevailing market price + 2% penalty, or  
+- Previous day’s VWAP + 2.5%  
+Buy-In executed on All-or-None basis on special Buy-In Board.  
+If Buy-In fails → Transaction rescinded by CDSC in consultation with NSE & CMA.
+
+**Trading Halts & Suspensions (Exact from Rule 9)**  
+The Exchange may halt trading in a security:  
+- Upon request by issuer for material news dissemination  
+- Regulatory reasons (CMA directive)  
+- Technical issues or abnormal price/volatility  
+- To maintain orderly market  
+
+Halt duration: Minimum 1 hour or until further notice.  
+All open orders purged during halt.  
+Daily price limits suspended for entire session when trading resumes.
+
+**Cancellation of Transactions (Exact from Rule 8)**  
+The Exchange may cancel transactions deemed erroneous if:  
+- Manifest error in price (significant deviation from fair value)  
+- System malfunction  
+- Erroneous order entry  
+Cancellation request must be made within 30 minutes of trade.  
+Decision by Market Operations Committee final.
+
+**Material Announcements During Trading Hours (Exact from Rule 6.10)**  
+If material price-sensitive announcement made during session:  
+→ Immediate trading halt for remainder of session  
+→ All open orders purged  
+→ Trading resumes next business day with no daily price limits for full session.
+
+**Self-Trade Prevention (Exact from Rule 6.6)**  
+Same CDS account cannot trade with itself except in declared omnibus accounts with prior Exchange approval.
+
+**Market Maker Obligations (Where Appointed)**  
+Designated Market Makers must maintain two-way quotes within maximum spread and minimum size during continuous trading.
+
+**Exclusion of Liability (Exact from Rule 11)**  
+The NSE shall not be liable for any loss resulting from system failure, errors, or any cause beyond its reasonable control except in cases of gross negligence or wilful default.
+
+
+
 
 
 ### 1. NSE Nominated Advisors (NOMAs) Rules, 2012
@@ -2321,21 +3320,6 @@ Flexibility: Implement various strategies to profit in different market conditio
         A:Open an account with a derivatives licensed trading member (stockbroker or investment bank). The member will provide you with access to the online trading platform.
         
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
         """
 
     @retry(stop=stop_after_attempt(3), wait=wait_fixed(1))
@@ -2351,70 +3335,15 @@ Flexibility: Implement various strategies to profit in different market conditio
     def build_knowledge_base(self):
         seeds = [
            "https://www.nse.co.ke/",
-            "https://www.nse.co.ke/site-map/",
-            "https://www.nse.co.ke/home/",
-            "https://www.nse.co.ke/about-nse/",
-            "https://www.nse.co.ke/our-story/",
-            "https://www.nse.co.ke/contact-us/",
-            "https://www.nse.co.ke/faqs/",
-            "https://www.nse.co.ke/leadership/",
-            "https://www.nse.co.ke/listed-companies/",
-            "https://www.nse.co.ke/corporate-bonds/",
-            "https://www.nse.co.ke/government-bonds/",
-            "https://www.nse.co.ke/equities-market/",
-            "https://www.nse.co.ke/exchange-traded-funds/",
-            "https://www.nse.co.ke/share-price/",
-            "https://www.nse.co.ke/market-statistics/",
-            "https://www.nse.co.ke/data/",
-            "https://www.nse.co.ke/derivatives/equity-index-futures/",
-            "https://www.nse.co.ke/derivatives/accredited-members/",
-            "https://www.nse.co.ke/derivatives/",
-            "https://www.nse.co.ke/derivatives/about-next",
-            "https://www.nse.co.ke/derivatives/single-stock-futures/",
-            "https://www.nse.co.ke/derivatives/options-on-futures/"
-            "https://www.nse.co.ke/derivatives/faq/",
-            "https://www.nse.co.ke/growth-enterprise-market-segment/",
-            "https://www.nse.co.ke/green-bonds/",
-            "https://www.nse.co.ke/training/",
-            "https://www.nse.co.ke/usp/",
-            "https://www.nse.co.ke/ibuka-2/",
-            "https://www.nse.co.ke/ibuka/",
-            "https://www.nse.co.ke/m-akiba/",
-            "https://www.nse.co.ke/list-of-trading-participants/",
-            "https://www.nse.co.ke/real-estate-investment-trusts/",
-            "https://www.nse.co.ke/main-investment-market-segment/",
-            "https://www.nse.co.ke/alternative-investment-market-segment/",
-            "https://www.nse.co.ke/sustainability/",
-            "https://www.nse.co.ke/nominated-advisors/",
-            "https://www.nse.co.ke/corporate-actions/",
-            "https://www.nse.co.ke/listed-company-announcements/",
-            "https://www.nse.co.ke/privacy-policy/",
-            "https://www.nse.co.ke/trading-participant-financials/",
-            "https://www.nse.co.ke/csr/",
-
-
-            #come back to append pdfs 
-            "https://www.nse.co.ke/derivatives/next-education-resources/",
-            "https://www.nse.co.ke/policy-guidance-notes/",
             #Data Services Links
             "https://www.nse.co.ke/dataservices/",
             "https://www.nse.co.ke/dataservices/market-statistics/",
             "https://www.nse.co.ke/dataservices/market-data-overview/",
             "https://www.nse.co.ke/dataservices/real-time-data/",
-            "https://www.nse.co.ke/dataservices/end-of-day-data/",
-            "https://www.nse.co.ke/dataservices/historical-data/",
-            "https://www.nse.co.ke/dataservices/historical-data-request-form/",
-            "https://www.nse.co.ke/dataservices/international-securities-identification-number-isin/"
-        ]
+            "https://www.nse.co.ke/dataservices/end-of-day-data/",       
+            ]
         
         hardcoded_pdfs = [
-             "https://www.nse.co.ke/wp-content/uploads/nse-equities-trading-rules.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/nse-listing-rules.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/Groundrules-nse-NSE-BankingSector-share-index_-V1.0.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/GroundRules-NSE-Bond-Index-NSE-BI-v2-Index-final-2.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/groundrules-nse-20-share-index_-v1.6.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/GroundRules-NSE-10v2-Share-Index.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/groundrules-nse-25-share-index_-v1.4.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-market-participants-rules.pdf",
             "https://www.nse.co.ke/wp-content/uploads/NSE-Equity-Trading-Rules-Amended-Jul-2025.pdf",
             "https://www.nse.co.ke/wp-content/uploads/nse-fixed-income-trading-rules.pdf",
@@ -2429,32 +3358,17 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/nse-clear-backtesting-policy.pdf",
             "https://www.nse.co.ke/wp-content/uploads/policy-guidance-note-for-exchange-traded-funds.pdf",
             "https://www.nse.co.ke/wp-content/uploads/policy-guidance-note-for-green-bonds.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/NSE-ESG-Disclosures-Guidance-Manual.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/BBO-standards.pdf",
-            "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/nse-derivatives-membership-criteria-and-fees-february-2021.pdf",
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/corporate-action-management-guide.pdf",
             "https://www.nse.co.ke/wp-content/uploads/HOW-TO-BECOME-A-TRADING-PARTICIPANT-.pdf",
             "https://www.nse.co.ke/wp-content/uploads/NSE-OPERATIONAL-GUIDELINES-FOR-THE-BOND-QUOTATIONS-BOARD.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/NSE-Day-Trading-Operational-Guidelines.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/guidelines-on-direct-market-access-october-2019.pdf",
             "https://www.nse.co.ke/wp-content/uploads/guidelines-on-financial-resource-requirements-for-market-intermediaries.pdf",
             "https://www.nse.co.ke/wp-content/uploads/guidelines-on-managementsupervision-and-internal-control-of-cma-licensed-entities-may-2012.pdf",
             "https://www.nse.co.ke/wp-content/uploads/guidelines-on-the-prevention-of-money-laundering-and-terrorism-financing-in-the-capital-markets.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/East-African-Exchanges-EAE-20-Share-Index-Methodology-F-.pdf",
             "https://www.nse.co.ke/wp-content/uploads/NSE-Implied-Yields-Yield-Curve-Generation-Methodology-1.pdf",
-            "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2024/08/PL-Calculator-User-Manual.pdf",
-            "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/internal-controls-for-clearing-and-trading-members.pdf",
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/internal-controls-for-clearing-and-trading-members.pdf",
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2025/03/Mini-NSE-10-Index-Futures-Product-Report.pdf",
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/nse-clear-status-on-pfmi-principles-april-2021.pdf",
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2025/03/Product-Report-Options-on-Futures-August-2024-Approved.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/NSE-2025-2029-Strategy.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/NSE-ESOP-Public-Announcement-2025.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/NSE_Press-Release-Nairobi-Securities-Exchange-Plc-takes-a-bold-step-to-expand-investment-access-for-retail-investors-1.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/Press-Release-Nairobi-Securities-Exchange-Plc-Appoints-Sterling-Capital-Limited-as-a-market-maker-in-the-NEXT-Derivatives-Market.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/Press-Release-Nairobi-Securities-Exchange-Plc-Launches-Banking-Sector-Index.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/broker-back-office-prequalified-vendors.pdf",
-            "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/derivatives-document-1.pdf"
 
         ]
 
