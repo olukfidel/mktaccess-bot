@@ -2884,6 +2884,413 @@ Claims must be submitted to Trustees.
 Trustees refer claims to the Management Committee for consideration.
 Payment is made from the Fund's assets (NSE/NSE Clear money is not available for these claims)
 
+{
+  "filename": "Market-Notice-Initial-Margins-March-2025-Final.pdf",
+  "type": "NSE Derivatives Market Notice",
+  "reference": "001DER/NSE/2025",
+  "date": "12th March 2025",
+  "subject": "INITIAL MARGIN REQUIREMENTS FOR EQUITY FUTURES",
+  "effective_date": "Friday, 21st March 2025",
+  "initial_margins_kes": {
+    "Safaricom Plc (SCOM)": {
+      "19-Jun-25": 2500,
+      "18-Sept-25": 2700,
+      "18-Dec-25": 2900,
+      "20-Mar-25": 3100
+    },
+    "KCB Group Plc (KCBG)": {
+      "19-Jun-25": 6000,
+      "18-Sept-25": 6400,
+      "18-Dec-25": 6700,
+      "20-Mar-25": 7100
+    },
+    "Equity Group Holdings Plc (EQTY)": {
+      "19-Jun-25": 5700,
+      "18-Sept-25": 6100,
+      "18-Dec-25": 6500,
+      "20-Mar-25": 6900
+    },
+    "ABSA Bank Kenya Plc (ABSA)": {
+      "19-Jun-25": 3000,
+      "18-Sept-25": 3100,
+      "18-Dec-25": 3300,
+      "20-Mar-25": 3400
+    },
+    "East African Breweries Ltd (EABL)": {
+      "19-Jun-25": 4500,
+      "18-Sept-25": 4700,
+      "18-Dec-25": 4900,
+      "20-Mar-25": 5100
+    },
+    "British American Tobacco Kenya Plc (BATK)": {
+      "19-Jun-25": 5400,
+      "18-Sept-25": 5500,
+      "18-Dec-25": 5700,
+      "20-Mar-25": 5800
+    },
+    "NSE 25 Share Index (N25I)": {
+      "19-Jun-25": 20200,
+      "18-Sept-25": 22600,
+      "18-Dec-25": 24900,
+      "20-Mar-25": 27200
+    },
+    "Mini NSE 25 Share Index (25MN)": {
+      "19-Jun-25": 2000,
+      "18-Sept-25": 2200,
+      "18-Dec-25": 2400,
+      "20-Mar-25": 2700
+    },
+    "NCBA Group Plc (NCBA)": {
+      "19-Jun-25": 6000,
+      "18-Sept-25": 6500,
+      "18-Dec-25": 7100,
+      "20-Mar-25": 7600
+    },
+    "The Co-operative Bank of Kenya Ltd (COOP)": {
+      "19-Jun-25": 2600,
+      "18-Sept-25": 2700,
+      "18-Dec-25": 2900,
+      "20-Mar-25": 3000
+    },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": {
+      "19-Jun-25": 4000,
+      "18-Sept-25": 4200,
+      "18-Dec-25": 4300,
+      "20-Mar-25": 4500
+    },
+    "I&M Group Plc (IMHP)": {
+      "19-Jun-25": 5500,
+      "18-Sept-25": 5700,
+      "18-Dec-25": 5800,
+      "20-Mar-25": 6000
+    },
+    "Mini NSE 10 Share Index (10MN)": {
+      "19-Jun-25": 800,
+      "18-Sept-25": 900,
+      "18-Dec-25": 1000,
+      "20-Mar-25": 1100
+    }
+  },
+  "changes_since_last_review": {
+    "Safaricom Plc (SCOM)": { "19-Jun-25": -400, "18-Sept-25": -200, "18-Dec-25": 0 },
+    "KCB Group Plc (KCBG)": { "19-Jun-25": 1300, "18-Sept-25": 1100, "18-Dec-25": 1400 },
+    "Equity Group Holdings Plc (EQTY)": { "19-Jun-25": -500, "18-Sept-25": 0, "18-Dec-25": 400 },
+    "ABSA Bank Kenya Plc (ABSA)": { "19-Jun-25": 500, "18-Sept-25": 400, "18-Dec-25": 600 },
+    "East African Breweries Ltd (EABL)": { "19-Jun-25": 700, "18-Sept-25": 600, "18-Dec-25": 800 },
+    "British American Tobacco Kenya Plc (BATK)": { "19-Jun-25": -500, "18-Sept-25": -200, "18-Dec-25": 0 },
+    "NSE 25 Share Index (N25I)": { "19-Jun-25": -1700, "18-Sept-25": 200, "18-Dec-25": 2500 },
+    "Mini NSE 25 Share Index (25MN)": { "19-Jun-25": -100, "18-Sept-25": 0, "18-Dec-25": 200 },
+    "NCBA Group Plc (NCBA)": { "19-Jun-25": -700, "18-Sept-25": 0, "18-Dec-25": 600 },
+    "The Co-operative Bank of Kenya Ltd (COOP)": { "19-Jun-25": 300, "18-Sept-25": 300, "18-Dec-25": 500 },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": { "19-Jun-25": 1100, "18-Sept-25": 1100, "18-Dec-25": 1200 },
+    "I&M Group Plc (IMHP)": { "19-Jun-25": 1500, "18-Sept-25": 700, "18-Dec-25": 800 },
+    "Mini NSE 10 Share Index (10MN)": { "19-Jun-25": -100, "18-Sept-25": 0, "18-Dec-25": 100 }
+  },
+  "additional_notes": "Clients with existing June 2025, Sept 2025 and Dec 2025 positions will receive initial margin refunds or will be required to top up their accounts to reflect the new rates above.",
+  "guide_url": "https://www.nse.co.ke/next-document-library/operational-procedures.html",
+  "contact": "derivatives@nse.co.ke",
+  "notice_availability": "https://www.nse.co.ke/next-document-library/next-notices.html"
+}
+
+
+{
+  "filename": "Market-Notice-Initial-Margins-June-2025-Final.pdf",
+  "type": "NSE Derivatives Market Notice",
+  "reference": "002DER/NSE/2025",
+  "date": "10th June 2025",
+  "subject": "INITIAL MARGIN REQUIREMENTS FOR EQUITY FUTURES",
+  "effective_date": "Friday, 20th June 2025",
+  "initial_margins_kes": {
+    "Safaricom Plc (SCOM)": {
+      "18-Sep-25": 2600,
+      "18-Dec-25": 2800,
+      "19-Mar-26": 3000,
+      "18-Jun-26": 3200
+    },
+    "KCB Group Plc (KCBG)": {
+      "18-Sep-25": 5700,
+      "18-Dec-25": 6100,
+      "19-Mar-26": 6400,
+      "18-Jun-26": 6800
+    },
+    "Equity Group Holdings Plc (EQTY)": {
+      "18-Sep-25": 5700,
+      "18-Dec-25": 6000,
+      "19-Mar-26": 6400,
+      "18-Jun-26": 6800
+    },
+    "ABSA Bank Kenya Plc (ABSA)": {
+      "18-Sep-25": 3000,
+      "18-Dec-25": 3200,
+      "19-Mar-26": 3300,
+      "18-Jun-26": 3500
+    },
+    "East African Breweries Ltd (EABL)": {
+      "18-Sep-25": 4500,
+      "18-Dec-25": 4700,
+      "19-Mar-26": 4900,
+      "18-Jun-26": 5100
+    },
+    "British American Tobacco Kenya Plc (BATK)": {
+      "18-Sep-25": 5500,
+      "18-Dec-25": 5700,
+      "19-Mar-26": 5800,
+      "18-Jun-26": 6000
+    },
+    "NSE 25 Share Index (N25I)": {
+      "18-Sep-25": 20500,
+      "18-Dec-25": 22900,
+      "19-Mar-26": 25300,
+      "18-Jun-26": 27700
+    },
+    "Mini NSE 25 Share Index (25MN)": {
+      "18-Sep-25": 2000,
+      "18-Dec-25": 2200,
+      "19-Mar-26": 2500,
+      "18-Jun-26": 2700
+    },
+    "NCBA Group Plc (NCBA)": {
+      "18-Sep-25": 6500,
+      "18-Dec-25": 7100,
+      "19-Mar-26": 7700,
+      "18-Jun-26": 8300
+    },
+    "The Co-operative Bank of Kenya Ltd (COOP)": {
+      "18-Sep-25": 2600,
+      "18-Dec-25": 2700,
+      "19-Mar-26": 2800,
+      "18-Jun-26": 3000
+    },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": {
+      "18-Sep-25": 4600,
+      "18-Dec-25": 4700,
+      "19-Mar-26": 4900,
+      "18-Jun-26": 5100
+    },
+    "I&M Group Plc (IMHP)": {
+      "18-Sep-25": 5300,
+      "18-Dec-25": 5400,
+      "19-Mar-26": 5600,
+      "18-Jun-26": 5700
+    },
+    "Mini NSE 10 Share Index (10MN)": {
+      "18-Sep-25": 800,
+      "18-Dec-25": 900,
+      "19-Mar-26": 1000,
+      "18-Jun-26": 1100
+    }
+  },
+  "changes_since_last_review": {
+    "Safaricom Plc (SCOM)": { "18-Sep-25": -100, "18-Dec-25": -100, "19-Mar-26": -100 },
+    "KCB Group Plc (KCBG)": { "18-Sep-25": -700, "18-Dec-25": -600, "19-Mar-26": -700 },
+    "Equity Group Holdings Plc (EQTY)": { "18-Sep-25": -400, "18-Dec-25": -500, "19-Mar-26": -500 },
+    "ABSA Bank Kenya Plc (ABSA)": { "18-Sep-25": -100, "18-Dec-25": -100, "19-Mar-26": -100 },
+    "East African Breweries Ltd (EABL)": { "18-Sep-25": -200, "18-Dec-25": -200, "19-Mar-26": -200 },
+    "British American Tobacco Kenya Plc (BATK)": { "18-Sep-25": 0, "18-Dec-25": 0, "19-Mar-26": 0 },
+    "NSE 25 Share Index (N25I)": { "18-Sep-25": -2100, "18-Dec-25": -2000, "19-Mar-26": -1900 },
+    "Mini NSE 25 Share Index (25MN)": { "18-Sep-25": -200, "18-Dec-25": -200, "19-Mar-26": -200 },
+    "NCBA Group Plc (NCBA)": { "18-Sep-25": 0, "18-Dec-25": 0, "19-Mar-26": 100 },
+    "The Co-operative Bank of Kenya Ltd (COOP)": { "18-Sep-25": -100, "18-Dec-25": -200, "19-Mar-26": -200 },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": { "18-Sep-25": 400, "18-Dec-25": 400, "19-Mar-26": 400 },
+    "I&M Group Plc (IMHP)": { "18-Sep-25": -400, "18-Dec-25": -400, "19-Mar-26": -400 },
+    "Mini NSE 10 Share Index (10MN)": { "18-Sep-25": -100, "18-Dec-25": -100, "19-Mar-26": -100 }
+  },
+  "additional_notes": "Clients with existing Sept 2025, Dec 2025 and Mar 2026 positions will receive initial margin refunds or will be required to top up their accounts to reflect the new rates above.",
+  "guide_url": "https://www.nse.co.ke/next-document-library/operational-procedures.html",
+  "contact": "derivatives@nse.co.ke",
+  "notice_availability": "https://www.nse.co.ke/next-document-library/next-notices.html"
+}
+
+
+{
+  "filename": "Market-Notice-Listing-of-New-Single-Stock-Futures-July-2025.pdf",
+  "type": "NSE Derivatives Market Notice",
+  "reference": "003DER/NSE/2025",
+  "date": "3rd July 2025",
+  "subject": "INITIAL MARGIN REQUIREMENTS FOR SINGLE STOCK FUTURES",
+  "effective_date": "Monday, 7th July 2025",
+  "new_securities_approved": [
+    "Kenya Power & Lighting Co Plc (KPLC)",
+    "KenGen Co Plc (KEGN)",
+    "Kenya Re Insurance Corporation Ltd (KNRE)",
+    "Liberty Kenya Holdings Ltd (LBTY)",
+    "Britam Holdings Plc (BRIT)"
+  ],
+  "initial_margins_kes": {
+    "Kenya Power & Lighting Co Plc (KPLC)": {
+      "18-Sep-25": 4000,
+      "18-Dec-25": 4100,
+      "19-Mar-26": 4200,
+      "18-Jun-26": 4300
+    },
+    "KenGen Co Plc (KEGN)": {
+      "18-Sep-25": 1700,
+      "18-Dec-25": 1800,
+      "19-Mar-26": 1800,
+      "18-Jun-26": 1800
+    },
+    "Kenya Re Insurance Corporation Ltd (KNRE)": {
+      "18-Sep-25": 1000,
+      "18-Dec-25": 1000,
+      "19-Mar-26": 1000,
+      "18-Jun-26": 1000
+    },
+    "Liberty Kenya Holdings Ltd (LBTY)": {
+      "18-Sep-25": 3000,
+      "18-Dec-25": 3100,
+      "19-Mar-26": 3300,
+      "18-Jun-26": 3400
+    },
+    "Britam Holdings Plc (BRIT)": {
+      "18-Sep-25": 1100,
+      "18-Dec-25": 1200,
+      "19-Mar-26": 1400,
+      "18-Jun-26": 1500
+    }
+  },
+  "guide_url": "https://www.nse.co.ke/derivatives/operational-procedures/",
+  "contact": "derivatives@nse.co.ke",
+  "notice_availability": "https://www.nse.co.ke/derivatives/market-notices/",
+  "disclaimer": "DISCLAIMER: This announcement has been issued with the approval of the Capital Markets Authority pursuant to regulation 63(7) of the Capital Markets (Licensing Requirements) (General) Regulations, 2002. As a matter of policy, the Capital Markets Authority assumes no responsibility for the correctness of the information appearing in this announcement."
+}
+
+{
+  "filename": "Market-Notice-Initial-Margins-September-2024.pdf",
+  "type": "NSE Derivatives Market Notice",
+  "reference": "003DER/NSE/2024",
+  "date": "5th September 2024",
+  "subject": "INITIAL MARGIN REQUIREMENTS FOR EQUITY FUTURES",
+  "effective_date": "Friday, 20th September 2024",
+  "initial_margins_kes": {
+    "Safaricom Plc (SCOM)": { "19-Dec-24": 2300, "20-Mar-25": 2500, "19-Jun-25": 2700, "18-Sep-25": 2900 },
+    "KCB Group Plc (KCBG)": { "19-Dec-24": 4500, "20-Mar-25": 4800, "19-Jun-25": 5000, "18-Sep-25": 5300 },
+    "Equity Group Holdings Plc (EQTY)": { "19-Dec-24": 5000, "20-Mar-25": 5400, "19-Jun-25": 5700, "18-Sep-25": 6100 },
+    "ABSA Bank Kenya Plc (ABSA)": { "19-Dec-24": 2400, "20-Mar-25": 2500, "19-Jun-25": 2600, "18-Sep-25": 2700 },
+    "East African Breweries Ltd (EABL)": { "19-Dec-24": 3700, "20-Mar-25": 3800, "19-Jun-25": 4000, "18-Sep-25": 4100 },
+    "British American Tobacco Kenya Plc (BATK)": { "19-Dec-24": 5200, "20-Mar-25": 5300, "19-Jun-25": 5500, "18-Sep-25": 5700 },
+    "NSE 25 Share Index (N25I)": { "19-Dec-24": 16700, "20-Mar-25": 18600, "19-Jun-25": 20500, "18-Sep-25": 22400 },
+    "Mini NSE 25 Share Index (25MN)": { "19-Dec-24": 1600, "20-Mar-25": 1800, "19-Jun-25": 2000, "18-Sep-25": 2200 },
+    "NCBA Group Plc (NCBA)": { "19-Dec-24": 5100, "20-Mar-25": 5600, "19-Jun-25": 6000, "18-Sep-25": 6500 },
+    "The Co-operative Bank of Kenya Ltd (COOP)": { "19-Dec-24": 2100, "20-Mar-25": 2200, "19-Jun-25": 2300, "18-Sep-25": 2400 },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": { "19-Dec-24": 2800, "20-Mar-25": 2900, "19-Jun-25": 3000, "18-Sep-25": 3100 },
+    "I&M Group Plc (IMHP)": { "19-Dec-24": 4700, "20-Mar-25": 4800, "19-Jun-25": 4900, "18-Sep-25": 5000 }
+  },
+  "changes_since_last_review": {
+    "Safaricom Plc (SCOM)": { "19-Dec-24": -200, "20-Mar-25": -200, "19-Jun-25": -200 },
+    "KCB Group Plc (KCBG)": { "19-Dec-24": 300, "20-Mar-25": 400, "19-Jun-25": 300 },
+    "Equity Group Holdings Plc (EQTY)": { "19-Dec-24": -400, "20-Mar-25": -400, "19-Jun-25": -500 },
+    "ABSA Bank Kenya Plc (ABSA)": { "19-Dec-24": 200, "20-Mar-25": 100, "19-Jun-25": 100 },
+    "East African Breweries Ltd (EABL)": { "19-Dec-24": 100, "20-Mar-25": 100, "19-Jun-25": 200 },
+    "British American Tobacco Kenya Plc (BATK)": { "19-Dec-24": -300, "20-Mar-25": -400, "19-Jun-25": -400 },
+    "NSE 25 Share Index (N25I)": { "19-Dec-24": -1400, "20-Mar-25": -1400, "19-Jun-25": -1400 },
+    "Mini NSE 25 Share Index (25MN)": { "19-Dec-24": -200, "20-Mar-25": -200, "19-Jun-25": -100 },
+    "NCBA Group Plc (NCBA)": { "19-Dec-24": -600, "20-Mar-25": -600, "19-Jun-25": -700 },
+    "The Co-operative Bank of Kenya Ltd (COOP)": { "19-Dec-24": -100, "20-Mar-25": 0, "19-Jun-25": 0 },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": { "19-Dec-24": 100, "20-Mar-25": 100, "19-Jun-25": 100 },
+    "I&M Group Plc (IMHP)": { "19-Dec-24": 900, "20-Mar-25": 900, "19-Jun-25": 900 }
+  },
+  "additional_notes": "Clients with existing December 2024, March 2025 and June 2025 positions will receive initial margin refunds or will be required to top up their accounts to reflect the new rates above.",
+  "guide_url": "https://www.nse.co.ke/next-document-library/operational-procedures.html",
+  "contact": "derivatives@nse.co.ke",
+  "notice_availability": "https://www.nse.co.ke/next-document-library/next-notices.html"
+}
+
+{
+  "filename": "Market-Notice-Initial-Margins-December-2024-Final.pdf",
+  "type": "NSE Derivatives Market Notice",
+  "reference": "003DER/NSE/2024",
+  "date": "16th December 2024",
+  "subject": "INITIAL MARGIN REQUIREMENTS FOR EQUITY FUTURES",
+  "effective_date": "Friday, 20th December 2024",
+  "initial_margins_kes": {
+    "Safaricom Plc (SCOM)": { "20-Mar-25": 2100, "19-Jun-25": 2300, "18-Sept-25": 2500, "18-Dec-25": 2700 },
+    "KCB Group Plc (KCBG)": { "20-Mar-25": 5100, "19-Jun-25": 5400, "18-Sept-25": 5800, "18-Dec-25": 6100 },
+    "Equity Group Holdings Plc (EQTY)": { "20-Mar-25": 5500, "19-Jun-25": 5900, "18-Sept-25": 6200, "18-Dec-25": 6600 },
+    "ABSA Bank Kenya Plc (ABSA)": { "20-Mar-25": 2500, "19-Jun-25": 2600, "18-Sept-25": 2700, "18-Dec-25": 2800 },
+    "East African Breweries Ltd (EABL)": { "20-Mar-25": 4200, "19-Jun-25": 4400, "18-Sept-25": 4500, "18-Dec-25": 4700 },
+    "British American Tobacco Kenya Plc (BATK)": { "20-Mar-25": 5100, "19-Jun-25": 5300, "18-Sept-25": 5400, "18-Dec-25": 5600 },
+    "NSE 25 Share Index (N25I)": { "20-Mar-25": 17800, "19-Jun-25": 19900, "18-Sept-25": 21900, "18-Dec-25": 24000 },
+    "Mini NSE 25 Share Index (25MN)": { "20-Mar-25": 1700, "19-Jun-25": 1900, "18-Sept-25": 2100, "18-Dec-25": 2400 },
+    "NCBA Group Plc (NCBA)": { "20-Mar-25": 5400, "19-Jun-25": 5900, "18-Sept-25": 6400, "18-Dec-25": 6900 },
+    "The Co-operative Bank of Kenya Ltd (COOP)": { "20-Mar-25": 2200, "19-Jun-25": 2300, "18-Sept-25": 2400, "18-Dec-25": 2500 },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": { "20-Mar-25": 3200, "19-Jun-25": 3300, "18-Sept-25": 3400, "18-Dec-25": 3500 },
+    "I&M Group Plc (IMHP)": { "20-Mar-25": 4300, "19-Jun-25": 4400, "18-Sept-25": 4500, "18-Dec-25": 4700 },
+    "Mini NSE 10 Share Index (10MN)": { "20-Mar-25": 700, "19-Jun-25": 800, "18-Sept-25": 900, "18-Dec-25": 1000 }
+  },
+  "changes_since_last_review": {
+    "Safaricom Plc (SCOM)": { "20-Mar-25": -600, "19-Jun-25": -600, "18-Sept-25": -400 },
+    "KCB Group Plc (KCBG)": { "20-Mar-25": 700, "19-Jun-25": 700, "18-Sept-25": 500 },
+    "Equity Group Holdings Plc (EQTY)": { "20-Mar-25": -300, "19-Jun-25": -300, "18-Sept-25": 100 },
+    "ABSA Bank Kenya Plc (ABSA)": { "20-Mar-25": 100, "19-Jun-25": 100, "18-Sept-25": 0 },
+    "East African Breweries Ltd (EABL)": { "20-Mar-25": 500, "19-Jun-25": 600, "18-Sept-25": 400 },
+    "British American Tobacco Kenya Plc (BATK)": { "20-Mar-25": -600, "19-Jun-25": -600, "18-Sept-25": -300 },
+    "NSE 25 Share Index (N25I)": { "20-Mar-25": -2200, "19-Jun-25": -2000, "18-Sept-25": -500 },
+    "Mini NSE 25 Share Index (25MN)": { "20-Mar-25": -300, "19-Jun-25": -200, "18-Sept-25": -100 },
+    "NCBA Group Plc (NCBA)": { "20-Mar-25": -800, "19-Jun-25": -800, "18-Sept-25": -100 },
+    "The Co-operative Bank of Kenya Ltd (COOP)": { "20-Mar-25": 0, "19-Jun-25": 0, "18-Sept-25": 0 },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": { "20-Mar-25": 400, "19-Jun-25": 400, "18-Sept-25": 300 },
+    "I&M Group Plc (IMHP)": { "20-Mar-25": 400, "19-Jun-25": 400, "18-Sept-25": -500 },
+    "Mini NSE 10 Share Index (10MN)": { "20-Mar-25": -100, "19-Jun-25": -100, "18-Sept-25": 0 }
+  },
+  "additional_notes": "Clients with existing March 2025, June 2025 and Sept 2025 positions will receive initial margin refunds or will be required to top up their accounts to reflect the new rates above.",
+  "guide_url": "https://www.nse.co.ke/next-document-library/operational-procedures.html",
+  "contact": "derivatives@nse.co.ke",
+  "notice_availability": "https://www.nse.co.ke/next-document-library/next-notices.html"
+}
+
+
+{
+  "filename": "Market-Notice-New-SSF-Contract-size-and-Initial-Margins-September-2025-Final-1.pdf",
+  "type": "NSE Derivatives Market Notice",
+  "reference": "004DER/NSE/2025",
+  "date": "15th September 2025",
+  "subject": "CHANGE IN SINGLE STOCK FUTURES CONTRACT SIZE AND INITIAL MARGIN REQUIREMENTS FOR EQUITY FUTURES",
+  "effective_date": "Friday, 19th September 2025",
+  "contract_size_changes": {
+    "Safaricom Plc (SCOM)": { "old": "1:1000", "new": "1:100" },
+    "KCB Group Plc (KCBG)": { "old": "1:1000", "new": "1:100" },
+    "Equity Group Holdings Plc (EQTY)": { "old": "1:1000", "new": "1:100" },
+    "ABSA Bank Kenya Plc (ABSA)": { "old": "1:1000", "new": "1:100" },
+    "East African Breweries Ltd (EABL)": { "old": "1:100", "new": "1:10" },
+    "British American Tobacco Kenya Plc (BATK)": { "old": "1:100", "new": "1:10" },
+    "NCBA Group Plc (NCBA)": { "old": "1:1000", "new": "1:100" },
+    "The Co-operative Bank of Kenya Ltd (COOP)": { "old": "1:1000", "new": "1:100" },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": { "old": "1:100", "new": "1:10" },
+    "I&M Group Plc (IMHP)": { "old": "1:1000", "new": "1:100" },
+    "Kenya Power & Lighting Co Plc (KPLC)": { "old": "1:1000", "new": "1:100" },
+    "KenGen Co Plc (KEGN)": { "old": "1:1000", "new": "1:100" },
+    "Kenya Re Insurance Corporation Ltd (KNRE)": { "old": "1:1000", "new": "1:100" },
+    "Liberty Kenya Holdings Ltd (LBTY)": { "old": "1:1000", "new": "1:100" },
+    "Britam Holdings Plc (BRIT)": { "old": "1:1000", "new": "1:100" }
+  },
+  "new_initial_margins_kes": {
+    "Safaricom Plc (SCOM)": { "18-Dec-25": 300, "19-Mar-26": 400, "18-Jun-26": 400, "17-Sept-26": 400 },
+    "KCB Group Plc (KCBG)": { "18-Dec-25": 600, "19-Mar-26": 700, "18-Jun-26": 700, "17-Sept-26": 800 },
+    "Equity Group Holdings Plc (EQTY)": { "18-Dec-25": 600, "19-Mar-26": 700, "18-Jun-26": 700, "17-Sept-26": 700 },
+    "ABSA Bank Kenya Plc (ABSA)": { "18-Dec-25": 300, "19-Mar-26": 300, "18-Jun-26": 300, "17-Sept-26": 300 },
+    "East African Breweries Ltd (EABL)": { "18-Dec-25": 500, "19-Mar-26": 500, "18-Jun-26": 500, "17-Sept-26": 500 },
+    "British American Tobacco Kenya Plc (BATK)": { "18-Dec-25": 600, "19-Mar-26": 600, "18-Jun-26": 600, "17-Sept-26": 600 },
+    "NSE 25 Share Index (N25I)": { "18-Dec-25": 23900, "19-Mar-26": 26600, "18-Jun-26": 29200, "17-Sept-26": 31800 },
+    "Mini NSE 25 Share Index (25MN)": { "18-Dec-25": 2300, "19-Mar-26": 2600, "18-Jun-26": 2900, "17-Sept-26": 3100 },
+    "NCBA Group Plc (NCBA)": { "18-Dec-25": 700, "19-Mar-26": 800, "18-Jun-26": 900, "17-Sept-26": 900 },
+    "The Co-operative Bank of Kenya Ltd (COOP)": { "18-Dec-25": 200, "19-Mar-26": 200, "18-Jun-26": 300, "17-Sept-26": 300 },
+    "Standard Chartered Bank Kenya Ltd (SCBK)": { "18-Dec-25": 400, "19-Mar-26": 500, "18-Jun-26": 500, "17-Sept-26": 500 },
+    "I&M Group Plc (IMHP)": { "18-Dec-25": 600, "19-Mar-26": 600, "18-Jun-26": 600, "17-Sept-26": 600 }
+  },
+  "important_note": "These are the CURRENT initial margins as of November 2025 (post contract-size reduction). The massive drop in margin amounts is due to the contract size being reduced from 1:1000 to 1:100 for most stocks (and 1:100 → 1:10 for EABL, BATK, SCBK)."
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
         [OFFICIAL_FAQ]
         Q:What products are traded at the Nairobi Securities Exchange?
