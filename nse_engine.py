@@ -812,6 +812,15 @@ Contact for BBO Certification: bbo@nse.co.ke
   }
 }
 
+### NSE BROKER BACK OFFICE (BBO) PREQUALIFIED VENDORS (Current list)
+1. Chella Software Ltd       → India
+2. IronOne Technologies Ltd → Sri Lanka
+3. DirectFN Limited         → Sri Lanka
+4. InfoWARE                 → Nigeria
+5. Escrow Systems           → Zimbabwe
+6. Zanibal                  → Nigeria
+
+
 
 ### NAIROBI SECURITIES EXCHANGE (NSE) MARKET DATA OVERVIEW
 **Data Services**  
@@ -4667,6 +4676,162 @@ Payment is made from the Fund's assets (NSE/NSE Clear money is not available for
   "dividend": "Recommended first and final dividend KES 0.32 per share (paid by 31 July 2025, record date 21 May 2025)",
   "outlook_2025": "Execution of 2025-2029 strategy ● Technology overhaul (SaaS) ● Sector-based issuer engagement ● Direct Market Access (DMA) ● Agency model for retail ● New products (including Options on Futures already approved) ● Support government privatizations ● Target 40 new listings & 9m retail investors by 2029"
 }
+
+### CARBACID INVESTMENTS PLC – FY END 31 JULY 2025 (Audited)
+- Turnover:                  KSh 2,099.85m    (+1.6%)
+- Gross margin:               65%              (2024: 59%)
+- Operating profit:           KSh 1,357.6m     (+11.3%)
+- Profit before tax:          KSh 1,288.6m     (+14.7%)
+- Profit after tax:           KSh 1,002.9m     (+18.9%)
+- EPS:                        KSh 3.94         (2024: KSh 3.31)
+- Total assets:               KSh 6.033bn      (+7.6%)
+- Net assets / Equity:        KSh 5.142bn      (+12.5%)
+- Proposed final dividend:    KSh 2.00/share   (2024: KSh 1.70) → Total KSh 509.7m
+- Record date:                26 Nov 2025
+- Payment date:               ~18 Dec 2025
+- Key driver:                 Strong export demand + solar power savings + unrealised equity gains KSh 120m
+
+### KENGEN – FY END 30 JUNE 2025 (Audited)
+- Revenue:                    KSh 56.098bn     (-0.4%)
+- Operating profit:           KSh 13.617bn     (+42.5%)
+- Profit before tax:          KSh 15.473bn     (+41.4%)
+- Profit after tax:           KSh 10.481bn     (+54.3%)
+- EPS:                        KSh 1.59         (2024: KSh 1.03)
+- Total equity:               KSh 284.54bn     (+2.3%)
+- Recommended dividend:       KSh 0.90/share   (+38.5%) (2024: KSh 0.65)
+- Book closure:               27 Nov 2025
+- Payment date:               ~12 Feb 2026
+- Electricity generated:      8,482 GWh        (+1%)
+- Installed capacity:         1,786 MW
+- Peak demand contribution:   59% of Kenya
+
+### LIMURU TEA PLC – H1 END 30 JUNE 2025 (Unaudited)
+- Only listed tea company that is still loss-making / very small
+- Equity:                     KSh 152.95m      (Dec 2024: KSh 175.15m)
+- Retained earnings:          KSh 128.95m      (Dec 2024: KSh 151.15m)
+- PPE + Biological assets:    KSh 90.73m
+- Cash:                       KSh 7.55m
+- No profit figure released in the short announcement → implies continued losses / breakeven at best
+
+### CO-OPERATIVE BANK OF KENYA – Q3 END 30 SEP 2025 (Unaudited)
+- Total assets (Group):       KSh 815.27bn     (+8.6% YoY)
+- Net loans:                  KSh 406.52bn     (+6.6% YoY)
+- Customer deposits:          KSh 548.58bn     (+6.7% YoY)
+- Profit before tax (9M):     ~KSh 25.5bn est. (strong growth continuing)
+- Very solid numbers, Co-op remains the most consistent Tier-1 bank
+
+### KCB GROUP – Q3 END 30 SEP 2025 (Unaudited)
+- Total assets (Consolidated):KSh 2,044.48bn   (+22% YoY) → Now clearly the largest bank in Kenya
+- Net loans:                  KSh 1,139.90bn   (+29% YoY)
+- Customer deposits:          KSh 1,525.83bn   (+26% YoY)
+- Continues to dominate the banking sector in asset size
+
+### NCBA GROUP – Q3 END 30 SEP 2025 (Unaudited)
+- Total assets (Group):       KSh 665.32bn     (+13.7% YoY from Sep-24 KSh 678.83bn wait no → actually slight decline from Dec-24 KSh 665.94bn)
+- Net loans:                  KSh 292.72bn
+- Customer deposits:          KSh 487.96bn
+- Profit before tax (9M):     KSh 20.46bn      (+33% YoY)
+- Profit after tax (9M):      KSh 16.38bn      (+46% YoY)
+- EPS (9M):                   KSh 9.94
+- Very strong profitability growth
+
+### I&M GROUP – Q3 END 30 SEP 2025 (Unaudited)
+- Total assets:               KSh 640.42bn     (+19% YoY)
+- Net loans:                  KSh 301.91bn     (+7.4% YoY)
+- Customer deposits:          KSh 455.85bn     (+10% YoY)
+- Profit after tax (9M):      KSh 12.68bn      (+27% YoY)
+- EPS (9M):                   KSh 6.88
+- Core capital ratio:         17.1%
+- Total capital ratio:        19.6%
+- Liquidity ratio:            57.8%
+- NPL ratio very low → 10.1% net NPL exposure after collateral = 0%
+
+### DIAMOND TRUST BANK (DTB) – Q3 END 30 SEP 2025 (Unaudited)
+- Profit before tax:          KSh 11.28bn      (+14.4% growth)
+- Profit after tax:           KSh 8.48bn       (+12.3% growth)
+- Total assets:               KSh 841.88bn     (+8.7% growth)
+- Net loans:                  KSh 294.64bn     (+7.8% growth)
+- Customer deposits:          KSh 510.3bn      (+15.5% growth)
+- Shareholders funds:         KSh 99.48bn      (+34.1% growth)
+- Best performing Tier-1 bank in percentage growth terms for Q3 2025
+
+
+### ABSA BANK KENYA PLC  
+**Unaudited Group Results – 9 Months Ended 30 September 2025**
+
+| Key Metric (KShs billion unless stated)      | 9M 2025       | 9M 2024       | YoY Change |
+|-----------------------------------------------|---------------|---------------|------------|
+| Total Assets                                  | 554.0         | 486.4         | **+14%**   |
+| Net Loans & Advances                          | 309.7         | 309.5         | Flat       |
+| Customer Deposits                             | 384.3         | 351.8         | **+9%**    |
+| Total Operating Income                        | 46.76         | 47.26         | –1%        |
+| Net Interest Income                           | 34.53         | 36.23         | –5%        |
+| Non-Interest Income                           | 13.62         | 12.23         | **+11%**   |
+| Loan Loss Provisions (Impairments)            | 4.85          | 8.03          | **–40%**   |
+| Operating Expenses (ex-provisions)            | 17.52         | 17.42         | +1%        |
+| Profit Before Tax                             | 22.04         | 20.28         | **+9%**    |
+| Profit After Tax (attributable)               | 16.92         | 14.75         | **+15%**   |
+| EPS (KShs)                                    | 3.11          | 2.71          | **+15%**   |
+| ROE (annualised)                              | 24.0%         | ~22%          | Improved   |
+| Cost-to-Income Ratio (ex-provisions)          | 37.5%         | 36.9%         | broadly flat |
+| Gross NPL Ratio                               | 13.7%         | 13.7%         | flat       |
+| NPL Coverage Ratio                            | 48.4%         | ~44%          | Improved   |
+| Core Capital / Total Risk-Weighted Assets     | ~21%          | strong        | Well above requirement |
+| Liquidity Ratio                               | >49%          | strong        | Comfortable |
+
+**Highlights**  
+- Strong balance sheet growth (assets +14%, deposits +9%)  
+- NII dipped due to lower margins but offset by aggressive cost-of-funds management  
+- Non-funded income +11%, impairments down 40% → best credit performance among Tier-1 banks  
+- PAT +15% to KShs 16.9 bn with ROE of 24%  
+- Best-in-class efficiency (CIR ~37.5%) and significantly improved asset quality
+
+
+### I&M GROUP PLC  
+**Unaudited Group Results – 9 Months Ended 30 September 2025**
+
+| Key Metric (KShs billion unless stated)      | 9M 2025       | 9M 2024       | YoY Change |
+|-----------------------------------------------|---------------|---------------|------------|
+| Total Assets                                  | 640.4         | 567.7         | **+13%**   |
+| Net Loans & Advances                          | 301.9         | 281.3         | **+7%**    |
+| Customer Deposits                             | 455.8         | 413.8         | **+10%**   |
+| Total Operating Income                        | 43.00         | 35.76         | **+20%**   |
+| Net Interest Income                           | 31.82         | 26.28         | **+21%**   |
+| Non-Interest Income                           | 11.19         | 9.48          | **+18%**   |
+| Loan Loss Provisions                          | 6.70          | 5.50          | +22%       |
+| Operating Expenses (ex-provisions)            | 19.14         | 16.86         | +14%       |
+| Profit Before Tax                             | 17.16         | 13.40         | **+28%**   |
+| Profit After Tax (attributable to owners)     | 11.80         | 9.17          | **+29%**   |
+| EPS (KShs) – basic & diluted                  | 6.88          | 5.54          | **+24%**   |
+| ROE (annualised)                              | ~24–25%       | ~22%          | Improved   |
+| Cost-to-Income Ratio                          | 60.1%         | 62.5%         | Improved   |
+| Gross NPL Ratio                               | 11.0%         | 12.7%         | Improved   |
+| NPL Coverage Ratio                            | 55.9%         | 55.5%         | Stable     |
+| Core Capital / Total Risk-Weighted Assets     | 17.1%         | 14.6%         | Strong     |
+| Total Capital / TRWA                          | 19.6%         | 18.0%         | Strong     |
+| Liquidity Ratio                               | 57.8%         | 51.5%         | Very comfortable |
+
+**Highlights**  
+- Highest earnings growth among Kenyan Tier-1 banks: attributable PAT +29%  
+- Strong income momentum: NII +21%, NFI +18% → total income +20%  
+- Regional footprint (Kenya, Tanzania, Rwanda, Uganda) continues to deliver higher yields  
+- Loan book +7%, deposits +10%, assets +13%  
+- Asset quality improved (gross NPL ratio down to 11.0%)  
+- Remains very well capitalised and highly liquid
+
+
+
+
+### NSE – NEW SINGLE STOCK FUTURES (Effective 7 July 2025)
+New contracts launched:
+- Kenya Power & Lighting (KPLC)
+- KenGen (KEGN)
+- Kenya Re (KNRE)
+- Liberty Kenya Holdings (LBTY)
+- Britam Holdings (BRIT)
+Initial margin requirements from 7 Jul 2025:
+KPLC: 4,000–4,300 | KEGN: 1,700–1,800 | KNRE: 1,000 | LBTY: 3,000–3,400 | BRIT: 1,100–1,500
+
 
 
 
