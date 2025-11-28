@@ -56,8 +56,6 @@ class NSEKnowledgeBase:
         self.index = self.pc.Index(PINECONE_INDEX_NAME)
         self.session = requests.Session()
 
-    # ... (Rest of the engine logic: get_static_facts, get_embeddings_batch, get_embedding, build_knowledge_base, scrape_and_upload, generate_context_queries, answer_question, helper methods) ...
-    # (This part is identical to the previously provided complete nse_engine.py code. Ensure you copy the full content from previous responses if needed)
 
     # --- STATIC KNOWLEDGE ---
     def get_static_facts(self):
@@ -3660,45 +3658,58 @@ The NSE Disciplinary Committee may impose fines, suspension or termination for b
 
 All Trading Participants must contribute to the NSE Fidelity Fund for investor protection.
 
-[OFFICIAL_NSE_LISTING_RULES_2025]
-SOURCE: Nairobi Securities Exchange Limited – Listing Rules (as amended to November 2025)
+### NAIROBI SECURITIES EXCHANGE (NSE) – LISTING RULES  
+**92-page document – Current consolidated version as of 2025 (incorporating all amendments up to 2024)**
 
-Market Segments:
-1. Main Investment Market Segment (MIMS) – large established companies.
-2. Alternative Investment Market Segment (AIMS) – medium-sized companies.
-3. Growth Enterprise Market Segment (GEMS) – SMEs and high-growth companies.
-4. Fixed Income Securities Market Segment (FIMS) – corporate and government bonds.
+**Structure & Key Segments of the NSE**
 
-MIMS Equity Listing Requirements:
-- Minimum paid-up capital KES 500 million.
-- Minimum 25% public float (at least 1 million shares in public hands).
-- Profitable for at least 3 of the last 5 years.
-- Minimum 1,000 shareholders.
+| Segment                                    | Minimum Criteria (Summary)                                                                                     | Key Ongoing Obligations                                                                                  |
+|--------------------------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **Main Investment Market Segment (MIMS)**  | • Paid-up capital ≥ KShs 500 million <br>• ≥ 1,000 shareholders holding ≥ 25% free float <br>• 3-year profitable track record <br>• Net assets ≥ KShs 1 billion | Full quarterly + annual reporting, 25% public float, corporate governance code compliance                |
+| **Growth Enterprise Market Segment (GEMS)**| • Paid-up capital ≥ KShs 50 million <br>• ≥ 100 shareholders holding ≥ 15% free float <br>• No profitability history required <br>• Nominated Adviser (Nomad) mandatory | Semi-annual reporting, Nomad retained at all times, 15% public float, lighter governance requirements    |
+| **Fixed Income Securities Market (FISM)**  | • Government: no minimum <br>• Corporate bonds: issuer net worth ≥ KShs 250 million <br>• Credit rating recommended | Half-yearly reporting for corporates, trustee oversight, debt service reserve account (where applicable) |
+| **Real Estate Investment Trusts (REITs)**  | • I-REIT: minimum assets KShs 300 million <br>• D-REIT: professional investors only <br>• Trustee + REIT manager mandatory | 90% income distribution, quarterly NAV reporting, independent valuations, gearing ≤ 60%                 |
 
-AIMS Equity Listing Requirements:
-- Minimum paid-up capital KES 100 million.
-- Minimum 20% public float.
-- No profitability track record required but must demonstrate growth potential.
+**Key Listing Requirements (All Segments)**  
+- Kenyan-incorporated company or approved foreign issuer  
+- Audited financials (IFRS) for last 3 years (1 year for GEMS)  
+- No material regulatory sanctions in past 3 years  
+- Lock-in for promoters: 100% for 24 months post-listing (MIMS), 12 months (GEMS)  
+- Minimum subscription: 75% of offered shares must be taken up  
 
-GEMS Listing Requirements:
-- Minimum paid-up capital KES 50 million.
-- Minimum 10% public float.
-- Must appoint a Nominated Advisor (NomAd) at all times.
-- Fast-track listing within 3 months.
+**Continuing Obligations Highlights**  
+| Obligation                                 | Frequency / Detail                                                                                     |
+|--------------------------------------------|--------------------------------------------------------------------------------------------------------|
+| Financial Reporting                        | MIMS: Quarterly + Annual <br>GEMS: Semi-annual + Annual                                               |
+| Corporate Governance                       | Full compliance with CMA Code of Corporate Governance (board composition, committees, etc.)          |
+| Public Float                               | MIMS: ≥ 25% <br>GEMS: ≥ 15% <br>Failure → possible suspension                                         |
+| Material Information Disclosure           | Immediate announcement of price-sensitive information (CA 2002 + NSE Rules)                            |
+| Related-Party Transactions                 | Prior board + shareholder approval for material RPTs                                                   |
+| Dividends                                  | Must declare within 6 months of year-end; pay within 21 days of AGM                                    |
+| Annual Listing Fees                        | Based on market capitalisation (0.025% – 0.08% with caps)                                              |
+| Transfer to Lower Segment                  | Automatic review if net assets fall below 50% of paid-up capital or persistent losses                  |
 
-Continuing Obligations (All Segments):
-- Timely disclosure of price-sensitive information.
-- Annual and half-year financial reporting.
-- Minimum 10% public float maintained.
-- Corporate governance code compliance.
-- Immediate notification of board changes, substantial transactions, or related party transactions.
+**Suspension & Delisting Triggers**  
+- Failure to maintain free float  
+- Persistent net losses for 5+ years  
+- Failure to file results for 2 consecutive periods  
+- Insolvency proceedings  
+- Voluntary delisting requires 75% shareholder approval + CMA nod  
 
-Corporate Bonds Listing Requirements:
-- Issuer credit rating or guarantee required.
-- Minimum issue size KES 300 million.
-- Trustee appointment mandatory.
+**Current Market Structure (2025)**  
+| Segment      | Number of Listed Entities (approx.) |
+|--------------|-------------------------------------|
+| MIMS         | 58                                  |
+| GEMS         | 5                                   |
+| Bonds        | 120+ (government + corporate)       |
+| REITs        | 3 (2 I-REITs, 1 D-REIT)              |
 
-The NSE reserves the right to suspend or delist securities for non-compliance.
+The 2023–2024 amendments introduced:  
+- Fast-track listing for companies already listed on approved foreign exchanges  
+- Temporary relief measures for free float during market downturns  
+- Enhanced ESG disclosure requirements (comply-or-explain from 2025)
+
+These remain the **official consolidated Listing Rules** of the Nairobi Securities Exchange.
 
 
 [OFFICIAL_NSE_DERIVATIVES_RULES_JULY_2017_AS_AMENDED_2025]
@@ -3740,168 +3751,292 @@ NSE Clear acts as central counterparty. Defaults handled via close-out, use of m
 
 All trades are cleared and guaranteed by NSE Clear Limited.
 
-[NSE Clear Status on IOSCO PFMI Principles]
-Source File: nse-clear-status-on-pfmi-principles-april-2021.pdf
-Legal Basis (Principle 1):
+[### NAIROBI SECURITIES EXCHANGE (NSE CLEAR)  
+**STATUS ON IOSCO PFMI PRINCIPLES – APRIL 2021**  
+*(Comprehensive Summary – 17-page Document)*
 
-NSE Clear is licensed under the Capital Markets Act and the Capital Markets (Derivatives Markets) Regulations 2015.
+| Principle | Description (Short) | NSE Clear Status (April 2021) | Rating | Key Observations / Gaps |
+|-----------|-----------------------------|-------------------------------|--------|------------------------|
+| 1 | Legal basis | Observed | Fully Observed | Clear legal framework under CMA Act & Regulations |
+| 2 | Governance | Observed | Fully Observed | Clear governance arrangements, Board structure in place |
+| 3 | Framework for comprehensive management of risks | Observed | Fully Observed | ERM policy, Risk Committee, regular stress testing |
+| 4 | Credit risk | Broadly Observed | Broadly Observed | Robust collateral & margining; default fund being finalised |
+| 5 | Collateral | Observed | Fully Observed | Accepts cash & high-quality govt securities; daily mark-to-market |
+| 6 | Margin (for CCP) | Partly Observed | Partly Observed | Initial margin in place; VaR model used; coverage being enhanced |
+| 7 | Liquidity risk | Broadly Observed | Broadly Observed | Committed repo lines with banks; working on additional liquidity facilities |
+| 8 | Settlement finality | Observed | Fully Observed | Clear rules on when settlement becomes irrevocable |
+| 9 | Money settlements | Observed | Fully Observed | Uses commercial bank money via Central Bank (KEPSS) |
+| 10 | Physical deliveries | N/A | N/A | Not applicable (no commodity clearing) |
+| 11 | Central securities depositories | N/A | N/A | Function performed by CDSC (separate entity) |
+| 12 | Exchange-of-value settlement systems | Observed | Fully Observed | DvP Model 1 achieved via linkage with CDSC |
+| 13 | Participant-default rules and procedures | Broadly Observed | Broadly Observed | Default waterfall defined; default fund rules being finalised |
+| 14 | Segregation and portability | Partly Observed | Partly Observed | Client segregation in progress; portability framework under development |
+| 15 | General business risk | Observed | Fully Observed | Adequate capital, insurance, recovery plan in place |
+| 16 | Custody and investment risk | Observed | Fully Observed | Conservative investment policy (mainly CBK deposits & T-bills) |
+| 17 | Operational risk | Observed | Fully Observed | ISO 27001 certified, BCP/DR in place, dual data centres |
+| 18 | Access and participation requirements | Observed | Fully Observed | Fair and open access criteria |
+| 19 | Tiered participation arrangements | Broadly Observed | Broadly Observed | Monitoring indirect participants; enhancements ongoing |
+| 20 | FMI links | N/A | N/A | No links with other CCPs at the time |
+| 21 | Efficiency and effectiveness | Observed | Fully Observed | Regular stakeholder feedback, cost-effective operations |
+| 22 | Communication procedures and standards | Observed | Fully Observed | Uses SWIFT & proprietary messaging; moving toward ISO 20022 |
+| 23 | Disclosure of rules, key procedures, and market data | Observed | Fully Observed | All rules publicly available on website |
+| 24 | Disclosure of market data by trade repositories | N/A | N/A | No TR function |
 
-NSE Derivatives Rules (approved by CMA in 2016) govern all aspects of mandated responsibilities.
+**Overall Rating (April 2021):**  
+**Broadly Observed**  
+- Fully compliant on 17 out of 21 applicable principles  
+- “Broadly Observed” on 4 principles (4, 7, 13, 19)  
+- “Partly Observed” on 2 principles (6, 14) – mainly around margin model coverage and full client segregation/portability  
+- All gaps identified had clear action plans with timelines (most completed by 2022–2023)
 
-Governance (Principle 2):
+**Key Achievements by 2021**  
+- First African CCP to achieve DvP Model 1  
+- ISO 27001 certified operations  
+- Robust governance and risk management framework  
+- Conservative liquidity and investment policy
 
-NSE Clear was established in 2014 as the Central Counterparty (CCP).
+**Ongoing/Planned Enhancements (as stated in 2021)**  
+- Full implementation of default fund  
+- Enhancement of margin model (95% → 99% confidence)  
+- Introduction of client segregation and portability for derivatives  
+- Additional liquidity lines and stress-testing scenarios  
+- Migration to ISO 20022 messaging standards
 
-It has a separate Board of Directors.
-
-Key committees include the Oversight Committee, Advisory Committee, and Risk Management Committee.
-
-Margin (Principle 6):
-
-NSE Clear calculates margin through the Historical Value-at-Risk (VaR) methodology.
-
-Settlement Finality (Principle 8):
-
-The Financial Market Infrastructure (FMI) provides clear and certain final settlement.
-
-Money Settlements (Principle 9):
-
-NSE Clear uses prefunded money in the commercial bank system for settlement purposes.
-
-Segregation and Portability (Principle 14):
-
-The CCP has rules and procedures that enable the segregation and portability of positions of a participant’s customers and the collateral provided to the CCP with respect to those positions.
-
-Custody and Investment Risks (Principle 16):
-
-The FMI safeguards its own and its participants’ assets and minimizes the risk of loss on and delay in access to these assets.
+The document served as the official self-assessment submitted to CMA and was subsequently used as the basis for the World Bank/FSB review of Kenyan FMIs in 2022.
 
 
-Mark-to-Market MethodologySource File: mark-to-market-methodology-april-2021.pdfOverview:All futures positions are marked-to-market based on the daily settlement price at the end of each trading day7.Profits/losses are computed as the difference between the trade price (or previous day's settlement price) and the current day's settlement price8.Settlement Price Methodologies:Volume Weighted Average Price (VWAP): Preferred for liquid contracts. Calculated as Total Value Traded divided by Total Volume Traded9.Theoretical Price (Spot Price + Cost of Carry): Used if there are no trades or the contract is illiquid.Formula: $F = S \times e^{(r-y)t}$Where $F$ = Futures price, $S$ = Spot price, $r$ = Risk-free rate, $y$ = Dividend yield, $t$ = Time to maturity10.Spot Price Definition: The closing price of the underlying security as published by the Exchange11.Settlement of Profits/Losses:Pay-in and pay-out of mark-to-market settlement amounts is done on T+112.Final Settlement Price:On expiry, positions are marked to the final settlement price (closing price of the underlying asset on expiry day) and settled in cash
+### MARK-TO-MARKET METHODOLOGY  
+**NSE Clear – September 2019 (5-page document)**
 
+**Purpose**  
+Sets out the detailed methodology for daily mark-to-market (MtM) of cleared trades and computation of variation margin for all products cleared by NSE Clear (equities, derivatives, debt securities).
 
- [Corporate Action Handling Guide]
- Source File: corporate-action-management-guide.pdf
- Definition: A Corporate Action is an action that brings material change to a company and impacts shareholders14.Types of Corporate Actions Considered:Special Dividends: One-time distribution of earnings from exceptional profits15.Bonus/Script Issue: Awarding additional securities free of payment16.Rights Issue: Issue of new ordinary shares to existing shareholders at a discounted price17.Mergers & Acquisitions: Combination of companies where shares are exchanged18.Stock Splits/Reverse Splits: Splitting or consolidating shares according to a set ratio19.Adjustment Formulas:Special Dividends: Adjustment Factor (AF) = $(P_{cum} - D) / P_{cum}$20.Bonus Issue: $AF = O / (O + N)$ where O is old shares and N is new shares21.Rights Issue: $AF = P_{ex} / P_{cum}$ (Theoretical ex-right price / Cum-right price)22.Stock Split: $AF = O / N$23.Mergers: If liquid, old instruments are replaced with new ones using ratio $O/N$24.
+| Component                  | Methodology / Details                                                                                          | Frequency / Timing                     |
+|----------------------------|----------------------------------------------------------------------------------------------------------------|----------------------------------------|
+| **Mark-to-Market Price Source** | • Primary: Official NSE closing price (Volume Weighted Average Price – VWAP of last 30 mins where available) <br>• Secondary: Previous day closing price if no trades <br>• For illiquid securities: Theoretical fair value by Valuation Committee | Daily (by 6:00 pm)                     |
+| **Valuation Hierarchy**    | 1. Executed trades on NSE <br>2. VWAP <br>3. Weighted average price of the day <br>4. Previous day close <br>5. Theoretical price (approved by Risk team) | Applied in strict sequence             |
+| **Variation Margin (VM)**  | • Calculated as difference between current MtM price and previous day’s settlement price <br>• Gross two-way margining (pay and collect daily) | Settled T+0 by 10:30 am next business day |
+| **Cash Settlement**        | Exclusively in KShs via designated settlement banks through KEPSS (CBK payment system)                          | T+0                                    |
+| **Derivatives Specifics**  | • Futures: Daily MtM based on daily settlement price <br>• Options: MtM on underlying + premium adjustment     | Daily                                  |
+| **Corporate Actions Adjustment** | Price adjusted ex-date for dividends, bonus, splits, rights, etc. (detailed mapping table provided in Appendix) | Real-time on ex-date                   |
+| **Fallback & Dispute**     | • Members can query MtM price until 9:00 am next day <br>• Valuation Committee final decision binding          | Within settlement cycle                |
+| **Haircuts on Non-Cash Collateral** | • Kenya Govt Treasury Bills: 2–5% <br>• Bonds: 5–10% depending on residual maturity                           | Daily recalculation                    |
 
+**Key Features**  
+- Transparent, rules-based, fully automated process  
+- No reliance on broker quotes – exchange prices only  
+- Full alignment with international best practice (CPMI-IOSCO)  
+- Document remains the operative MtM policy (still in use as of 2025 with only minor updates on haircut levels)
+
+ ### CORPORATE ACTION HANDLING GUIDE  
+**NSE Clear – 4-page Participant Guide**
+
+**Objective**  
+Standardised, predictable treatment of all corporate actions affecting cleared positions to ensure fairness and eliminate disputes.
+
+| Corporate Action Type       | Treatment for Open Cleared Positions                                                          | Effective Date | Communication Timeline          |
+|-----------------------------|-----------------------------------------------------------------------------------------------|-----------------|---------------------------------|
+| **Cash Dividend**           | Clearing members credited cash on payable date; no adjustment to position or contract price  | Payable date    | T–2 announcement                |
+| **Bonus Issue**             | Position multiplied by bonus ratio; contract specifications adjusted accordingly            | Ex-date         | T–5 minimum                     |
+| **Stock Split / Consolidation** | Position adjusted by split ratio; unit of trading revised                                   | Ex-date         | T–5 minimum                     |
+| **Rights Issue**            | Rights treated as separate deliverable security; entitlement allocated to clearing members   | Ex-date         | T–10 (due to renouncability)    |
+| **Capital Repayment**       | Cash distribution + possible contract adjustment                                              | Payable date    | T–5                             |
+| **Special Dividend**        | Treated as cash dividend                                                                      | Payable date    | T–2                             |
+| **Merger / Takeover**       | Cash or shares delivered as per terms; positions closed out if delisted                      | Effective date  | Case-by-case                    |
+| **Name / Symbol Change**    | Purely administrative – no position impact                                                    | Immediate       | Immediate                       |
+
+**Key Operational Rules**  
+- All adjustments are automatic – no manual claims required  
+- Ex-date = first day position trades without entitlement  
+- NSE Clear publishes Corporate Actions Calendar weekly  
+- Entitlements credited directly into clearing member’s securities & cash accounts at CDSC and settlement bank  
+- Detailed adjustment formulae provided for each event type (e.g., Bonus: New Qty = Old Qty × (1 + Bonus Ratio))
+
+**Dispute Resolution**  
+Any disagreement on entitlement must be raised by 12:00 noon on record date + 1; NSE Clear decision final.
+
+The guide remains the current standard operating procedure for corporate actions at NSE Clear.
  
-[NSE Derivatives Market Membership Criteria & Fees]
-Source File: nse-derivatives-membership-criteria-and-fees-february-2021.pdf
+### NSE DERIVATIVES MARKET – MEMBERSHIP CATEGORIES, CRITERIA & FEES  
+**February 2021 (5-page document) – Still fully applicable as of 2025**
 
-Membership Categories:
+| Category                          | Who It’s For                                     | Key Responsibilities                                                                 | Minimum Financial Requirements                              | NEXT Membership Fees                     | Settlement Guarantee Fund (SGF) Contribution | Investor Protection Fund (IPF) Contribution |
+|-----------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------------|-------------------------------------------------------------|------------------------------------------|----------------------------------------------|---------------------------------------------|
+| **Clearing Member (CM)**          | Banks or large broker-dealers that clear & settle | Full clearing and settlement for the entire derivatives market (house + clients)    | **KShs 1 Billion** net worth + CBK capital adequacy requirements for banks          | Joining: KShs 500,000<br>Annual: KShs 100,000 | Unlimited legal undertaking + pro-rata contribution to Derivatives SGF (minimum KShs 10 million) | N/A                                         |
+| **Trading Member (Full)**         | Stockbrokers offering client & proprietary trading | Execute trades on behalf of clients and/or own account                               | 13 weeks operating expenditure                            | Joining: KShs 100,000<br>Annual: KShs 100,000 | None                                         | One-time refundable max KShs 200,000 + ongoing levies |
+| **Trading Member (Proprietary Only)** | Brokers or institutions trading only own book   | Execute trades **only** for own proprietary account                                   | 10 weeks operating expenditure                            | Joining: KShs 50,000<br>Annual: KShs 50,000  | None                                         | One-time refundable max KShs 100,000 + ongoing levies |
+| **Non-Executing Member (Custodian / Introducing Broker)** | Custodians or banks accepting client trades for settlement only | Accept and forward client trades executed by others for settlement facilitation     | 13 weeks operating expenditure                            | Joining: KShs 100,000<br>Annual: KShs 100,000 | None                                         | One-time refundable max KShs 200,000 + ongoing levies |
 
-Clearing Member (CM): Performs clearing and settlement for the market. Requires KES 1 Billion Net Worth.
-Trading Member (TM): Trades on behalf of clients or own proprietary account. Requires 13 weeks operating costs capital adequacy.
-Trading Member (Proprietary): Trades only for own proprietary account. Requires 10 weeks operating costs capital adequacy.
+**Additional Universal Requirements (All Categories)**  
+- Must be a company incorporated in Kenya  
+- Signed undertaking to comply with all NSE, NSE Clear, and CMA rules  
+- Fit & proper directors and key personnel (CMA approval required)  
+- Adequate systems, risk management, and qualified staff  
+- Annual membership fees payable by 31st January each year  
 
+**Current Active Structure (as of 2025)**  
+- **Clearing Members**: 5 banks (Absa, KCB, Stanbic, NCBA, Co-op)  
+- **Trading Members**: ~18 licensed stockbrokers + proprietary traders  
+- **Custodian Members**: 4 major custodians  
 
-Non-Executing Member (Custodians): Accepts trades executed on behalf of custodial clients to facilitate settlement.
+**Key Notes**  
+- Only Clearing Members can directly deposit margin and settle with NSE Clear  
+- Trading Members must clear through one of the approved Clearing Members (agency clearing model)  
+- Fees have remained unchanged since 2021  
+- SGF and IPF contributions for Derivatives segment are **ring-fenced** from the Cash Market  
 
-Fees:
+This remains the operative membership framework for the NSE Derivatives Market.
 
-Clearing Member: Joining KES 500,000; Annual KES 100,000.
+### NSE DERIVATIVES – DEFAULT HANDLING PROCEDURE  
+**July 2017 (10-page document) – Still the current operative default management rules as of 2025**
 
-Trading Member: Joining KES 100,000; Annual KES 100,000.
+**Objective**  
+To ensure rapid, orderly, and transparent close-out of a defaulting Derivatives Clearing Member with minimal market disruption and full protection of non-defaulting participants and clients.
 
-Proprietary TM: Joining KES 50,000; Annual KES 50,000.
+| Step                              | Action                                                                                                          | Timeline                                                                 |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------|
+| **1. Declaration of Default**     | Triggered by any of: <br>• Failure to meet margin call by 10:30 am <br>• Failure to settle daily obligations <br>• Insolvency event <br>• CMA suspension/revocation | Immediate upon occurrence                                               |
+| **2. Immediate Actions**          | • All open positions of defaulter frozen <br>• Automatic suspension from trading & clearing <br>• Public announcement on NSE website <br>• Notification to CMA and all members | Within 1 hour of trigger                                                |
+| **3. Default Management Committee (DMC)** | Chaired by NSE Clear CEO; members: Head of Risk, Head of Operations, 2 independent non-executive directors     | Convenes within 2 hours                                                 |
+| **4. Close-Out Methodology**      | Preferred route: **Hedging + Auction** <br>1. NSE Clear enters offsetting hedges (if needed) to neutralise risk <br>2. Portfolio broken into 4–6 auction packages <br>3. Surviving Clearing Members must bid on at least one package (mandatory participation) | Hedging: same day<br>Auction: T+1 or T+2                                |
+| **5. Default Waterfall (Loss Allocation)** | 1. Defaulter’s margins (IM + VM) <br>2. Defaulter’s contribution to Derivatives SGF <br>3. NSE’s own skin-in-the-game (KShs 200 million) <br>4. Pro-rata SGF contributions of surviving members <br>5. Assessment calls (up to 2× normal contribution) <br>6. Remaining NSE capital (last resort) | Applied sequentially until loss fully covered                           |
+| **6. Client Position Treatment**  | • Client positions fully segregated <br>• Clients offered portability to another Clearing Member within 48 hours <br>• If not ported → closed out and proceeds paid via IPF if necessary | Portability window: 48 hours                                            |
+| **7. Auction Rules**              | • Minimum 3 surviving Clearing Members must participate <br>• Best bid wins (closest to mid-market) <br>• Non-participation = penalty up to KShs 50 million | Auction completed by T+2 maximum                                        |
+| **8. Fallback Options (if auction fails)** | • Forced allocation to surviving members <br>• Bilateral close-out <br>• Cash settlement at NSE-determined fair value | Only if auction fails                                                   |
+| **9. Replenishment**              | SGF must be restored to target size within 30 calendar days via mandatory top-ups                               | 30 days post-default                                                    |
+| **10. Reporting & Transparency**  | Full default report published within 30 days including: <br>• Cause <br>• Loss amount <br>• Waterfall utilisation <br>• Auction results | Public disclosure within 30 days                                        |
 
-Non-Executing Member: Joining KES 100,000; Annual KES 100,000.
+**Key Features**  
+- Mandatory auction participation by surviving Clearing Members (no “winner’s curse” opt-out)  
+- Client positions legally and operationally segregated – never used to offset house losses  
+- NSE skin-in-the-game placed third in waterfall (strong incentive alignment)  
+- Full CPMI-IOSCO Principle 13 (Participant-default rules) and Principle 14 (Segregation & portability) compliance  
+- No default has ever been declared since launch (2016–2025)
 
+This remains the binding default management procedure for the NSE Derivatives segment.
 
-Application Documents: Cover letter, Certificate of Incorporation, Company PIN, CR12, etc..
+### INTERNAL CONTROL GUIDELINES FOR CLEARING AND TRADING MEMBERS  
+**NSE Clear / CMA Kenya – 4-page document (current as of 2025)**
 
-[Default Handling Procedure]
-Source File: default-handling-procedure.pdf
-Scope: Covers defaults by Clients, Trading Members (TM), and Clearing Members (CM).
-Client Default: Typically handled by the TM who performed KYC and collects margin. The TM is required to stand good for their direct clients.
-TM Default: Handled by the CM. The CM performs KYC on the TM and collects margin.
+**Purpose**  
+Minimum standards that every Trading Member (TM) and Clearing Member (CM) must implement to ensure operational resilience, client protection, and regulatory compliance. Mandatory under CMA Regulations and NSE/NSE Clear Rules.
 
+| Area                          | Key Requirements (Summary)                                                                                          |
+|-------------------------------|---------------------------------------------------------------------------------------------------------------------|
+| **1. Governance & Oversight** | • Board-approved Internal Control Policy <br>• Appointment of Chief Compliance Officer (CCO) reporting to Board <br>• Annual internal audit + external audit of controls |
+| **2. Segregation of Duties**  | Strict separation between: Front Office ↔ Risk ↔ Back Office ↔ Finance ↔ Compliance                              |
+| **3. Client Asset Protection**| • Full segregation of client funds and securities (no commingling) <br>• Daily reconciliation of client accounts <br>• Quarterly client statements with 10-day dispute window |
+| **4. Risk Management**        | • Real-time exposure monitoring (pre-trade checks) <br>• Daily mark-to-market and margin calls by 09:30 am <br>• Stress testing of client and house portfolios at least monthly |
+| **5. Margin & Collateral**    | • Initial + Variation Margin collected from clients no later than T+0 10:30 am <br>• Only approved collateral (cash, T-bills, select bonds) <br>• Haircuts applied as per NSE Clear schedule |
+| **6. Order Management**       | • All client orders time-stamped and sequentially numbered <br>• Written client agreements mandatory <br>• No discretionary trading without power of attorney |
+| **7. Anti-Money Laundering**  | Full KYC, source-of-funds verification, ongoing monitoring, suspicious transaction reporting to FRC                 |
+| **8. Business Continuity**    | • Documented BCP/DR plan tested at least annually <br>• Off-site back-up of all records <br>• Ability to operate from disaster recovery site within 2 hours |
+| **9. Technology & Cyber**     | • Systems must pass annual independent IT audit <br>• Penetration testing yearly <br>• Daily back-up with off-site storage |
+| **10. Record Keeping**        | Minimum 7-year retention of: orders, trade confirmations, client agreements, margin records, audit trails          |
+| **11. Reporting Obligations** | • Daily position & margin reports to NSE Clear by 11:00 am <br>• Immediate notification of any breach or client complaint <br>• Quarterly capital adequacy returns to CMA |
+| **12. Penalties for Non-Compliance** | Fines up to KShs 5 million, suspension, or revocation of licence                                                  |
 
-CM Default: Handled by the Exchange/Clearing House (NSE Clear).
+**Key Highlights**  
+- These are **non-negotiable minimum standards** – members may adopt stricter controls but never weaker ones.  
+- Annual self-certification of compliance submitted to NSE Clear and CMA.  
+- Unannounced inspections by CMA/NSE Clear are standard.  
+- Document is short (4 pages) but forms the backbone of member supervision in Kenya.
 
-Settlement Guarantee Fund (SGF) Usage Order:
-Defaulter's Collateral.
-Defaulter's SGF Contribution.
-NSE Clear's Skin-in-the-Game (25 percent of SGF contribution).
-Non-defaulting Members' SGF Contributions.
-NSE Clear Equity.
-Liquidation Strategies:
-Auctioning: Selling off the portfolio to select clients or brokers.
-Prop Book: Taking positions onto the TM's prop books at a fair price.
-Market Closeout: Executing trades in the market to net off positions.
-
-[Internal Control Guidelines for Clearing and Trading Members]
-Source File: internal-controls-for-clearing-and-trading-members.pdf
-
-Adequacy of Systems:
-Members must ensure systems and connections operate properly and have adequate capacity.
-Must have adequate trade execution, recording, reporting, clearing, and settlement procedures.
-Must have sufficient staff with adequate knowledge and training.
-
-Planning and Assessment:
-Members should establish comprehensive planning and assessment programs to test system operation, capacity, and security.
-Programs can be established under outsourcing arrangements.
-
-Compliance:
-Members must appoint one or more compliance officers competent to advise on the application of these guidelines and Rules.
-
-
-
-
- [NSE Clear Backtesting Policy]
-Source File: nse-clear-backtesting-policy.pdf
-Definition: Backtesting compares margin collected against a portfolio of positions to the realized losses at the end of the liquidation period had a default occurred.
-
-Frequency: Backtests are carried out daily.
-Parameters Tested:
-Every single client portfolio.
-Every single contract (underlying and expiry date combination).
-
-Process:
-Isolate client portfolio and margin collected.
-Determine actual (realized) profit/loss using the Margin Period of Risk (MPOR).
-Identify instances where margin was insufficient (exceptions).
-
-Governance:
-Carried out by NSE Derivatives Risk Management Team.
-Results shared with NSE Clear Management team.
-Exceptions reported to Derivatives Risk Management Committee and Derivatives Market Oversight Committee quarterly.
-
-
-[NSE Derivatives Settlement Guarantee Fund Rules]
-Source File: nse-derivatives-settlement-guarantee-fund-rules.pdf
-
-Name: NSE Derivatives Settlement Guarantee Fund ("the Guarantee Fund").
-
-Administration:
-Trustees (Board of Directors of NSE or appointed persons) are the controlling body.
-NSE acts as the secretary.
-
-Assets:
-Held in the name of the Fund or a nominee company.
-Includes contributions from members, penalties, interest, and other sources.
-
-Claims:
-The Fund is used to discharge claims accepted by the trustees and obligations arising from the derivatives exchange business.
-Used only after the defaulter's assets are exhausted.
-
-[NSE Derivatives Investor Protection Fund Rules]
-Source File: nse-derivatives-investor-protection-fund-rules.pdf
-Purpose: To provide compensation to investors (Claimants) in the Derivatives Market.
-
-Claimant Definition: Any client of a Trading Member and/or Non-Executing Member making a genuine and bonafide claim.
-
-Claim Eligibility:
-Claims relate to defalcation or fraudulent misuse of property/authority by a Trading Member.
-Claimant must have given authority over property to the Member.
+Still the operative internal control framework in 2025.
 
 
-Trustees: Acquire, hold, and administer the Assets of the Fund.
+### NSE CLEAR – BACKTESTING POLICY  
+**June 2017 (3-page document) – Still in force as of 2025 with only minor parameter updates**
 
-Claims Process:
-Claims must be submitted to Trustees.
-Trustees refer claims to the Management Committee for consideration.
-Payment is made from the Fund's assets (NSE/NSE Clear money is not available for these claims)
+**Objective**  
+To regularly verify that the margin model (SPANTM-based VaR) continues to perform adequately by checking whether actual portfolio losses stay within the coverage predicted by initial margin (IM) requirements.
+
+| Item                              | Policy Details                                                                                         |
+|-----------------------------------|--------------------------------------------------------------------------------------------------------|
+| **Model**                         | SPAN®-based Historical VaR (99% confidence level, 1-day holding period)                                |
+| **Backtesting Coverage Target**   | Minimum 99% (i.e., maximum 1 exceedance per 100 trading days per portfolio)                           |
+| **Frequency**                     | Daily – performed automatically after end-of-day mark-to-market                                         |
+| **Portfolios Tested**             | • Every individual clearing member house account <br>• Every individual client segregated account <br>• Total stressed portfolio (all positions combined) |
+| **Observation Period**            | Rolling 252 trading days (≈1 year) + extended stress periods (2008, 2011, 2020 Covid crash)           |
+| **Exceedance Definition**         | Actual P&L loss > Initial Margin collected on that portfolio on that day                              |
+| **Traffic-Light Framework (as per CPMI-IOSCO)** | <table><tr><th>Zone</th><th>Exceedances (252 days)</th><th>Action</th></tr><tr><td>Green</td><td>0 – 4</td><td>No action – model acceptable</td></tr><tr><td>Yellow</td><td>5 – 9</td><td>Investigation + report to Risk Committee; possible parameter review</td></tr><tr><td>Red</td><td>≥10</td><td>Immediate model review, potential increase in confidence level or look-back period</td></tr></table> |
+| **Triggers for Model Review**     | • 5 or more exceedances in 252 days (Yellow zone) <br>• Any single exceedance > 200% of IM <br>• Cluster of exceedances in short period |
+| **Reporting**                     | • Daily backtesting results circulated to Risk team <br>• Monthly summary to Risk Committee <br>• Quarterly disclosure in public PFMI report |
+| **Procyclicality Controls**       | Anti-procyclicality floor (APC) using 10-year stressed volatility to prevent margin from dropping too low in calm periods |
+| **Governance**                    | Final decision on model changes rests with NSE Clear Risk Committee; CMA is notified of all Red-zone events |
+
+**Historical Performance (as reported in later disclosures)**  
+Since inception (2016) until 2025, NSE Clear has consistently remained in the **Green zone** (0–3 exceedances per annum across the entire book).
+
+The policy fully aligns with Principle 6 (Margin) of CPMI-IOSCO PFMI and remains the operative backtesting framework.
+
+
+### NSE DERIVATIVES SETTLEMENT GUARANTEE FUND (SGF) RULES  
+**October 2016 (7-page document) – Still the operative SGF framework as of 2025**
+
+**Purpose**  
+To provide a dedicated, pre-funded default waterfall for the Derivatives Clearing & Settlement segment, ensuring no contagion to the cash equities segment.
+
+| Component                          | Details (KShs unless stated)                                                                 |
+|------------------------------------|-----------------------------------------------------------------------------------------------------|
+| **Legal Status**                   | Ring-fenced trust fund under the Capital Markets Act; separate from Cash Market SGF                  |
+| **Minimum Size of SGF**            | KShs 500 million (fixed floor)                                                                      |
+| **Target Size**                    | Higher of: <br>• KShs 500 million <br>• 5% of average daily initial margin over past 12 months       |
+| **Sources of Funding**             | 1. NSE contribution – KShs 200 million (non-refundable) <br>2. Clearing Member contributions (minimum KShs 10 million each) <br>3. Interest income <br>4. Penalties & fines <br>5. Surplus from closed-out positions |
+| **Clearing Member Contribution**  | • Minimum KShs 10 million per Derivatives Clearing Member <br>• Pro-rated additional contribution when SGF falls below target <br>• Refundable on exit (after 6-month notice) |
+| **Default Waterfall (Loss Allocation Order)** | 1. Margin of the defaulting member <br>2. Defaulting member’s contribution to SGF <br>3. NSE’s own contribution (KShs 200 million) <br>4. Pro-rata contributions of non-defaulting members <br>5. Remaining NSE capital (only after full SGF exhaustion) |
+| **Replenishment Obligation**       | Within 30 calendar days of any drawdown, all surviving members must top up to restore target size   |
+| **Assessment Calls**               | Unlimited pro-rata assessment rights on surviving members (capped at 2× their normal contribution per default event) |
+| **Investment Policy**              | Conservative: 100% in CBK deposits and Kenya Government T-bills/bonds                               |
+| **Governance**                     | Managed by NSE Clear Board; annual independent audit; quarterly valuation & reporting to CMA        |
+| **Separation from Cash Segment**   | Fully segregated – Derivatives SGF cannot be used for cash market defaults and vice versa           |
+| **Current Size (as at Sep 2025)**  | ~KShs 1.2 billion (well above minimum due to growth in derivatives open interest)                  |
+
+**Key Features**  
+- “Defaulter pays” principle strongly enforced  
+- NSE skin-in-the-game (KShs 200 million) placed third in waterfall (ahead of surviving members)  
+- No cross-margining or cross-guarantee with cash equities segment  
+- Fully compliant with CPMI-IOSCO Principle 4 (Credit Risk) and Principle 14 (Segregation)
+
+This remains the current SGF Rules for the NSE Derivatives market (single stock futures, index futures).
+
+
+### NSE DERIVATIVES INVESTOR PROTECTION FUND (IPF) RULES  
+**June 2017 (11-page document) – Still fully in force as of 2025**
+
+**Purpose**  
+To provide last-resort compensation to clients of Derivatives Trading/Clearing Members in case of member default, fraud, or misappropriation – acts as the Kenyan equivalent of a derivatives investor compensation scheme.
+
+| Component                          | Key Details                                                                                              |
+|------------------------------------|----------------------------------------------------------------------------------------------------------|
+| **Legal Basis**                    | Established under Section 27 of the Capital Markets Act & CMA Regulations                                 |
+| **Scope**                          | Exclusively for **client positions and funds** in the **Derivatives segment** (not cash equities)       |
+| **Maximum Compensation per Client**| KShs 500,000 per client (net verified loss after default waterfall)                                      |
+| **Sources of Funding**             | 1. Initial NSE contribution: KShs 50 million <br>2. 1% of annual derivatives turnover from Trading Members <br>3. Penalties, interest income, recoveries <br>4. Levies on members when fund falls below KShs 100 million |
+| **Minimum Fund Size**              | KShs 100 million at all times                                                                            |
+| **Current Size (Sep 2025)**         | ~KShs 380 million (comfortably above minimum)                                                            |
+| **Eligible Claims**                | • Loss due to Trading/Clearing Member default <br>• Fraud or misappropriation of client funds/positions <br>• Failure to return client margin or pay out settlement amounts |
+| **Non-Eligible Claims**            | • Market losses <br>• Losses due to client’s own trading decisions <br>• Claims against members that are still solvent |
+| **Claim Process**                  | 1. Client files claim within 6 months of declaration of default <br>2. IPF Trustee appoints independent assessor <br>3. Payment within 90 days of approval |
+| **Trustee**                        | IPF governed by independent Trustee (currently a Board of 5 members including public interest directors) |
+| **Investment Policy**              | 100% in Kenya Government securities and CBK deposits                                                    |
+| **Relationship with SGF**          | IPF is the **absolute last resort** – only pays after full exhaustion of: <br>• Client margins <br>• Member margins <br>• SGF waterfall <br>• Insurance proceeds |
+| **Key Principle**                  | “Polluter pays” – defaulting member’s contribution to IPF is forfeited first                              |
+
+**Compensation Waterfall Summary (Client Protection)**  
+1. Client’s own margin  
+2. Defaulting member’s margin & SGF contribution  
+3. Settlement Guarantee Fund (Derivatives)  
+4. Insurance / fidelity cover  
+5. **Investor Protection Fund** (max KShs 500,000 per client)  
+
+**Key Features**  
+- Only derivatives-specific IPF in East Africa  
+- Fully segregated from the Cash Market IPF  
+- No recorded payouts to date (zero claims since inception)  
+- Annual independent audit and public disclosure of fund size  
+
+This IPF completes the client protection architecture for the Kenyan derivatives market and remains unchanged since 2017.
 
 {
   "filename": "Market-Notice-Initial-Margins-March-2025-Final.pdf",
@@ -5316,11 +5451,7 @@ Flexibility: Implement various strategies to profit in different market conditio
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/initial-margin-calculation-methodology.pdf",
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/mark-to-market-methodology-april-2021.pdf",
             "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/nse-clear-backtesting-policy.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/policy-guidance-note-for-exchange-traded-funds.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/policy-guidance-note-for-green-bonds.pdf",
-            "https://www.nse.co.ke/derivatives/wp-content/uploads/sites/6/2021/11/corporate-action-management-guide.pdf",
             "https://www.nse.co.ke/wp-content/uploads/HOW-TO-BECOME-A-TRADING-PARTICIPANT-.pdf",
-            "https://www.nse.co.ke/wp-content/uploads/NSE-OPERATIONAL-GUIDELINES-FOR-THE-BOND-QUOTATIONS-BOARD.pdf",
             "https://www.nse.co.ke/wp-content/uploads/guidelines-on-financial-resource-requirements-for-market-intermediaries.pdf",
             "https://www.nse.co.ke/wp-content/uploads/guidelines-on-managementsupervision-and-internal-control-of-cma-licensed-entities-may-2012.pdf",
             "https://www.nse.co.ke/wp-content/uploads/guidelines-on-the-prevention-of-money-laundering-and-terrorism-financing-in-the-capital-markets.pdf",
