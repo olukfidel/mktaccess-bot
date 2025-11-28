@@ -3148,7 +3148,7 @@ The NSE shall not be liable for any loss resulting from system failure, errors, 
 - Base Date: 31 December 2018 = 1,000
 
 
-### 10. NSE Listing Rules (Latest Version)
+### 10. NSE Listing Rules
 
 **Key Facts – NSE Listing Rules**
 
