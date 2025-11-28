@@ -3280,6 +3280,384 @@ Payment is made from the Fund's assets (NSE/NSE Clear money is not available for
   "important_note": "These are the CURRENT initial margins as of November 2025 (post contract-size reduction). The massive drop in margin amounts is due to the contract size being reduced from 1:1000 to 1:100 for most stocks (and 1:100 → 1:10 for EABL, BATK, SCBK)."
 }
 
+{
+  "filename": "Mini-NSE-10-Index-Futures-Product-Report.pdf",
+  "document_type": "NSE Equity Index Futures Product Report",
+  "title": "EQUITY INDEX FUTURES PRODUCT REPORT",
+  "year": "2023",
+  "full_document_page_count": 13,
+  "introduction_summary": "The Nairobi Securities Exchange (NSE) launched the derivatives market in July 2019 after being granted a license by the Capital Markets Authority in May 2019. The NSE also incorporated a Clearing House, NSE Clear and signed up Clearing Members and Trading Members. One of the products that the NSE initially rolled out is the Equity Index Futures contracts based on the NSE 25 Index with tenors of quarterly contracts (3 months, 6 months, 9 months and/or 12 months). This was subsequently followed by the introduction of the Mini NSE 25 Index futures contract in 2021. All the contracts are cash settled at expiry or at close out.",
+  "nse_10_index_background": "The NSE 10 index came into effect on 30th August 2023, as a new tradable index. This was informed by the need to have a reference benchmark that more accurately represents the most actively traded counters in the market that allows investors to hedge their portfolios. The NSE 10 is designed to represent the performance of the market based on a sample of ten (10) liquid stocks. The Index will assist portfolio managers and retail investors with available for sale positions to track the performance of their portfolios and rebalance as the market dynamics change from time to time. A major objective is to be a key barometer for active investors. The index can also be tracked and expected that potential promoters (issuers) may use it to structure such products in our market.",
+  "nse_10_calculation_method": "The NSE 10 is calculated using the base-weighted aggregate methodology also known as the market capitalization/value weighted methodology float adjusted, which means that the index level reflects the total market value of component stocks relative to a particular base period. The float is adjusted to reflect the portion of the Issued shares available in the CDSC system trading account.",
+  "nse_10_ground_rules_url": "https://www.nse.co.ke/wp-content/uploads/GroundRules-NSE-10v-Share-Index-002.pdf",
+  "nse_10_selection_criteria": "For a stock to be eligible for inclusion in NSE 10 share index (N10) calculations, it must be listed under the Main Investments Market Segment (MIMS) or the Alternative Investment Market Segments (AIMS) of the Nairobi Securities Exchange. The company must meet the liquidity threshold as may be determined by the Exchange from time to time. The Liquidity measures to determine the eligibility shall be as follows; Market capitalisation (float adjusted) 40%, Turnover (30%) Volume (20%) Deals (10%). Top 10 companies having been screened under the said liquidity measures shall form the constituent companies for a six-month period after which a review will be undertaken.",
+  "nse_10_constituents_september_2023": [
+    { "security": "ABSA Bank Kenya Plc Ord 0.50", "free_float": "5,085,425,799.00" },
+    { "security": "The Co-operative Bank of Kenya Ltd Ord 1.00", "free_float": "5,472,686,357.00" },
+    { "security": "Centum Investment Co Plc Ord 0.50", "free_float": "578,787,450.00" },
+    { "security": "East African Breweries Plc Ord 2.00", "free_float": "749,391,878.00" },
+    { "security": "Equity Group Holdings Plc Ord 0.50", "free_float": "3,755,675,882.00" },
+    { "security": "KCB Group Plc Ord 1.00", "free_float": "2,312,504,728.00" },
+    { "security": "KenGen Co. Plc Ord. 2.50", "free_float": "1,924,970,853.00" },
+    { "security": "Kenya Re Insurance Corporation Ltd Ord 2.50", "free_float": "1,101,753,494.00" },
+    { "security": "NCBA Group Plc Ord 5.00", "free_float": "1,416,352,325.00" },
+    { "security": "Safaricom Plc Ord 0.05", "free_float": "9,976,433,820.00" }
+  ],
+  "product_specifications": {
+    "underlying": "The recently introduced NSE 10 Index with the base date of 30th August, 2023.",
+    "trading_hours": "9.30 a.m. to 3.00 p.m. (aligned with spot market)",
+    "contract_size": "Price of the index multiplied by Kshs.10 (e.g., index at 1000 points = KShs.10,000 contract value)",
+    "minimum_price_fluctuation": "1 index point (KSh.10)",
+    "quotation": "Kenya shillings terms",
+    "tenor": "Monthly or quarterly expiries (March, June, September, December for quarterly)",
+    "available_contracts": "Four quarterly contracts available at any time (apart from monthly)",
+    "price_limits": "+/-5% on previous day settlement (circuit breaker 15 mins), then +/-10% (trading halt for day)",
+    "settlement_mechanism": "Cash settled in Kenya Shillings",
+    "settlement_price": "Closing price of underlying index – Volume Weighted Average Price (VWAP) for liquid contracts OR spot price + cost of carry for illiquid contracts",
+    "expiry_time": "15H00 on expiry date",
+    "final_settlement_day": "Third Thursday of the expiry month (previous business day if holiday)"
+  },
+  "risk_management": {
+    "initial_margin_methodology": "99.95% VaR over 750 historical data points, scaled for 2-day liquidation period. Full methodology: https://www.nse.co.ke/derivatives/operational-procedures/",
+    "initial_margin_examples": {
+      "Mini NSE 10 Share Index (10MN)": {
+        "21-Dec-23": 600,
+        "21-Mar-24": 600,
+        "20-Jun-24": 700,
+        "19-Sep-24": 800
+      }
+    },
+    "variation_margin": "Daily Mark-to-Market profit/loss",
+    "collateral": "Initially only cash; later may include bank guarantees, fixed deposits, approved securities"
+  },
+  "position_limits": {
+    "market_wide": "No market wide position limits for index futures",
+    "client_level": "15% or more of open interest must be reported to exchange",
+    "trading_member": "Higher of 50% of average daily turnover OR 50% of total open interest in the index futures"
+  },
+  "fees": {
+    "total_exchange_fees_percentage": "0.14%",
+    "breakdown": {
+      "NSE Clear": "0.02%",
+      "Clearing Member": "0.02%",
+      "Trading Member": "0.08%",
+      "IPF Levy": "0.01%",
+      "CMA Fee": "0.01%"
+    }
+  },
+  "addendum_contract_summary": {
+    "category_of_contract": "Index future",
+    "underlying": "The NSE 10 Share Index",
+    "system_code_example": "Dec23 10MN",
+    "contract_size": "One index point equals Ten Kenyan Shillings (KES 10.00)",
+    "minimum_price_movement": "KES 10.00 per 1 index point",
+    "mark_to_market": "Explicit daily – VWAP for liquid or theoretical (spot + cost of carry) for illiquid",
+    "trading_times": "09H00 to 15H00 local Kenyan time"
+  },
+  "important_note_current_nov2025": "This 2023 report reflects the original Mini NSE 10 Index Futures specifications. Contract margins have changed over time (see quarterly margin notices) and single stock contract sizes were reduced 10x in September 2025, but index futures contract multiplier remains KES 10 per point."
+}
+
+
+
+{
+  "filename": "Product-Report-Options-on-Futures-August-2024-Approved.pdf",
+  "document_type": "NSE Options on Futures Product Report",
+  "title": "Options on Futures Product Report",
+  "date": "August 2024",
+  "full_document_page_count": 22,
+  "introduction_summary": "The Nairobi Securities Exchange (NSE), having obtained approval from the Capital Markets Authority (CMA), proposes to introduce Options on Futures as part of its strategy to expand and deepen the Kenyan derivatives market. This initiative is designed to enhance the suite of financial instruments available to market participants, thereby facilitating more sophisticated risk management strategies and investment opportunities. The introduction of these contracts is not only a response to growing market demand but also a strategic move to position the NSE as a leading derivatives market in the region. All contracts will be cash-settled using the existing infrastructure of NSE Clear and supported by our network of Clearing Members and Trading Members.",
+  "options_basics": {
+    "definition": "An option is a contract that gives the buyer the right, but not the obligation, to sell or buy a particular asset at a particular price, on or before a specified date. The seller of the option, conversely, assumes an obligation in respect of the underlying asset upon which the option has been traded.",
+    "underlying": "Options on futures (the underlying asset is a futures contract)",
+    "types": {
+      "call_option": "Right to buy the underlying",
+      "put_option": "Right to sell the underlying"
+    },
+    "exercise_styles": {
+      "european": "Exercisable only on expiry day (this is the style used for NSE Options on Futures – confirmed by Black-76 pricing model usage)",
+      "american": "Exercisable any day during life"
+    },
+    "moneyness": {
+      "in_the_money": "Call: Spot > Strike | Put: Spot < Strike",
+      "at_the_money": "Spot = Strike",
+      "out_of_the_money": "Call: Spot < Strike | Put: Spot > Strike"
+    }
+  },
+  "product_specifications": {
+    "underlying_futures": ["Safaricom Plc (SCOM)", "KCB Group Plc (KCBG)", "Equity Group Holdings Plc (EQTY)", "ABSA Bank Kenya Plc (ABSA)", "NCBA Group Plc (NCBA)", "The Co-operative Bank of Kenya Ltd (COOP)", "I&M Group Plc (IMHP)", "East African Breweries Ltd (EABL)", "British American Tobacco Kenya Plc (BATK)", "Standard Chartered Bank Kenya Ltd (SCBK)", "Mini NSE 25 Share Index (25MN)", "Mini NSE 10 Share Index (10MN)"],
+    "contract_size_rule": "1 Options contract = 1 underlying Futures contract",
+    "old_contract_sizes_note_august2024": "SCOM/KCBG/EQTY/ABSA/NCBA/COOP/IMHP = 1:1000 shares, EABL/BATK/SCBK = 1:100 shares, Index futures = 1:10 multiplier. These were reduced in September 2025 for single stocks.",
+    "trading_hours": "9.00 a.m. to 3.00 p.m.",
+    "minimum_price_fluctuation_tick": {
+      "price_below_100": "0.01",
+      "price_100_to_500": "0.05",
+      "price_above_500": "0.25"
+    },
+    "quotation": "Kenya Shillings terms",
+    "tenor": "Monthly or quarterly (March, June, September, December)",
+    "price_limits": "No daily price limits (strike determined by market)",
+    "settlement": "Cash settled in Kenya Shillings",
+    "settlement_price_model": "Black-76 European options pricing model",
+    "expiry_time": "3.00 p.m. on expiry date",
+    "final_settlement_day": "Third Thursday of expiry month (previous business day if holiday)"
+  },
+  "risk_management": {
+    "premium": "Paid upfront by buyer to seller, non-refundable",
+    "variation_margin": "Daily MtM based on underlying futures price, volatility and time to expiry",
+    "mark_to_market_settlement": "Payment before midday next day or margin calls",
+    "automatic_close_on_expiry": true,
+    "rollover": "Manual – close existing and open new expiry"
+  },
+  "fees_total": "0.085% of notional contract value",
+  "fees_breakdown": {
+    "NSE Clear": "0.0125%",
+    "Clearing Member": "0.0125%",
+    "Trading Member": "0.05%",
+    "IPF Levy": "0.005%",
+    "CMA Fee": "0.005%"
+  },
+  "addendum_per_underlying_examples": {
+    "common_fields_all_underlyings": {
+      "category": "Options on Single Stock Future or Options on Index Future",
+      "contract_months": "Monthly or quarterly (March, June, September and December)",
+      "expiry_dates": "Third Thursday of expiry month (previous business day if holiday)",
+      "expiry_time": "15H00 Kenyan time",
+      "listing_program": "Monthly or Quarterly",
+      "valuation_method_on_expiry": "Volume weighted average price of underlying for liquid contracts, theoretical price (spot + cost of carry) for illiquid",
+      "settlement": "Cash settled through the NSE",
+      "contract_size": "One options contract equals 1 underlying futures contract",
+      "mark_to_market": "Explicit daily – VWAP for liquid or theoretical (spot + cost of carry) for illiquid",
+      "trading_times": "09H00 to 15H00 local Kenyan time",
+      "fees": "Total 0.085% as above"
+    },
+    "specific_examples": {
+      "Safaricom Plc (SCOM)": { "system_code_example": "19 SEP 24 SCOM 20.00 CALL/PUT", "tick": "KES 0.01" },
+      "KCB Group Plc (KCBG)": { "system_code_example": "19 SEP 24 KCBG 32.50 CALL/PUT", "tick": "KES 0.01" },
+      "Equity Group Holdings Plc (EQTY)": { "system_code_example": "19 SEP 24 EQTY 43.00 CALL/PUT", "tick": "KES 0.01" },
+      "The Co-operative Bank of Kenya Ltd (COOP)": { "system_code_example": "19 SEP 24 COOP 13.00 CALL/PUT", "tick": "KES 0.01" },
+      "ABSA Bank Kenya Plc (ABSA)": { "system_code_example": "19 SEP 24 ABSA 14.50 CALL/PUT", "tick": "KES 0.01" },
+      "British American Tobacco Kenya Plc (BATK)": { "system_code_example": "19 SEP 24 BATK 355.00 CALL/PUT", "tick": "KES 0.05" },
+      "East African Breweries Ltd (EABL)": { "system_code_example": "19 SEP 24 EABL 145.20 CALL/PUT", "tick": "KES 0.05" },
+      "NCBA Group Plc (NCBA)": { "system_code_example": "19 SEP 24 NCBA 41.50 CALL/PUT", "tick": "KES 0.01" },
+      "Standard Chartered Bank Kenya Ltd (SCBK)": { "system_code_example": "19 SEP 24 SCBK 192.00 CALL/PUT", "tick": "KES 0.05" },
+      "I&M Group Plc (IMHP)": { "system_code_example": "19 SEP 24 IMHP 22.00 CALL/PUT", "tick": "KES 0.01" },
+      "Mini NSE 25 Share Index (25MN)": { "system_code_example": "19 SEP 24 25MN 2,729.00 CALL/PUT", "tick": "KES 0.01" },
+      "Mini NSE 10 Share Index (10MN)": { "system_code_example": "19 SEP 24 10MN 1,058.00 CALL/PUT", "tick": "KES 0.01" }
+    }
+  },
+  "important_note_current_nov2025": "This August 2024 report reflects the original Options on Futures specifications BEFORE the September 2025 single-stock contract size reduction (1:1000 → 1:100 for most stocks). Option contract size is always 1:1 with the underlying future, so the notional value per option contract decreased 10x for affected stocks after September 2025. Fees, tick sizes, and Black-76 European style remain unchanged."
+}
+
+
+{
+  "filename": "NSE-Group-Audited-Financial-Statements-for-the-year-ended-31-December-2024.pdf",
+  "document_type": "NSE Plc Audited Group Results Announcement",
+  "title": "NAIROBI SECURITIES EXCHANGE PLC ANNOUNCEMENT OF AUDITED GROUP RESULTS FOR THE YEAR ENDED 31 DECEMBER 2024",
+  "approved_by_board": "27th March 2025",
+  "signed_by": ["Mr. Kiprono Kittony, EBS - Chairman", "Ms. Isis Nyong’o - Director"],
+  "profit_loss_and_oci": {
+    "Transactions levy - Equity": { "2024": 253650, "2023": 211094 },
+    "Transactions levy - Bond": { "2024": 169881, "2023": 64395 },
+    "Data vending income": { "2024": 101299, "2023": 116569 },
+    "Annual, initial and additional listing fees": { "2024": 69508, "2023": 69838 },
+    "Interest income": { "2024": 146960, "2023": 120950 },
+    "Broker back office subscription": { "2024": 33023, "2023": 27944 },
+    "Unquoted securities platform fees": { "2024": 1037, "2023": 2439 },
+    "Dividend from equity investment": { "2024": 8279, "2023": 8013 },
+    "Advisory fees": { "2024": 10888, "2023": 0 },
+    "Other income": { "2024": 33876, "2023": 41079 },
+    "Total income": { "2024": 828401, "2023": 662321 },
+    "Staff costs": { "2024": 200781, "2023": 176452 },
+    "Systems maintenance costs": { "2024": 82226, "2023": 61847 },
+    "Depreciation and amortisation": { "2024": 39107, "2023": 37720 },
+    "Building and office costs": { "2024": 39767, "2023": 41914 },
+    "Directors' emoluments": { "2024": 50262, "2023": 47922 },
+    "Revaluation loss on property": { "2024": 20778, "2023": 27500 },
+    "Share of bond levy expense": { "2024": 37487, "2023": 20096 },
+    "Other operating expenses": { "2024": 202859, "2023": 182587 },
+    "Total expenses": { "2024": 673267, "2023": 596038 },
+    "Operating profit before ECL and fair value movements": { "2024": 155134, "2023": 66283 },
+    "Provision for expected credit losses (ECL) and bond mark to market valuation": { "2024": -1014, "2023": -4528 },
+    "Share of gain/(loss) of associate": { "2024": 8703, "2023": -19429 },
+    "Profit before taxation": { "2024": 162823, "2023": 42326 },
+    "Taxation charge": { "2024": -46523, "2023": -23922 },
+    "Profit for the year": { "2024": 116300, "2023": 18404 },
+    "Other comprehensive income": { "2024": 15832, "2023": 23597 },
+    "Total comprehensive income for the year": { "2024": 132132, "2023": 42001 },
+    "Earnings Per Share - Basic and diluted (Kshs)": { "2024": 0.45, "2023": 0.05 },
+    "Number of shares used for EPS": { "2024": 260634541, "2023": 260452401 }
+  },
+  "financial_position": {
+    "Property and equipment": { "2024": 403608, "2023": 404657 },
+    "Intangible assets": { "2024": 89840, "2023": 108048 },
+    "Investment in associate": { "2024": 176036, "2023": 166151 },
+    "Financial assets at fair value through other comprehensive income – Quoted equity instruments": { "2024": 147771, "2023": 133121 },
+    "Government securities at amortised cost": { "2024": 201813, "2023": 201973 },
+    "Financial assets at fair value through profit or loss": { "2024": 133096, "2023": 241324 },
+    "Cash and bank balances and bank deposits": { "2024": 670445, "2023": 407082 },
+    "Other assets": { "2024": 328203, "2023": 365708 },
+    "Total assets": { "2024": 2150812, "2023": 2028064 },
+    "Share capital": { "2024": 1042538, "2023": 1041810 },
+    "Share premium": { "2024": 279725, "2023": 279489 },
+    "Revenue reserves": { "2024": 567579, "2023": 492979 },
+    "Non controlling interest": { "2024": 6888, "2023": 6860 },
+    "Other reserves": { "2024": 71425, "2023": 55593 },
+    "Non current liabilities": { "2024": 15033, "2023": 13965 },
+    "Other liabilities": { "2024": 167624, "2023": 137368 },
+    "Total equity and liabilities": { "2024": 2150812, "2023": 2028064 }
+  },
+  "cash_flows": {
+    "Cash generated from/(used in) operations": { "2024": 109084, "2023": -3874 },
+    "Tax paid": { "2024": -17291, "2023": -27905 },
+    "Net cash from operating activities": { "2024": 91793, "2023": -31779 },
+    "Cash (used in)/generated from investing activities": { "2024": -249391, "2023": 152815 },
+    "Cash used in financing activities": { "2024": -39932, "2023": -56950 },
+    "Net (decrease)/increase in cash and cash equivalents": { "2024": -197530, "2023": 64086 },
+    "Cash and cash equivalents at the start of the year": { "2024": 318806, "2023": 250234 },
+    "Effect of foreign exchange rate changes": { "2024": -5755, "2023": 4486 },
+    "Cash and cash equivalents at the end of the year": { "2024": 115521, "2023": 318806 }
+  },
+  "dividend": "The Board of Directors recommends ... the payment of a first and final dividend of Kshs. 0.32 per share (2023: Kshs. 0.16 per share) to be paid by 31st July 2025 to members on the register at the close of business on 21st May 2025.",
+  "agm": "The Annual General Meeting ... will be held on 21st May 2025.",
+  "market_performance_2024_highlights": "NSE was the best-performing market in Africa in dollar returns per MSCI ● Equity turnover +20.10% to Kshs.105.97bn ● Bond turnover +140% to Kshs.1.5trn (first time ever above Kshs.1trn) ● Derivatives turnover +165% to Kshs.170.09mn ● NSE 20 Share Index +33.94% ● NASI +34.06% ● NSE 25 +42.96% ● NSE 10 +43.50% ● Market cap from Kshs.1.4trn to Kshs.1.9trn",
+  "profit_after_tax_growth": "over 500% from Kshs.18.4 million in 2023 to Kshs.116.3 million in 2024",
+  "current_status_nov2025": "This is the latest fully audited full-year results (as of 28 Nov 2025). H1 2025 unaudited results were released on 27 Aug 2025 (see separate JSON)."
+}
+
+{
+  "filename": "NSE-Plc-Unaudited-Group-results-for-the-6-months-ended-30-June-2025.pdf",
+  "document_type": "NSE Plc Unaudited Group Results Announcement",
+  "title": "NAIROBI SECURITIES EXCHANGE PLC ANNOUNCEMENT OF UNAUDITED GROUP RESULTS FOR THE SIX MONTHS PERIOD ENDED 30 JUNE 2025",
+  "released_date": "27th August 2025",
+  "signed_by": "Frank Lloyd Mwiti - Chief Executive Officer",
+  "profit_loss_h1": {
+    "Transaction levy - Equity": { "H1_2025": 133859, "H1_2024": 113485, "FY_2024": 253650 },
+    "Transactions levy - Bond": { "H1_2025": 153019, "H1_2024": 85999, "FY_2024": 169881 },
+    "Data income": { "H1_2025": 58212, "H1_2024": 66842, "FY_2024": 101299 },
+    "Annual, initial and additional listing fees": { "H1_2025": 33300, "H1_2024": 36876, "FY_2024": 69508 },
+    "Interest income": { "H1_2025": 65618, "H1_2024": 71731, "FY_2024": 146960 },
+    "Broker back office subscriptions": { "H1_2025": 16399, "H1_2024": 14774, "FY_2024": 33023 },
+    "Consultancy income": { "H1_2025": 19571, "H1_2024": 21479, "FY_2024": 23200 },
+    "Dividend from equity investment": { "H1_2025": 7276, "H1_2024": 8506, "FY_2024": 8279 },
+    "Unquoted securities platform fees": { "H1_2025": 1565, "H1_2024": 0, "FY_2024": 1037 },
+    "Other income": { "H1_2025": 22778, "H1_2024": 9776, "FY_2024": 21564 },
+    "Total income": { "H1_2025": 511597, "H1_2024": 429468, "FY_2024": 828401 },
+    "Staff costs": { "H1_2025": 101836, "H1_2024": 103571, "FY_2024": 200781 },
+    "Systems maintenance costs": { "H1_2025": 41437, "H1_2024": 41199, "FY_2024": 82226 },
+    "Depreciation and amortisation": { "H1_2025": 19196, "H1_2024": 18528, "FY_2024": 39107 },
+    "Building and office costs": { "H1_2025": 20221, "H1_2024": 23577, "FY_2024": 39767 },
+    "Directors' emoluments": { "H1_2025": 25928, "H1_2024": 23796, "FY_2024": 50262 },
+    "Share of bond levy expense": { "H1_2025": 31149, "H1_2024": 18936, "FY_2024": 37487 },
+    "Revaluation loss on property": { "H1_2025": 0, "H1_2024": 0, "FY_2024": 20778 },
+    "Other operating expenses": { "H1_2025": 70167, "H1_2024": 109852, "FY_2024": 202859 },
+    "Total expenses": { "H1_2025": 309934, "H1_2024": 339459, "FY_2024": 673267 },
+    "Operating profit before ECL and fair value movements": { "H1_2025": 201663, "H1_2024": 90009, "FY_2024": 155134 },
+    "Provision for expected credit losses and bond mark to market valuation": { "H1_2025": -5355, "H1_2024": -9212, "FY_2024": -1014 },
+    "Share of gain/(loss) of associate": { "H1_2025": 6599, "H1_2024": -790, "FY_2024": 8703 },
+    "Profit before tax": { "H1_2025": 202907, "H1_2024": 80007, "FY_2024": 162823 },
+    "Tax expense": { "H1_2025": -51330, "H1_2024": -25287, "FY_2024": -46523 },
+    "Profit after tax": { "H1_2025": 151577, "H1_2024": 54720, "FY_2024": 116300 },
+    "Other comprehensive income/(loss)": { "H1_2025": 20366, "H1_2024": -4078, "FY_2024": 15832 },
+    "Total comprehensive income": { "H1_2025": 171943, "H1_2024": 50642, "FY_2024": 132132 },
+    "EPS (Basic and diluted) Kshs": { "H1_2025": 0.58, "H1_2024": 0.21, "FY_2024": 0.45 },
+    "Weighted average shares": { "H1_2025": 260896654, "H1_2024": 260634541, "FY_2024": 260634541 }
+  },
+  "pat_growth_h1_yoy": "+177% (Kshs.151.6 million vs Kshs.54.7 million in H1 2024)",
+  "equity_turnover_h1_2025": "Kshs.56 billion (+18% YoY)",
+  "bond_turnover_h1_2025": "Kshs.1.3 trillion (+78% YoY) – first time ever >Kshs.1trn in a half-year",
+  "index_performance_h1_2025": {
+    "NASI": "+22.41% to 153.43",
+    "NSE 20 Share Index": "+18.54% to 2,440.26",
+    "NSE 10 Share Index": "+14.28% to 1,116.93",
+    "NSE 25 Share Index": "+13.89% to 3,938.28"
+  },
+  "new_listings_h1_2025": [
+    "Satrix MSCI World Equity Feeder ETF (secondary listing)",
+    "Shri Krishana Overseas Limited (SME segment)",
+    "Linzi 003 Infrastructure Asset Backed Security – Kshs.44.9 billion (first ABS on NSE, graced by H.E. President William Ruto)"
+  ],
+  "nse_share_price_performance": "+50.33% (Kshs.6.00 → Kshs.9.02)",
+  "dividend_h1_2025": "The Board of Directors does not recommend an interim dividend for the first half of the year 2025.",
+  "current_status_nov2025": "Latest published results as of 28 November 2025."
+}
+
+
+{
+  "filename": "NSE-Annual-Report-2023Interactive.pdf",
+  "document_type": "NSE Plc Integrated Annual Report & Financial Statements",
+  "year": "2023",
+  "total_pages": 156,
+  "release_date": "28th March 2024",
+  "board_purpose": "Inspiring Africa's transformation – linking financial and non-financial performance per International Integrated Reporting Framework, Kenya Companies Act 2015, and CMA guidelines",
+  "chairman": "Mr. Kiprono Kittony, EBS",
+  "ceo_until_march2024": "Mr. Geoffrey O. Odundo (retired 1st March 2024)",
+  "ceo_from_may2024": "Mr. Frank Mwiti (appointed effective 2nd May 2024)",
+  "auditor": "Deloitte & Touche LLP",
+  "key_financial_highlights_2023_vs_2022": {
+    "total_income": { "2023": 662321, "2022": 642764, "growth": "+3%" },
+    "profit_after_tax": { "2023": 18404, "2022": 13724, "growth": "+34%" },
+    "total_assets": { "2023": 2028064, "2022": 2033689 },
+    "equity_attributable_to_owners": { "2023": 1869871, "2022": 1879676 },
+    "eps_basic_diluted_kes": { "2023": 0.07, "2022": 0.05 },
+    "dividend_per_share_kes": { "2023": 0.16, "2022": 0.00 + special 0.40 + normal 0.50 }
+  },
+  "market_performance_2023": "Challenging year – equity turnover -6.35% to KES 88.2bn ● Bond turnover -13.2% to KES 643bn ● Equity volumes +6.4% to 3.2bn shares ● Laptrust Imara I-REIT listed (first by pension fund) ● Linzi Sukuk (KES 3bn) – first Sukuk on USP",
+  "strategic_focus_2023": "Diversification into non-trading revenue (data vending +25%, interest income +16%) ● Cost management ● Preparation for new 2025-2029 strategy ● ESG, sustainability, regional leadership",
+  "profit_loss_summary_kes000": {
+    "total_income": 662321,
+    "total_expenses": 596038,
+    "profit_before_tax": 42326,
+    "profit_after_tax": 18404,
+    "oci": 23597,
+    "total_comprehensive_income": 42001
+  },
+  "balance_sheet_summary_kes000": {
+    "total_assets": 2028064,
+    "total_equity": 1876731,
+    "non_controlling_interest": 6860
+  },
+  "dividend": "Proposed ordinary dividend KES 0.16 per share (paid by July 2024)"
+}
+
+{
+  "filename": "NSE-Plc-2024-Integrated-Annual-Report-and-Financial-Statement-1.pdf",
+  "document_type": "NSE Plc Integrated Annual Report & Financial Statements",
+  "year": "2024",
+  "total_pages": 156,
+  "release_date": "27th March 2025",
+  "board_approval_date": "27th March 2025",
+  "chairman": "Mr. Kiprono Kittony, EBS",
+  "ceo": "Mr. Frank Lloyd Mwiti",
+  "auditor": "Deloitte & Touche LLP",
+  "new_strategic_plan": "2025-2029 Strategy – Purpose: Inspiring Africa's Transformation ● Revenue target KES 3bn by 2029 (60% non-trading) ● Cost-to-income 40% ● 40 new listings ● 50 new index funds ● 9 million active retail investors by 2029 ● Sector-based commercial approach ● Technology overhaul to SaaS model",
+  "key_financial_highlights_2024_vs_2023": {
+    "total_income_kes_m": { "2024": 828.4, "2023": 662.3, "growth": "+25.08%" },
+    "profit_after_tax_kes_m": { "2024": 116.3, "2023": 18.4, "growth": "+544.44%" },
+    "equity_transaction_levy_kes_m": { "2024": 253.7, "2023": 211.1, "growth": "+20%" },
+    "bond_transaction_levy_kes_m": { "2024": 169.9, "2023": 64.4, "growth": "+164%" },
+    "interest_income_kes_m": { "2024": 146.9, "2023": 120.9, "growth": "+21.5%" },
+    "total_assets_kes_bn": { "2024": 2.15, "2023": 2.02, "growth": "+6.44%" },
+    "total_equity_kes_bn": { "2024": 1.968, "2023": 1.877 },
+    "eps_kes": { "2024": 0.45, "2023": 0.07 }
+  },
+  "market_performance_2024": "Best performing exchange in Africa in USD returns (MSCI) ● Equity turnover +20% to KES 105.9bn ● Bond turnover +140% to KES 1.5trn (first time >1trn) ● Shares traded +32% to 4.93bn ● Derivatives turnover +165% to KES 170m ● Market cap KES 1.9trn (from 1.4trn) ● NASI +34.06% ● NSE 20 +33.94% ● 12 NSE companies in MSCI Frontier Indices ● FTSE Russell upgrade to “pass”",
+  "profit_loss_summary_kes000": {
+    "total_income": 828401,
+    "total_expenses": 673267,
+    "profit_before_tax": 162823,
+    "profit_after_tax": 116300,
+    "oci": 15832,
+    "total_comprehensive_income": 132132
+  },
+  "balance_sheet_summary_kes000": {
+    "total_assets": 2150812,
+    "total_equity": 1968155,
+    "non_controlling_interest": 6888
+  },
+  "dividend": "Recommended first and final dividend KES 0.32 per share (paid by 31 July 2025, record date 21 May 2025)",
+  "outlook_2025": "Execution of 2025-2029 strategy ● Technology overhaul (SaaS) ● Sector-based issuer engagement ● Direct Market Access (DMA) ● Agency model for retail ● New products (including Options on Futures already approved) ● Support government privatizations ● Target 40 new listings & 9m retail investors by 2029"
+}
+
 
 
 
